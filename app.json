@@ -1,11 +1,4 @@
 {
-  "expo": {
-    "name": "sweddbeninapp",
-    "slug": "sweddbeninapp",
-    "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
-  },
-  "name": "sweddbeninapp"
+  "name": "Sweddmobile",
+  "displayName": "Sweddmobile"
 }

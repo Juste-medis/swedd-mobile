@@ -1,0 +1,9 @@
+export const ADD_BEST_CATEGORIE = "ADD_BEST_CATEGORIE";
+
+export const SET_ROFIL = "SET_ROFIL";
+export const ADD_ROFIL_ITEM = "ADD_ROFIL_ITEM";
+
+export const SET_SELECTED_VIDEO = "SET_SELECTED_VIDEO";
+
+export const SET_SEARCH_LIST = "SET_SEARCH_LIST";
+export const TEMP_TYPE = "TEMP_TYPE";

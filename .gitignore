@@ -20,7 +20,6 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-project.xcworkspace
 
 # Android/IntelliJ
 #
@@ -29,6 +28,7 @@ build/
 .gradle
 local.properties
 *.iml
+*.hprof
 
 # node.js
 #
@@ -53,15 +53,8 @@ buck-out/
 */fastlane/Preview.html
 */fastlane/screenshots
 
-# Bundle artifacts
+# Bundle artifact
 *.jsbundle
 
 # CocoaPods
 /ios/Pods/
-
-# Expo
-.expo/*
-web-build/
-android/java_pid3269.hprof
-android/java_pid6237.hprof
-node_modules
