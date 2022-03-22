@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '11.0'
 
-target 'Sweddmobile' do
+target 'swdmbl' do
   config = use_native_modules!
 
   use_react_native!(
@@ -12,7 +12,7 @@ target 'Sweddmobile' do
     :hermes_enabled => false
   )
 
-  target 'SweddmobileTests' do
+  target 'swdmblTests' do
     inherit! :complete
     # Pods for testing
   end
