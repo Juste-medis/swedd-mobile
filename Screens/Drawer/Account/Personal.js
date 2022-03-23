@@ -157,8 +157,8 @@ function Personal(route) {
   };
 
   return (
-    <ScrollView style={{backgroundColor: 'white'}}>
-      <View style={[styles.main_container]}>
+    <ScrollView>
+      <View style={[styles.main_container, {backgroundColor: 'white'}]}>
         <Text
           style={{
             textAlign: 'left',
@@ -170,7 +170,6 @@ function Personal(route) {
           Information relative à votre profil personel
         </Text>
         {menu_main(menuoth)}
-
         {spinner ? (
           <ActivityIndicator
             style={styles.indicator}

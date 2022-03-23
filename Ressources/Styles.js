@@ -144,24 +144,6 @@ if (mobile_360_750) {
       color: 'black',
     },
   });
-
-  tyleControlBoard = StyleSheet.create({
-    pressable_cash: {
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 8,
-    },
-    pressable_title: {
-      fontSize: 15,
-      fontFamily: 'Neogrotesk',
-    },
-    pressable_subtitle: {
-      fontWeight: 'normal',
-      fontSize: 15,
-    },
-  });
-
   tyleSignIn = StyleSheet.create({
     container: {
       flex: 1,
@@ -203,7 +185,6 @@ if (mobile_360_750) {
     Image_style: {
       height: 150,
       width: 150,
-      zIndex: -41,
       marginBottom: 30,
     },
     center_container: {
@@ -1427,6 +1408,14 @@ if (mobile_360_750) {
       fontSize: 20,
     },
   });
+  tyleControlBoard = StyleSheet.create({
+    icon_containter: {
+      backgroundColor: 'white',
+      padding: 25,
+      elevation: 2,
+      borderRadius: 10,
+    },
+  });
   tyleAccount = StyleSheet.create({
     main_container: {
       display: 'flex',
@@ -1436,11 +1425,12 @@ if (mobile_360_750) {
       justifyContent: 'center',
       padding: 8,
       paddingBottom: 50,
+      backgroundColor: Globals.COLORS.co_gris,
     },
     image_avatar: {
       borderRadius: 70,
-      height: 100,
-      width: 100,
+      height: 130,
+      width: 130,
     },
     name_title: {
       fontWeight: 'bold',
@@ -1465,11 +1455,11 @@ if (mobile_360_750) {
     },
     menu_item: {
       flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'flex-start',
       justifyContent: 'space-between',
       paddingHorizontal: 20,
-      paddingVertical: 10,
-      backgroundColor: 'white',
+      paddingVertical: 8,
+      borderRadius: 20,
     },
     item_title: {
       fontSize: 18,
@@ -1481,7 +1471,7 @@ if (mobile_360_750) {
     },
     buts_style: {
       width: 200,
-      backgroundColor: Globals.COLORS.primary,
+      backgroundColor: Globals.COLORS.pink,
       marginVertical: 15,
       borderRadius: 6,
       justifyContent: 'center',
@@ -1526,13 +1516,14 @@ if (mobile_360_750) {
       fontWeight: 'bold',
     },
     prop_unity_value: {
-      borderRadius: 30,
-      elevation: 2,
-      backgroundColor: Globals.COLORS.primary,
-      textAlign: 'center',
+      textAlign: 'left',
       color: 'white',
-      padding: 3,
+      paddingStart: 10,
+      fontSize: 50,
       fontWeight: 'bold',
+      textAlignVertical: 'top',
+      paddingTop: 0,
+      marginTop: -10,
     },
     note_main_container: {
       flexDirection: 'column',

@@ -1,16 +1,22 @@
 import React from 'react';
-import {ScrollView, Text, View, Linking, ActivityIndicator} from 'react-native';
+import {
+  ScrollView,
+  Text,
+  View,
+  Linking,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native';
 import Globals from '../../../Ressources/Globals';
 import {styleAccount as styles} from '../../../Ressources/Styles';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {AddProfilItem} from '../../../Store/Actions';
-import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Storer from '../../../API/storer';
 import RNReastart from 'react-native-restart';
 import {alert_message, onShare, toast_message} from '../../../Helpers/Utils';
-import fetcher from '../../../API/fetcher';
+import fetcher from '../../../API/fakeApi';
 import {Image} from 'react-native-elements';
 import SimpleRipple from '../../../components/Touchable/SimpleRipple';
 
@@ -143,120 +149,82 @@ function Account(route) {
   return (
     <ScrollView>
       <View style={styles.main_container}>
-        {Globals.USER_TYPE ? (
-          <View style={{width: '100%', alignItems: 'center'}}>
-            {profil.photourl != '' ? (
-              <Image
-                source={{uri: profil.photourl}}
-                containerStyle={styles.item}
-                style={styles.image_avatar}
-                PlaceholderContent={<ActivityIndicator />}
-              />
-            ) : (
-              <View style={styles.def_avatar}>
-                <Text
-                  style={{color: 'white', fontSize: 50, fontWeight: 'bold'}}>
-                  {profil.first_name.substr(0, 2)}
-                </Text>
-              </View>
-            )}
-
-            <Text style={styles.name_title}>
-              {profil.last_name +
-                ' ' +
-                profil.first_name.toUpperCase().charAt(0) +
-                '.'}
-            </Text>
-
-            <Text
-              style={[
-                styles.menu_title,
-                {color: Globals.COLORS.secondary, alignSelf: 'flex-start'},
-              ]}>
-              {Globals.STRINGS.general.toUpperCase()}
-            </Text>
-            {menu_main(menugen)}
-            <Text
-              style={[
-                styles.menu_title,
-                {
-                  color: Globals.COLORS.secondary,
-                  alignSelf: 'flex-start',
-                  fontFamily: 'Montserrat',
-                },
-              ]}>
-              {Globals.STRINGS.other.toUpperCase()}
-            </Text>
-          </View>
-        ) : (
-          <View style={{width: '100%', alignItems: 'center', marginBottom: 50}}>
+        <View style={{width: '100%', alignItems: 'center'}}>
+          {profil.photourl != '' ? (
+            <Image
+              source={{uri: profil.photourl}}
+              containerStyle={styles.item}
+              style={styles.image_avatar}
+              PlaceholderContent={<ActivityIndicator />}
+            />
+          ) : (
             <View style={styles.def_avatar}>
-              <Icon name="person" size={100} color="white" />
-            </View>
-
-            <Button
-              style={[
-                styles.pressable_cash,
-                {
-                  backgroundColor: Globals.COLORS.secondary,
-                  elevation: 8,
-                  borderRadius: 8,
-                  marginVertical: 50,
-                  width: '90%',
-                },
-              ]}
-              onPress={() => {
-                route.navigation.push('SignIn');
-              }}>
-              <Text
-                style={{
-                  color: 'white',
-                  fontWeight: 'bold',
-                  padding: 10,
-                  fontSize: 16,
-                }}>
-                {Globals.STRINGS.connection}
+              <Text style={{color: 'white', fontSize: 50, fontWeight: 'bold'}}>
+                {profil.first_name.substr(0, 2)}
               </Text>
-            </Button>
-          </View>
-        )}
+            </View>
+          )}
 
+          <Text style={styles.name_title}>
+            {profil.last_name +
+              ' ' +
+              profil.first_name.toUpperCase().charAt(0) +
+              '.'}
+          </Text>
+
+          <Text
+            style={[
+              styles.menu_title,
+              {color: Globals.COLORS.secondary, alignSelf: 'flex-start'},
+            ]}>
+            {Globals.STRINGS.general.toUpperCase()}
+          </Text>
+          {menu_main(menugen)}
+          <Text
+            style={[
+              styles.menu_title,
+              {
+                color: Globals.COLORS.secondary,
+                alignSelf: 'flex-start',
+                fontFamily: 'Montserrat',
+              },
+            ]}>
+            {Globals.STRINGS.other.toUpperCase()}
+          </Text>
+        </View>
         {menu_main(menuoth)}
-        {Globals.USER_TYPE ? (
-          <Button
-            style={styles.buts_style}
-            onPress={() => {
-              alert_message(
-                'déconnexion',
-                Globals.STRINGS.sur_deconnect,
-                Globals.STRINGS.deconnexion,
-                () => {
-                  fetcher
-                    .Signout()
-                    .then(resi => {
-                      if (resi.data === 1) {
-                        Storer.removeData();
-                        RNReastart.Restart();
-                      } else {
-                        alert(Globals.STRINGS.Ocurred_error);
-                      }
-                    })
-                    .catch(err => {
-                      if (!Globals.INTERNET) {
-                        toast_message(Globals.STRINGS.no_internet);
-                        route.navigation.goBack();
-                      } else {
-                        toast_message(`${err}`);
-                      }
-                    });
-                },
-              );
-            }}>
-            <Text style={styles.boldText_touchable}>
-              {Globals.STRINGS.deconnexion}
-            </Text>
-          </Button>
-        ) : null}
+        <TouchableOpacity
+          style={styles.buts_style}
+          activeOpacity={0.8}
+          onPress={() => {
+            alert_message(
+              'déconnexion',
+              Globals.STRINGS.sur_deconnect,
+              Globals.STRINGS.deconnexion,
+              () => {
+                fetcher
+                  .Signout()
+                  .then(resi => {
+                    if (resi.data === 1) {
+                      Storer.removeData();
+                      RNReastart.Restart();
+                    } else {
+                      alert(Globals.STRINGS.Ocurred_error);
+                    }
+                  })
+                  .catch(err => {
+                    if (!Globals.INTERNET) {
+                      toast_message(Globals.STRINGS.no_internet);
+                      route.navigation.goBack();
+                    } else {
+                      toast_message(`${err}`);
+                    }
+                  });
+              },
+            );
+          }}>
+          <Text style={styles.boldText_touchable}>se déconnecter</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

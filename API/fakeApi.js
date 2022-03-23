@@ -71,6 +71,16 @@ let Fetcher = {
     });
     return await result;
   },
+  Signout: async function (setdada) {
+    const result = await new Promise(resolve => {
+      setTimeout(() => {
+        resolve({
+          data: 1,
+        });
+      }, 3000);
+    });
+    return await result;
+  },
   CheckAuth: async function (setdada, tk) {
     const result = await new Promise(resolve => {
       setTimeout(() => {
