@@ -1,14 +1,14 @@
-import * as React from "react";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import Profil from "./Stack/ProfileNavigation";
-import About from "./Stack/AboutNavigation";
-import Notification from "./Stack/NotificationNavigation";
-import Parameter from "./Stack/ParameterNavigation";
-import ControlBoard from "./Stack/ControlBoardNavigation";
-import Globals from "../Ressources/Globals";
-import Icon from "react-native-vector-icons/FontAwesome";
-import Icono from "react-native-vector-icons/Octicons";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import * as React from 'react';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import Profil from './Stack/ProfileNavigation';
+import About from './Stack/AboutNavigation';
+import Notification from './Stack/NotificationNavigation';
+import Parameter from './Stack/ParameterNavigation';
+import ControlBoard from './Stack/ControlBoardNavigation';
+import Globals from '../Ressources/Globals';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Icono from 'react-native-vector-icons/Octicons';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const Drawer = createDrawerNavigator();
 function ParentMainNavigation() {
@@ -17,15 +17,14 @@ function ParentMainNavigation() {
       <Drawer.Navigator
         initialRouteName="Profil"
         drawerContentOptions={{
-          activeTintColor: "#30B9AB",
-          activeBackgroundColor: "rgba(0,0,0,.04)",
+          activeTintColor: '#30B9AB',
+          activeBackgroundColor: 'rgba(0,0,0,.04)',
           labelStyle: {
-            fontWeight: "bold",
+            fontWeight: 'bold',
             fontSize: 18,
-            fontFamily: "PatrickHand-Regular",
+            fontFamily: 'PatrickHand-Regular',
           },
-        }}
-      >
+        }}>
         <Drawer.Screen
           name="Profil"
           component={Profil}

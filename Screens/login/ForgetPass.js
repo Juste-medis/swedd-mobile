@@ -1,20 +1,27 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {View, Image, Text, ScrollView, ActivityIndicator} from 'react-native';
-import {Button} from 'react-native-elements';
+import {
+  View,
+  Image,
+  ScrollView,
+  ActivityIndicator,
+  TouchableWithoutFeedbackBase,
+} from 'react-native';
 import Globals from '../../Ressources/Globals';
 import {styleSignIn as styles} from '../../Ressources/Styles';
 import Toast from 'react-native-toast-message';
-import Fetcher from '../../API/fetcher';
+import Fetcher from '../../API/fakeApi';
 import {Schemasignin} from '../../API/schemas';
-import {Input} from 'react-native-elements';
+import {Input, Button, Text} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/Feather';
+import LottieView from 'lottie-react-native';
+import {TouchableNativeFeedback} from 'react-native-gesture-handler';
 
 export default function ForgetPass({navigation}) {
   const [mail, setmail] = useState('');
 
   const [wrong_logins_text, set_wrong_text] = useState('');
   const [spinner, setspinner] = useState(false);
-
   function err_err(err) {
     setspinner(false);
     Toast.show({
@@ -26,50 +33,55 @@ export default function ForgetPass({navigation}) {
           : err.message || Globals.STRINGS.Ocurred_error,
     });
   }
-  async function onSignInPressed() {
+  async function onRessetPressed() {
     try {
-      await Schemasignin.validate({mail, password});
       setspinner(true);
-      Fetcher.AuthSignin(
+      await Schemasignin.validate({mail});
+      Fetcher.RessetPassword(
         JSON.stringify({
           user: {
             mail,
           },
         }),
       )
-        .then((res) => {
+        .then(res => {
           setspinner(false);
-          if (res.errors) {
-            set_wrong_text(
-              typeof res.errors[0] === 'string'
-                ? res.errors[0]
-                : Globals.STRINGS.Ocurred_error,
-            );
+          if (res.message) {
+            set_wrong_text(message);
             setspinner(false);
           } else {
             Globals.PROFIL_INFO = res;
             Toast.show({
               type: 'success',
-              text1:
-                'Si vous avez saisit la bonne addresse mail, des instructions vous sont envoyées dans votre boîte Mail.',
+              text1: res.success_message || Globals.STRINGS.Ocurred_error,
             });
           }
         })
-        .catch((err) => {
+        .catch(err => {
           err_err(err);
         });
     } catch (e) {
       if (e.name === 'ValidationError') {
         set_wrong_text(e.message);
+        setspinner(false);
       }
     }
   }
   return (
-    <View style={styles.container} source={Globals.IMAGES.LO_SPLASH}>
+    <View style={styles.container}>
       <Toast />
-      <Image source={Globals.IMAGES.LOGO} style={styles.Image_style} />
+
+      <LottieView
+        source={require('../../assets/loties/forget_pass.json')}
+        autoPlay
+        loop
+        style={{width: 150, height: 150, marginVertical: 20}}
+      />
+
       <ScrollView style={styles.center_scroll}>
-        <Title style={styles.titleText}>{Globals.STRINGS.hello}</Title>
+        <Text style={styles.titleText}>
+          Recupération de votre mot de passe !
+        </Text>
         <View style={styles.center_container}>
           {wrong_logins_text.length > 2 && (
             <View style={styles.wrong_login_container}>
@@ -81,44 +93,31 @@ export default function ForgetPass({navigation}) {
 
           <Input
             placeholder={Globals.STRINGS.mail}
-            rightIcon={{type: 'font-awesome', name: 'mail'}}
-            onChangeText={(name) => setmail(name)}
+            rightIcon={<Icon name="mail" size={24} color="black" />}
+            rightIconContainerStyle={{position: 'absolute', right: 15}}
+            onChangeText={name => setmail(name)}
             style={styles.input}
             value={mail}
+            inputContainerStyle={{borderBottomWidth: 0}}
           />
 
           <View style={styles.err_cont}>
-            {spinner ? (
-              <ActivityIndicator
-                style={styles.indicator}
-                size="large"
-                color={Globals.COLORS.primary_pure}
-              />
-            ) : (
-              <FormButton
-                title={Globals.STRINGS.connection}
-                modeValue="contained"
-                labelStyle={styles.loginButtonLabel}
-                onPress={() => {
-                  onSignInPressed();
-                }}
-              />
-            )}
             <Button
-              title="SIGN UP"
-              loading={true}
+              title="rechercher"
+              loading={spinner}
               loadingProps={{
                 size: 'small',
-                color: 'rgba(111, 202, 186, 1)',
+                color: Globals.COLORS.primary,
               }}
+              TouchableComponent={TouchableNativeFeedback}
+              background={TouchableNativeFeedback.Ripple(
+                Globals.COLORS.primary,
+                true,
+              )}
+              disabled={spinner}
+              type="outline"
+              onPress={() => onRessetPressed()}
               titleStyle={{fontWeight: '700'}}
-              buttonStyle={{
-                backgroundColor: 'rgba(92, 99,216, 1)',
-                borderColor: 'transparent',
-                borderWidth: 0,
-                borderRadius: 5,
-                paddingVertical: 10,
-              }}
               containerStyle={{
                 width: 200,
                 marginHorizontal: 50,

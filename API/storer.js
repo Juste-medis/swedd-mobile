@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as RNFS from 'react-native-fs';
-
+import {toast_message} from '../Helpers/Utils';
+import Globals from '../Ressources/Globals';
 let Storer = {
   storeData: async function (key, datan) {
     try {
@@ -50,6 +51,26 @@ let Storer = {
       return await AsyncStorage.removeItem(key);
     } catch (e) {
       console.log('Storer' + e);
+    }
+  },
+  StoreProfil: async function () {
+    let url = 'https://sedami.com/auth/users/current/20';
+    let res = await fetch(url, {
+      method: 'POST',
+      credentials: 'include',
+      body: {},
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    }).catch(err => {
+      toast_message(err);
+    });
+    res = await res.json();
+    if (res.username) {
+      Globals.PROFIL_INFO = res;
+      res.downloads = [];
+      Storer.storeData('@ProfilInfo', res);
     }
   },
 };

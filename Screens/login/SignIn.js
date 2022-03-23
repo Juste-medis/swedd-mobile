@@ -1,16 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {View, Image, Text, ScrollView, ActivityIndicator} from 'react-native';
+import {View, Image, ScrollView, ActivityIndicator} from 'react-native';
 
 import Globals from '../../Ressources/Globals';
 import {styleSignIn as styles} from '../../Ressources/Styles';
 import Storer from '../../API/storer';
 import RNReastart from 'react-native-restart';
 import Toast from 'react-native-toast-message';
-import Fetcher from '../../API/fetcher';
+import Fetcher from '../../API/fakeApi';
 import {Schemasignin} from '../../API/schemas';
-import {Input} from 'react-native-elements';
-
+import {Input, Button, Text} from 'react-native-elements';
+import Icon from 'react-native-vector-icons/Feather';
 //search "beautiful textinput on google"
 export default function SignIn({navigation}) {
   const [mail, setmail] = useState('');
@@ -42,21 +42,17 @@ export default function SignIn({navigation}) {
           },
         }),
       )
-        .then((res) => {
+        .then(res => {
           setspinner(false);
-          if (res.errors) {
-            set_wrong_text(
-              typeof res.errors[0] === 'string'
-                ? res.errors[0]
-                : Globals.STRINGS.Ocurred_error,
-            );
+          if (res.error) {
+            set_wrong_text(res.error);
             setspinner(false);
           } else {
             Globals.PROFIL_INFO = res;
             Toast.show({
               type: 'success',
               text1: 'Bienvenu',
-              text2: res?.user?.username,
+              text2: res?.first_name,
             });
             Storer.storeData('@ProfilInfo', {...res, mail, password}).then(
               () => {
@@ -67,22 +63,27 @@ export default function SignIn({navigation}) {
             );
           }
         })
-        .catch((err) => {
+        .catch(err => {
           err_err(err);
         });
     } catch (e) {
       if (e.name === 'ValidationError') {
         set_wrong_text(e.message);
       }
-    } 
+    }
   }
   return (
     <View style={styles.container} source={Globals.IMAGES.LO_SPLASH}>
       <Toast />
-      <Image source={Globals.IMAGES.LOGO} style={styles.Image_style} />
       <ScrollView style={styles.center_scroll}>
-        <Title style={styles.titleText}>{Globals.STRINGS.hello}</Title>
+        <Text style={styles.titleText}>{Globals.STRINGS.hello}</Text>
         <View style={styles.center_container}>
+          <Image
+            source={Globals.IMAGES.LO_SPLASH}
+            resizeMode="contain"
+            style={styles.Image_style}
+          />
+
           {wrong_logins_text.length > 2 && (
             <View style={styles.wrong_login_container}>
               <Text style={styles.wrong_login_found_text}>
@@ -93,19 +94,43 @@ export default function SignIn({navigation}) {
 
           <Input
             placeholder={Globals.STRINGS.mail}
-            rightIcon={{type: 'font-awesome', name: 'mail'}}
-            onChangeText={(name) => setmail(name)}
+            rightIcon={<Icon name="mail" size={24} color="black" />}
+            rightIconContainerStyle={{position: 'absolute', right: 15}}
+            onChangeText={name => setmail(name)}
             style={styles.input}
             value={mail}
+            underlineColorAndroi
+            inputContainerStyle={{
+              borderBottomWidth: 0,
+              width: '90%',
+            }}
+            containerStyle={{
+              display: 'flex',
+              alignItems: 'center',
+              padding: 0,
+              height: 70,
+            }}
           />
 
           <Input
             secureTextEntry={true}
             labelName="password"
+            rightIcon={<Icon name="lock" size={24} color="black" />}
+            rightIconContainerStyle={{position: 'absolute', right: 15}}
             value={password}
-            style={styles.input}
-            onChangeText={(userpassword) => setpassword(userpassword)}
+            onChangeText={userpassword => setpassword(userpassword)}
             placeholder="Mot de passe"
+            inputContainerStyle={{
+              borderBottomWidth: 0,
+              width: '90%',
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+            inputStyle={styles.input}
+            containerStyle={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
           />
 
           <View style={styles.err_cont}>
@@ -116,15 +141,35 @@ export default function SignIn({navigation}) {
                 color={Globals.COLORS.primary_pure}
               />
             ) : (
-              <FormButton
+              <Button
                 title={Globals.STRINGS.connection}
-                modeValue="contained"
-                labelStyle={styles.loginButtonLabel}
+                loading={false}
+                loadingProps={{size: 'small', color: 'white'}}
+                buttonStyle={{
+                  backgroundColor: 'rgb(32, 137, 220)',
+                  borderRadius: 5,
+                }}
+                titleStyle={styles.loginButtonLabel}
+                containerStyle={{
+                  marginHorizontal: 50,
+                  height: 50,
+                  width: 200,
+                  marginVertical: 10,
+                }}
                 onPress={() => {
                   onSignInPressed();
                 }}
               />
             )}
+          </View>
+          <View>
+            <Text
+              style={{color: Globals.COLORS.primary_pure, marginTop: 20}}
+              onPress={() => {
+                navigation.navigate('ForgetPass');
+              }}>
+              Mot de passe oublié ?
+            </Text>
           </View>
         </View>
       </ScrollView>

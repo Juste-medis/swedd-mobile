@@ -1,7 +1,7 @@
-import React from "react";
-import { Text } from "react-native";
-import Globals from "../Ressources/Globals";
-import { useFonts } from "expo-font";
+import React from 'react';
+import {Text} from 'react-native';
+import Globals from '../Ressources/Globals';
+import {useFonts} from 'expo-font';
 async function App() {
   const [loaded] = useFonts({
     Montserrat: Globals.FONTS.Montserrat_LightItalic,

@@ -1,11 +1,11 @@
-import { combineReducers } from "redux";
-import * as TYPES from "./types";
+import {combineReducers} from 'redux';
+import * as TYPES from './types';
 
-const bestCategoryReducer = (state = { best_categories: [] }, action) => {
+const bestCategoryReducer = (state = {best_categories: []}, action) => {
   switch (action.type) {
     case TYPES.ADD_BEST_CATEGORIE:
-      let { best_categories } = state;
-      if (action.payload.index === "") {
+      let {best_categories} = state;
+      if (action.payload.index === '') {
         best_categories = [];
       } else {
         best_categories.push({
@@ -14,12 +14,8 @@ const bestCategoryReducer = (state = { best_categories: [] }, action) => {
         });
       }
       if (best_categories.length == 11) {
-        const pub = best_categories.filter((ele) =>
-          ele.name.match(/^p[0-9]$/g)
-        );
-        const cat = best_categories.filter(
-          (ele) => !ele.name.match(/^p[0-9]$/g)
-        );
+        const pub = best_categories.filter(ele => ele.name.match(/^p[0-9]$/g));
+        const cat = best_categories.filter(ele => !ele.name.match(/^p[0-9]$/g));
         best_categories = [];
         best_categories.push(
           pub.shift(),
@@ -32,46 +28,46 @@ const bestCategoryReducer = (state = { best_categories: [] }, action) => {
           cat.shift(),
           cat.shift(),
           pub.shift(),
-          cat.shift()
+          cat.shift(),
         );
       }
-      return { best_categories };
+      return {best_categories};
     default:
       return state;
   }
 };
 
-const SearchReducer = (state = { search_list: [] }, action) => {
+const SearchReducer = (state = {search_list: []}, action) => {
   switch (action.type) {
     case TYPES.SET_SEARCH_LIST:
-      let { search_list } = state;
-      if (action.payload == "") {
+      let {search_list} = state;
+      if (action.payload == '') {
         search_list = [];
       } else {
         search_list.push(action.payload);
       }
-      return { search_list };
+      return {search_list};
     default:
       return state;
   }
 };
 
-const SetPlayVideoReducer = (state = { session_select: {} }, action) => {
+const SetPlayVideoReducer = (state = {session_select: {}}, action) => {
   switch (action.type) {
     case TYPES.SET_SELECTED_VIDEO:
-      let { session_select } = state;
+      let {session_select} = state;
       session_select = action.payload;
-      return { session_select };
+      return {session_select};
     default:
       return state;
   }
 };
-const SetTempReducer = (state = { temp: { index: 0 } }, action) => {
+const SetTempReducer = (state = {temp: {index: 0}}, action) => {
   switch (action.type) {
     case TYPES.TEMP_TYPE:
-      let { temp } = state;
+      let {temp} = state;
       temp = action.payload;
-      return { temp };
+      return {temp};
     default:
       return state;
   }
@@ -80,40 +76,40 @@ const ProfilReducer = (
   state = {
     account: {
       id: 0,
-      username: "",
-      user_email: "",
-      user_pass: "",
-      display_name: "",
-      user_firtname: "",
-      user_lastname: "",
-      photourl: "",
-      balance: 0,
-      description: "",
-      notifications: 1,
-      downloads: [],
-      user_url: "",
-      job: "",
+      photourl: '',
+      description: '',
+      job: '',
+      mail: '',
+      first_name: '',
+      last_name: '',
+      address: '',
+      filled_fiche: 0,
+      rejected_fiche: 0,
+      accepted_fiche: 0,
+      review_fiche: 0,
+      new_messages: 0,
+      new_notifications: 0,
     },
   },
-  action
+  action,
 ) => {
   switch (action.type) {
     case TYPES.SET_ROFIL:
-      let { account } = state;
+      let {account} = state;
       let setdef = Object.keys(action.payload);
       for (let si = 0; si < setdef.length; si++) {
         const key = setdef[si];
         account[key] = action.payload[key];
       }
-      return { account };
+      return {account};
     case TYPES.ADD_ROFIL_ITEM:
       account = state.account;
-      let { key, data } = action.payload;
+      let {key, data} = action.payload;
       let valcon = account[key];
 
       if (Array.isArray(valcon)) {
-        if (account[key].find((el) => el == data)) {
-          if (action.payload.force !== "add")
+        if (account[key].find(el => el == data)) {
+          if (action.payload.force !== 'add')
             account[key] = account[key].filter(function (ele) {
               return ele != data;
             });
@@ -122,15 +118,15 @@ const ProfilReducer = (
         }
       } else {
         switch (typeof valcon) {
-          case "undefined":
-            console.log("undefinis ninit");
+          case 'undefined':
+            console.log('undefinis ninit');
             break;
           default:
             account[key] = data;
             break;
         }
       }
-      return { account };
+      return {account};
     default:
       return state;
   }

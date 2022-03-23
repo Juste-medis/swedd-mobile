@@ -21,15 +21,51 @@ let Fetcher = {
     });
     return await result;
   },
-  AuthSignin: async function (setdada) {
+  RessetPassword: async function (setdada) {
     const result = await new Promise(resolve => {
       setTimeout(() => {
         resolve({
-          saved: 5,
-          checked: 15,
-          rejected: 20,
-          earned: 30,
-          name: 'Mathildda Martica',
+          success_message:
+            'Si vous avez saisit la bonne addresse mail, des instructions vous sont envoyées dans votre boîte Mail.',
+        });
+      }, 3000);
+    });
+    return await result;
+  },
+  AuthSignin: async function (setdada) {
+    const result = await new Promise(resolve => {
+      setdada = JSON.parse(setdada);
+      setTimeout(() => {
+        resolve({
+          mail: setdada.mail,
+          first_name: 'Mathildda',
+          last_name: 'Martica',
+          address: 'Abomey Calavi',
+          filled_fiche: 68,
+          rejected_fiche: 80,
+          accepted_fiche: 8,
+          review_fiche: 15,
+          new_messages: 20,
+          new_notifications: 15,
+        });
+      }, 3000);
+    });
+    return await result;
+  },
+  UpdateData: async function (setdada) {
+    const result = await new Promise(resolve => {
+      setTimeout(() => {
+        resolve({
+          sucess_Update: 'Modification reuissi !',
+          first_name: 'Mathildda',
+          last_name: 'Martica',
+          address: 'Abomey Calavi',
+          filled_fiche: 68,
+          rejected_fiche: 80,
+          accepted_fiche: 8,
+          review_fiche: 15,
+          new_messages: 20,
+          new_notifications: 15,
         });
       }, 3000);
     });

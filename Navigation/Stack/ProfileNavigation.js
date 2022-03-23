@@ -1,25 +1,17 @@
-import * as React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import Account from "../../Screens/Drawer/Account/Account";
-import Personal from "../../Screens/Drawer/Account/Personal";
-import Security from "../../Screens/Drawer/Account/Security";
-import HamburgerIcon from "../../components/Gadgets/drawer_toggle";
-import Globals from "../../Ressources/Globals";
+import * as React from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
+import Account from '../../Screens/Drawer/Account/Account';
+import Personal from '../../Screens/Drawer/Account/Personal';
+import Security from '../../Screens/Drawer/Account/Security';
+import Globals from '../../Ressources/Globals';
 
 const Stack = createStackNavigator();
-function Navigation({ navigation }) {
+function Navigation({navigation}) {
   const navOptions = {
-    headerLeft: () => <HamburgerIcon navigationProps={navigation} />,
-    headerStyle: {
-      backgroundColor: "#FFFFFF",
-    },
-    headerTintColor: "#FFFFFF",
-    headerTitleStyle: {
-      fontWeight: "bold",
-    },
+    headerShown: false,
   };
   return (
-    <Stack.Navigator initialRouteName="Profil">
+    <Stack.Navigator initialRouteName="Account">
       <Stack.Screen
         name="Account"
         component={Account}
@@ -41,7 +33,7 @@ function Navigation({ navigation }) {
         component={Security}
         options={{
           ...navOptions,
-          title: "Sécurité",
+          title: 'Sécurité',
         }}
       />
     </Stack.Navigator>

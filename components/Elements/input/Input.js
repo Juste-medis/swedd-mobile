@@ -5,7 +5,7 @@ var __rest =
     for (var p in s)
       if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
         t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+    if (s != null && typeof Object.getOwnPropertySymbols === 'function')
       for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
         if (
           e.indexOf(p[i]) < 0 &&
@@ -15,7 +15,7 @@ var __rest =
       }
     return t;
   };
-import React from "react";
+import React from 'react';
 import {
   Text,
   View,
@@ -24,24 +24,24 @@ import {
   Easing,
   Platform,
   StyleSheet,
-} from "react-native";
-import { renderNode, patchWebProps } from "../helpers";
-import { fonts, withTheme } from "../config";
-import Icon from "../icons/Icon";
+} from 'react-native';
+import {renderNode, patchWebProps} from '../helpers';
+import {fonts, withTheme} from '../config';
+import Icon from '../icons/Icon';
 const renderText = (content, defaultProps, style) =>
   renderNode(
     Text,
     content,
     Object.assign(Object.assign({}, defaultProps), {
       style: StyleSheet.flatten([style, defaultProps && defaultProps.style]),
-    })
+    }),
   );
 class Input extends React.Component {
   constructor() {
     super(...arguments);
     this.shakeAnimationValue = new Animated.Value(0);
     this.shake = () => {
-      const { shakeAnimationValue } = this;
+      const {shakeAnimationValue} = this;
       shakeAnimationValue.setValue(0);
       // Animation duration based on Material Design
       // https://material.io/guidelines/motion/duration-easing.html#duration-easing-common-durations
@@ -92,25 +92,25 @@ class Input extends React.Component {
         style,
       } = _a,
       attributes = __rest(_a, [
-        "containerStyle",
-        "disabled",
-        "disabledInputStyle",
-        "inputContainerStyle",
-        "leftIcon",
-        "leftIconContainerStyle",
-        "rightIcon",
-        "rightIconContainerStyle",
-        "InputComponent",
-        "inputStyle",
-        "errorProps",
-        "errorStyle",
-        "errorMessage",
-        "label",
-        "labelStyle",
-        "labelProps",
-        "theme",
-        "renderErrorMessage",
-        "style",
+        'containerStyle',
+        'disabled',
+        'disabledInputStyle',
+        'inputContainerStyle',
+        'leftIcon',
+        'leftIconContainerStyle',
+        'rightIcon',
+        'rightIconContainerStyle',
+        'InputComponent',
+        'inputStyle',
+        'errorProps',
+        'errorStyle',
+        'errorMessage',
+        'label',
+        'labelStyle',
+        'labelProps',
+        'theme',
+        'renderErrorMessage',
+        'style',
       ]);
     const translateX = this.shakeAnimationValue.interpolate({
       inputRange: [0, 0.5, 1, 1.5, 2, 2.5, 3],
@@ -121,37 +121,35 @@ class Input extends React.Component {
       <View style={StyleSheet.flatten([styles.container, containerStyle])}>
         {renderText(
           label,
-          Object.assign({ style: labelStyle }, labelProps),
+          Object.assign({style: labelStyle}, labelProps),
           Object.assign(
-            { fontSize: 16, color: theme.colors.grey3 },
+            {fontSize: 16, color: theme.colors.grey3},
             Platform.select({
               android: Object.assign({}, fonts.android.bold),
               default: {
-                fontWeight: "bold",
+                fontWeight: 'bold',
               },
-            })
-          )
+            }),
+          ),
         )}
 
         <Animated.View
           style={StyleSheet.flatten([
             {
-              flexDirection: "row",
+              flexDirection: 'row',
               borderBottomWidth: 1,
-              alignItems: "center",
+              alignItems: 'center',
               borderColor: theme.colors.grey3,
             },
             inputContainerStyle,
-            { transform: [{ translateX }] },
-          ])}
-        >
+            {transform: [{translateX}]},
+          ])}>
           {leftIcon && (
             <View
               style={StyleSheet.flatten([
                 styles.iconContainer,
                 leftIconContainerStyle,
-              ])}
-            >
+              ])}>
               {renderNode(Icon, leftIcon)}
             </View>
           )}
@@ -160,12 +158,12 @@ class Input extends React.Component {
             testID="RNE__Input__text-input"
             underlineColorAndroid="transparent"
             editable={!disabled}
-            ref={(ref) => {
+            ref={ref => {
               this.input = ref;
             }}
             style={StyleSheet.flatten([
               {
-                alignSelf: "center",
+                alignSelf: 'center',
                 color: theme.colors.black,
                 fontSize: 18,
                 flex: 1,
@@ -185,8 +183,7 @@ class Input extends React.Component {
               style={StyleSheet.flatten([
                 styles.iconContainer,
                 rightIconContainerStyle,
-              ])}
-            >
+              ])}>
               {renderNode(Icon, rightIcon)}
             </View>
           )}
@@ -206,8 +203,7 @@ class Input extends React.Component {
               margin: 0,
               padding: 0,
             },
-          ])}
-        >
+          ])}>
           {errorMessage}
         </Text>
       </View>
@@ -216,7 +212,7 @@ class Input extends React.Component {
 }
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: '100%',
     paddingHorizontal: 10,
   },
   disabledInput: {
@@ -224,12 +220,12 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     height: 40,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingRight: 4,
     marginVertical: 4,
   },
 });
-export { Input };
+export {Input};
 //@ts-ignore
-export default withTheme(Input, "Input");
+export default withTheme(Input, 'Input');

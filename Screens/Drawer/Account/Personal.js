@@ -1,20 +1,22 @@
-import React from "react";
+/* eslint-disable react-native/no-inline-styles */
+import React from 'react';
 import {
   ScrollView,
   Text,
   View,
   TextInput,
   TouchableOpacity,
-} from "react-native";
-import Globals from "../../../Ressources/Globals";
-import { styleAccount as styles } from "../../../Ressources/Styles";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { setProfil } from "../../../Store/Actions";
-import Icon from "react-native-vector-icons/Ionicons";
-import Storer from "../../../API/storer";
-import Fetcher from "../../../API/fetcher";
-import { toast_message, UriEncoder } from "../../../Helpers/Utils";
+  ActivityIndicator,
+} from 'react-native';
+import Globals from '../../../Ressources/Globals';
+import {styleAccount as styles} from '../../../Ressources/Styles';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {setProfil} from '../../../Store/Actions';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Storer from '../../../API/storer';
+import Fetcher from '../../../API/fakeApi';
+import {toast_message, UriEncoder} from '../../../Helpers/Utils';
 
 function Personal(route) {
   let profil = route.my_profil.account;
@@ -24,52 +26,34 @@ function Personal(route) {
   React.useEffect(() => {}, []);
   let menuoth = [
     {
-      icon: "person-circle",
-      title: Globals.STRINGS.username,
-      value: profil.username,
-      key: "username",
-    },
-    {
-      icon: "person-circle",
+      icon: 'person-circle',
       title: Globals.STRINGS.firstname,
-      value: profil.user_firtname,
-      key: "user_firtname",
+      value: profil.last_name,
+      key: 'last_name',
     },
     {
-      icon: "person-circle-outline",
+      icon: 'person-circle-outline',
       title: Globals.STRINGS.lastname,
-      value: profil.user_lastname,
-      key: "user_lastname",
+      value: profil.first_name,
+      key: 'first_name',
     },
     {
-      icon: "at-circle",
+      icon: 'at-circle',
       title: Globals.STRINGS.mail,
-      value: profil.user_email,
-      key: "user_email",
+      value: profil.mail,
+      key: 'mail',
     },
     {
-      icon: "person-circle-outline",
-      title: Globals.STRINGS.display_name,
-      value: profil.display_name,
-      key: "display_name",
+      icon: 'location',
+      title: 'Addresse',
+      value: profil.address,
+      key: 'address',
     },
     {
-      icon: "briefcase",
-      title: Globals.STRINGS.profession,
-      value: profil.job,
-      key: "job",
-    },
-    {
-      icon: "link",
-      title: Globals.STRINGS.link,
-      value: profil.user_url,
-      key: "user_url",
-    },
-    {
-      icon: "md-alert-circle",
+      icon: 'md-alert-circle',
       title: Globals.STRINGS.About,
       value: profil.description,
-      key: "description",
+      key: 'description',
     },
   ];
 
@@ -78,74 +62,88 @@ function Personal(route) {
     if (modibool) {
       setspinner(true);
       Fetcher.UpdateData(UriEncoder(modifying))
-        .then((res) => {
+        .then(res => {
           if (res.message) {
             toast_message(res.message);
           } else {
             toast_message(Globals.STRINGS.sucess_Update);
-            setspinner(false);
             route.setProfil(modifying);
-            Storer.StoreProfil();
+            //todo web developp un endpoint pour obtenir toutes les information (current modified)
+            //Storer.StoreProfil();
+            setspinner(false);
           }
         })
-        .catch((err) => {
+        .catch(err => {
           setspinner(false);
           toast_message(`${err}`);
         });
     }
   }
 
-  const menu_main = (data) => {
+  const menu_main = data => {
     return (
-      <View style={{ backgroundColor: "white", width: "100%" }}>
+      <View style={{backgroundColor: 'white', width: '100%'}}>
         {data.map((item, index) => {
           return (
             <View
               style={[
                 styles.menu_item,
                 {
-                  borderRadius: 8,
-                  flexDirection: "column",
-                  marginBottom: 10,
+                  flexDirection: 'column',
                   backgroundColor: Globals.COLORS.white,
-                  elevation: 1,
                 },
               ]}
-              key={index}
-            >
+              key={index}>
               <View
                 style={{
+                  display: 'flex',
                   backgroundColor: Globals.COLORS.white,
-                  flexDirection: "row",
+                  flexDirection: 'row',
                   zIndex: 1,
-                  alignSelf: "flex-start",
-                }}
-              >
+                  alignSelf: 'flex-start',
+                  alignContent: 'center',
+                  ...(modibool
+                    ? {
+                        position: 'absolute',
+                        top: 0,
+                        left: 10,
+                        backgroundColor: 'white',
+                      }
+                    : {}),
+                }}>
                 <Icon
                   name={item.icon}
                   size={25}
-                  color={Globals.COLORS.secondary}
+                  color={Globals.COLORS.arsenic2}
                 />
                 <Text
                   style={[
-                    styles.pressable_title,
                     {
-                      color: Globals.COLORS.secondary,
-                      marginStart: 12,
+                      color: Globals.COLORS.black,
+                      marginStart: 2,
+                      textAlignVertical: 'center',
+                      fontWeight: 'bold',
                     },
-                  ]}
-                >
+                  ]}>
                   {item.title}
                 </Text>
               </View>
               <TextInput
                 style={{
-                  width: "90%",
-                  color: Globals.COLORS.blue_grey,
-                  fontWeight: modibool ? "normal" : "bold",
+                  width: '100%',
+                  color: Globals.COLORS.grey,
+                  fontWeight: '500',
+                  ...(modibool
+                    ? {
+                        borderWidth: 1,
+                        borderRadius: 10,
+                        padding: 20,
+                        borderColor: Globals.COLORS.grey,
+                      }
+                    : {}),
                 }}
                 defaultValue={item.value}
-                onChangeText={(name) => (modifying[item.key] = name)}
+                onChangeText={name => (modifying[item.key] = name)}
                 multiline={item.title === Globals.STRINGS.About ? true : false}
                 placeholder={item.value}
                 placeholderTextColor={Globals.COLORS.arsenic2}
@@ -159,29 +157,48 @@ function Personal(route) {
   };
 
   return (
-    <ScrollView style={{ backgroundColor: "white" }}>
+    <ScrollView style={{backgroundColor: 'white'}}>
       <View style={[styles.main_container]}>
+        <Text
+          style={{
+            textAlign: 'left',
+            width: '100%',
+            marginBottom: 20,
+            padding: 10,
+            fontWeight: 'bold',
+          }}>
+          Information relative à votre profil personel
+        </Text>
         {menu_main(menuoth)}
-        <TouchableOpacity
-          style={styles.buts_style}
-          onPress={() => {
-            submit_modi();
-          }}
-          activeOpacity={0.8}
-        >
-          <Text style={styles.boldText_touchable}>
-            {!modibool ? Globals.STRINGS.modify : Globals.STRINGS.submit}
-          </Text>
-        </TouchableOpacity>
+
+        {spinner ? (
+          <ActivityIndicator
+            style={styles.indicator}
+            size="large"
+            color={Globals.COLORS.primary_pure}
+          />
+        ) : (
+          <TouchableOpacity
+            style={styles.buts_style}
+            onPress={() => {
+              submit_modi();
+            }}
+            disabled={spinner}
+            activeOpacity={0.8}>
+            <Text style={styles.boldText_touchable}>
+              {!modibool ? Globals.STRINGS.modify : Globals.STRINGS.submit}
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </ScrollView>
   );
 }
-const mapStateToProps = (state) => {
-  const { my_profil } = state;
-  return { my_profil };
+const mapStateToProps = state => {
+  const {my_profil} = state;
+  return {my_profil};
 };
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ setProfil }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({setProfil}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Personal);

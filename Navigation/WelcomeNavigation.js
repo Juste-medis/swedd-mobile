@@ -1,29 +1,30 @@
-import * as React from "react";
+import * as React from 'react';
 import {
-  createStackNavigator,
   TransitionSpecs,
   HeaderStyleInterpolators,
-} from "@react-navigation/stack";
+  createStackNavigator,
+} from '@react-navigation/stack';
 
-import { NavigationContainer } from "@react-navigation/native";
-import SignIn from "../Screens/login/SignIn";
+import {NavigationContainer} from '@react-navigation/native';
+import SignIn from '../Screens/login/SignIn';
+import ForgetPass from '../Screens/login/ForgetPass';
 
 const Stack = createStackNavigator();
-function Navigation({ navigation }) {
+function Navigation({navigation}) {
   return (
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="SignIn"
         screenOptions={{
-          gestureDirection: "horizontal",
+          gestureDirection: 'horizontal',
           header: () => {},
           transitionSpec: {
             open: TransitionSpecs.TransitionIOSSpec,
             close: TransitionSpecs.TransitionIOSSpec,
           },
           headerStyleInterpolator: HeaderStyleInterpolators.forFade,
-          cardStyleInterpolator: (inter) => {
-            let { current, next, layouts } = inter;
+          cardStyleInterpolator: inter => {
+            let {current, next, layouts} = inter;
             return {
               cardStyle: {
                 transform: [
@@ -51,9 +52,9 @@ function Navigation({ navigation }) {
               },
             };
           },
-        }}
-      >
+        }}>
         <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="ForgetPass" component={ForgetPass} />
       </Stack.Navigator>
     </NavigationContainer>
   );
