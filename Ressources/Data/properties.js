@@ -1,0 +1,31 @@
+export const variants = [
+    '226, 72 ,65',
+    '99, 75, 216',
+    '121 ,220 ,71',
+    '61 ,153 ,245',
+  ],
+  icons = ['file1', 'filetext1', 'profile', 'file-markdown'],
+  descriptions = [
+    'Il faut cependant attendre les élections législatives françaises de 1951 pour que la rupture soit effective. L’obtention d’un second siège au Palais Bourbon pour la circonscription du Dahomey est alors considérée, par Hubert Maga et ses partisans, comme l’occasion donnée à l’UPD de démontrer son attachement aux intérêts du',
+    'En termes de fréquentation scolaire, 45 % des filles du premier cycle du secondaire ne sont pas scolarisées (contre 28 % des garçons).',
+    'Si cette dynamique démographique se poursuit, la population béninoise pourrait doubler au cours des 30 prochaines années',
+    'ce qui entraînerait une pression accrue sur les dépenses sociales et économiques et risquerait de retarder davantage la transition',
+  ],
+  kits = [
+    'Tlephones',
+    'Ordinateur',
+    'Sacs',
+    'Balaie',
+    'Ardoise',
+    'Plastiques',
+    'Savon',
+  ],
+  animators = [
+    'ASSIAMAIN Nikola',
+    'Minsmin Nikole',
+    'Blaise YIDENON',
+    'Antoine GLELE',
+    'KOKOU Niquèze',
+    'Reginald KOMLAN',
+    'TIPENTI gaspard',
+  ];

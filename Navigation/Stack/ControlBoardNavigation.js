@@ -1,7 +1,9 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import HamburgerIcon from '../../components/Gadgets/drawer_toggle';
 import ControlBoard from '../../Screens/Drawer/ControlBoard/ControlBoard';
+import FichesTemplates from '../../Screens/Drawer/ControlBoard/FichesTemplates';
+import FicheForm from '../../Screens/Drawer/ControlBoard/FicheForm';
+import FichesList from '../../Screens/Drawer/ControlBoard/FichesList';
 
 const Stack = createStackNavigator();
 
@@ -12,7 +14,27 @@ function Navigation({navigation}) {
         name="ControlBoard"
         component={ControlBoard}
         options={{
-          title: 'Tableau de Bord',
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="FichesTemplates"
+        component={FichesTemplates}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="FicheForm"
+        component={FicheForm}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="FichesList"
+        component={FichesList}
+        options={{
           headerShown: false,
         }}
       />

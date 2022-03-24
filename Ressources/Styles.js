@@ -1409,11 +1409,52 @@ if (mobile_360_750) {
     },
   });
   tyleControlBoard = StyleSheet.create({
+    main_container: {height: '100%', backgroundColor: Globals.COLORS.surface},
+    icon_containter_ficheli: {
+      padding: 10,
+      borderRadius: 10,
+    },
     icon_containter: {
       backgroundColor: 'white',
       padding: 25,
       elevation: 2,
       borderRadius: 10,
+    },
+    main_menu_indider: {
+      marginTop: 20,
+      width: '100%',
+      borderRadius: 20,
+      backgroundColor: 'white',
+      elevation: 20,
+    },
+    menu_item: {
+      width: '100%',
+      flexDirection: 'column',
+      borderRadius: 15,
+      paddingHorizontal: 20,
+    },
+    main_menu_top: {
+      display: 'flex',
+      flexDirection: 'row',
+    },
+    prop_unity_value: {
+      fontSize: 14,
+      marginTop: 10,
+      paddingStart: 10,
+    },
+    main_menu_bottom: {
+      display: 'flex',
+      justifyContent: 'flex-start',
+    },
+    prop_unity_valuei: {
+      fontSize: 15,
+      marginTop: 10,
+      color: Globals.COLORS.blue_dark,
+      paddingStart: 0,
+    },
+    description: {
+      paddingVertical: 10,
+      color: '#707375',
     },
   });
   tyleAccount = StyleSheet.create({
@@ -1425,7 +1466,7 @@ if (mobile_360_750) {
       justifyContent: 'center',
       padding: 8,
       paddingBottom: 50,
-      backgroundColor: Globals.COLORS.co_gris,
+      backgroundColor: Globals.COLORS.surface,
     },
     image_avatar: {
       borderRadius: 70,
@@ -1457,8 +1498,8 @@ if (mobile_360_750) {
       flexDirection: 'row',
       alignItems: 'flex-start',
       justifyContent: 'space-between',
-      paddingHorizontal: 20,
-      paddingVertical: 8,
+      paddingHorizontal: 15,
+      paddingVertical: 12,
       borderRadius: 20,
     },
     item_title: {
@@ -1517,11 +1558,9 @@ if (mobile_360_750) {
     },
     prop_unity_value: {
       textAlign: 'left',
-      color: 'white',
       paddingStart: 10,
       fontSize: 50,
       fontWeight: 'bold',
-      textAlignVertical: 'top',
       paddingTop: 0,
       marginTop: -10,
     },

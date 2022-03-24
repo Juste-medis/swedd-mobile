@@ -1,4 +1,3 @@
-import React from 'react';
 import Globals from '../Ressources/Globals';
 import {Share} from 'react-native';
 import {ToastAndroid, Alert} from 'react-native';
@@ -195,4 +194,14 @@ export const htmlSafe = o1 => {
 export const paginate = (array, page_size, page_number) => {
   // human-readable page numbers usually start with 1, so we reduce 1 in the first argument
   return array.slice((page_number - 1) * page_size, page_number * page_size);
+};
+export const generateRandom = (maxLimit = 100) => {
+  let rand = Math.random() * maxLimit;
+  rand = Math.floor(rand);
+  return rand;
+};
+export const randomDate = (start, end) => {
+  return new Date(
+    start.getTime() + Math.random() * (end.getTime() - start.getTime()),
+  );
 };

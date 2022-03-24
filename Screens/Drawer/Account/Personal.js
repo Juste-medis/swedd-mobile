@@ -45,7 +45,7 @@ function Personal(route) {
     },
     {
       icon: 'location',
-      title: 'Addresse',
+      title: 'adresse',
       value: profil.address,
       key: 'address',
     },

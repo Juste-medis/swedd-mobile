@@ -22,7 +22,6 @@ import SimpleRipple from '../../../components/Touchable/SimpleRipple';
 
 function Account(route) {
   let profil = route.my_profil.account;
-  console.log(route.my_profil);
   React.useEffect(() => {
     //route.AddProfilItem({ key: "visitedcourses", data: "^^^^^^^^^^^^^^^^^" });
   }, []);
@@ -50,7 +49,7 @@ function Account(route) {
       onclick: () => {
         route.navigation.navigate('Notification');
       },
-      value: profil.notifications,
+      value: profil.notifications.length,
     },
     {
       icon: 'ios-key-sharp',
@@ -108,24 +107,31 @@ function Account(route) {
       <View style={{width: '100%'}}>
         {data.map((item, index) => {
           return (
-            <View style={{marginTop: 10}}>
+            <View
+              style={{
+                marginTop: 10,
+                backgroundColor: 'white',
+                borderRadius: 10,
+              }}>
               <SimpleRipple
-                style={styles.menu_item}
+                style={[styles.menu_item, {alignItems: 'center'}]}
                 onPress={() => {
                   item.onclick();
                 }}
                 key={index}>
-                <View style={styles.menu_item}>
+                <View style={[styles.menu_item, {alignItems: 'center'}]}>
                   <Icon
                     name={item.icon}
                     size={25}
                     color={Globals.COLORS.secondary}
                   />
                   <Text
-                    style={[
-                      styles.pressable_title,
-                      {color: Globals.COLORS.arsenic, marginStart: 12},
-                    ]}>
+                    style={{
+                      color: Globals.COLORS.arsenic,
+                      marginStart: 12,
+                      fontWeight: '500',
+                      fontSize: 16,
+                    }}>
                     {item.title}
                   </Text>
                 </View>
@@ -136,7 +142,14 @@ function Account(route) {
                     color="grey"
                   />
                 ) : (
-                  <Text style={styles.prop_unity_value}>{item.value}</Text>
+                  <Text
+                    style={{
+                      ...styles.prop_unity_value,
+                      fontSize: 15,
+                      marginTop: 10,
+                    }}>
+                    {item.value}
+                  </Text>
                 )}
               </SimpleRipple>
             </View>
@@ -200,7 +213,7 @@ function Account(route) {
             alert_message(
               'déconnexion',
               Globals.STRINGS.sur_deconnect,
-              Globals.STRINGS.deconnexion,
+              'Se déconnecter',
               () => {
                 fetcher
                   .Signout()

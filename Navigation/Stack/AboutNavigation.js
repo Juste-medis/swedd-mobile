@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import About from '../../Screens/Drawer/About/About';
-import HamburgerIcon from '../../components/Gadgets/drawer_toggle';
 import Globals from '../../Ressources/Globals';
 
 const Stack = createStackNavigator();

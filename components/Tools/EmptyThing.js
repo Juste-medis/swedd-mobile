@@ -1,10 +1,10 @@
-import React from "react";
-import { Image, Text, View } from "react-native";
-import { styleMyCoursesScreen as styles } from "../../Ressources/Styles";
-import Globals from "../../Ressources/Globals";
-import CategorieList from "../../Components/Worker/Lists/CategorieList";
+import React from 'react';
+import {Image, Text, View} from 'react-native';
+import {styleMyCoursesScreen as styles} from '../../Ressources/Styles';
+import Globals from '../../Ressources/Globals';
+import CategorieList from '../../Components/Worker/Lists/CategorieList';
 
-export default function EmptyThing({ route }) {
+export default function EmptyThing({route}) {
   return (
     <View style={styles.empty_container}>
       <Image
@@ -14,7 +14,7 @@ export default function EmptyThing({ route }) {
       />
       <Text style={styles.head_title}>{Globals.STRINGS.course_here}</Text>
       <View style={styles.CategorieList}>
-        <Text style={[styles.head_title, { fontWeight: "bold" }]}>
+        <Text style={[styles.head_title, {fontWeight: 'bold'}]}>
           {Globals.STRINGS.parcour_category}
         </Text>
         <CategorieList navigation={route.route.navigation} verticale={true} />

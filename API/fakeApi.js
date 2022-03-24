@@ -1,3 +1,6 @@
+import {generateRandom, randomDate} from '../Helpers/Utils';
+import Fiches from '../Ressources/Data/Fiches';
+import {animators, descriptions, kits} from '../Ressources/Data/properties';
 import Neter from '../Ressources/Neter';
 const baseUrl = Neter.uri1;
 
@@ -26,7 +29,7 @@ let Fetcher = {
       setTimeout(() => {
         resolve({
           success_message:
-            'Si vous avez saisit la bonne addresse mail, des instructions vous sont envoyées dans votre boîte Mail.',
+            'Si vous avez saisit la bonne adresse mail, des instructions vous sont envoyées dans votre boîte Mail.',
         });
       }, 3000);
     });
@@ -41,12 +44,74 @@ let Fetcher = {
           first_name: 'Mathildda',
           last_name: 'Martica',
           address: 'Abomey Calavi',
-          filled_fiche: 68,
-          rejected_fiche: 80,
-          accepted_fiche: 8,
-          review_fiche: 15,
-          new_messages: 20,
-          new_notifications: 15,
+          filled_fiche: Array.apply(null, Array(50)).map(function (x, i) {
+            const radi = generateRandom(Fiches.length);
+            return {
+              id: i + 1,
+              id_fiche: Fiches[radi].id,
+              title: Fiches[radi].title,
+            };
+          }),
+          rejected_fiche: Array.apply(null, Array(30)).map(function (x, i) {
+            const radi = generateRandom(Fiches.length);
+            return {
+              id: i + 1,
+              id_fiche: Fiches[radi].id,
+              title: Fiches[radi].title,
+            };
+          }),
+          accepted_fiche: Array.apply(null, Array(80)).map(function (x, i) {
+            const radi = generateRandom(Fiches.length);
+            return {
+              id: i + 1,
+              id_fiche: Fiches[radi].id,
+              title: Fiches[radi].title,
+            };
+          }),
+          review_fiche: Array.apply(null, Array(31)).map(function (x, i) {
+            const radi = generateRandom(Fiches.length);
+            return {
+              id: i + 1,
+              id_fiche: Fiches[radi].id,
+              title: Fiches[radi].title,
+            };
+          }),
+          animators: Array.apply(null, Array(50)).map(function (x, i) {
+            return {
+              id: i + 1,
+              name: animators[generateRandom(animators.length)],
+              description: descriptions[generateRandom(descriptions.length)],
+            };
+          }),
+          beneficiaires: Array.apply(null, Array(66)).map(function (x, i) {
+            return {
+              id: i + 1,
+              name: animators[generateRandom(animators.length)],
+              description: descriptions[generateRandom(descriptions.length)],
+            };
+          }),
+          formations: Array.apply(null, Array(25)).map(function (x, i) {
+            const radi = generateRandom(Fiches.length);
+            return {
+              id: i + 1,
+              name: Fiches[radi].title,
+              description: descriptions[generateRandom(descriptions.length)],
+            };
+          }),
+          kits: Array.apply(null, Array(19)).map(function (x, i) {
+            return {
+              id: i + 1,
+              name: kits[generateRandom(kits.length)],
+              description: descriptions[generateRandom(descriptions.length)],
+            };
+          }),
+          notifications: Array.apply(null, Array(15)).map(function (x, i) {
+            return {
+              id: i + 1,
+              description: descriptions[generateRandom(descriptions.length)],
+              date: randomDate(new Date(2021, 0, 1), new Date()),
+            };
+          }),
         });
       }, 3000);
     });

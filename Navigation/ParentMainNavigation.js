@@ -36,6 +36,7 @@ function ParentMainNavigation() {
           name="Profil"
           component={Profil}
           options={{
+            first: 1,
             title: Globals.STRINGS.Profil,
             drawerIcon: ({color, focused}) =>
               focused ? (
@@ -83,24 +84,6 @@ function ParentMainNavigation() {
                   <Icono name="notifications" size={30} color={color} />
                 ) : (
                   <Icono name="notifications-outline" size={30} color={color} />
-                ),
-            }}
-          />
-          <Drawer.Screen
-            name="MainMessage"
-            component={About}
-            options={{
-              groupName: 'Alertes',
-              drawerItemStyle: {
-                borderColor: Globals.COLORS.grey,
-                borderBottomWidth: 1,
-              },
-              title: Globals.STRINGS.About,
-              drawerIcon: ({color, focused}) =>
-                focused ? (
-                  <Icono name="mail" size={30} color={color} />
-                ) : (
-                  <Icono name="mail-outline" size={30} color={color} />
                 ),
             }}
           />
@@ -164,8 +147,8 @@ const CustomSidebarMenu = props => {
             alignItems: 'center',
             padding: 20,
           }}>
-          {Globals.PROFIL_INFO.photourl &&
-          Globals.PROFIL_INFO.photourl !== '' ? (
+          {/**Globals.PROFIL_INFO.photourl && Globals.PROFIL_INFO.photourl !== ''  */}
+          {1 ? (
             <Image
               source={{
                 uri: 'https://cdn.futura-sciences.com/buildsv6/images/wide1920/1/8/2/182c0cf196_50167185_proprietaire-chat-min.jpg',
@@ -188,7 +171,7 @@ const CustomSidebarMenu = props => {
           <Text style={styles.mail_title}>{Globals.PROFIL_INFO.mail}</Text>
         </View>
         {state.routes.map(route => {
-          const {activeTintColor, drawerIcon, title, groupName} =
+          const {activeTintColor, drawerIcon, title, first, groupName} =
             descriptors[route.key].options;
           if (lastGroupName !== groupName) {
             newGroup = true;
@@ -200,12 +183,14 @@ const CustomSidebarMenu = props => {
             <>
               {newGroup ? (
                 <View style={styles.sectionContainer}>
-                  <Text
-                    key={groupName}
-                    style={{marginLeft: 16, fontWeight: 'bold'}}>
-                    {groupName}
-                  </Text>
-                  <View style={styles.sectionLine} />
+                  {!first && (
+                    <Text
+                      key={groupName}
+                      style={{marginLeft: 16, fontWeight: 'bold'}}>
+                      {groupName}
+                    </Text>
+                  )}
+                  {!first && <View style={styles.sectionLine} />}
                 </View>
               ) : null}
               <DrawerItem
@@ -236,7 +221,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10,
   },
   image_avatar: {
     borderRadius: 70,
