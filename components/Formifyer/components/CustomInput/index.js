@@ -1,9 +1,5 @@
-import React, { PureComponent } from 'react';
-import {
-  View,
-  TextInput,
-  Text,
-} from 'react-native';
+import React, {PureComponent} from 'react';
+import {View, TextInput, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -60,8 +56,8 @@ export default class CustomInput extends PureComponent {
     return this.state.value;
   };
 
-  setValue = (value) => {
-    this.setState({ value });
+  setValue = value => {
+    this.setState({value});
   };
 
   isValid = () => {
@@ -69,15 +65,15 @@ export default class CustomInput extends PureComponent {
   };
 
   clear = () => {
-    this.setState({ value: '' });
+    this.setState({value: ''});
     this.clearError();
   };
 
   clearError = () => {
-    this.setState({ error: false });
+    this.setState({error: false});
   };
 
-  calculateInputHeight = (event) => {
+  calculateInputHeight = event => {
     if (this.props.multiline) {
       this.setState({
         multiLineStyle: {
@@ -99,31 +95,23 @@ export default class CustomInput extends PureComponent {
     );
 
     // extract colors from theme
-    const { theme } = this.context;
-    const {
-      textPrimary,
-      error,
-      iconDark,
-      placeholderTextColor,
-    } = theme.colors;
+    const {theme} = this.context;
+    const {textPrimary, error, iconDark, placeholderTextColor} = theme.colors;
 
     return (
       <View style={styles.container}>
-        <LabelError
-          label={this.props.label}
-          error={this.props.error}
-        />
+        <LabelError label={this.props.label} error={this.props.error} />
         <TextInput
           editable={!this.props.disabled}
           {...this.props}
-          onChangeText={(input) => {
+          onChangeText={input => {
             let value;
             if (this.props.onChangeTextWithNewValue) {
               value = this.props.onChangeTextWithNewValue(input);
             } else {
               value = input;
             }
-            this.setState({ value }, () => {
+            this.setState({value}, () => {
               if (this.state.error) {
                 this.setState({
                   error: !this.isValid(),
@@ -137,7 +125,9 @@ export default class CustomInput extends PureComponent {
           onContentSizeChange={this.calculateInputHeight}
           placeholder={this.props.placeholder}
           placeholderTextColor={
-            this.state.error ? error : (theme.input.placeholderTextColor || placeholderTextColor)
+            this.state.error
+              ? error
+              : theme.input.placeholderTextColor || placeholderTextColor
           }
           selectionColor={textPrimary}
           style={[
@@ -147,12 +137,14 @@ export default class CustomInput extends PureComponent {
             theme.input.style,
           ]}
           underlineColorAndroid="transparent"
-          value={this.props.masked ? this.props.value : this.state.value || this.props.value}
+          value={
+            this.props.masked
+              ? this.props.value
+              : this.state.value || this.props.value
+          }
           secureTextEntry={this.props.password}
         />
-        {
-          !!this.props.icon
-          &&
+        {!!this.props.icon && (
           <View style={styles.iconStyle}>
             <Icon
               color={theme.input.iconColor || iconDark}
@@ -160,7 +152,7 @@ export default class CustomInput extends PureComponent {
               size={20}
             />
           </View>
-        }
+        )}
       </View>
     );
   }

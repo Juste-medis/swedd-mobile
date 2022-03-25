@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
-import {
-  View,
-} from 'react-native';
+import React, {Component, useState} from 'react';
+import {View} from 'react-native';
 import PropTypes from 'prop-types';
-import { RadioButton } from 'react-native-material-ui';
 import _ from 'lodash';
 
 import LabelError from '../LabelError';
 import CustomInput from '../CustomInput';
 
 import styles from './styles';
+
+import {CheckBox, Icon} from 'react-native-elements';
 
 export default class RadioGroup extends Component {
   static propTypes = {
@@ -34,9 +33,9 @@ export default class RadioGroup extends Component {
     textValue: '',
   };
 
-  onCheck = (value) => {
-    const { onRadioValueChanged } = this.props;
-    const { selectedValue } = this.state;
+  onCheck = value => {
+    const {onRadioValueChanged} = this.props;
+    const {selectedValue} = this.state;
     const newValue = value.value;
     if (newValue !== 'other') {
       this.setState({
@@ -52,18 +51,15 @@ export default class RadioGroup extends Component {
         selectedValue: newValue,
       });
     }
-  }
+  };
 
-  onOtherTextChanged = (text) => {
-    const { onRadioValueChanged } = this.props;
+  onOtherTextChanged = text => {
+    const {onRadioValueChanged} = this.props;
     onRadioValueChanged(text);
   };
 
   renderOtherInput = () => {
-    const {
-      selectedValue,
-      textValue,
-    } = this.state;
+    const {selectedValue, textValue} = this.state;
     if (selectedValue === 'other') {
       return (
         <CustomInput
@@ -78,59 +74,83 @@ export default class RadioGroup extends Component {
   };
 
   render() {
-    const {
-      label,
-      options,
-      error,
-      other,
-    } = this.props;
-    const { selectedValue } = this.state;
+    const {label, options, error, other} = this.props;
+    const {selectedValue} = this.state;
     const propValue = this.props.value;
     return (
       <View>
-        <LabelError
-          label={label}
-          error={error}
-        />
+        <LabelError label={label} error={error} />
         <View style={styles.radioContainer}>
-          {
-            _.map(options, value => (
-              <RadioButton
+          {_.map(options, value => (
+            <View>
+              <CheckBox
+                checkedIcon={
+                  <Icon
+                    name="radio-button-checked"
+                    type="material"
+                    color="green"
+                    size={25}
+                    iconStyle={{marginRight: 10}}
+                  />
+                }
+                uncheckedIcon={
+                  <Icon
+                    name="radio-button-unchecked"
+                    type="material"
+                    color="grey"
+                    size={25}
+                    iconStyle={{marginRight: 10}}
+                  />
+                }
                 key={_.get(value, 'value')}
-                label={_.get(value, 'label')}
+                title={_.get(value, 'label')}
                 checked={propValue === value.value}
-                value={_.get(value, 'value')}
                 onSelect={() => {}}
-                onCheck={(checked) => {
-                  this.onCheck(value, checked);
+                onPress={checked => {
+                  this.onCheck(value, true);
                 }}
               />
-            ))
-          }
-          {
-            other
-            ?
-              <View style={styles.otherRow}>
-                <RadioButton
-                  key="other"
-                  label="Other"
-                  checked={selectedValue === 'other'}
-                  value="other"
-                  onSelect={() => {}}
-                  onCheck={(checked) => {
-                    this.onCheck({
+            </View>
+          ))}
+          {other ? (
+            <View style={styles.otherRow}>
+              <CheckBox
+                checkedIcon={
+                  <Icon
+                    name="radio-button-checked"
+                    type="material"
+                    color="green"
+                    size={25}
+                    iconStyle={{marginRight: 10}}
+                  />
+                }
+                uncheckedIcon={
+                  <Icon
+                    name="radio-button-unchecked"
+                    type="material"
+                    color="grey"
+                    size={25}
+                    iconStyle={{marginRight: 10}}
+                  />
+                }
+                onPress={checked => {
+                  this.onCheck(
+                    {
                       value: 'other',
-                      label: 'Other',
-                    }, checked);
-                  }}
-                />
-                <View style={{ flex: 1 }}>
-                  {this.renderOtherInput()}
-                </View>
-              </View>
-              :
-              null
-          }
+                      label: 'Autres',
+                    },
+                    checked,
+                  );
+                }}
+                key="other"
+                title="Autres"
+                checked={selectedValue === 'other'}
+                value="other"
+                onSelect={() => {}}
+              />
+              <View style={{flex: 1}}>{this.renderOtherInput()}</View>
+            </View>
+          ) : null}
         </View>
       </View>
     );

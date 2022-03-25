@@ -112,7 +112,8 @@ function Account(route) {
                 marginTop: 10,
                 backgroundColor: 'white',
                 borderRadius: 10,
-              }}>
+              }}
+              key={index}>
               <SimpleRipple
                 style={[styles.menu_item, {alignItems: 'center'}]}
                 onPress={() => {

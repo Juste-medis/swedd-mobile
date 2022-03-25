@@ -13,6 +13,29 @@ export default Fiches = [
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
     description: descriptions[generateRandom(descriptions.length)],
+    content: [
+      {
+        key: 'hdghhdbdfgh',
+        type: 'header',
+        subtype: 'h1',
+        label: 'ferf',
+      },
+      {
+        key: 'manshgdsuudfg',
+        type: 'text',
+        required: true, // optional
+        label: 'What is your last name?',
+        placeholder: 'Last Name', // optional
+        subtype: 'text', // one of text, tel, email and password
+        maxlength: 30, // optional
+        value: 'Salako', // optional
+        disabled: false, // optional,
+        icon: 'lock', // optional
+        validationFunc: value => {
+          // do validation here and return bool status
+        }, // optional
+      },
+    ],
   },
   {
     id: 'akFuu3Yjwnp2LQCyX2pndK',

@@ -20,7 +20,7 @@ function FichesTemplates(route) {
               <SimpleRipple
                 style={[styles.menu_item, stylesc.menu_item]}
                 onPress={() => {
-                  route.navigation.navigate('FicheForm', item);
+                  route.navigation.navigate('FicheForm', {set: item});
                 }}
                 rippleColor={item.variant}>
                 <View style={stylesc.main_menu_top}>

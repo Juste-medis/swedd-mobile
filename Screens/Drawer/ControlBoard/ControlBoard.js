@@ -108,7 +108,7 @@ function ControlBoard(route) {
                 marginTop: 10,
                 borderRadius: 20,
               }}
-              key={index}>
+              key={item.title}>
               <SimpleRipple
                 style={[
                   styles.menu_item,

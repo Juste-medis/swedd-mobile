@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import { View } from 'react-native';
+import React, {PureComponent} from 'react';
+import {View} from 'react-native';
 import PropTypes from 'prop-types';
 import MultiSelect from 'react-native-multiple-select';
 
@@ -29,20 +29,14 @@ export default class Select extends PureComponent {
     theme: PropTypes.object.isRequired,
   };
 
-  onSelectedItemsChange = (selectedItems) => {
-    const { onSelect } = this.props;
+  onSelectedItemsChange = selectedItems => {
+    const {onSelect} = this.props;
     onSelect(selectedItems);
-  }
+  };
 
   render() {
-    const {
-      label,
-      values,
-      data,
-      single,
-      searchInputPlaceholder,
-      error,
-    } = this.props;
+    const {label, values, data, single, searchInputPlaceholder, error} =
+      this.props;
     const {
       theme: {
         select: {
@@ -58,11 +52,8 @@ export default class Select extends PureComponent {
     } = this.context;
     return (
       <View>
-        <LabelError
-          label={label}
-          error={error}
-        />
-        <View style={{ marginTop: 10 }}>
+        <LabelError label={label} error={error} />
+        <View style={{marginTop: 10}}>
           <MultiSelect
             hideSubmitButton
             autoFocusInput={false}
@@ -80,7 +71,7 @@ export default class Select extends PureComponent {
             selectedItemIconColor={selectedItemIconColor}
             itemTextColor={itemTextColor}
             displayKey="label"
-            searchInputStyle={{ color: '#CCC' }}
+            searchInputStyle={{color: '#CCC'}}
             submitButtonColor={submitButtonColor}
             submitButtonText="OK"
           />

@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
 import {View, ScrollView} from 'react-native';
 import PropTypes from 'prop-types';
-import {ThemeProvider} from 'react-native-material-ui';
 import _ from 'lodash';
 
 import Header from '../components/Header';
 import Paragraph from '../components/Paragraph';
 import CustomInput from '../components/CustomInput';
-import Rating from '../components/Rating';
 import RadioGroup from '../components/RadioGroup';
 import CheckboxGroup from '../components/CheckboxGroup';
 import CustomDate from '../components/CustomDate';
@@ -16,10 +14,9 @@ import Select from '../components/Select';
 import Button from '../components/Button';
 
 import {getInputType} from '../util';
-import {buildTheme} from '../../config/styles';
+import {buildTheme} from '../config/styles';
 import styles from './styles';
 
-const uiTheme = {};
 const defaultTheme = buildTheme();
 
 export default class DynamicForm extends Component {
@@ -233,29 +230,7 @@ export default class DynamicForm extends Component {
               />
             </View>
           );
-        case 'starRating':
-          return (
-            <View key={key} style={styles.row}>
-              <Rating
-                starCount={(() => {
-                  const maxStars = element.maxStars || 5;
-                  const starCount = Number(
-                    this.getFormElementValue(key, element),
-                  );
-                  if (isNaN(starCount)) {
-                    return 0;
-                  }
-                  return starCount > maxStars ? 0 : starCount;
-                })()}
-                label={label}
-                onStarRatingChange={starCount => {
-                  this.updateFormElement(starCount, element);
-                }}
-                maxStars={element.maxStars}
-                config={element.config}
-              />
-            </View>
-          );
+
         case 'radio-group':
           const radioOptions = {};
           if (element.other) {
@@ -384,13 +359,11 @@ export default class DynamicForm extends Component {
 
   render() {
     return (
-      <ThemeProvider uiTheme={uiTheme}>
-        <View style={[styles.container, this.props.style]}>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {this.renderForm()}
-          </ScrollView>
-        </View>
-      </ThemeProvider>
+      <View style={[styles.container, this.props.style]}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {this.renderForm()}
+        </ScrollView>
+      </View>
     );
   }
 }

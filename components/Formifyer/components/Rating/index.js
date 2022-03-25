@@ -1,8 +1,5 @@
-import React, { PureComponent } from 'react';
-import {
-  View,
-  Text,
-} from 'react-native';
+import React, {PureComponent} from 'react';
+import {View, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import StarRating from 'react-native-star-rating';
 
@@ -51,39 +48,24 @@ export default class Rating extends PureComponent {
     };
   }
 
-  onStarRatingPress = (starCount) => {
-    const { onStarRatingChange } = this.props;
+  onStarRatingPress = starCount => {
+    const {onStarRatingChange} = this.props;
     onStarRatingChange(starCount);
   };
 
   getRatingRemark = () => {
-    const { starCount, config } = this.props;
+    const {starCount, config} = this.props;
     const ratingRemark = config.ratingRemark || this.ratingRemark;
     return ratingRemark[starCount] || '';
   };
 
   render() {
-    const {
-      label,
-      starCount,
-      error,
-      maxStars,
-      config,
-    } = this.props;
-    const {
-      iconSet,
-      emptyStar,
-      fullStar,
-      halfStar,
-      enableHalfStar,
-    } = config;
-    const { theme } = this.context;
+    const {label, starCount, error, maxStars, config} = this.props;
+    const {iconSet, emptyStar, fullStar, halfStar, enableHalfStar} = config;
+    const {theme} = this.context;
     return (
       <View>
-        <LabelError
-          label={label}
-          error={error}
-        />
+        <LabelError label={label} error={error} />
         <View style={styles.ratingContainer}>
           <StarRating
             containerStyle={styles.containerStyle}
@@ -98,9 +80,7 @@ export default class Rating extends PureComponent {
             selectedStar={this.onStarRatingPress}
             fullStarColor={theme.rating.starFillColor}
           />
-          <Text style={theme.rating.remarkStyle}>
-            {this.getRatingRemark()}
-          </Text>
+          <Text style={theme.rating.remarkStyle}>{this.getRatingRemark()}</Text>
         </View>
       </View>
     );

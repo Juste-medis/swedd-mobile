@@ -9,6 +9,9 @@ export default {
     LO_SPLASH: require('../assets/signup-fig.png'),
     LOGO: require('../assets/logo.png'),
   },
+  FONTS: {
+    Lato: 'require("../assets/fonts/Montserrat-LightItalic.ttf")',
+  },
   COLORS: {
     primary: 'rgb(32, 137, 220)',
     secondary: '#204b9bff',

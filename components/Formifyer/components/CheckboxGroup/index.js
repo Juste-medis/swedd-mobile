@@ -1,8 +1,8 @@
 import React, {PureComponent} from 'react';
 import {View, Text, Switch} from 'react-native';
 import PropTypes from 'prop-types';
-import {Checkbox} from 'react-native-material-ui';
 import _ from 'lodash';
+import {CheckBox} from 'react-native-elements';
 
 import LabelError from '../LabelError';
 import CustomInput from '../CustomInput';
@@ -135,14 +135,19 @@ export default class CheckboxGroup extends PureComponent {
               </View>
             ) : (
               <View key={`${_.get(value, 'value')}`}>
-                <Checkbox
-                  label={_.get(value, 'label')}
-                  value={_.get(value, 'value')}
+                <CheckBox
+                  center
+                  title={_.get(value, 'label')}
                   checked={
                     propsValue.regular.indexOf(_.get(value, 'value')) !== -1
                   }
-                  onCheck={checked => {
-                    this.onCheckChanged(_.get(value, 'value'), checked);
+                  onPress={checked => {
+                    this.onCheckChanged(
+                      _.get(value, 'value'),
+                      !(
+                        propsValue.regular.indexOf(_.get(value, 'value')) !== -1
+                      ),
+                    );
                   }}
                 />
               </View>
@@ -163,12 +168,12 @@ export default class CheckboxGroup extends PureComponent {
                   <Text style={styles.toggleText}>Other</Text>
                 </View>
               ) : (
-                <Checkbox
-                  label="Other"
-                  value="other"
+                <CheckBox
+                  center
+                  title="Autres"
                   checked={!!propsValue.other}
-                  onCheck={checked => {
-                    this.onCheckChanged('other', checked);
+                  onPress={checked => {
+                    this.onCheckChanged('other', !propsValue.other);
                   }}
                 />
               )}

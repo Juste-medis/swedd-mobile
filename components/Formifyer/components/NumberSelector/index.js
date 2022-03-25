@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {View, TextInput, Text, TouchableOpacity} from 'react-native';
+import {View, TextInput, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 
