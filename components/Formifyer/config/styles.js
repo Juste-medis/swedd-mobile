@@ -41,6 +41,7 @@ export const defaultTheme = {
     marginTop: 10,
     fontSize: 14,
     color: textPrimary,
+    fontWeight: 'bold',
   },
   // error
   error: {

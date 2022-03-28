@@ -56,13 +56,13 @@ export default class Select extends PureComponent {
         <View style={{marginTop: 10}}>
           <MultiSelect
             hideSubmitButton
-            autoFocusInput={false}
+            autoFocusInput={true}
             single={single}
             items={data}
             uniqueKey="value"
             onSelectedItemsChange={this.onSelectedItemsChange}
             selectedItems={values}
-            selectText="Pick Item(s)"
+            selectText={searchInputPlaceholder}
             searchInputPlaceholderText={searchInputPlaceholder}
             tagRemoveIconColor={tagRemoveIconColor}
             tagBorderColor={tagBorderColor}
@@ -71,7 +71,20 @@ export default class Select extends PureComponent {
             selectedItemIconColor={selectedItemIconColor}
             itemTextColor={itemTextColor}
             displayKey="label"
-            searchInputStyle={{color: '#CCC'}}
+            styleTextDropdown={{
+              paddingStart: 10,
+              color: 'grey',
+            }}
+            styleTextDropdownSelected={{
+              paddingStart: 10,
+              fontWeight: '500',
+            }}
+            noItemsText="Aucun élement trouvé ."
+            styleListContainer={{
+              elevation: 20,
+              backgroundColor: 'white',
+              marginHorizontal: 4,
+            }}
             submitButtonColor={submitButtonColor}
             submitButtonText="OK"
           />

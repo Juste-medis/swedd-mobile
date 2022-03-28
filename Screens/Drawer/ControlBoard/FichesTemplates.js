@@ -1,12 +1,13 @@
 import React from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import {ScrollView, Text, View, TouchableOpacity} from 'react-native';
 import {styleAccount as styles} from '../../../Ressources/Styles';
 import {styleControlBoard as stylesc} from '../../../Ressources/Styles';
 import Icon from 'react-native-vector-icons/AntDesign';
-import SimpleRipple from '../../../components/Touchable/SimpleRipple';
 import Fiches from '../../../Ressources/Data/Fiches';
 
 function FichesTemplates(route) {
+  const [spinner, setspinner] = React.useState(false);
+
   React.useEffect(() => {
     //route.AddProfilItem({ key: "visitedcourses", data: "^^^^^^^^^^^^^^^^^" });
   }, []);
@@ -17,9 +18,11 @@ function FichesTemplates(route) {
         {data.map((item, index) => {
           return (
             <View key={item.id} style={stylesc.main_menu_indider}>
-              <SimpleRipple
+              <TouchableOpacity
+                activeOpacity={0.8}
                 style={[styles.menu_item, stylesc.menu_item]}
                 onPress={() => {
+                  setspinner(true);
                   route.navigation.navigate('FicheForm', {set: item});
                 }}
                 rippleColor={item.variant}>
@@ -52,7 +55,7 @@ function FichesTemplates(route) {
                   </Text>
                   <Text style={stylesc.description}>{item.description}</Text>
                 </View>
-              </SimpleRipple>
+              </TouchableOpacity>
             </View>
           );
         })}

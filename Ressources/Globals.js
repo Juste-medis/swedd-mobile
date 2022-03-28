@@ -79,6 +79,7 @@ export default {
     connect: 'Se Connecter',
     connection: 'Connexion',
     Ocurred_error: 'An error occured',
+    empty_field: 'Un ou plusieur champs sont manquants.',
     inscription: 'Inscription',
     firstname: 'Nom',
     lastname: 'prénom',

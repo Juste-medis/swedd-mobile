@@ -41,8 +41,13 @@ export default class DynamicForm extends Component {
 
   constructor(props) {
     super(props);
+    this.errors = {};
+    _.each(props.form, element => {
+      this.errors[element.key] = false;
+    });
     this.state = {
       responses: this.poupulateDefaultFormFields(),
+      errors: this.errors,
     };
   }
 
@@ -63,7 +68,27 @@ export default class DynamicForm extends Component {
     return _.get(element, 'value');
   };
 
-  _getFormResponses = () => this.state.responses;
+  _getFormResponses = () => {
+    let responses = this.state.responses;
+    let anythingOk = responses;
+    _.each(this.props.form, element => {
+      const validi = this.validateInput(
+        responses[element.key]?.userAnswer,
+        element,
+      );
+      if (validi) {
+        let newState = {...this.state.errors};
+        newState[element.key] = false;
+        this.errors[element.key] = false;
+        this.setState({errors: newState});
+      } else {
+        anythingOk = false;
+        this.errors[element.key] = true;
+        this.setState({errors: {...this.state.errors, [element.key]: true}});
+      }
+    });
+    return anythingOk;
+  };
 
   poupulateDefaultFormFields = () => {
     const {form} = this.props;
@@ -131,12 +156,30 @@ export default class DynamicForm extends Component {
     });
     return responses;
   };
-
+  validateInput = (value, element) => {
+    let valid = true;
+    if (element.type === 'checkbox-group' && element.required) {
+      valid = value?.regular?.length > 0 || !!value?.other?.value;
+    } else {
+      valid = !!value;
+    }
+    return valid;
+  };
   updateFormElement = (value, element) => {
     const {onFormDataChange} = this.props;
     const {responses} = this.state;
     const clonedResponses = _.cloneDeep(responses);
     const formAnswer = _.get(clonedResponses, element.key);
+
+    const validi = !this.validateInput(value, element);
+    this.errors[element.key] = validi;
+    this.setState({
+      errors: {
+        ...this.state.errors,
+        [element.key]: validi,
+      },
+    });
+
     if (!_.isEmpty(formAnswer)) {
       formAnswer.userAnswer = value;
     } else {
@@ -145,7 +188,6 @@ export default class DynamicForm extends Component {
         userAnswer: value,
       });
     }
-    console.log('Data changes...');
     this.setState(
       {
         responses: clonedResponses,
@@ -168,7 +210,7 @@ export default class DynamicForm extends Component {
   renderForm = () => {
     const {form, submitButton} = this.props;
     const formElements = _.map(form, element => {
-      const {key, type, subtype, style} = element;
+      const {key, type, subtype, style, required} = element;
       const label = this.getFormElementLabel(element);
       // const hasError = errors.indexOf(key) !== -1 && this.submitTriggered;
       switch (type) {
@@ -192,6 +234,8 @@ export default class DynamicForm extends Component {
           return (
             <View key={key} style={styles.row}>
               <CustomInput
+                error={this.state.errors[key]}
+                required={required}
                 {...moreOptions}
                 onChangeText={value => {
                   this.updateFormElement(value, element);
@@ -217,6 +261,8 @@ export default class DynamicForm extends Component {
             <View key={key} style={styles.row}>
               <CustomInput
                 {...textAreaOptions}
+                error={this.state.errors[key]}
+                required={required}
                 onChangeText={value => {
                   this.updateFormElement(value, element);
                 }}
@@ -239,7 +285,10 @@ export default class DynamicForm extends Component {
           return (
             <View key={key} style={styles.row}>
               <RadioGroup
+                error={this.state.errors[key]}
+                required={required}
                 {...radioOptions}
+                placeholder={element.placeholder}
                 label={label}
                 options={element.values}
                 value={this.getFormElementValue(key, element)}
@@ -260,6 +309,8 @@ export default class DynamicForm extends Component {
           return (
             <View key={key} style={styles.row}>
               <CheckboxGroup
+                required={required}
+                error={this.state.errors[key]}
                 {...checkOptions}
                 label={label}
                 options={element.values}
@@ -274,6 +325,8 @@ export default class DynamicForm extends Component {
           return (
             <View key={key} style={styles.row}>
               <CustomDate
+                error={this.state.errors[key]}
+                required={required}
                 placeholder={element.placeholder}
                 label={label}
                 value={this.getFormElementValue(key, element)}
@@ -294,6 +347,8 @@ export default class DynamicForm extends Component {
           return (
             <View key={key} style={styles.row}>
               <Select
+                required={required}
+                error={this.state.errors[key]}
                 {...multiOptions}
                 searchInputPlaceholder={element.searchInputPlaceholder}
                 data={element.values}
@@ -301,6 +356,7 @@ export default class DynamicForm extends Component {
                 values={this.getFormElementValue(key, element)}
                 onSelect={value => {
                   this.updateFormElement(value, element);
+                  element.onchange ? element.onchange(value) : () => {};
                 }}
               />
             </View>
@@ -309,6 +365,8 @@ export default class DynamicForm extends Component {
           return (
             <View key={key} style={styles.row}>
               <NumberSelector
+                required={required}
+                error={this.state.errors[key]}
                 label={label}
                 disabled={element.disabled}
                 placeholder={element.placeholder}

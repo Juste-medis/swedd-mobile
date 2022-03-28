@@ -2,8 +2,8 @@ import Globals from '../Ressources/Globals';
 import {Share} from 'react-native';
 import {ToastAndroid, Alert} from 'react-native';
 
-export function toast_message(mes) {
-  ToastAndroid.show(mes, ToastAndroid.LONG);
+export function toast_message(mes, dur = ToastAndroid.LONG) {
+  ToastAndroid.show(mes, dur);
 }
 
 export function alert_message(
@@ -204,4 +204,12 @@ export const randomDate = (start, end) => {
   return new Date(
     start.getTime() + Math.random() * (end.getTime() - start.getTime()),
   );
+};
+
+export const flatArrayBykey = (array = [], key = '', value = '') => {
+  const result = array.filter(mes => mes[key] === value);
+  if (result.length === 0 || !array[0][key]) {
+    return array;
+  }
+  return result;
 };

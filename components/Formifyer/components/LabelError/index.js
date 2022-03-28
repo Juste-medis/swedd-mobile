@@ -18,12 +18,19 @@ export default class LabelError extends PureComponent {
   };
 
   render() {
-    const {label, error} = this.props;
+    const {label, error, placeholder} = this.props;
     const {theme} = this.context;
     return (
       <View>
         {label ? <Text style={theme.label}>{label}</Text> : null}
-        {error ? <Text style={theme.error}>Required</Text> : null}
+        {placeholder && (
+          <Text style={{paddingBottom: 15, color: 'grey'}}>{placeholder}</Text>
+        )}
+        {error ? (
+          <Text style={theme.error}>
+            Ce champ est requis ou doit être bien remplis.
+          </Text>
+        ) : null}
       </View>
     );
   }

@@ -6,25 +6,13 @@ const {width, height} = Dimensions.get('screen');
 const mobile_360_750 = true;
 const mobile_500_1000 = width <= 500 && height <= 1000;
 
-let tyleWelcome,
+let tyleFicheForm,
   tyleStartSplash,
   tyleSignIn,
-  tyleWelcomeCard,
-  tyleCourses,
   tyleSearch,
   tyleDisplayCategorie,
-  tyleCoursesList1,
-  tyleCoursesList2,
-  tyleCategory,
-  tyleCourseItem,
-  tyleMyPannier,
   tyleMyCoursesScreen,
   tyleCourseOverView,
-  tyleFormator,
-  tyleSectionComplete,
-  tyleCommentComplete,
-  tyleDownload,
-  tyleReader,
   tyleControlBoard,
   tyleAccount,
   tyleNotificationItem,
@@ -33,14 +21,12 @@ let tyleWelcome,
   tyleNoInternet;
 
 if (mobile_360_750) {
-  tyleWelcome = StyleSheet.create({
+  tyleFicheForm = StyleSheet.create({
     main_container: {
-      flex: 1,
-      display: 'flex',
-      flexDirection: 'column',
+      backgroundColor: 'white',
     },
     slide: {
-      flex: 1,
+      height: '100%',
     },
     bottom_container: {
       display: 'flex',
@@ -52,18 +38,17 @@ if (mobile_360_750) {
       width: '100%',
     },
     buts_style: {
-      width: 200,
+      width: 100,
       backgroundColor: Globals.COLORS.primary,
-      marginTop: 30,
       borderRadius: 70,
       justifyContent: 'center',
       alignItems: 'center',
-      height: 40,
+      height: 30,
     },
     boldText_touchable: {
       fontWeight: 'bold',
       color: Globals.COLORS.white,
-      fontSize: 18,
+      fontSize: 14,
     },
     title_text: {
       textAlign: 'center',
@@ -76,6 +61,51 @@ if (mobile_360_750) {
       textAlign: 'center',
       color: 'white',
       fontFamily: 'Montserrat',
+    },
+    buttonWrapperStyle: {
+      backgroundColor: 'transparent',
+      flexDirection: 'row',
+      position: 'absolute',
+      top: -290,
+      left: 0,
+      flex: 1,
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    paginationStyle: {
+      backgroundColor: 'transparent',
+      flexDirection: 'row',
+      position: 'absolute',
+      top: -500,
+      left: 0,
+      flex: 1,
+      alignItems: 'center',
+      overflow: 'scroll',
+      zIndex: 1000,
+    },
+    dot: {
+      backgroundColor: 'white',
+      width: 30,
+      height: 30,
+      borderRadius: 30,
+      elevation: 10,
+      padding: 10,
+      marginLeft: 3,
+      marginRight: 3,
+      marginTop: 3,
+      marginBottom: 3,
+    },
+    buts_style_next: {right: 0},
+    buts_style_prev: {left: 0, width: 30, height: 30, borderRadius: 30},
+    sectionTitleStyle: {
+      fontWeight: 'bold',
+      color: Globals.COLORS.primary,
+      marginTop: 70,
+    },
+    centeredView: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   });
   tyleStartSplash = StyleSheet.create({
@@ -266,37 +296,6 @@ if (mobile_360_750) {
     media_container: {flexDirection: 'row', margin: 50},
   });
 
-  tyleWelcomeCard = StyleSheet.create({
-    touchable_main: {
-      height: 200,
-      margin: 9,
-      display: 'flex',
-      elevation: 10,
-      backgroundColor: 'rgb(255,255,255)',
-      borderRadius: 10,
-    },
-    Image: {
-      borderRadius: 10,
-      backgroundColor: 'rgba(0,0,0,.0)',
-    },
-    bottom_container: {
-      position: 'absolute',
-      padding: 8,
-      bottom: 0,
-    },
-    title_text: {
-      fontSize: 17,
-      color: 'white',
-      fontWeight: 'bold',
-      marginHorizontal: 2,
-      fontFamily: 'Montserrat',
-    },
-    text_content: {
-      fontSize: 15,
-      color: 'white',
-      fontWeight: 'normal',
-    },
-  });
   tyleCourseOverView = StyleSheet.create({
     container: {
       backgroundColor: 'white',
@@ -462,7 +461,7 @@ if (mobile_360_750) {
       borderRadius: 6,
     },
     indi_cont: {
-      width: `100%`,
+      width: '100%',
       backgroundColor: '#bdbdbd',
       marginStart: 10,
       height: 10,
@@ -544,12 +543,6 @@ if (mobile_360_750) {
       marginTop: 10,
     },
   });
-  tyleMyPannier = StyleSheet.create({
-    main_container: {
-      flex: 1,
-      backgroundColor: Globals.COLORS.white,
-    },
-  });
   tyleMyCoursesScreen = StyleSheet.create({
     main_scroll: {
       flex: 1,
@@ -607,40 +600,6 @@ if (mobile_360_750) {
     head_title_container: {
       padding: 10,
       marginVertical: 5,
-    },
-  });
-  tyleCourses = StyleSheet.create({
-    main_container: {
-      flex: 1,
-      backgroundColor: Globals.COLORS.white,
-      padding: 4,
-      paddingBottom: 48,
-    },
-    cate_text: {
-      fontSize: 20,
-      color: Globals.COLORS.blue_dark,
-      fontFamily: 'Neogrotesk',
-    },
-    retry_text: {
-      backgroundColor: Globals.COLORS.primary,
-      borderRadius: 7,
-      color: 'white',
-      padding: 8,
-      fontWeight: 'bold',
-      margin: 8,
-    },
-    err_cont: {
-      flex: 1,
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: Globals.COLORS.white,
-    },
-    pan_style: {
-      margin: 16,
-      right: 0,
-      top: 0,
-      width: 100,
     },
   });
   tyleSearch = StyleSheet.create({
@@ -713,61 +672,6 @@ if (mobile_360_750) {
       paddingStart: 4,
     },
   });
-  tyleCategory = StyleSheet.create({
-    main_container: {
-      flex: 1,
-      backgroundColor: Globals.COLORS.white,
-      paddingHorizontal: 8,
-    },
-    cate_text: {
-      fontSize: 16,
-      color: Globals.COLORS.blue_dark,
-      fontFamily: 'Neogrotesk',
-    },
-    alafiche_text: {
-      fontWeight: 'bold',
-      fontSize: 20,
-      color: Globals.COLORS.blue_dark,
-    },
-    retry_text: {
-      backgroundColor: Globals.COLORS.primary,
-      borderRadius: 7,
-      color: 'white',
-      padding: 8,
-      fontWeight: 'bold',
-      margin: 8,
-      elevation: 4,
-      fontSize: 20,
-    },
-    load_more_button: {
-      padding: 10,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    err_cont: {
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: Globals.COLORS.white,
-      height: '100%',
-    },
-    pan_style: {
-      margin: 16,
-      right: 0,
-      top: 0,
-      width: 100,
-    },
-    list: {
-      marginBottom: 50,
-    },
-    loading_container: {
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: Globals.COLORS.white,
-      height: '100%',
-    },
-  });
   tyleDisplayCategorie = StyleSheet.create({
     main_container: {
       backgroundColor: Globals.COLORS.white,
@@ -811,514 +715,6 @@ if (mobile_360_750) {
       margin: 8,
     },
   });
-  tyleCoursesList1 = StyleSheet.create({
-    main_container: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      marginVertical: 10,
-      backgroundColor: Globals.COLORS.white,
-      elevation: 6,
-    },
-    cate_text: {
-      fontSize: 20,
-      color: Globals.COLORS.blue_dark,
-    },
-    main_scroller: {
-      height: 220,
-      marginBottom: 8,
-    },
-    touchable_main: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      width: 172,
-      margin: 4,
-      backgroundColor: Globals.COLORS.white,
-      borderRadius: 6,
-      padding: 2,
-    },
-    see_more_main: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: 150,
-    },
-    scroller_labelContainer: {
-      width: '100%',
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      margin: 2,
-      backgroundColor: Globals.COLORS.white,
-    },
-    categorie_text: {
-      fontSize: 20,
-      color: Globals.COLORS.primary,
-    },
-    imag_container: {
-      borderRadius: 5,
-    },
-    image: {
-      borderRadius: 5,
-    },
-    bottom_container: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'flex-start',
-      paddingTop: 7,
-    },
-    title_text: {
-      fontSize: 14,
-      color: Globals.COLORS.arsenic,
-      textAlign: 'left',
-      fontFamily: 'Neogrotesk',
-    },
-    formator_text: {
-      fontSize: 13,
-      color: Globals.COLORS.arsenic2,
-      fontFamily: 'Helvetica',
-    },
-    stars_container: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      width: 100,
-    },
-    note_text: {
-      marginStart: 10,
-      fontSize: 15,
-    },
-    price_container: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-    },
-    good_price: {
-      fontSize: 15,
-      color: 'black',
-      fontWeight: 'bold',
-    },
-    to_come: {
-      fontSize: 15,
-      color: Globals.COLORS.white,
-      backgroundColor: Globals.COLORS.arsenic2,
-      fontWeight: 'bold',
-      padding: 5,
-    },
-    bad_price: {
-      fontSize: 10,
-      textDecorationLine: 'line-through',
-      marginStart: 10,
-    },
-    retry_text: {
-      backgroundColor: Globals.COLORS.white,
-      borderRadius: 7,
-      color: 'white',
-      padding: 8,
-      fontWeight: 'bold',
-      margin: 8,
-    },
-  });
-  tyleFormator = StyleSheet.create({
-    main_container: {
-      display: 'flex',
-      backgroundColor: Globals.COLORS.white,
-      marginBottom: '15%',
-    },
-    top_container: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      width: '100%',
-      justifyContent: 'space-between',
-      margin: 10,
-    },
-    image: {
-      borderRadius: 50,
-      height: 100,
-      width: '30%',
-      padding: 4,
-    },
-    top_container_right: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      width: '70%',
-    },
-    autor_name: {
-      color: Globals.COLORS.arsenic,
-      fontSize: 20,
-    },
-    autor_profession: {
-      fontSize: 15,
-    },
-    middle_container: {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-    },
-    midle_prop_title: {
-      fontWeight: 'bold',
-    },
-    midle_prop_value: {
-      fontWeight: '700',
-      color: Globals.COLORS.arsenic,
-      fontSize: 18,
-    },
-    des_title: {
-      fontWeight: '700',
-      color: Globals.COLORS.arsenic,
-      fontSize: 18,
-    },
-    des_content: {
-      fontWeight: '700',
-      color: Globals.COLORS.arsenic,
-      fontSize: 24,
-    },
-    touchable_see_more: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: '100%',
-      height: 70,
-    },
-    seemore_text: {
-      fontWeight: 'bold',
-      color: Globals.COLORS.primary_pure,
-      fontSize: 16,
-    },
-  });
-  tyleSectionComplete = StyleSheet.create({
-    main_container: {
-      display: 'flex',
-      backgroundColor: Globals.COLORS.white,
-      padding: 8,
-      paddingBottom: 80,
-    },
-    prog_cont: {
-      borderRadius: 6,
-      backgroundColor: '#ffffff',
-      elevation: 3,
-      padding: 10,
-      margin: 10,
-    },
-    head_title: {
-      fontSize: 20,
-      color: Globals.COLORS.primary_pure,
-      fontWeight: 'bold',
-    },
-  });
-  tyleReader = StyleSheet.create({
-    main_container: {
-      height: '100%',
-      width: '100%',
-      backgroundColor: Globals.COLORS.white,
-    },
-    valide_container: {
-      flex: 1,
-      display: 'flex',
-      paddingBottom: 0,
-    },
-    top_container: {},
-    bottom_container: {
-      flex: 2,
-      padding: 8,
-    },
-    retry_text: {
-      backgroundColor: Globals.COLORS.primary,
-      borderRadius: 7,
-      color: 'white',
-      padding: 4,
-      fontWeight: 'bold',
-      margin: 8,
-      textAlign: 'center',
-    },
-    err_cont: {
-      flex: 1,
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    empty_notes: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontSize: 20,
-      fontFamily: 'Neogrotesk',
-      color: Globals.COLORS.arsenic2,
-      margin: '10%',
-    },
-    title_text: {
-      fontSize: 16,
-      color: Globals.COLORS.blue_dark,
-      fontFamily: 'Neogrotesk',
-      paddingTop: 3,
-    },
-    seemoretext: {
-      margin: 4,
-      color: Globals.COLORS.white,
-      fontSize: 15,
-      textAlign: 'center',
-      fontWeight: 'bold',
-    },
-    tabbar: {
-      backgroundColor: 'rgba(238, 108, 59,0.0)',
-      height: 50,
-      elevation: 0,
-    },
-    tabStyle: {
-      backgroundColor: 'rgba(255, 255, 255,0)',
-    },
-    label: {
-      fontSize: 10,
-      color: Globals.COLORS.secondary,
-      fontFamily: 'Neogrotesk',
-      fontWeight: 'bold',
-    },
-    indicator: {
-      backgroundColor: Globals.COLORS.primary,
-      height: '5%',
-      alignSelf: 'center',
-    },
-    labelStyle: {
-      fontSize: 13,
-      color: Globals.COLORS.arsenic2,
-      fontFamily: 'Ubuntu',
-    },
-
-    video_potrait: {
-      backgroundColor: 'rgba(0,0,0,.8)',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      zIndex: 1,
-    },
-    video_land: {
-      backgroundColor: 'rgba(0,0,0,.8)',
-      height: 210,
-    },
-  });
-  tyleCommentComplete = StyleSheet.create({
-    main_container: {
-      flex: 1,
-      display: 'flex',
-      backgroundColor: Globals.COLORS.white,
-      padding: 13,
-      paddingBottom: 50,
-    },
-    star_cont: {
-      borderRadius: 6,
-      backgroundColor: '#ffffff',
-      elevation: 3,
-      padding: 10,
-      margin: 10,
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    head_title: {
-      fontSize: 20,
-      color: Globals.COLORS.secondary,
-      fontWeight: '800',
-    },
-    comments_container: {
-      flexDirection: 'column',
-      marginBottom: 10,
-    },
-    comment_author: {
-      color: 'black',
-      fontWeight: 'bold',
-      fontSize: 17,
-    },
-    comment_date: {
-      fontSize: 12,
-    },
-    comment_content: {
-      fontSize: 16,
-      color: 'black',
-    },
-    stars_cont: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    err_cont: {
-      flex: 1,
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: Globals.COLORS.white,
-    },
-  });
-
-  tyleCourseItem = StyleSheet.create({
-    touchable_main: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'flex-start',
-      marginBottom: 12,
-    },
-    image: {
-      height: '35%',
-      width: '15%',
-      marginHorizontal: '2%',
-      marginTop: 4,
-    },
-    right_container: {
-      display: 'flex',
-      flexDirection: 'column',
-      width: '70%',
-    },
-    title_text: {
-      fontSize: 14,
-      color: Globals.COLORS.arsenic2,
-      fontFamily: 'Neogrotesk',
-    },
-    formator_text: {
-      fontSize: 14,
-      color: '#535e72ff',
-      marginVertical: 1,
-      fontFamily: 'Helvetica',
-    },
-    stars_container: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      width: 100,
-    },
-    note_text: {
-      marginStart: 10,
-      fontSize: 15,
-    },
-    price_container: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'flex-start',
-      justifyContent: 'flex-start',
-    },
-    indi_cont: {
-      width: `85%`,
-      backgroundColor: '#bdbdbd',
-      height: 5,
-      borderRadius: 10,
-    },
-    good_price: {
-      fontSize: 15,
-      color: 'black',
-      fontFamily: 'Neogrotesk',
-    },
-    bad_price: {
-      fontSize: 10,
-      textDecorationLine: 'line-through',
-      marginStart: 10,
-    },
-    loading_container: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      top: 100,
-      bottom: 70,
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '100%',
-    },
-  });
-  tyleCoursesList2 = StyleSheet.create({
-    main_container: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      margin: 4,
-    },
-    cate_text: {
-      fontSize: 20,
-      color: Globals.COLORS.blue_dark,
-    },
-    main_scroller: {
-      height: 220,
-    },
-    touchable_main: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      width: 180,
-      margin: 4,
-      backgroundColor: Globals.COLORS.white,
-      borderRadius: 10,
-    },
-    scroller_labelContainer: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      margin: 4,
-      backgroundColor: Globals.COLORS.white,
-    },
-    categorie_text: {
-      fontSize: 20,
-      color: Globals.COLORS.primary,
-    },
-    imag_container: {
-      borderRadius: 5,
-    },
-    image: {
-      borderRadius: 5,
-    },
-    bottom_container: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-    },
-    title_text: {
-      fontWeight: 'bold',
-      fontSize: 15,
-      color: '#535e72ff',
-    },
-    formator_text: {
-      fontWeight: 'normal',
-      fontSize: 13,
-      color: '#535e72ff',
-    },
-    stars_container: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      width: 100,
-    },
-    note_text: {
-      marginStart: 10,
-      fontSize: 15,
-    },
-    price_container: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-    },
-    good_price: {
-      fontSize: 15,
-      color: 'black',
-    },
-    bad_price: {
-      fontSize: 15,
-      textDecorationLine: 'line-through',
-      marginStart: 10,
-    },
-    retry_text: {
-      backgroundColor: Globals.COLORS.teal,
-      borderRadius: 7,
-      color: 'white',
-      padding: 8,
-      fontWeight: 'bold',
-      margin: 8,
-    },
-  });
   tyleNoInternet = StyleSheet.create({
     main_container: {
       display: 'flex',
@@ -1341,26 +737,6 @@ if (mobile_360_750) {
       padding: 8,
       fontWeight: 'bold',
       margin: 8,
-    },
-  });
-  tyleDownload = StyleSheet.create({
-    main_container: {
-      display: 'flex',
-      flex: 1,
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: Globals.COLORS.primary,
-    },
-    retry_text: {
-      backgroundColor: Globals.COLORS.primary_pure,
-      borderRadius: 7,
-      color: 'white',
-      padding: 8,
-      fontWeight: 'bold',
-      margin: 8,
-      fontSize: 25,
-      textAlign: 'center',
     },
   });
   tyleNotificationItem = StyleSheet.create({
@@ -1666,30 +1042,18 @@ if (mobile_360_750) {
     },
   });
 } else if (mobile_500_1000) {
-  tyleWelcome = StyleSheet.create({
+  tyleFicheForm = StyleSheet.create({
     wrapper: {},
   });
 }
-export const styleWelcome = tyleWelcome,
+export const styleFicheForm = tyleFicheForm,
   styleStartSplash = tyleStartSplash,
   styleSignIn = tyleSignIn,
-  styleWelcomeCard = tyleWelcomeCard,
-  styleCourses = tyleCourses,
   styleDisplayCategorie = tyleDisplayCategorie,
-  styleCoursesList1 = tyleCoursesList1,
-  styleCoursesList2 = tyleCoursesList2,
   styleNoInternet = tyleNoInternet,
-  styleCategory = tyleCategory,
-  styleCourseItem = tyleCourseItem,
-  styleMyPannier = tyleMyPannier,
   styleMyCoursesScreen = tyleMyCoursesScreen,
   styleCourseOverView = tyleCourseOverView,
-  styleFormator = tyleFormator,
-  styleCommentComplete = tyleCommentComplete,
   styleSearch = tyleSearch,
-  styleSectionComplete = tyleSectionComplete,
-  styleReader = tyleReader,
-  styleDownload = tyleDownload,
   styleAccount = tyleAccount,
   styleNotificationItem = tyleNotificationItem,
   styleAccordian = tyleAccordian,

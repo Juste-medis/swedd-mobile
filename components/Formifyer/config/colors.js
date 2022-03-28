@@ -1,4 +1,6 @@
-export const primary = '#00a5ff';
+import Globals from '../../../Ressources/Globals';
+
+export const primary = Globals.COLORS.primary;
 export const primaryDark = '#0077cb';
 export const textPrimary = '#2A3C53';
 export const error = '#FF6565';

@@ -14,7 +14,7 @@ export default (fontSize, error, icon, disabled, showBorder, multiline) =>
       opacity: disabled ? 0.7 : 1,
     },
     inputStyle: {
-      height: multiline ? 100 : 50,
+      height: multiline ? 100 : 60,
       borderWidth: 0,
       textAlignVertical: 'center',
       fontSize,

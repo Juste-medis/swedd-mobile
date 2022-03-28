@@ -8,7 +8,8 @@ import CustomInput from '../CustomInput';
 
 import styles from './styles';
 
-import {CheckBox, Icon} from 'react-native-elements';
+import {CheckBox, Icon, Text} from 'react-native-elements';
+import Globals from '../../../../Ressources/Globals';
 
 export default class RadioGroup extends Component {
   static propTypes = {
@@ -79,79 +80,106 @@ export default class RadioGroup extends Component {
     const propValue = this.props.value;
     return (
       <View>
-        <LabelError label={label} error={error} />
+        <LabelError
+          placeholder={this.props.placeholder}
+          label={label}
+          error={error}
+        />
+
         <View style={styles.radioContainer}>
           {_.map(options, value => (
-            <View>
-              <CheckBox
-                checkedIcon={
-                  <Icon
-                    name="radio-button-checked"
-                    type="material"
-                    color="green"
-                    size={25}
-                    iconStyle={{marginRight: 10}}
-                  />
-                }
-                uncheckedIcon={
-                  <Icon
-                    name="radio-button-unchecked"
-                    type="material"
-                    color="grey"
-                    size={25}
-                    iconStyle={{marginRight: 10}}
-                  />
-                }
-                key={_.get(value, 'value')}
-                title={_.get(value, 'label')}
-                checked={propValue === value.value}
-                onSelect={() => {}}
-                onPress={checked => {
-                  this.onCheck(value, true);
-                }}
-              />
-            </View>
+            <CheckBox
+              containerStyle={{
+                backgroundColor: 'rgba(9,105,195,0.05)',
+                borderRadius: 50,
+                borderWidth: 0,
+              }}
+              textStyle={{
+                padding: 0,
+              }}
+              style={{
+                margin: 0,
+                padding: 0,
+              }}
+              Component={Text}
+              checkedIcon={
+                <Icon
+                  name="radio-button-checked"
+                  type="material"
+                  color={Globals.COLORS.primary}
+                  size={25}
+                />
+              }
+              uncheckedIcon={
+                <Icon
+                  name="radio-button-unchecked"
+                  type="material"
+                  color="grey"
+                  size={25}
+                />
+              }
+              key={_.get(value, 'value')}
+              title={_.get(value, 'label')}
+              checked={propValue === value.value}
+              onSelect={() => {}}
+              onPress={checked => {
+                this.onCheck(value, true);
+              }}
+            />
           ))}
-          {other ? (
-            <View style={styles.otherRow}>
-              <CheckBox
-                checkedIcon={
-                  <Icon
-                    name="radio-button-checked"
-                    type="material"
-                    color="green"
-                    size={25}
-                    iconStyle={{marginRight: 10}}
-                  />
-                }
-                uncheckedIcon={
-                  <Icon
-                    name="radio-button-unchecked"
-                    type="material"
-                    color="grey"
-                    size={25}
-                    iconStyle={{marginRight: 10}}
-                  />
-                }
-                onPress={checked => {
-                  this.onCheck(
-                    {
-                      value: 'other',
-                      label: 'Autres',
-                    },
-                    checked,
-                  );
-                }}
-                key="other"
-                title="Autres"
-                checked={selectedValue === 'other'}
-                value="other"
-                onSelect={() => {}}
-              />
-              <View style={{flex: 1}}>{this.renderOtherInput()}</View>
-            </View>
-          ) : null}
         </View>
+        {other ? (
+          <View style={styles.otherRow}>
+            <CheckBox
+              containerStyle={{
+                backgroundColor: 'rgba(9,105,195,0.05)',
+                borderRadius: 50,
+                borderWidth: 0,
+              }}
+              textStyle={{
+                padding: 0,
+              }}
+              style={{
+                margin: 0,
+                padding: 0,
+              }}
+              Component={Text}
+              checkedIcon={
+                <Icon
+                  name="radio-button-checked"
+                  type="material"
+                  color="green"
+                  size={25}
+                  iconStyle={{marginRight: 10}}
+                />
+              }
+              uncheckedIcon={
+                <Icon
+                  name="radio-button-unchecked"
+                  type="material"
+                  color="grey"
+                  size={25}
+                  iconStyle={{marginRight: 10}}
+                />
+              }
+              onPress={checked => {
+                this.onCheck(
+                  {
+                    value: 'other',
+                    label: 'Autres',
+                  },
+                  checked,
+                );
+              }}
+              key="other"
+              title="Autres"
+              checked={selectedValue === 'other'}
+              value="other"
+              onSelect={() => {}}
+            />
+            <View style={{flex: 1}}>{this.renderOtherInput()}</View>
+          </View>
+        ) : null}
       </View>
     );
   }

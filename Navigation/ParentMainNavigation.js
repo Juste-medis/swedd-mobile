@@ -141,7 +141,6 @@ const CustomSidebarMenu = props => {
         <View
           style={{
             width: '100%',
-            backgroundColor: Globals.COLORS.surface,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',

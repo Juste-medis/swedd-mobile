@@ -1,12 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {
-  View,
-  Image,
-  ScrollView,
-  ActivityIndicator,
-  TouchableWithoutFeedbackBase,
-} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import Globals from '../../Ressources/Globals';
 import {styleSignIn as styles} from '../../Ressources/Styles';
 import Toast from 'react-native-toast-message';
@@ -47,7 +41,7 @@ export default function ForgetPass({navigation}) {
         .then(res => {
           setspinner(false);
           if (res.message) {
-            set_wrong_text(message);
+            set_wrong_text(res.message);
             setspinner(false);
           } else {
             Globals.PROFIL_INFO = res;

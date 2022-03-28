@@ -37,6 +37,7 @@ export default class CheckboxGroup extends PureComponent {
 
   constructor(props) {
     super(props);
+    this.isRequired = this.props.required;
     this.state = {
       selectedValues: this.props.value,
     };
@@ -88,6 +89,15 @@ export default class CheckboxGroup extends PureComponent {
       },
     );
   };
+  validate = () => {
+    let valid = true;
+    if (this.isRequired) {
+      valid =
+        this.state.selectedValues.regular?.length > 0 ||
+        !!this.state.selectedValues.other?.value;
+    }
+    return valid;
+  };
 
   renderOtherInput = () => {
     const {selectedValues} = this.state;
@@ -109,7 +119,11 @@ export default class CheckboxGroup extends PureComponent {
     const propsValue = this.props.value;
     return (
       <View>
-        <LabelError label={label} error={error} />
+        <LabelError
+          label={label}
+          placeholder={this.props.placeholder}
+          error={error}
+        />
         <View style={styles.checkboxContainer}>
           {_.map(options, value =>
             toggle ? (
@@ -136,6 +150,19 @@ export default class CheckboxGroup extends PureComponent {
             ) : (
               <View key={`${_.get(value, 'value')}`}>
                 <CheckBox
+                  containerStyle={{
+                    backgroundColor: 'rgba(9,105,195,0.05)',
+                    borderRadius: 50,
+                    borderWidth: 0,
+                  }}
+                  textStyle={{
+                    padding: 0,
+                  }}
+                  style={{
+                    margin: 0,
+                    padding: 0,
+                  }}
+                  Component={Text}
                   center
                   title={_.get(value, 'label')}
                   checked={
@@ -153,34 +180,44 @@ export default class CheckboxGroup extends PureComponent {
               </View>
             ),
           )}
-          {other ? (
-            <View style={styles.otherRow}>
-              {toggle ? (
-                <View style={styles.switchRow}>
-                  <Switch
-                    thumbTintColor={theme.toggle.knobColor}
-                    onTintColor={theme.toggle.tintColor}
-                    onValueChange={checked => {
-                      this.onCheckChanged('other', checked);
-                    }}
-                    value={!!propsValue.other}
-                  />
-                  <Text style={styles.toggleText}>Other</Text>
-                </View>
-              ) : (
-                <CheckBox
-                  center
-                  title="Autres"
-                  checked={!!propsValue.other}
-                  onPress={checked => {
-                    this.onCheckChanged('other', !propsValue.other);
-                  }}
-                />
-              )}
-              <View style={{flex: 1}}>{this.renderOtherInput()}</View>
-            </View>
-          ) : null}
         </View>
+        {other ? (
+          <View style={styles.otherRow}>
+            {toggle ? (
+              <View style={styles.switchRow}>
+                <Switch
+                  thumbTintColor={theme.toggle.knobColor}
+                  onTintColor={theme.toggle.tintColor}
+                  onValueChange={checked => {
+                    this.onCheckChanged('other', checked);
+                  }}
+                  value={!!propsValue.other}
+                />
+                <Text style={styles.toggleText}>Other</Text>
+              </View>
+            ) : (
+              <CheckBox
+                center
+                containerStyle={{
+                  backgroundColor: 'rgba(9,105,195,0.05)',
+                  borderRadius: 50,
+                  borderWidth: 0,
+                }}
+                textStyle={{
+                  padding: 0,
+                }}
+                Component={Text}
+                style={{margin: 0, padding: 0}}
+                title="Autres"
+                checked={!!propsValue.other}
+                onPress={checked => {
+                  this.onCheckChanged('other', !propsValue.other);
+                }}
+              />
+            )}
+            <View style={{flex: 1}}>{this.renderOtherInput()}</View>
+          </View>
+        ) : null}
       </View>
     );
   }

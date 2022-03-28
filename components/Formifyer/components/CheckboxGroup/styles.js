@@ -1,10 +1,17 @@
 import {textPrimary} from '../../config/colors';
 
 export default {
-  checkboxContainer: {},
+  checkboxContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    overflow: 'scroll',
+  },
   otherRow: {
+    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    flexWrap: 'wrap',
   },
   switchRow: {
     flexDirection: 'row',
