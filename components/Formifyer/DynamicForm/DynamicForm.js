@@ -226,32 +226,7 @@ export default class DynamicForm extends Component {
               <Paragraph label={label} style={style} />
             </View>
           );
-        case 'text':
-          const moreOptions = {};
-          if (element.maxlength) {
-            moreOptions.maxLength = Number(element.maxlength);
-          }
-          return (
-            <View key={key} style={styles.row}>
-              <CustomInput
-                error={this.state.errors[key]}
-                required={required}
-                {...moreOptions}
-                onChangeText={value => {
-                  this.updateFormElement(value, element);
-                }}
-                value={this.getFormElementValue(key, element)}
-                label={label}
-                keyboardType={getInputType(element.subtype)}
-                validation={element.validationFunc}
-                password={element.subtype === 'password'}
-                placeholder={element.placeholder}
-                disabled={element.disabled}
-                icon={element.icon}
-                masked
-              />
-            </View>
-          );
+
         case 'textarea':
           const textAreaOptions = {};
           if (element.maxlength) {
@@ -394,7 +369,31 @@ export default class DynamicForm extends Component {
             </View>
           );
         default:
-          return null;
+          const moreOptions = {};
+          if (element.maxlength) {
+            moreOptions.maxLength = Number(element.maxlength);
+          }
+          return (
+            <View key={key} style={styles.row}>
+              <CustomInput
+                error={this.state.errors[key]}
+                required={required}
+                {...moreOptions}
+                onChangeText={value => {
+                  this.updateFormElement(value, element);
+                }}
+                value={this.getFormElementValue(key, element)}
+                label={label}
+                keyboardType={getInputType(element.subtype)}
+                validation={element.validationFunc}
+                password={element.subtype === 'password'}
+                placeholder={element.placeholder}
+                disabled={element.disabled}
+                icon={element.icon}
+                masked
+              />
+            </View>
+          );
       }
     });
     // push submit button if specified

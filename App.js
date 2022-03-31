@@ -23,7 +23,7 @@ const App = () => {
   spinner &&
     Storer.getData('@USER_TYPE').then(data => {
       if (data) {
-        isLogged = data;
+        isLogged = !!data;
         Globals.USER_TYPE = data;
         Storer.getData('@ProfilInfo').then(prise => {
           Globals.PROFIL_INFO = prise;

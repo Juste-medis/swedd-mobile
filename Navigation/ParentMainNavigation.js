@@ -12,23 +12,25 @@ import ControlBoard from './Stack/ControlBoardNavigation';
 import Globals from '../Ressources/Globals';
 import Icono from 'react-native-vector-icons/Ionicons';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {ActivityIndicator, View} from 'react-native';
+import {ActivityIndicator, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
 import {Image} from 'react-native-elements';
-
+import {alert_message, toast_message} from '../Helpers/Utils';
+import fetcher from '../API/fakeApi';
+import Storer from '../API/storer';
+import RNReastart from 'react-native-restart';
 const Drawer = createDrawerNavigator();
 function ParentMainNavigation() {
   return (
     <SafeAreaProvider>
       <Drawer.Navigator
         initialRouteName="Profil"
-        drawerContentOptions={{
-          activeTintColor: '#30B9AB',
-          activeBackgroundColor: 'rgba(0,0,0,.04)',
-          labelStyle: {
-            fontWeight: 'bold',
+        screenOptions={{
+          drawerActiveTintColor: '#30B9AB',
+          drawerActiveBackgroundColor: 'rgba(0,0,0,.04)',
+          drawerLabelStyle: {
+            fontFamily: 'Lato-Bold',
             fontSize: 18,
-            fontFamily: 'PatrickHand-Regular',
           },
         }}
         drawerContent={props => <CustomSidebarMenu {...props} />}>
@@ -49,14 +51,16 @@ function ParentMainNavigation() {
         <Drawer.Screen
           name="MainControlBoard"
           component={ControlBoard}
-          options={{
-            title: Globals.STRINGS.BoardControl,
-            drawerIcon: ({color, focused}) =>
-              focused ? (
-                <Icono name="ios-pie-chart" size={30} color={color} />
-              ) : (
-                <Icono name="ios-pie-chart-outline" size={30} color={color} />
-              ),
+          options={({navigation, route}) => {
+            return {
+              title: Globals.STRINGS.BoardControl,
+              drawerIcon: ({color, focused}) =>
+                focused ? (
+                  <Icono name="ios-pie-chart" size={30} color={color} />
+                ) : (
+                  <Icono name="ios-pie-chart-outline" size={30} color={color} />
+                ),
+            };
           }}
         />
         <Drawer.Screen
@@ -72,22 +76,28 @@ function ParentMainNavigation() {
               ),
           }}
         />
-        <Drawer.Group>
-          <Drawer.Screen
-            name="MainNotification"
-            component={Notification}
-            options={{
-              groupName: 'Alertes',
-              title: Globals.STRINGS.Notification,
-              drawerIcon: ({color, focused}) =>
-                focused ? (
-                  <Icono name="notifications" size={30} color={color} />
-                ) : (
-                  <Icono name="notifications-outline" size={30} color={color} />
-                ),
-            }}
-          />
-        </Drawer.Group>
+        {Globals.PROFIL_INFO.user_type === 'facilitateur_1' ? (
+          <Drawer.Group>
+            <Drawer.Screen
+              name="MainNotification"
+              component={Notification}
+              options={{
+                groupName: 'Alertes',
+                title: Globals.STRINGS.Notification,
+                drawerIcon: ({color, focused}) =>
+                  focused ? (
+                    <Icono name="notifications" size={30} color={color} />
+                  ) : (
+                    <Icono
+                      name="notifications-outline"
+                      size={30}
+                      color={color}
+                    />
+                  ),
+              }}
+            />
+          </Drawer.Group>
+        ) : null}
         <Drawer.Screen
           name="MainFeedBack"
           component={About}
@@ -138,19 +148,12 @@ const CustomSidebarMenu = props => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
-        <View
-          style={{
-            width: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: 20,
-          }}>
+        <View style={styles.drawer_header_cont}>
           {/**Globals.PROFIL_INFO.photourl && Globals.PROFIL_INFO.photourl !== ''  */}
           {1 ? (
             <Image
               source={{
-                uri: 'https://cdn.futura-sciences.com/buildsv6/images/wide1920/1/8/2/182c0cf196_50167185_proprietaire-chat-min.jpg',
+                uri: 'https://picsum.photos/200',
               }}
               style={styles.image_avatar}
               PlaceholderContent={<ActivityIndicator />}
@@ -169,7 +172,7 @@ const CustomSidebarMenu = props => {
           </Text>
           <Text style={styles.mail_title}>{Globals.PROFIL_INFO.mail}</Text>
         </View>
-        {state.routes.map(route => {
+        {state.routes.map((route, i) => {
           const {activeTintColor, drawerIcon, title, first, groupName} =
             descriptors[route.key].options;
           if (lastGroupName !== groupName) {
@@ -179,9 +182,9 @@ const CustomSidebarMenu = props => {
             newGroup = false;
           }
           return (
-            <>
+            <React.Fragment key={i}>
               {newGroup ? (
-                <View style={styles.sectionContainer}>
+                <View key={i} style={styles.sectionContainer}>
                   {!first && (
                     <Text
                       key={groupName}
@@ -207,15 +210,69 @@ const CustomSidebarMenu = props => {
                 activeTintColor={activeTintColor}
                 onPress={() => navigation.navigate(route.name)}
               />
-            </>
+            </React.Fragment>
           );
         })}
+        <TouchableOpacity
+          style={styles.buts_style}
+          activeOpacity={0.8}
+          onPress={() => {
+            alert_message(
+              'déconnexion',
+              Globals.STRINGS.sur_deconnect,
+              'Se déconnecter',
+              () => {
+                fetcher
+                  .Signout()
+                  .then(resi => {
+                    if (resi.data === 1) {
+                      Storer.removeData();
+                      RNReastart.Restart();
+                    } else {
+                      alert_message(Globals.STRINGS.Ocurred_error);
+                    }
+                  })
+                  .catch(err => {
+                    if (!Globals.INTERNET) {
+                      toast_message(Globals.STRINGS.no_internet);
+                    } else {
+                      toast_message(`${err}`);
+                    }
+                  });
+              },
+            );
+          }}>
+          <Text style={styles.boldText_touchable}>se déconnecter</Text>
+        </TouchableOpacity>
       </DrawerContentScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  drawer_header_cont: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  buts_style: {
+    width: 200,
+    backgroundColor: Globals.COLORS.pink,
+    marginVertical: 15,
+    borderRadius: 6,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 4,
+    height: 50,
+    alignSelf: 'center',
+  },
+  boldText_touchable: {
+    fontFamily: 'Lato-Bold',
+    color: Globals.COLORS.white,
+    fontSize: 18,
+  },
   sectionContainer: {
     flex: 1,
     flexDirection: 'row',
@@ -225,6 +282,10 @@ const styles = StyleSheet.create({
     borderRadius: 70,
     height: 130,
     width: 130,
+    shadowColor: 'black',
+    shadowOffset: {height: 10, width: 10},
+    shadowOpacity: 0.5,
+    shadowRadius: 1,
   },
   sectionLine: {
     backgroundColor: 'gray',
@@ -234,7 +295,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   name_title: {
-    fontWeight: 'bold',
+    fontFamily: 'Lato-Bold',
     fontSize: 16,
     color: 'black',
   },
@@ -248,6 +309,7 @@ const styles = StyleSheet.create({
     backgroundColor: Globals.COLORS.primary,
   },
   mail_title: {
+    fontFamily: 'Lato-Regular',
     fontSize: 16,
   },
 });

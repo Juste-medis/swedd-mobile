@@ -50,10 +50,10 @@ export default function ShopCodeIcon(props) {
     set_dialogVisible(false);
   }
 
-  const MatpickerItems = DataMatClass.MatiereData.map((mat) => (
+  const MatpickerItems = DataMatClass.MatiereData.map(mat => (
     <Picker.Item label={mat.label.toString()} value={mat.label.toLowerCase()} />
   ));
-  const ClasspickerItems = DataMatClass.ClassData.map((mat) => (
+  const ClasspickerItems = DataMatClass.ClassData.map(mat => (
     <Picker.Item label={mat.label.toString()} value={mat.label.toLowerCase()} />
   ));
 
@@ -90,7 +90,7 @@ export default function ShopCodeIcon(props) {
               style={styles.center_input_text}
               defaultValue={2}
               keyboardType="numeric"
-              onChangeText={(text) => entered_nbre_heure(text)}
+              onChangeText={text => entered_nbre_heure(text)}
             />
           </View>
           <Text>{Globals.STRINGS.fixed_price + ': ' + total_Price}</Text>
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   input_label: {
-    fontWeight: 'bold',
+    fontFamily: 'Lato-Bold',
     start: 10,
     flexWrap: 'wrap',
     position: 'absolute',

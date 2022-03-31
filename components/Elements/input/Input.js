@@ -123,11 +123,15 @@ class Input extends React.Component {
           label,
           Object.assign({style: labelStyle}, labelProps),
           Object.assign(
-            {fontSize: 16, color: theme.colors.grey3},
+            {
+              fontFamily: 'Lato-Regular',
+              fontSize: 16,
+              color: theme.colors.grey3,
+            },
             Platform.select({
               android: Object.assign({}, fonts.android.bold),
               default: {
-                fontWeight: 'bold',
+                fontFamily: 'Lato-Bold',
               },
             }),
           ),
@@ -165,6 +169,7 @@ class Input extends React.Component {
               {
                 alignSelf: 'center',
                 color: theme.colors.black,
+                fontFamily: 'Lato-Regular',
                 fontSize: 18,
                 flex: 1,
                 minHeight: 40,
@@ -194,6 +199,7 @@ class Input extends React.Component {
           style={StyleSheet.flatten([
             {
               margin: 5,
+              fontFamily: 'Lato-Regular',
               fontSize: 12,
               color: theme.colors.error,
             },

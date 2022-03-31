@@ -4,6 +4,7 @@ import ControlBoard from '../../Screens/Drawer/ControlBoard/ControlBoard';
 import FichesTemplates from '../../Screens/Drawer/ControlBoard/FichesTemplates';
 import FicheForm from '../../Screens/Drawer/ControlBoard/FicheForm';
 import FichesList from '../../Screens/Drawer/ControlBoard/FichesList';
+import Animators from '../../Screens/Drawer/ControlBoard/Animators';
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ function Navigation({navigation}) {
         component={ControlBoard}
         options={{
           headerShown: false,
+          title: 'toto',
         }}
       />
       <Stack.Screen
@@ -27,6 +29,13 @@ function Navigation({navigation}) {
       <Stack.Screen
         name="FicheForm"
         component={FicheForm}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Animators"
+        component={Animators}
         options={{
           headerShown: false,
         }}

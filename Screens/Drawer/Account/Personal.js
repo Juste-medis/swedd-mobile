@@ -122,7 +122,7 @@ function Personal(route) {
                       color: Globals.COLORS.black,
                       marginStart: 2,
                       textAlignVertical: 'center',
-                      fontWeight: 'bold',
+                      fontFamily: 'Lato-Bold',
                     },
                   ]}>
                   {item.title}
@@ -165,7 +165,7 @@ function Personal(route) {
             width: '100%',
             marginBottom: 20,
             padding: 10,
-            fontWeight: 'bold',
+            fontFamily: 'Lato-Bold',
           }}>
           Information relative à votre profil personel
         </Text>

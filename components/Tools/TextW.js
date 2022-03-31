@@ -1,16 +1,16 @@
-import React from "react";
-import { StyleSheet, Text } from "react-native";
-import Globals from "../../Ressources/Globals";
-export default function TextW({ text, seemore, seemorecolor, size, ...rest }) {
+import React from 'react';
+import {StyleSheet, Text} from 'react-native';
+import Globals from '../../Ressources/Globals';
+export default function TextW({text, seemore, seemorecolor, size, ...rest}) {
   size = size ? size : 100;
   seemore =
-    text.length > size && seemore ? seemore : text.length > size ? " .." : null;
+    text.length > size && seemore ? seemore : text.length > size ? ' ..' : null;
 
   seemorecolor =
     text.length > size && seemorecolor
       ? seemorecolor
       : text.length > size
-      ? "#23233cff"
+      ? '#23233cff'
       : null;
 
   text = text.length > size ? text.substr(0, size) : text;
@@ -18,10 +18,9 @@ export default function TextW({ text, seemore, seemorecolor, size, ...rest }) {
     <Text style={styles.input} {...rest}>
       {text}
       <Text
-        style={[styles.seemore, { color: seemorecolor }]}
+        style={[styles.seemore, {color: seemorecolor}]}
         numberOfLines={1}
-        ellipsizeMode="tail"
-      >
+        ellipsizeMode="tail">
         {seemore}
       </Text>
     </Text>
@@ -29,11 +28,12 @@ export default function TextW({ text, seemore, seemorecolor, size, ...rest }) {
 }
 const styles = StyleSheet.create({
   input: {
+    fontFamily: 'Lato-Regular',
     fontSize: 15,
-    textAlign: "center",
+    textAlign: 'center',
     color: Globals.COLORS.arsenic,
   },
   seemore: {
-    fontWeight: "bold",
+    fontFamily: 'Lato-Bold',
   },
 });

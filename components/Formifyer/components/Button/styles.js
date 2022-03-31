@@ -13,6 +13,7 @@ export default {
   buttonLabel: {
     flex: 1,
     color: white,
+    fontFamily: 'Lato-Regular',
     fontSize: 14,
     textAlign: 'center',
   },

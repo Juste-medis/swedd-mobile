@@ -11,6 +11,7 @@ export default class CustomInput extends PureComponent {
   static propTypes = {
     disabled: PropTypes.bool,
     showBorder: PropTypes.bool,
+    fontFamily: 'Lato-Regular',
     fontSize: PropTypes.number,
     icon: PropTypes.string,
     onChangeText: PropTypes.func,
@@ -36,6 +37,7 @@ export default class CustomInput extends PureComponent {
     value: null,
     masked: false,
     showBorder: true,
+    fontFamily: 'Lato-Regular',
     fontSize: 16,
     label: '',
     multiline: false,

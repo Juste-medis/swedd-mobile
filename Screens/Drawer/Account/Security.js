@@ -1,22 +1,21 @@
-import React from "react";
+/* eslint-disable react-native/no-inline-styles */
+import React from 'react';
 import {
   ScrollView,
   Text,
   View,
   TextInput,
   TouchableOpacity,
-  ToastAndroid,
   ActivityIndicator,
-} from "react-native";
-import Globals from "../../../Ressources/Globals";
-import { styleAccount as styles } from "../../../Ressources/Styles";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { setProfil } from "../../../Store/Actions";
-import Icon from "react-native-vector-icons/Ionicons";
-import Storer from "../../../API/storer";
-import Fetcher from "../../../API/fetcher";
-import { toast_message, UriEncoder } from "../../../Helpers/Utils";
+} from 'react-native';
+import Globals from '../../../Ressources/Globals';
+import {styleAccount as styles} from '../../../Ressources/Styles';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {setProfil} from '../../../Store/Actions';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Fetcher from '../../../API/fetcher';
+import {toast_message, UriEncoder} from '../../../Helpers/Utils';
 
 function Security(route) {
   let profil = route.my_profil.account;
@@ -26,28 +25,28 @@ function Security(route) {
   React.useEffect(() => {}, []);
   let menuoth = [
     {
-      icon: "lock-closed",
+      icon: 'lock-closed',
       title: Globals.STRINGS.password,
       value: profil.password,
-      key: "user_pass",
+      key: 'user_pass',
     },
     {
-      icon: "lock-closed-outline",
+      icon: 'lock-closed-outline',
       title: Globals.STRINGS.old_password,
-      value: "",
-      key: "user_pass",
+      value: '',
+      key: 'user_pass',
     },
     {
-      icon: "lock-closed-outline",
+      icon: 'lock-closed-outline',
       title: Globals.STRINGS.new_pass,
-      value: "",
-      key: "new_pass",
+      value: '',
+      key: 'new_pass',
     },
     {
-      icon: "lock-closed-outline",
+      icon: 'lock-closed-outline',
       title: Globals.STRINGS.confirm_password,
-      value: "",
-      key: "password_conf",
+      value: '',
+      key: 'password_conf',
     },
   ];
   function submit_modi() {
@@ -60,12 +59,12 @@ function Security(route) {
         modifying.new_pass !== modifying.password_conf
       ) {
         toast_message(
-          "les mots de passes ne se correspondent pas ou ne respectent pas la taille minim (6 caractères)."
+          'les mots de passes ne se correspondent pas ou ne respectent pas la taille minim (6 caractères).',
         );
       } else {
         setspinner(true);
         Fetcher.ChangePassPassu(UriEncoder(modifying))
-          .then((res) => {
+          .then(res => {
             if (res.message) {
               toast_message(res.message);
             } else {
@@ -73,7 +72,7 @@ function Security(route) {
             }
             setspinner(false);
           })
-          .catch((err) => {
+          .catch(err => {
             setspinner(false);
             if (!Globals.INTERNET) {
               toast_message(Globals.STRINGS.no_internet);
@@ -86,10 +85,10 @@ function Security(route) {
     }
   }
 
-  const menu_main = (data) => {
+  const menu_main = data => {
     data = modibool ? [data[0], data[2], data[3]] : [data[0]];
     return (
-      <View style={{ backgroundColor: "white", width: "100%" }}>
+      <View style={{backgroundColor: 'white', width: '100%'}}>
         {data.map((item, index) => {
           return (
             <View
@@ -97,22 +96,20 @@ function Security(route) {
                 styles.menu_item,
                 {
                   borderRadius: 8,
-                  flexDirection: "column",
+                  flexDirection: 'column',
                   marginBottom: 10,
                   backgroundColor: Globals.COLORS.white,
                   elevation: 1,
                 },
               ]}
-              key={index}
-            >
+              key={index}>
               <View
                 style={{
                   backgroundColor: Globals.COLORS.white,
-                  flexDirection: "row",
+                  flexDirection: 'row',
                   zIndex: 1,
-                  alignSelf: "flex-start",
-                }}
-              >
+                  alignSelf: 'flex-start',
+                }}>
                 <Icon
                   name={item.icon}
                   size={25}
@@ -125,21 +122,20 @@ function Security(route) {
                       color: Globals.COLORS.secondary,
                       marginStart: 12,
                     },
-                  ]}
-                >
+                  ]}>
                   {item.title}
                 </Text>
               </View>
               <TextInput
                 style={{
-                  width: "90%",
+                  width: '90%',
                   color: Globals.COLORS.blue_grey,
-                  fontWeight: modibool ? "normal" : "bold",
+                  fontWeight: modibool ? 'normal' : 'bold',
                 }}
                 defaultValue={item.value}
-                onChangeText={(name) => (modifying[item.key] = name)}
+                onChangeText={name => (modifying[item.key] = name)}
                 multiline={item.title === Globals.STRINGS.About ? true : false}
-                secureTextEntry={item.title.includes("pass")}
+                secureTextEntry={item.title.includes('pass')}
                 editable={modibool}
               />
             </View>
@@ -150,7 +146,7 @@ function Security(route) {
   };
 
   return (
-    <ScrollView style={{ backgroundColor: "white" }}>
+    <ScrollView style={{backgroundColor: 'white'}}>
       <View style={[styles.main_container]}>
         {menu_main(menuoth)}
         {spinner ? (
@@ -161,8 +157,7 @@ function Security(route) {
             onPress={() => {
               submit_modi();
             }}
-            activeOpacity={0.8}
-          >
+            activeOpacity={0.8}>
             <Text style={styles.boldText_touchable}>
               {!modibool ? Globals.STRINGS.modify : Globals.STRINGS.submit}
             </Text>
@@ -172,11 +167,11 @@ function Security(route) {
     </ScrollView>
   );
 }
-const mapStateToProps = (state) => {
-  const { my_profil } = state;
-  return { my_profil };
+const mapStateToProps = state => {
+  const {my_profil} = state;
+  return {my_profil};
 };
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ setProfil }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({setProfil}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Security);

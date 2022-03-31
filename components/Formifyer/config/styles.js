@@ -32,7 +32,7 @@ export const defaultColors = {
 };
 
 export const defaultFonts = {
-  defaultFontFamily: fontFamily,
+  defaultFontFamily: 'Lato-Regular',
 };
 
 export const defaultTheme = {
@@ -41,33 +41,35 @@ export const defaultTheme = {
     marginTop: 10,
     fontSize: 14,
     color: textPrimary,
-    fontWeight: 'bold',
+    fontFamily: 'Lato-Bold',
   },
   // error
   error: {
+    fontFamily: 'Lato-Regular',
     fontSize: 12,
     color: error,
   },
   // headers
   headers: {
     h1: {
+      fontFamily: 'Lato-Regular',
       fontSize: 24,
       color: textPrimary,
-      fontFamily,
     },
     h2: {
+      fontFamily: 'Lato-Regular',
       fontSize: 20,
       color: textPrimary,
-      fontFamily,
     },
     h3: {
+      fontFamily: 'Lato-Regular',
       fontSize: 16,
       color: textPrimary,
-      fontFamily,
     },
   },
   // paragraph
   p: {
+    fontFamily: 'Lato-Regular',
     fontSize: 16,
     color: textPrimary,
   },
@@ -82,6 +84,7 @@ export const defaultTheme = {
     starFillColor,
     remarkStyle: {
       color: starFillColor,
+      fontFamily: 'Lato-Regular',
       fontSize: 14,
     },
   },
@@ -121,12 +124,14 @@ export const buildTheme = (userColors = {}, userFonts = {}, userTheme = {}) => {
     // labels
     label: {
       marginTop: 10,
+      fontFamily: 'Lato-Bold',
       fontSize: 14,
       color: mergedColors.textPrimary,
       ..._.get(userTheme, 'label'),
     },
     // error
     error: {
+      fontFamily: 'Lato-Regular',
       fontSize: 12,
       color: mergedColors.error,
       ..._.get(userTheme, 'error'),
@@ -135,26 +140,27 @@ export const buildTheme = (userColors = {}, userFonts = {}, userTheme = {}) => {
     // headers
     headers: {
       h1: {
+        fontFamily: 'Lato-Bold',
         fontSize: 28,
         color: mergedColors.textPrimary,
-        fontFamily: mergedFonts.defaultFontFamily,
         ..._.get(userTheme, 'headers.h1'),
       },
       h2: {
+        fontFamily: 'Lato-Bold',
         fontSize: 24,
         color: mergedColors.textPrimary,
-        fontFamily: mergedFonts.defaultFontFamily,
         ..._.get(userTheme, 'headers.h2'),
       },
       h3: {
+        fontFamily: 'Lato-Bold',
         fontSize: 20,
         color: mergedColors.textPrimary,
-        fontFamily: mergedFonts.defaultFontFamily,
         ..._.get(userTheme, 'headers.h3'),
       },
     },
     // paragraph
     p: {
+      fontFamily: 'Lato-Regular',
       fontSize: 16,
       color: mergedColors.textPrimary,
       ..._.get(userTheme, 'p'),
@@ -170,6 +176,7 @@ export const buildTheme = (userColors = {}, userFonts = {}, userTheme = {}) => {
       starFillColor: mergedColors.starFillColor,
       remarkStyle: {
         color: mergedColors.starFillColor,
+        fontFamily: 'Lato-Regular',
         fontSize: 14,
       },
       ..._.get(userTheme, 'rating'),

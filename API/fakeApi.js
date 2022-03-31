@@ -24,6 +24,35 @@ let Fetcher = {
     });
     return await result;
   },
+  GetMessages: async function (setdada) {
+    const result = await new Promise(resolve => {
+      setTimeout(() => {
+        resolve({
+          trancriptarr: [
+            'Il s’est agrippé à moi.',
+            "Je m'assied sur un dabouret",
+            'regarde cet homme devant toi',
+            'Tourne à gauche',
+            'respecte tes aînés',
+            "L'homme travail dur pour gagner son pain",
+            'Tourne à droite',
+          ],
+          language: 'Fongbe',
+        });
+      }, 3000);
+    });
+    return await result;
+  },
+  GetUnityMessage: async function (setdada) {
+    const result = await new Promise(resolve => {
+      setTimeout(() => {
+        resolve({
+          description: 'Il s’est agrippé à moi.',
+        });
+      }, 3000);
+    });
+    return await result;
+  },
   RessetPassword: async function (setdada) {
     const result = await new Promise(resolve => {
       setTimeout(() => {
@@ -40,6 +69,7 @@ let Fetcher = {
       setdada = JSON.parse(setdada);
       setTimeout(() => {
         resolve({
+          user_type: setdada.user_type,
           mail: setdada.mail,
           first_name: 'Mathildda',
           last_name: 'Martica',
@@ -81,6 +111,7 @@ let Fetcher = {
               id: i + 1,
               name: animators[generateRandom(animators.length)],
               description: descriptions[generateRandom(descriptions.length)],
+              photo: 'https://picsum.photos/200',
             };
           }),
           beneficiaires: Array.apply(null, Array(66)).map(function (x, i) {
@@ -88,6 +119,7 @@ let Fetcher = {
               id: i + 1,
               name: animators[generateRandom(animators.length)],
               description: descriptions[generateRandom(descriptions.length)],
+              photo: 'https://picsum.photos/200',
             };
           }),
           formations: Array.apply(null, Array(25)).map(function (x, i) {
@@ -109,7 +141,9 @@ let Fetcher = {
             return {
               id: i + 1,
               description: descriptions[generateRandom(descriptions.length)],
-              date: randomDate(new Date(2021, 0, 1), new Date()),
+              date_envoi: randomDate(new Date(2021, 0, 1), new Date()),
+              date_lecture: randomDate(new Date(2021, 0, 1), new Date()),
+              expediteur: animators[generateRandom(animators.length)],
             };
           }),
         });

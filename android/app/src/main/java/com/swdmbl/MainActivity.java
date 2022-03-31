@@ -1,4 +1,4 @@
-package com.swdmbl;
+package com.investigation.sweddmobileapp;
 
 import com.facebook.react.ReactActivity;
 

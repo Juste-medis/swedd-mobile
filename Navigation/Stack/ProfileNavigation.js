@@ -4,6 +4,7 @@ import Account from '../../Screens/Drawer/Account/Account';
 import Personal from '../../Screens/Drawer/Account/Personal';
 import Security from '../../Screens/Drawer/Account/Security';
 import Globals from '../../Ressources/Globals';
+import Notification from '../../Screens/Drawer/Notifications/Notification';
 
 const Stack = createStackNavigator();
 function Navigation({navigation}) {
@@ -34,6 +35,14 @@ function Navigation({navigation}) {
         options={{
           ...navOptions,
           title: 'Sécurité',
+        }}
+      />
+      <Stack.Screen
+        name="Notification"
+        component={Security}
+        options={{
+          ...navOptions,
+          title: 'Notification',
         }}
       />
     </Stack.Navigator>

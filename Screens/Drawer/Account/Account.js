@@ -1,22 +1,13 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {
-  ScrollView,
-  Text,
-  View,
-  Linking,
-  ActivityIndicator,
-  TouchableOpacity,
-} from 'react-native';
+import {ScrollView, Text, View, Linking, ActivityIndicator} from 'react-native';
 import Globals from '../../../Ressources/Globals';
 import {styleAccount as styles} from '../../../Ressources/Styles';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {AddProfilItem} from '../../../Store/Actions';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Storer from '../../../API/storer';
-import RNReastart from 'react-native-restart';
-import {alert_message, onShare, toast_message} from '../../../Helpers/Utils';
-import fetcher from '../../../API/fakeApi';
+import {toast_message} from '../../../Helpers/Utils';
 import {Image} from 'react-native-elements';
 import SimpleRipple from '../../../components/Touchable/SimpleRipple';
 
@@ -43,30 +34,36 @@ function Account(route) {
           : toast_message(Globals.STRINGS.no_internet);
       },
     },
-    {
-      icon: 'ios-notifications-sharp',
-      title: Globals.STRINGS.Notification,
-      onclick: () => {
-        route.navigation.navigate('Notification');
-      },
-      value: profil.notifications.length,
-    },
+    ...[
+      profil.user_type === 'facilitateur_1'
+        ? {
+            icon: 'ios-notifications-sharp',
+            title: Globals.STRINGS.Notification,
+            onclick: () => {
+              route.navigation.navigate('Notification');
+            },
+            value: profil.notifications.length,
+          }
+        : {},
+    ],
     {
       icon: 'ios-key-sharp',
       title: 'Sécurité',
       onclick: () => {
-        Globals.INTERNET
-          ? route.navigation.navigate('Security')
-          : toast_message(Globals.STRINGS.no_internet);
+        route.navigation.navigate('Security');
       },
     },
-    {
-      icon: 'people-outline',
-      title: 'Responsable superviseur Niveau 2',
-      onclick: () => {
-        route.navigation.navigate('Notes');
-      },
-    },
+    ...[
+      profil.user_type === 'facilitateur_1'
+        ? {
+            icon: 'people-outline',
+            title: 'Responsable superviseur Niveau 2',
+            onclick: () => {
+              route.navigation.navigate('Notes');
+            },
+          }
+        : {},
+    ],
   ];
 
   let menuoth = [
@@ -93,20 +90,13 @@ function Account(route) {
         //route.navigation.navigate("About");
       },
     },
-    {
-      icon: 'share',
-      title: 'Partager',
-      onclick: () => {
-        onShare('SweddMobile | tres cool');
-      },
-    },
   ];
 
   const menu_main = data => {
     return (
       <View style={{width: '100%'}}>
         {data.map((item, index) => {
-          return (
+          return item.title ? (
             <View
               style={{
                 marginTop: 10,
@@ -131,6 +121,7 @@ function Account(route) {
                       color: Globals.COLORS.arsenic,
                       marginStart: 12,
                       fontWeight: '500',
+                      fontFamily: 'Lato-Regular',
                       fontSize: 16,
                     }}>
                     {item.title}
@@ -146,6 +137,7 @@ function Account(route) {
                   <Text
                     style={{
                       ...styles.prop_unity_value,
+                      fontFamily: 'Lato-Regular',
                       fontSize: 15,
                       marginTop: 10,
                     }}>
@@ -154,7 +146,7 @@ function Account(route) {
                 )}
               </SimpleRipple>
             </View>
-          );
+          ) : null;
         })}
       </View>
     );
@@ -164,7 +156,7 @@ function Account(route) {
     <ScrollView>
       <View style={styles.main_container}>
         <View style={{width: '100%', alignItems: 'center'}}>
-          {profil.photourl != '' ? (
+          {profil.photourl !== '' ? (
             <Image
               source={{uri: profil.photourl}}
               containerStyle={styles.item}
@@ -173,7 +165,12 @@ function Account(route) {
             />
           ) : (
             <View style={styles.def_avatar}>
-              <Text style={{color: 'white', fontSize: 50, fontWeight: 'bold'}}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontSize: 50,
+                  fontFamily: 'Lato-Bold',
+                }}>
                 {profil.first_name.substr(0, 2)}
               </Text>
             </View>
@@ -200,45 +197,13 @@ function Account(route) {
               {
                 color: Globals.COLORS.secondary,
                 alignSelf: 'flex-start',
-                fontFamily: 'Montserrat',
+                fontFamily: 'Lato-Regular',
               },
             ]}>
             {Globals.STRINGS.other.toUpperCase()}
           </Text>
         </View>
         {menu_main(menuoth)}
-        <TouchableOpacity
-          style={styles.buts_style}
-          activeOpacity={0.8}
-          onPress={() => {
-            alert_message(
-              'déconnexion',
-              Globals.STRINGS.sur_deconnect,
-              'Se déconnecter',
-              () => {
-                fetcher
-                  .Signout()
-                  .then(resi => {
-                    if (resi.data === 1) {
-                      Storer.removeData();
-                      RNReastart.Restart();
-                    } else {
-                      alert(Globals.STRINGS.Ocurred_error);
-                    }
-                  })
-                  .catch(err => {
-                    if (!Globals.INTERNET) {
-                      toast_message(Globals.STRINGS.no_internet);
-                      route.navigation.goBack();
-                    } else {
-                      toast_message(`${err}`);
-                    }
-                  });
-              },
-            );
-          }}>
-          <Text style={styles.boldText_touchable}>se déconnecter</Text>
-        </TouchableOpacity>
       </View>
     </ScrollView>
   );

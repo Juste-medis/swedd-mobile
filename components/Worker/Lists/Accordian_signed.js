@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -6,17 +6,17 @@ import {
   LayoutAnimation,
   Platform,
   UIManager,
-} from "react-native";
-import Globals from "../../../Ressources/Globals";
-import Icon from "react-native-vector-icons/Ionicons";
-import TextW from "../../Tools/TextW";
-import Ripple from "../../Elements/Touchable/index";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { setSelectedVideo } from "../../../Store/Actions";
-import { styleAccordian as styles } from "../../../Ressources/Styles";
-import { computeTime, hour_to_string } from "../../../Helpers/Utils";
-import Fetcher from "../../../API/fetcher";
+} from 'react-native';
+import Globals from '../../../Ressources/Globals';
+import Icon from 'react-native-vector-icons/Ionicons';
+import TextW from '../../Tools/TextW';
+import Ripple from '../../Elements/Touchable/index';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {setSelectedVideo} from '../../../Store/Actions';
+import {styleAccordian as styles} from '../../../Ressources/Styles';
+import {computeTime, hour_to_string} from '../../../Helpers/Utils';
+import Fetcher from '../../../API/fetcher';
 
 class Accordian extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ class Accordian extends Component {
     this.courid = props.courid;
     this.async_cour = props.async_cour;
     this.selected = props.my_profil.account.courses.find(
-      (el) => el.id == props.courid
+      el => el.id == props.courid,
     );
     this.uno = props.uno;
     this.state = {
@@ -32,7 +32,7 @@ class Accordian extends Component {
       expanded: false,
       selected: 0,
     };
-    if (Platform.OS === "android") {
+    if (Platform.OS === 'android') {
       UIManager.setLayoutAnimationEnabledExperimental(true);
     }
   }
@@ -40,18 +40,18 @@ class Accordian extends Component {
     if (this.async_cour) {
       console.log(content);
       this.props.setSelectedVideo(content);
-      this.setState({ selected: no });
+      this.setState({selected: no});
     } else
-      Fetcher.GetLesson(this.courid, content.ID, "student")
-        .then((res) => {
+      Fetcher.GetLesson(this.courid, content.ID, 'student')
+        .then(res => {
           if (res) {
-            if (!res.post_content) res.post_content = "Aucune Description";
+            if (!res.post_content) res.post_content = 'Aucune Description';
             this.props.setSelectedVideo(res);
-            this.setState({ selected: no });
+            this.setState({selected: no});
           }
         })
-        .catch((err) => {
-          console.log("err1 => ", err);
+        .catch(err => {
+          console.log('err1 => ', err);
         });
   }
 
@@ -70,7 +70,7 @@ class Accordian extends Component {
             styles.main_touchable,
             {
               backgroundColor:
-                sel == this.state.selected ? "rgba(238, 108, 59,0.1)" : null,
+                sel == this.state.selected ? 'rgba(238, 108, 59,0.1)' : null,
             },
           ]}
           onPress={
@@ -81,15 +81,14 @@ class Accordian extends Component {
               : null
           }
           activeOpacity={Globals.USER_TYPE ? 0.5 : 1}
-          key={`accoit${this.props.section_id}-${sel}`}
-        >
+          key={`accoit${this.props.section_id}-${sel}`}>
           <View style={styles.touchable_container}>
             <Text style={styles.index_text}>{sel}</Text>
             <View style={styles.right_toucha}>
               <View style={styles.pos_comp}>
                 {comp && (
                   <Icon
-                    name={"checkmark-circle"}
+                    name={'checkmark-circle'}
                     size={20}
                     color={Globals.COLORS.green}
                   />
@@ -98,9 +97,9 @@ class Accordian extends Component {
                   style={[
                     styles.title_lesson,
                     {
-                      fontWeight: sel == this.state.selected ? "bold" : null,
+                      fontWeight: sel == this.state.selected ? 'bold' : null,
                       fontFamily:
-                        sel == this.state.selected ? "bold" : "Helvetica",
+                        sel == this.state.selected ? 'bold' : 'Helvetica',
                     },
                   ]}
                   text={item.post_title.trim()}
@@ -115,7 +114,7 @@ class Accordian extends Component {
           </View>
           <Icon
             name={
-              sel == this.state.selected ? "play-circle" : "play-circle-outline"
+              sel == this.state.selected ? 'play-circle' : 'play-circle-outline'
             }
             size={30}
             color={Globals.COLORS.primary}
@@ -136,31 +135,30 @@ class Accordian extends Component {
           ]}
           activeOpacity={1}
           onPress={() => this.toggleExpand()}
-          key={`section${this.props.section_id}`}
-        >
+          key={`section${this.props.section_id}`}>
           <View
             style={[
               styles.top_cont,
-              { maxWidth: "70%", justifyContent: null, paddingVertical: 10 },
-            ]}
-          >
+              {maxWidth: '70%', justifyContent: null, paddingVertical: 10},
+            ]}>
             <Text
               style={[
                 styles.title,
                 {
-                  fontWeight: this.state.expanded ? "600" : "450",
+                  fontWeight: this.state.expanded ? '600' : '450',
+                  fontFamily: 'Lato-Regular',
                   fontSize: 12,
                   color: Globals.COLORS.arsenic2,
                 },
-              ]}
-            >
-              {"Section " + this.props.ni + " : "}
+              ]}>
+              {'Section ' + this.props.ni + ' : '}
             </Text>
             <TextW
               style={[
                 styles.des_title,
                 {
-                  fontWeight: this.state.expanded ? "600" : "450",
+                  fontWeight: this.state.expanded ? '600' : '450',
+                  fontFamily: 'Lato-Regular',
                   fontSize: 12,
                   color: Globals.COLORS.arsenic2,
                 },
@@ -171,7 +169,7 @@ class Accordian extends Component {
           </View>
           <Icon
             name={
-              this.state.expanded ? "caret-down-sharp" : "caret-forward-sharp"
+              this.state.expanded ? 'caret-down-sharp' : 'caret-forward-sharp'
             }
             size={18}
             color={Globals.COLORS.primary}
@@ -184,8 +182,7 @@ class Accordian extends Component {
               height: this.state.expanded ? null : 0,
               borderBottomWidth: this.state.expanded ? 4 : 0,
             },
-          ]}
-        >
+          ]}>
           {this.show_Main()}
         </View>
       </View>
@@ -193,15 +190,15 @@ class Accordian extends Component {
   }
   toggleExpand = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    this.setState({ expanded: !this.state.expanded });
+    this.setState({expanded: !this.state.expanded});
   };
 }
 
-const mapStateToProps = (state) => {
-  const { my_profil } = state;
-  return { my_profil };
+const mapStateToProps = state => {
+  const {my_profil} = state;
+  return {my_profil};
 };
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ setSelectedVideo }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({setSelectedVideo}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Accordian);

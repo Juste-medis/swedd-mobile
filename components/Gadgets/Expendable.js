@@ -83,7 +83,7 @@ var styles = StyleSheet.create({
   },
   title: {
     padding: 10,
-    fontWeight: 'bold',
+    fontFamily: 'Lato-Bold',
   },
   body: {
     padding: 10,

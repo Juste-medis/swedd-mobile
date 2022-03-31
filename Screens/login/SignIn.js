@@ -12,7 +12,10 @@ import {Schemasignin} from '../../API/schemas';
 import {Input, Button, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Feather';
 //search "beautiful textinput on google"
+import {CheckBox} from 'react-native-elements';
+
 export default function SignIn({navigation}) {
+  const [vip, setvip] = useState(false);
   const [mail, setmail] = useState('');
   const [password, setpassword] = useState('');
 
@@ -36,10 +39,11 @@ export default function SignIn({navigation}) {
       setspinner(true);
       Fetcher.AuthSignin(
         JSON.stringify({
-          user: {
-            mail,
-            password,
-          },
+          mail,
+          password,
+          //to remove
+          user_type: vip ? 'facilitateur_2' : 'facilitateur_1',
+          //to remove
         }),
       )
         .then(res => {
@@ -54,6 +58,7 @@ export default function SignIn({navigation}) {
               text1: 'Bienvenu',
               text2: res?.first_name,
             });
+
             Storer.storeData('@ProfilInfo', {...res, mail, password}).then(
               () => {
                 Storer.storeData('@USER_TYPE', 1).then(() => {
@@ -78,6 +83,11 @@ export default function SignIn({navigation}) {
       <ScrollView style={styles.center_scroll}>
         <Text style={styles.titleText}>{Globals.STRINGS.hello}</Text>
         <View style={styles.center_container}>
+          <Image
+            source={require('../../assets/flag_ben.png')}
+            resizeMode="contain"
+            style={styles.Image_flag}
+          />
           <Image
             source={Globals.IMAGES.LO_SPLASH}
             resizeMode="contain"
@@ -132,7 +142,27 @@ export default function SignIn({navigation}) {
               alignItems: 'center',
             }}
           />
-
+          <CheckBox
+            containerStyle={{
+              backgroundColor: 'rgba(9,105,195,0.05)',
+              borderRadius: 50,
+              borderWidth: 0,
+            }}
+            textStyle={{
+              padding: 0,
+            }}
+            style={{
+              margin: 0,
+              padding: 0,
+            }}
+            Component={Text}
+            center
+            title="vip"
+            checked={vip}
+            onPress={checked => {
+              setvip(!vip);
+            }}
+          />
           <View style={styles.err_cont}>
             {spinner ? (
               <ActivityIndicator

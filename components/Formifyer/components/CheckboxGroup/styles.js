@@ -19,6 +19,7 @@ export default {
     marginBottom: 5,
   },
   toggleText: {
+    fontFamily: 'Lato-Regular',
     fontSize: 16,
     color: textPrimary,
     marginLeft: 20,

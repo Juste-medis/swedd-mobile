@@ -1,6 +1,7 @@
 import Globals from '../Ressources/Globals';
 import {Share} from 'react-native';
 import {ToastAndroid, Alert} from 'react-native';
+import {monthNamesShort} from '../Ressources/Data/datepicker';
 
 export function toast_message(mes, dur = ToastAndroid.LONG) {
   ToastAndroid.show(mes, dur);
@@ -123,6 +124,31 @@ export function date_to_string(last_modified, whithHour) {
     let strdate = year + '-' + month + '-' + dt;
     strdate += whithHour
       ? ' , ' + last_modified.getHours() + ':' + last_modified.getMinutes()
+      : '';
+
+    return strdate;
+  }
+}
+/**
+ *to convert data to strin date format "yyyy/mm/dd"
+ * @param {conv} time the ms time
+ */
+export function date_to_local_string(last_modified, whithHour) {
+  if (last_modified) {
+    last_modified = new Date(last_modified);
+    let year = last_modified.getFullYear();
+    let month = last_modified.getMonth() + 1;
+    let dt = last_modified.getDate();
+
+    if (dt < 10) {
+      dt = '0' + dt;
+    }
+    if (month < 10) {
+      month = '0' + month;
+    }
+    let strdate = `${dt} ${monthNamesShort[month - 1]} ${year} `;
+    strdate += whithHour
+      ? ' à ' + last_modified.getHours() + ':' + last_modified.getMinutes()
       : '';
 
     return strdate;

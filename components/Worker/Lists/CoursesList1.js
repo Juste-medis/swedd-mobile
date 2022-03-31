@@ -1,26 +1,26 @@
-import React from "react";
+import React from 'react';
 import {
   Text,
   View,
   ScrollView,
   ActivityIndicator,
   Pressable,
-} from "react-native";
-import { styleCoursesList1 as styles } from "../../../Ressources/Styles";
-import TextW from "../../Tools/TextW";
-import { showStars } from "../../../Helpers/Utils";
-import Globals from "../../../Ressources/Globals";
-import Icon from "react-native-vector-icons/FontAwesome";
-import ProgressiveImage from "../../Tools/PlaceHolderLoader";
-import numeral from "numeral";
-import TouchableRipple from "../../Elements/Touchable";
-const CoursesList1 = (route) => {
+} from 'react-native';
+import {styleCoursesList1 as styles} from '../../../Ressources/Styles';
+import TextW from '../../Tools/TextW';
+import {showStars} from '../../../Helpers/Utils';
+import Globals from '../../../Ressources/Globals';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import ProgressiveImage from '../../Tools/PlaceHolderLoader';
+import numeral from 'numeral';
+import TouchableRipple from '../../Elements/Touchable';
+const CoursesList1 = route => {
   let orientation = route.verticale === true ? false : true;
-  let { name, data } = route.inter_cat;
+  let {name, data} = route.inter_cat;
   const MainShow = data ? (
     data.map((mes, index) => {
       if (index != data.length - 1) {
-        mes = { ...mes, ...mes.meta[0] };
+        mes = {...mes, ...mes.meta[0]};
         delete mes.meta;
         let {
           c_title,
@@ -36,28 +36,26 @@ const CoursesList1 = (route) => {
           <TouchableRipple
             style={[styles.touchable_main, {}]}
             onPress={() => {
-              route.navigation.push("CourseOverview", {
+              route.navigation.push('CourseOverview', {
                 course: mes,
               });
             }}
             activeOpacity={0.9}
-            key={`courseunity${index + 1}`}
-          >
+            key={`courseunity${index + 1}`}>
             <View
               style={[
                 styles.imag_container,
                 {
-                  width: "100%",
-                  height: "50%",
+                  width: '100%',
+                  height: '50%',
                 },
-              ]}
-            >
+              ]}>
               <ProgressiveImage
                 style={[
                   styles.image,
                   {
-                    height: "100%",
-                    width: "100%",
+                    height: '100%',
+                    width: '100%',
                   },
                 ]}
                 uri={c_corverurl}
@@ -76,29 +74,28 @@ const CoursesList1 = (route) => {
                 {showStars(c_stars.average)}
                 <TextW style={styles.note_text} text={c_students} size={50} />
               </View>
-              {c_status === "tocome" ? (
+              {c_status === 'tocome' ? (
                 <View style={styles.price_container}>
                   <Text style={styles.to_come}>à venir</Text>
                 </View>
               ) : (
                 <View style={styles.price_container}>
                   {c_price.current === 0 ? (
-                    <View style={{ backgroundColor: "green" }}>
+                    <View style={{backgroundColor: 'green'}}>
                       <Text
-                        style={[styles.to_come, { backgroundColor: "green" }]}
-                      >
+                        style={[styles.to_come, {backgroundColor: 'green'}]}>
                         Gratuit
                       </Text>
                     </View>
                   ) : (
                     <View style={styles.price_container}>
                       <Text style={styles.good_price}>
-                        {numeral(c_price.current).format("0,0[.]00 ") + " CFA"}
+                        {numeral(c_price.current).format('0,0[.]00 ') + ' CFA'}
                       </Text>
                       {c_price.promotion != null && (
                         <Text style={styles.bad_price}>
-                          {numeral(c_price.promotion).format("0,0[.]00 ") +
-                            " CFA"}
+                          {numeral(c_price.promotion).format('0,0[.]00 ') +
+                            ' CFA'}
                         </Text>
                       )}
                     </View>
@@ -112,25 +109,25 @@ const CoursesList1 = (route) => {
         return (
           <Pressable
             onPress={() => {
-              route.navigation.navigate("ExploreBest", {
+              route.navigation.navigate('ExploreBest', {
                 category: data[0].c_category,
                 navigation: route.navigation,
               });
             }}
-            style={({ pressed }) => [
+            style={({pressed}) => [
               {
-                backgroundColor: pressed ? "rgba(0, 0, 0,.1)" : "white",
+                backgroundColor: pressed ? 'rgba(0, 0, 0,.1)' : 'white',
               },
               styles.see_more_main,
             ]}
-            key={index + 1}
-          >
+            key={index + 1}>
             <TextW
               style={[
                 styles.cate_text,
                 {
                   color: Globals.COLORS.primary_pure,
-                  fontWeight: "bold",
+                  fontFamily: 'Lato-Bold',
+                  fontFamily: 'Lato-Regular',
                   fontSize: 15,
                 },
               ]}
@@ -157,7 +154,7 @@ const CoursesList1 = (route) => {
         <View style={styles.scroller_labelContainer}>
           <TextW style={[styles.categorie_text]} size={50} text={name} />
           <Icon
-            style={{ marginStart: 5 }}
+            style={{marginStart: 5}}
             name="arrow-right"
             size={15}
             color={Globals.COLORS.primary}
@@ -175,8 +172,7 @@ const CoursesList1 = (route) => {
       <ScrollView
         style={styles.main_scroller}
         horizontal={orientation}
-        showsHorizontalScrollIndicator={false}
-      >
+        showsHorizontalScrollIndicator={false}>
         {MainShow}
       </ScrollView>
     </View>

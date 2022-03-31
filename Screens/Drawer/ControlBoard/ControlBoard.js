@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, {useCallback} from 'react';
 import {ScrollView, Text, View, Linking} from 'react-native';
 import Globals from '../../../Ressources/Globals';
 import {styleAccount as styles} from '../../../Ressources/Styles';
@@ -10,7 +11,29 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {onShare} from '../../../Helpers/Utils';
 import SimpleRipple from '../../../components/Touchable/SimpleRipple';
 import Fiches from '../../../Ressources/Data/Fiches';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 
+/*
+    // TabNav navigation item
+    const navigation = useNavigation();
+
+    // Effect will be triggered everytime the Tab changes 
+    //      Mounting is not enough -> Tabs will not be unmount by change
+    useFocusEffect(
+        useCallback(() => {
+
+            // Get StackNav navigation item
+            const stackNavigator = navigation.dangerouslyGetParent();
+            if(stackNavigator){
+
+                // Actually set Title
+                stackNavigator.setOptions({
+                    title: "Home"
+                });
+            }
+        }, [navigation])
+    );
+*/
 function ControlBoard(route) {
   let profil = route.my_profil.account;
   React.useEffect(() => {
@@ -27,35 +50,47 @@ function ControlBoard(route) {
         route.navigation.navigate('FichesTemplates');
       },
     },
-    {
-      icon: 'md-eye-outline',
-      title: 'Supervision en cour',
-      value: profil.review_fiche.length,
-      variant: 'rgb(255,193,7)',
-      onclick: () => {
-        Linking.openURL('https://swedd.bj/contact/');
-        //route.navigation.navigate("About");
-      },
-    },
-    {
-      icon: 'checkmark-sharp',
-      title: 'Validées',
-      value: profil.accepted_fiche.length,
-      variant: '#198754',
-      onclick: () => {
-        Linking.openURL('https://swedd.bj/presentation-du-projet/');
-        //route.navigation.navigate("About");
-      },
-    },
-    {
-      icon: 'md-close',
-      title: 'Rejetées',
-      value: profil.rejected_fiche.length,
-      variant: '#dc3545',
-      onclick: () => {
-        onShare('SweddMobile | tres cool');
-      },
-    },
+    ...[
+      profil.user_type === 'facilitateur_1'
+        ? {
+            icon: 'md-eye-outline',
+            title: 'Supervision en cour',
+            value: profil.review_fiche.length,
+            variant: 'rgb(255,193,7)',
+            onclick: () => {
+              Linking.openURL('https://swedd.bj/contact/');
+              //route.navigation.navigate("About");
+            },
+          }
+        : {},
+    ],
+    ...[
+      profil.user_type === 'facilitateur_1'
+        ? {
+            icon: 'checkmark-sharp',
+            title: 'Validées',
+            value: profil.accepted_fiche.length,
+            variant: '#198754',
+            onclick: () => {
+              Linking.openURL('https://swedd.bj/presentation-du-projet/');
+              //route.navigation.navigate("About");
+            },
+          }
+        : {},
+    ],
+    ...[
+      profil.user_type === 'facilitateur_1'
+        ? {
+            icon: 'md-close',
+            title: 'Rejetées',
+            value: profil.rejected_fiche.length,
+            variant: '#dc3545',
+            onclick: () => {
+              onShare('SweddMobile | tres cool');
+            },
+          }
+        : {},
+    ],
     {
       icon: 'md-person-sharp',
       title: 'Animateurs',
@@ -63,7 +98,7 @@ function ControlBoard(route) {
       variant: Globals.COLORS.arsenic,
       backgroundColor: 'white',
       onclick: () => {
-        onShare('SweddMobile | tres cool');
+        route.navigation.navigate('Animators');
       },
     },
     {
@@ -102,7 +137,7 @@ function ControlBoard(route) {
     return (
       <View style={{width: '100%'}}>
         {data.map((item, index) => {
-          return (
+          return item.title ? (
             <View
               style={{
                 marginTop: 10,
@@ -142,6 +177,7 @@ function ControlBoard(route) {
                       style={{
                         color: item.backgroundColor ? item.variant : 'white',
                         marginStart: 12,
+                        fontFamily: 'Lato-Regular',
                       }}>
                       {item.title}
                     </Text>
@@ -149,7 +185,7 @@ function ControlBoard(route) {
                 </View>
               </SimpleRipple>
             </View>
-          );
+          ) : null;
         })}
       </View>
     );

@@ -1,74 +1,62 @@
-import React from "react";
-import { View, Text, Image } from "react-native";
-import Globals from "../../../Ressources/Globals";
-import { styleNotificationItem as styles } from "../../../Ressources/Styles";
-import TextW from "../../Tools/TextW";
-import { date_to_string } from "../../../Helpers/Utils";
-import { Button } from "react-native-elements";
+import React from 'react';
+import {View, Text} from 'react-native';
+import Globals from '../../../Ressources/Globals';
+import {styleNotificationItem as styles} from '../../../Ressources/Styles';
+import TextW from '../../Tools/TextW';
+import {date_to_local_string} from '../../../Helpers/Utils';
+import SimpleRipple from '../../Touchable/SimpleRipple';
+
 function NotificationItem(route) {
-  const {
-    ID,
-    date_envoi,
-    objet,
-    content,
-    uri,
-    date_lecture,
-    id_expe,
-    id_desti,
-  } = route.inter_notification;
-  let { onclick } = route,
+  const {id, expediteur, date_envoi, description, date_lecture} =
+    route.inter_notification;
+  let {onclick} = route,
     read = date_lecture.length > 0;
+
+  let localdate = new Date(date_envoi);
+
   return (
-    <Button
+    <SimpleRipple
       style={[
-        styles.main_Button,
+        styles.main_ripple,
         {
-          backgroundColor: read ? Globals.COLORS.white : "#eceff5",
+          backgroundColor: !read
+            ? Globals.COLORS.white
+            : Globals.COLORS.light_grey,
         },
       ]}
       onPress={() => {
-        onclick({ ID });
-      }}
-    >
-      {uri != "" && uri.length > 1 && (
-        <Image
-          style={[styles.image]}
-          source={{ uri: uri }}
-          resizeMode="contain"
-        />
-      )}
-      <View style={styles.main_container}>
-        <View style={styles.title_container}>
-          <TextW
-            style={[
-              styles.notification_title,
-              {
-                color: read
-                  ? Globals.COLORS.blue_grey
-                  : Globals.COLORS.blue_dark,
-              },
-            ]}
-            text={objet}
-            size={50}
-          />
+        onclick({description, expediteur, date_envoi});
+      }}>
+      <View style={styles.title_container}>
+        <View style={styles.def_avatar}>
           <Text
             style={{
-              textDecorationStyle: "double",
-              textDecorationLine: "underline",
-            }}
-          >
-            {date_to_string(date_envoi)}
+              color: 'white',
+              fontSize: 20,
+              fontFamily: 'Lato-Bold',
+            }}>
+            {expediteur.substr(0, 2)}
           </Text>
         </View>
+      </View>
+      <View style={styles.main_container}>
         <View style={styles.desciption_container}>
           <TextW
             style={styles.notification_description}
-            text={content.replace(/(<([^>]+)>)/gi, "")}
-            size={150}
+            text={description.replace(/(<([^>]+)>)/gi, '')}
+            size={100}
           />
+          <Text
+            style={{
+              color: Globals.COLORS.arsenic,
+              fontFamily: 'Lato-Black',
+              marginTop: 20,
+            }}>
+            {date_to_local_string(localdate, true)}
+          </Text>
         </View>
       </View>
-    </Button>
+    </SimpleRipple>
   );
 }
 

@@ -78,6 +78,7 @@ const ProfilReducer = (
       id: 0,
       photourl: '',
       description: '',
+      user_type: '',
       job: '',
       mail: '',
       first_name: '',
@@ -111,11 +112,12 @@ const ProfilReducer = (
       let valcon = account[key];
 
       if (Array.isArray(valcon)) {
-        if (account[key].find(el => el == data)) {
-          if (action.payload.force !== 'add')
+        if (account[key].find(el => el === data)) {
+          if (action.payload.force !== 'add') {
             account[key] = account[key].filter(function (ele) {
-              return ele != data;
+              return ele !== data;
             });
+          }
         } else {
           account[key].push(data);
         }

@@ -1,24 +1,18 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {styleMyCoursesScreen as styles} from '../../Ressources/Styles';
-import Globals from '../../Ressources/Globals';
-import CategorieList from '../../Components/Worker/Lists/CategorieList';
+import LottieView from 'lottie-react-native';
 
-export default function EmptyThing({route}) {
+export default function EmptyThing({message, style}) {
   return (
     <View style={styles.empty_container}>
-      <Image
-        style={styles.image_empty}
-        source={Globals.IMAGES.EMPTY_COURSE}
-        resizeMode="contain"
+      <LottieView
+        source={require('../../assets/loties/empty-list.json')}
+        autoPlay
+        loop
+        style={{width: 250, height: 250, marginVertical: 20, ...style}}
       />
-      <Text style={styles.head_title}>{Globals.STRINGS.course_here}</Text>
-      <View style={styles.CategorieList}>
-        <Text style={[styles.head_title, {fontWeight: 'bold'}]}>
-          {Globals.STRINGS.parcour_category}
-        </Text>
-        <CategorieList navigation={route.route.navigation} verticale={true} />
-      </View>
+      <Text style={styles.head_title}>{message}</Text>
     </View>
   );
 }

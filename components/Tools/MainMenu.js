@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from 'react';
 import {
   Modal,
   StyleSheet,
@@ -6,16 +6,16 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-} from "react-native";
-import Globals from "../../Ressources/Globals";
-import Icon from "react-native-vector-icons/Ionicons";
+} from 'react-native';
+import Globals from '../../Ressources/Globals';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-const MainMenu = (route) => {
-  let { actions } = route;
+const MainMenu = route => {
+  let {actions} = route;
   const [modalVisible, setModalVisible] = useState(false);
 
-  const ShowAction = actions.map((mes) => {
-    let { title, handler } = mes;
+  const ShowAction = actions.map(mes => {
+    let {title, handler} = mes;
     return (
       <TouchableOpacity
         key={title}
@@ -32,19 +32,17 @@ const MainMenu = (route) => {
         onPress={() => {
           handler();
           setModalVisible(!modalVisible);
-        }}
-      >
+        }}>
         <Text
           style={[
             styles.button_text,
             {
               color:
                 title === Globals.STRINGS.delete
-                  ? "white"
+                  ? 'white'
                   : Globals.COLORS.arsenic2,
             },
-          ]}
-        >
+          ]}>
           {title}
         </Text>
       </TouchableOpacity>
@@ -59,8 +57,7 @@ const MainMenu = (route) => {
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(!modalVisible);
-        }}
-      >
+        }}>
         <TouchableOpacity
           style={styles.modal_outcontainer}
           activeOpacity={1}
@@ -74,10 +71,9 @@ const MainMenu = (route) => {
       </Modal>
       <TouchableOpacity
         style={styles.imag_container}
-        onPress={() => setModalVisible(true)}
-      >
+        onPress={() => setModalVisible(true)}>
         <Icon
-          style={{ margin: 10 }}
+          style={{margin: 10}}
           name="ellipsis-vertical"
           size={20}
           color={Globals.COLORS.white}
@@ -89,44 +85,45 @@ const MainMenu = (route) => {
 
 const styles = StyleSheet.create({
   modal_container: {
-    flexDirection: "column",
-    alignItems: "flex-start",
+    flexDirection: 'column',
+    alignItems: 'flex-start',
     backgroundColor: Globals.COLORS.white,
     elevation: 5,
-    width: "100%",
+    width: '100%',
     bottom: 0,
-    position: "absolute",
+    position: 'absolute',
   },
   scrollView: {
-    width: "100%",
+    width: '100%',
   },
   modalView: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 20,
     elevation: 50,
-    maxWidth: "50%",
-    height: "100%",
+    maxWidth: '50%',
+    height: '100%',
   },
   modal_outcontainer: {
-    height: "100%",
-    width: "100%",
-    backgroundColor: "rgba(0,0,0,0.1)",
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'rgba(0,0,0,0.1)',
   },
   button: {
     padding: 10,
     borderBottomWidth: 1,
-    borderColor: "grey",
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
+    borderColor: 'grey',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   imag_container: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   button_text: {
+    fontFamily: 'Lato-Regular',
     fontSize: 15,
-    fontWeight: "bold",
+    fontFamily: 'Lato-Bold',
   },
 });
 

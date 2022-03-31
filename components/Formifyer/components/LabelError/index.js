@@ -20,9 +20,15 @@ export default class LabelError extends PureComponent {
   render() {
     const {label, error, placeholder} = this.props;
     const {theme} = this.context;
+    const isRequired = `${label}`[`${label}`.length - 1] === '*';
     return (
       <View>
-        {label ? <Text style={theme.label}>{label}</Text> : null}
+        {label ? (
+          <Text style={{...theme.label, fontFamily: 'Lato-Bold'}}>
+            {isRequired ? `${label}`.replace(`*`, '') : label}
+            {isRequired && <Text style={{color: 'red'}}>*</Text>}
+          </Text>
+        ) : null}
         {placeholder && (
           <Text style={{paddingBottom: 15, color: 'grey'}}>{placeholder}</Text>
         )}

@@ -12,6 +12,7 @@ export default {
   },
   input: {
     flex: 1,
+    fontFamily: 'Lato-Regular',
     fontSize: 20,
     textAlign: 'left',
     color: textPrimary,

@@ -9,7 +9,7 @@ export default function NotifPar(route) {
   const [selectedVal, setselectedVal] = useState(route.selectedValue);
   const [check_vali, setselectedVali] = useState(route.check_val);
 
-  const OptionItems = NotificationData.map((mat) => (
+  const OptionItems = NotificationData.map(mat => (
     <Picker.Item label={mat.toString()} value={mat.toLowerCase()} />
   ));
   function setSelection() {
@@ -69,11 +69,13 @@ const styles = StyleSheet.create({
   },
   property_container: {flexDirection: 'column', justifyContent: 'center'},
   label_notification_title: {
+    fontFamily: 'Lato-Regular',
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'Lato-Bold',
     color: Globals.COLORS.pur_green,
   },
   label_notification_value: {
+    fontFamily: 'Lato-Regular',
     fontSize: 15,
     fontWeight: '100',
     color: Globals.COLORS.pur_green,

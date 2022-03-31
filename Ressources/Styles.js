@@ -9,13 +9,13 @@ const mobile_500_1000 = width <= 500 && height <= 1000;
 let tyleFicheForm,
   tyleStartSplash,
   tyleSignIn,
-  tyleSearch,
   tyleDisplayCategorie,
   tyleMyCoursesScreen,
   tyleCourseOverView,
   tyleControlBoard,
   tyleAccount,
   tyleNotificationItem,
+  tyleAnimatorsItem,
   tyleAccordian,
   tyletoollength,
   tyleNoInternet;
@@ -26,7 +26,7 @@ if (mobile_360_750) {
       backgroundColor: 'white',
     },
     slide: {
-      height: '100%',
+      paddingBottom: 50,
     },
     bottom_container: {
       display: 'flex',
@@ -46,27 +46,27 @@ if (mobile_360_750) {
       height: 30,
     },
     boldText_touchable: {
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
       color: Globals.COLORS.white,
       fontSize: 14,
     },
     title_text: {
       textAlign: 'center',
       color: 'white',
+      fontFamily: 'Lato-Regular',
       fontSize: 20,
-      fontFamily: 'Neogrotesk',
     },
     subtitle_text: {
+      fontFamily: 'Lato-Regular',
       fontSize: 15,
       textAlign: 'center',
       color: 'white',
-      fontFamily: 'Montserrat',
     },
     buttonWrapperStyle: {
       backgroundColor: 'transparent',
       flexDirection: 'row',
       position: 'absolute',
-      top: -290,
+      top: 290,
       left: 0,
       flex: 1,
       justifyContent: 'space-between',
@@ -76,12 +76,13 @@ if (mobile_360_750) {
       backgroundColor: 'transparent',
       flexDirection: 'row',
       position: 'absolute',
-      top: -500,
+      top: 570,
       left: 0,
       flex: 1,
       alignItems: 'center',
       overflow: 'scroll',
       zIndex: 1000,
+      height: 50,
     },
     dot: {
       backgroundColor: 'white',
@@ -98,9 +99,9 @@ if (mobile_360_750) {
     buts_style_next: {right: 0},
     buts_style_prev: {left: 0, width: 30, height: 30, borderRadius: 30},
     sectionTitleStyle: {
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
       color: Globals.COLORS.primary,
-      marginTop: 70,
+      marginTop: 30,
     },
     centeredView: {
       flex: 1,
@@ -141,14 +142,14 @@ if (mobile_360_750) {
     title_text: {
       textAlign: 'center',
       color: 'white',
+      fontFamily: 'Lato-Regular',
       fontSize: 20,
-      fontFamily: 'Neogrotesk',
     },
     subtitle_text: {
+      fontFamily: 'Lato-Regular',
       fontSize: 15,
       textAlign: 'center',
       color: 'white',
-      fontFamily: 'Montserrat',
     },
     botofim1: {
       height: 15,
@@ -166,11 +167,11 @@ if (mobile_360_750) {
     },
     botofim3: {display: 'flex', flexDirection: 'row', alignItems: 'center'},
     botofim4: {},
-    botofim3_text: {marginStart: 10, fontSize: 15},
+    botofim3_text: {marginStart: 10, fontFamily: 'Lato-Regular', fontSize: 15},
     botofim4_text: {
       marginStart: 10,
       fontSize: 15,
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
       color: 'black',
     },
   });
@@ -188,17 +189,18 @@ if (mobile_360_750) {
       color: Globals.COLORS.blue_dark,
       width: '100%',
       textAlign: 'center',
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
     },
     loginButtonLabel: {
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
       fontSize: 23,
     },
     navButtonText: {
+      fontFamily: 'Lato-Regular',
       fontSize: 16,
     },
     boldText_touchable: {
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
       color: Globals.COLORS.white,
       fontSize: 18,
     },
@@ -206,7 +208,7 @@ if (mobile_360_750) {
       color: Globals.COLORS.secondary,
       fontSize: 16,
       marginVertical: 16,
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
     },
     simple_text: {
       textAlign: 'center',
@@ -216,6 +218,13 @@ if (mobile_360_750) {
       height: 150,
       width: 150,
       marginBottom: 30,
+    },
+    Image_flag: {
+      height: 40,
+      width: 50,
+      position: 'absolute',
+      top: 79,
+      left: 230,
     },
     center_container: {
       display: 'flex',
@@ -277,7 +286,7 @@ if (mobile_360_750) {
     },
     wrong_login_found_text: {
       color: Globals.COLORS.red,
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
       fontSize: 14,
       justifyContent: 'center',
       alignItems: 'center',
@@ -311,13 +320,14 @@ if (mobile_360_750) {
       elevation: 10,
     },
     title_text: {
+      fontFamily: 'Lato-Regular',
       fontSize: 20,
       color: 'white',
       marginBottom: 8,
       textAlign: 'left',
-      fontFamily: 'Ubuntu',
     },
     description_text: {
+      fontFamily: 'Lato-Regular',
       fontSize: 16,
       color: 'white',
       paddingTop: 10,
@@ -334,13 +344,14 @@ if (mobile_360_750) {
       alignItems: 'center',
     },
     top_prop_text_bold: {
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
       fontSize: 10,
       color: 'white',
       marginStart: 4,
     },
     top_prop_text_tiny: {
       fontWeight: 'normal',
+      fontFamily: 'Lato-Regular',
       fontSize: 10,
       color: 'white',
     },
@@ -373,10 +384,14 @@ if (mobile_360_750) {
     },
     price_text: {
       color: 'black',
+      fontFamily: 'Lato-Regular',
       fontSize: 25,
-      fontFamily: 'Neogrotesk',
     },
-    to_come: {color: 'white', fontSize: 25, fontWeight: 'bold'},
+    to_come: {
+      color: 'white',
+      fontSize: 25,
+      fontFamily: 'Lato-Bold',
+    },
     checkout_button: {
       justifyContent: 'center',
       alignItems: 'center',
@@ -384,10 +399,9 @@ if (mobile_360_750) {
       borderRadius: 5,
       elevation: 10,
       height: 45,
-      fontFamily: 'Neogrotesk',
     },
     chectout_text: {
-      fontFamily: 'Neogrotesk',
+      fontFamily: 'Lato-Regular',
       fontSize: 16,
       color: Globals.COLORS.white,
     },
@@ -408,9 +422,9 @@ if (mobile_360_750) {
       width: '100%',
     },
     add_to_text: {
+      fontFamily: 'Lato-Regular',
       fontSize: 17,
       color: Globals.COLORS.primary,
-      fontFamily: 'Neogrotesk',
     },
     unity_view: {
       flexDirection: 'row',
@@ -420,10 +434,10 @@ if (mobile_360_750) {
       padding: 5,
     },
     unity_view_text: {
+      fontFamily: 'Lato-Regular',
       fontSize: 13,
       marginHorizontal: 10,
       color: Globals.COLORS.arsenic,
-      fontFamily: 'Helvetica',
     },
     includes_container: {
       flexDirection: 'column',
@@ -445,6 +459,7 @@ if (mobile_360_750) {
     },
     seemore_text: {
       color: Globals.COLORS.primary_pure,
+      fontFamily: 'Lato-Regular',
       fontSize: 18,
       margin: 10,
     },
@@ -472,6 +487,7 @@ if (mobile_360_750) {
       justifyContent: 'space-between',
     },
     star_average: {
+      fontFamily: 'Lato-Regular',
       fontSize: 50,
       color: 'black',
     },
@@ -479,7 +495,7 @@ if (mobile_360_750) {
       flexDirection: 'row',
       alignItems: 'center',
     },
-    notes: {fontSize: 17, fontFamily: 'Neogrotesk'},
+    notes: {fontFamily: 'Lato-Regular', fontSize: 17},
     star_container_right: {
       flexDirection: 'column',
       alignItems: 'center',
@@ -488,9 +504,10 @@ if (mobile_360_750) {
       marginEnd: '30%',
     },
     head_title: {
+      fontFamily: 'Lato-Regular',
       fontSize: 18,
       color: Globals.COLORS.black,
-      fontFamily: 'Ubuntu',
+
       marginVertical: 8,
     },
     comments_container: {
@@ -499,17 +516,17 @@ if (mobile_360_750) {
     },
     comment_author: {
       color: Globals.COLORS.arsenic,
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
       fontSize: 17,
-      fontFamily: 'Neogrotesk',
     },
     comment_date: {
+      fontFamily: 'Lato-Regular',
       fontSize: 12,
     },
     comment_content: {
+      fontFamily: 'Lato-Regular',
       fontSize: 16,
       color: Globals.COLORS.arsenic2,
-      fontFamily: 'Helvetica',
     },
     loading_container: {
       position: 'absolute',
@@ -521,20 +538,20 @@ if (mobile_360_750) {
     },
 
     author_text: {
+      fontFamily: 'Lato-Regular',
       fontSize: 17,
       color: 'black',
-      fontFamily: 'Neogrotesk',
     },
     author_value_prop: {
+      fontFamily: 'Lato-Regular',
       fontSize: 14,
       color: Globals.COLORS.secondary,
       flexWrap: 'wrap',
-      fontFamily: 'Neogrotesk',
     },
     author_prop: {
+      fontFamily: 'Lato-Regular',
       fontSize: 15,
       color: '#3c434d',
-      fontFamily: 'Helvetica',
     },
     author_cont_top: {
       flexDirection: 'column',
@@ -566,18 +583,21 @@ if (mobile_360_750) {
       height: 240,
     },
     head_title: {
+      fontFamily: 'Lato-Regular',
       fontSize: 15,
-      color: Globals.COLORS.brown,
+      color: Globals.COLORS.black,
       marginTop: 30,
       textAlign: 'center',
     },
     empty_container: {
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
       height: '100%',
       width: '100%',
       backgroundColor: Globals.COLORS.white,
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     CategorieList: {
       width: '100%',
@@ -589,7 +609,7 @@ if (mobile_360_750) {
     },
 
     likes_text: {
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
       color: Globals.COLORS.arsenic2,
       fontSize: 20,
       width: '100%',
@@ -600,76 +620,6 @@ if (mobile_360_750) {
     head_title_container: {
       padding: 10,
       marginVertical: 5,
-    },
-  });
-  tyleSearch = StyleSheet.create({
-    main_container: {
-      flex: 1,
-      backgroundColor: Globals.COLORS.white,
-      paddingBottom: 48,
-      paddingTop: 8,
-    },
-    scroll_main: {
-      marginTop: 4,
-      padding: 10,
-    },
-    searchBar: {
-      elevation: 4,
-      flexDirection: 'row',
-      alignItems: 'center',
-      height: 50,
-      borderRadius: 4,
-    },
-    search_container: {
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      paddingStart: 10,
-    },
-    input_container: {
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-    },
-    retry_text: {
-      backgroundColor: Globals.COLORS.primary,
-      borderRadius: 7,
-      color: 'white',
-      padding: 8,
-      fontWeight: 'bold',
-      margin: 8,
-    },
-    head_title: {
-      fontSize: 20,
-      color: Globals.COLORS.primary_pure,
-      fontWeight: 'bold',
-    },
-    err_cont: {
-      flex: 1,
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: Globals.COLORS.white,
-    },
-    item_heberger: {
-      backgroundColor: Globals.COLORS.white,
-      borderRadius: 10,
-      elevation: 4,
-      width: '98%',
-    },
-    item_container: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      flexWrap: 'nowrap',
-      marginVertical: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: Globals.COLORS.co_gris,
-      padding: 5,
-    },
-    item_value: {
-      fontSize: 13,
-      fontWeight: 'normal',
-      color: Globals.COLORS.blue_grey,
-      fontFamily: 'Ubuntu',
-      paddingStart: 4,
     },
   });
   tyleDisplayCategorie = StyleSheet.create({
@@ -702,16 +652,16 @@ if (mobile_360_750) {
       borderRadius: 30,
     },
     title_text: {
+      fontFamily: 'Lato-Regular',
       fontSize: 11,
       color: '#535e72ff',
       textAlign: 'center',
-      fontFamily: 'Neogrotesk',
     },
     title_text_vert: {
+      fontFamily: 'Lato-Regular',
       fontSize: 15,
       color: '#535e72ff',
       textAlign: 'center',
-      fontFamily: 'Neogrotesk',
       margin: 8,
     },
   });
@@ -735,7 +685,7 @@ if (mobile_360_750) {
       borderWidth: 1,
       color: Globals.COLORS.primary,
       padding: 8,
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
       margin: 8,
     },
   });
@@ -743,44 +693,121 @@ if (mobile_360_750) {
     main_ripple: {
       flexDirection: 'row',
       elevation: 2,
-      width: '100%',
+      width: '90%',
       padding: 10,
-      marginVertical: 1,
+      marginBottom: 10,
     },
-    image: {
-      height: 60,
-      width: 60,
-      marginEnd: 4,
-      backgroundColor: Globals.COLORS.grey,
-    },
+
     main_container: {
       display: 'flex',
       flexDirection: 'column',
       paddingEnd: 70,
     },
+    title_container: {
+      display: 'flex',
+      alignItems: 'flex-start',
+      flexDirection: 'column',
+      paddingTop: 10,
+    },
+    notification_title: {
+      fontFamily: 'Lato-Bold',
+      fontSize: 20,
+      color: Globals.COLORS.arsenic2,
+    },
+    notif_infotag: {
+      fontFamily: 'Lato-Bold',
+      marginTop: 2,
+      color: Globals.COLORS.arsenic2,
+      fontWeight: '700',
+    },
+    def_avatar: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 50,
+      height: 50,
+      width: 50,
+      marginRight: 15,
+    },
+    notification_description: {
+      fontSize: 17,
+      fontFamily: 'Lato-Recular',
+      color: Globals.COLORS.arsenic,
+      fontWeight: '600',
+      lineHeight: 25,
+    },
+    desciption_container: {
+      justifyContent: 'flex-start',
+    },
+    notif_meta_container: {
+      display: 'flex',
+      flexDirection: 'row',
+      marginVertical: 10,
+      alignItems: 'center',
+    },
+  });
+  tyleAnimatorsItem = StyleSheet.create({
+    main_ripple: {
+      flexDirection: 'row',
+      elevation: 2,
+      width: '100%',
+      padding: 10,
+      marginVertical: 1,
+      borderStartColor: Globals.COLORS.primary,
+      borderStartWidth: 4,
+    },
 
+    main_container: {
+      display: 'flex',
+      flexDirection: 'column',
+      paddingEnd: 70,
+    },
     title_container: {
       display: 'flex',
       alignItems: 'flex-start',
       flexDirection: 'column',
     },
     notification_title: {
-      fontSize: 15,
-      fontFamily: 'Neogrotesk',
-      maxWidth: '85%',
+      fontFamily: 'Lato-Bold',
+      fontSize: 20,
+      color: Globals.COLORS.arsenic2,
+    },
+    notif_infotag: {
+      fontFamily: 'Lato-Bold',
+      marginTop: 2,
+      color: Globals.COLORS.arsenic2,
+      fontWeight: '700',
+    },
+    def_avatar: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 40,
+      height: 40,
+      width: 40,
+      backgroundColor: Globals.COLORS.primary,
+      marginRight: 20,
     },
     notification_description: {
-      fontSize: 16,
-      fontFamily: 'Helvetica',
-      color: Globals.COLORS.blue_grey,
+      fontSize: 17,
+      fontFamily: 'Lato-Bold',
+      color: Globals.COLORS.arsenic,
+      fontWeight: '600',
+      lineHeight: 25,
     },
     desciption_container: {
       justifyContent: 'flex-start',
     },
+    notif_meta_container: {
+      display: 'flex',
+      flexDirection: 'row',
+      marginVertical: 10,
+      alignItems: 'center',
+    },
   });
   tyletoollength = StyleSheet.create({
     learnig_display_text: {
-      fontFamily: 'Ubuntu',
+      fontFamily: 'Lato-Regular',
       fontSize: 20,
     },
   });
@@ -814,6 +841,7 @@ if (mobile_360_750) {
       flexDirection: 'row',
     },
     prop_unity_value: {
+      fontFamily: 'Lato-Regular',
       fontSize: 14,
       marginTop: 10,
       paddingStart: 10,
@@ -831,6 +859,8 @@ if (mobile_360_750) {
     description: {
       paddingVertical: 10,
       color: '#707375',
+      fontFamily: 'Lato-Regular',
+      lineHeight: 21,
     },
   });
   tyleAccount = StyleSheet.create({
@@ -850,7 +880,7 @@ if (mobile_360_750) {
       width: 130,
     },
     name_title: {
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
       fontSize: 16,
       color: 'black',
       margin: 8,
@@ -865,7 +895,7 @@ if (mobile_360_750) {
       backgroundColor: Globals.COLORS.primary,
     },
     menu_title: {
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
       fontSize: 15,
       color: Globals.COLORS.grey,
       margin: 8,
@@ -879,10 +909,12 @@ if (mobile_360_750) {
       borderRadius: 20,
     },
     item_title: {
+      fontFamily: 'Lato-Regular',
       fontSize: 18,
       color: Globals.COLORS.arsenic,
     },
     item_value: {
+      fontFamily: 'Lato-Regular',
       fontSize: 13,
       color: Globals.COLORS.blue_grey,
     },
@@ -898,7 +930,7 @@ if (mobile_360_750) {
       alignSelf: 'center',
     },
     boldText_touchable: {
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
       color: Globals.COLORS.white,
       fontSize: 18,
     },
@@ -923,6 +955,7 @@ if (mobile_360_750) {
     },
     text_main: {
       color: Globals.COLORS.arsenic,
+      fontFamily: 'Lato-Regular',
       fontSize: 14,
       margin: 8,
     },
@@ -930,13 +963,13 @@ if (mobile_360_750) {
       color: Globals.COLORS.black,
       fontSize: 16,
       padding: 8,
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
     },
     prop_unity_value: {
       textAlign: 'left',
       paddingStart: 10,
+      fontFamily: 'Lato-Bold',
       fontSize: 50,
-      fontWeight: 'bold',
       paddingTop: 0,
       marginTop: -10,
     },
@@ -949,31 +982,32 @@ if (mobile_360_750) {
     note_title: {
       color: Globals.COLORS.arsenic,
       marginStart: 5,
-      fontWeight: 'bold',
+      fontFamily: 'Lato-Bold',
     },
     note_content: {
       color: Globals.COLORS.arsenic,
       marginStart: 5,
-      fontFamily: 'Helvetica',
     },
     note_date: {
       color: Globals.COLORS.arsenic,
       marginStart: 5,
       width: '100%',
       textAlign: 'right',
+      fontFamily: 'Lato-Regular',
       fontSize: 10,
     },
   });
   tyleAccordian = StyleSheet.create({
     title: {
+      fontFamily: 'Lato-Regular',
       fontSize: 16,
       maxWidth: '40%',
       color: Globals.COLORS.arsenic,
-      fontFamily: 'Neogrotesk',
     },
     des_title: {
       color: '#878787',
       marginHorizontal: 2,
+      fontFamily: 'Lato-Regular',
       fontSize: 16,
     },
     row: {
@@ -1004,9 +1038,9 @@ if (mobile_360_750) {
     },
     index_text: {
       color: 'black',
+      fontFamily: 'Lato-Regular',
       fontSize: 15,
       margin: 20,
-      fontFamily: 'Ubuntu',
     },
     right_toucha: {
       display: 'flex',
@@ -1019,11 +1053,13 @@ if (mobile_360_750) {
       justifyContent: 'center',
     },
     title_lesson: {
+      fontFamily: 'Lato-Regular',
       fontSize: 15,
       color: Globals.COLORS.blue_dark,
       fontWeight: '600',
     },
     sub_title: {
+      fontFamily: 'Lato-Regular',
       fontSize: 13,
       marginTop: 2,
       color: Globals.COLORS.arsenic2,
@@ -1053,9 +1089,9 @@ export const styleFicheForm = tyleFicheForm,
   styleNoInternet = tyleNoInternet,
   styleMyCoursesScreen = tyleMyCoursesScreen,
   styleCourseOverView = tyleCourseOverView,
-  styleSearch = tyleSearch,
   styleAccount = tyleAccount,
   styleNotificationItem = tyleNotificationItem,
+  styleAnimatorsItem = tyleAnimatorsItem,
   styleAccordian = tyleAccordian,
   styletoollength = tyletoollength,
   styleControlBoard = tyleControlBoard;
