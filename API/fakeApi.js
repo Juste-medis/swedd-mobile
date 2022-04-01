@@ -36,6 +36,18 @@ let Fetcher = {
     });
     return await result;
   },
+  PostFiche: async function (setdada) {
+    //{departement:{id,label},commune:{id,label},arrondissement:{??..},nom_fille:{..},sexe,:{..}.....}
+    //=>{error,success}
+    const result = await new Promise(resolve => {
+      setTimeout(() => {
+        resolve({
+          success: 'Fiche Envoyée.',
+        });
+      }, 3000);
+    });
+    return await result;
+  },
   GetMessages: async function (setdada) {
     //{type (notification ou message) } / {error}
     //=> {error,messages}
@@ -77,6 +89,20 @@ let Fetcher = {
    */
   GetCollecteurs: async function (data, cache) {
     //=> {error,collecteurs}
+    return await resolveresponse({
+      collecteurs: Array.apply(null, Array(30)).map(function (x, i) {
+        return {
+          id: i + 1,
+          new: 1,
+          name: collecteurs[generateRandom(collecteurs.length)],
+          description: descriptions[generateRandom(descriptions.length)],
+          urlPhoto: 'https://picsum.photos/200',
+        };
+      }),
+    });
+  },
+  GetBeneficiaires: async function (data, cache) {
+    //=> {error,beneficiaires}
     return await resolveresponse({
       collecteurs: Array.apply(null, Array(30)).map(function (x, i) {
         return {
@@ -136,37 +162,10 @@ let Fetcher = {
               title: Fiches[radi].title,
             };
           }),
-          collecteurs: Array.apply(null, Array(50)).map(function (x, i) {
-            return {
-              id: i + 1,
-              name: collecteurs[generateRandom(collecteurs.length)],
-              description: descriptions[generateRandom(descriptions.length)],
-              urlPhoto: 'https://picsum.photos/200',
-            };
-          }),
-          beneficiaires: Array.apply(null, Array(66)).map(function (x, i) {
-            return {
-              id: i + 1,
-              name: collecteurs[generateRandom(collecteurs.length)],
-              description: descriptions[generateRandom(descriptions.length)],
-              urlPhoto: 'https://picsum.photos/200',
-            };
-          }),
-          formations: Array.apply(null, Array(25)).map(function (x, i) {
-            const radi = generateRandom(Fiches.length);
-            return {
-              id: i + 1,
-              name: Fiches[radi].title,
-              description: descriptions[generateRandom(descriptions.length)],
-            };
-          }),
-          kits: Array.apply(null, Array(19)).map(function (x, i) {
-            return {
-              id: i + 1,
-              name: kits[generateRandom(kits.length)],
-              description: descriptions[generateRandom(descriptions.length)],
-            };
-          }),
+          collecteurs: 50,
+          beneficiaires: 66,
+          formations: 25,
+          kits: 19,
           notifications: Array.apply(null, Array(15)).map(function (x, i) {
             return {
               id: i + 1,

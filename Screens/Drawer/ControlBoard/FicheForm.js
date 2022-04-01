@@ -8,11 +8,13 @@ import Swiper from 'react-native-swiper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Toast from 'react-native-toast-message';
 import LoadingDot from '../../../components/Gadgets/Loading';
+import Fetcher from '../../../API/fakeApi';
 
 let mainForm = [];
 function FicheForm(route) {
   let {set, values} = route.route.params;
   const [componentloading, setcomponentloading] = React.useState(false);
+  const [submiting, setsubmiting] = React.useState('progress');
   const [dependencies, setdependencies] = React.useState({});
   let refs = [],
     mySwipper;
@@ -56,10 +58,12 @@ function FicheForm(route) {
     }
   }
   function getFormResponses(responses) {
-    let allrep = {};
+    let allrep = {},
+      go = true;
     for (let fi = 0; fi < refs.length; fi++) {
       const responsesi = refs[fi]._getFormResponses();
       if (responsesi === false) {
+        go = false;
         Toast.show({
           type: 'error',
           text1: Globals.STRINGS.empty_field,
@@ -68,7 +72,38 @@ function FicheForm(route) {
       }
       Object.assign(allrep, responsesi);
     }
-    toast_message(JSON.stringify(allrep), 50000);
+    if (go) {
+      setsubmiting('submiting');
+      Fetcher.PostFiche(JSON.stringify(allrep))
+        .then(res => {
+          if (res.error) {
+            Toast.show({
+              type: 'error',
+              text1: res.error,
+            });
+            setsubmiting('progress');
+          } else {
+            Toast.show({
+              type: 'success',
+              text1: 'Bienvenu',
+              text2: res.success,
+            });
+            setsubmiting('submited');
+            /*todo
+          Storer.storeData('@ProfilInfo', {...res, username, password}).then(
+            () => {
+              Storer.storeData('@USER_TYPE', 1).then(() => {
+                RNReastart.Restart();
+              });
+            },
+          );
+*/
+          }
+        })
+        .catch(err => {
+          toast_message(err, 50000);
+        });
+    }
   }
   return (
     <View style={{flex: 1}}>
@@ -121,12 +156,13 @@ function FicheForm(route) {
               style={styles.slide}
               form={mes}
               submitButton={
-                i === mainForm.length - 1
+                i === mainForm.length - 1 && submiting !== 'submited'
                   ? {
                       action: responses => {
                         getFormResponses(responses);
                       },
                       label: 'Soumettre',
+                      disabled: submiting === 'submiting',
                       buttonStyle: {
                         backgroundColor: Globals.COLORS.primary,
                         height: 40,
@@ -138,7 +174,6 @@ function FicheForm(route) {
                         fontSize: 18,
                         color: 'white',
                       },
-                      disabled: false,
                     }
                   : null
               }

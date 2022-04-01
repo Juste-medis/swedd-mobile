@@ -830,16 +830,16 @@ if (mobile_360_750) {
       borderRadius: 10,
     },
     main_menu_indider: {
-      marginTop: 20,
+      marginBottom: 20,
       width: '100%',
-      borderRadius: 20,
+      borderRadius: 70,
       backgroundColor: 'white',
       elevation: 20,
     },
     menu_item: {
       width: '100%',
       flexDirection: 'column',
-      borderRadius: 15,
+      borderRadius: 8,
       paddingHorizontal: 20,
     },
     main_menu_top: {

@@ -119,7 +119,6 @@ function ControlBoard(route) {
       },
     },
   ];
-
   const menu_main = data => {
     return (
       <View style={{width: '100%'}}>

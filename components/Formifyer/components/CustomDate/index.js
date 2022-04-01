@@ -58,7 +58,11 @@ export default class CustomDate extends Component {
 
     return (
       <View>
-        <LabelError label={label} error={error} />
+        <LabelError
+          placeholder={this.props.placeholder}
+          label={label}
+          error={error}
+        />
         <RnDatePicker
           {...moreOptions}
           locale="fr-FR"

@@ -1,12 +1,17 @@
 import React from 'react';
-import {TouchableOpacity, Text} from 'react-native';
-import PropTypes from 'prop-types';
+import {Button} from 'react-native-elements';
 
 import styles from './styles';
 
-const Button = ({label, onPress, buttonStyle, buttonTextStyle, disabled}) => (
-  <TouchableOpacity
-    style={[
+const ButtonValidate = ({
+  label,
+  onPress,
+  buttonStyle,
+  buttonTextStyle,
+  disabled,
+}) => (
+  <Button
+    buttonStyle={[
       styles.buttonContainer,
       buttonStyle,
       {
@@ -14,24 +19,18 @@ const Button = ({label, onPress, buttonStyle, buttonTextStyle, disabled}) => (
       },
     ]}
     onPress={onPress}
-    disabled={disabled}>
-    <Text style={[styles.buttonLabel, buttonTextStyle]}>{label}</Text>
-  </TouchableOpacity>
+    loading={disabled}
+    disabled={disabled}
+    title="Soumettre"
+  />
 );
-
-Button.propTypes = {
-  label: PropTypes.string.isRequired,
-  onPress: PropTypes.func,
-  buttonStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
-  buttonTextStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
-  disabled: PropTypes.bool,
-};
 
 Button.defaultProps = {
   onPress: () => {},
   buttonStyle: {},
   buttonTextStyle: {},
   disabled: false,
+  loading: false,
 };
 
-export default Button;
+export default ButtonValidate;

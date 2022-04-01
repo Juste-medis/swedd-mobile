@@ -110,7 +110,11 @@ function Account(route) {
                   item.onclick();
                 }}
                 key={index}>
-                <View style={[styles.menu_item, {alignItems: 'center'}]}>
+                <View
+                  style={[
+                    styles.menu_item,
+                    {alignItems: 'center', paddingVertical: 15},
+                  ]}>
                   <Icon
                     name={item.icon}
                     size={25}

@@ -38,8 +38,8 @@ function Personal(route) {
       key: 'prenom',
     },
     {
-      icon: 'phone',
-      title: 'adresse',
+      icon: 'phone-portrait',
+      title: 'Téléphone',
       value: profil.contact,
       key: 'phone',
     },

@@ -158,6 +158,9 @@ export default class DynamicForm extends Component {
   };
   validateInput = (value, element) => {
     let valid = true;
+    if (element.type === 'header') {
+      return true;
+    }
     if (element.type === 'checkbox-group' && element.required) {
       valid = value?.regular?.length > 0 || !!value?.other?.value;
     } else {

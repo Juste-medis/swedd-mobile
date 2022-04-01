@@ -359,7 +359,7 @@ export default Fiches = [
             type: 'date',
             label: 'Date',
             placeholder: 'Veuillez entrer la date de la collecte',
-            value: new Date().toISOString(),
+            value: '',
             dateFormat: 'DD-MM-YYYY',
             disabled: false,
           },

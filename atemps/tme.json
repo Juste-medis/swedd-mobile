@@ -1,0 +1,278 @@
+{
+    "Date_de_naissance_de_la_fillle": {
+        "dateFormat": "DD-MM-YYYY",
+        "disabled": false,
+        "key": "Date_de_naissance_de_la_fillle",
+        "label": "Date de naissance de la fillle",
+        "onchange": [Function anonymous
+        ],
+        "placeholder": "Veuillez entrer la date de naissance de la fille",
+        "required": true,
+        "type": "date",
+        "userAnswer": 2022-04-02T15: 19: 00.000Z,
+        "value": "2022-04-01T15:19:46.708Z"
+    },
+    "affilie_Contacts": {
+        "key": "affilie_Contacts",
+        "label": "Contacts",
+        "onchange": [Function anonymous
+        ],
+        "placeholder": "Veuillez entrer le/les contacts de la personne à contacter",
+        "required": true,
+        "type": "text",
+        "userAnswer": "Ddgfdgg"
+    },
+    "affilie_Prenoms_de_la_personne_contacter": {
+        "key": "affilie_Prenoms_de_la_personne_contacter",
+        "label": "Prénoms de la personne à contacter",
+        "maxlength": 30,
+        "onchange": [Function anonymous
+        ],
+        "placeholder": "Veuillez entrer le/les prénoms de la personne à contacter",
+        "required": true,
+        "type": "text",
+        "userAnswer": "Efgdgf"
+    },
+    "affilie_personne_contacter": {
+        "key": "affilie_personne_contacter",
+        "label": "Nom de la personne à contacter",
+        "maxlength": 30,
+        "onchange": [Function anonymous
+        ],
+        "placeholder": "Veuillez entrer le nom de la personne à contacter",
+        "required": true,
+        "type": "text",
+        "userAnswer": "Eredgf"
+    },
+    "animator_firstname": {
+        "key": "animator_firstname",
+        "label": "Prénoms de l'agent enrégistreur",
+        "maxlength": 30,
+        "onchange": [Function anonymous
+        ],
+        "placeholder": "Veillez entrer vos Prénoms",
+        "required": true,
+        "type": "text",
+        "userAnswer": "adido"
+    },
+    "animator_lastname": {
+        "key": "animator_lastname",
+        "label": "Nom de l'agent enrégistreur",
+        "maxlength": 30,
+        "onchange": [Function anonymous
+        ],
+        "placeholder": "veillez entrer votre nom",
+        "required": true,
+        "type": "text",
+        "userAnswer": "Poloiv"
+    },
+    "beneficiaire_Etablissement_Universit": {
+        "key": "beneficiaire_Etablissement_Universit",
+        "label": "Etablissement/Université",
+        "maxlength": 30,
+        "onchange": [Function anonymous
+        ],
+        "placeholder": "Veuillez entrer l'établissement/université de la fille",
+        "required": true,
+        "type": "text",
+        "userAnswer": "3rrthfgh"
+    },
+    "beneficiaire_Lieu_de_naissance": {
+        "key": "beneficiaire_Lieu_de_naissance",
+        "label": "Lieu de naissance",
+        "maxlength": 30,
+        "onchange": [Function anonymous
+        ],
+        "placeholder": "Veuillez entrer le lieu de naissance de la fille",
+        "required": true,
+        "type": "text",
+        "userAnswer": "Fjfhggfry"
+    },
+    "beneficiaire_N_Mll_EDUCMASTER": {
+        "key": "beneficiaire_N_Mll_EDUCMASTER",
+        "label": "N° Mll /EDUCMASTER",
+        "maxlength": 30,
+        "onchange": [Function anonymous
+        ],
+        "placeholder": "Veuillez entrer le numéro EDUCMASTER de la fille",
+        "required": true,
+        "subtype": "tel",
+        "type": "text",
+        "userAnswer": "52"
+    },
+    "beneficiaire_Niveau_d_tude_Classe": {
+        "key": "beneficiaire_Niveau_d_tude_Classe",
+        "label": "Niveau d'étude/Classe",
+        "maxlength": 30,
+        "onchange": [Function anonymous
+        ],
+        "placeholder": "Veuillez entrer le niveau d'étude ou la classe de la fille",
+        "required": true,
+        "type": "text",
+        "userAnswer": "Dffgghdh"
+    },
+    "beneficiaire_Nom_de_l_enfant_enregistr": {
+        "key": "beneficiaire_Nom_de_l_enfant_enregistr",
+        "label": "Nom de la fille",
+        "maxlength": 30,
+        "onchange": [Function anonymous
+        ],
+        "placeholder": "Veuillez entrer le nom de la fille",
+        "required": true,
+        "type": "text",
+        "userAnswer": "Hfrtyy"
+    },
+    "beneficiaire_Pr_noms_de_l_enfant_enregistr": {
+        "key": "beneficiaire_Pr_noms_de_l_enfant_enregistr",
+        "label": "Prénoms de la fille",
+        "maxlength": 30,
+        "onchange": [Function anonymous
+        ],
+        "placeholder": "Veuillez entrer le/les prénoms de la fille",
+        "required": true,
+        "type": "text",
+        "userAnswer": "Fgsdf"
+    },
+    "beneficiaire_Type_d_appui": {
+        "key": "beneficiaire_Type_d_appui",
+        "label": "Type d'appui",
+        "onchange": [Function anonymous
+        ],
+        "other": false,
+        "placeholder": "Veuillez choisir le type d'appui dont bénéficie la fille",
+        "required": true,
+        "type": "radio-group",
+        "userAnswer": "bourse",
+        "values": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ]
+    },
+    "beneficiaire_vulnerabilite": {
+        "key": "beneficiaire_vulnerabilite",
+        "label": "Critères de vulnérabilité",
+        "onchange": [Function anonymous
+        ],
+        "other": true,
+        "placeholder": "Veuillez choisir le critère de vulnérabilité de la fille",
+        "required": true,
+        "type": "checkbox-group",
+        "userAnswer": {
+            "regular": [Array
+            ]
+        },
+        "values": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ]
+    },
+    "commune": {
+        "dependencie": [
+            "departement",
+            "DEPARTEMENTS"
+        ],
+        "dependent": "arrondissement",
+        "key": "commune",
+        "label": "COMMUNES",
+        "multiple": false,
+        "onchange": [Function anonymous
+        ],
+        "searchInputPlaceholder": "Veuillez sélectionner la commune",
+        "type": "select",
+        "userAnswer": [
+            "28"
+        ],
+        "values": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ]
+    },
+    "departement": {
+        "dependent": "commune",
+        "key": "departement",
+        "label": "DEPARTEMENTS",
+        "multiple": false,
+        "onchange": [Function anonymous
+        ],
+        "searchInputPlaceholder": "Veuillez sélectionner le département",
+        "type": "select",
+        "userAnswer": [
+            "4"
+        ],
+        "values": [
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ],
+            [Object
+            ]
+        ]
+    },
+    "fiche_Date": {
+        "dateFormat": "DD-MM-YYYY",
+        "disabled": false,
+        "key": "fiche_Date",
+        "label": "Date",
+        "onchange": [Function anonymous
+        ],
+        "placeholder": "Veuillez entrer la date de la collecte",
+        "type": "date",
+        "userAnswer": 2022-04-05T15: 19: 00.000Z,
+        "value": "2022-04-01T15:19:46.707Z"
+    },
+    "village": {
+        "key": "village",
+        "label": "Village/Quartier/Maison",
+        "maxlength": 30,
+        "onchange": [Function anonymous
+        ],
+        "placeholder": "Veuillez entrer le village/quartier/maison de provenance de la fille",
+        "required": true,
+        "type": "text",
+        "userAnswer": "Dgyghh"
+    }
+}
