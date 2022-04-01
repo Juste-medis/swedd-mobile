@@ -7,32 +7,32 @@ import {
   Text,
   ScrollView,
   View,
+  ActivityIndicator,
 } from 'react-native';
-import AnimatorsItem from '../../../components/Worker/Lists/AnimatorsItem';
+import CollecteursItem from '../../../components/Worker/Lists/CollecteursItem';
 import Globals from '../../../Ressources/Globals';
 import Fetcher from '../../../API/fakeApi';
-import {styleAnimatorsItem as styles} from '../../../Ressources/Styles';
+import {styleCollecteursItem as styles} from '../../../Ressources/Styles';
 import Storer from '../../../API/storer';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {AddProfilItem} from '../../../Store/Actions';
-import {date_to_local_string, toast_message} from '../../../Helpers/Utils';
-import EmptyThing from '../../../components/Tools/EmptyThing';
-import LoadingDot from '../../../components/Tools/Loading';
+import {toast_message} from '../../../Helpers/Utils';
+import EmptyThing from '../../../components/Gadgets/EmptyThing';
+import LoadingDot from '../../../components/Gadgets/Loading';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {Image} from 'react-native-elements';
 
 let notides = {uri: '', text: 'toto'};
-function Animators(route) {
-  const [Animators, setAnimators] = React.useState(
-    Globals.PROFIL_INFO.animators,
-  );
+function Collectors(route) {
+  const [Collecteurs, setCollecteurs] = React.useState([]);
   const [spinner, setspinner] = React.useState(true);
   const [modalVisible, setmodalVisible] = React.useState(false);
+
   React.useEffect(() => {
     //console.log(route.navigation.getParent());
     //route.navigation.getParent().setOptions({title: 'Animateur'});
     //route.navigation.setParams({title: 'Animateur'});
-
     _onSubmmitClick();
     return () => {};
   }, []);
@@ -42,18 +42,17 @@ function Animators(route) {
     setmodalVisible(true);
   };
   function _onSubmmitClick() {
-    Storer.getData('@Animators')
+    Storer.getData('@Collecteurs')
       .then(data => {
         if (data) {
-          setAnimators(data);
+          setCollecteurs(data);
           setspinner(false);
         } else {
-          Fetcher.GetMessages('Animators')
+          Fetcher.GetCollecteurs()
             .then(res => {
-              if (res.messages) {
-                setAnimators(res.messages);
-                Storer.storeData('@Animators', res.messages);
-                route.AddProfilItem({key: 'Animators', data: 0});
+              if (res.collecteurs) {
+                setCollecteurs(res.collecteurs);
+                //Storer.storeData('@Collecteurs', res.collectors);
               }
               setspinner(false);
             })
@@ -90,29 +89,32 @@ function Animators(route) {
       ) : (
         <FlatList
           style={{flex: 1, backgroundColor: Globals.COLORS.white}}
-          data={Animators}
+          data={Collecteurs}
           ListEmptyComponent={
             <EmptyThing style={{marginTop: 50}} message="Aucun Animateur !" />
           }
           keyExtractor={item => `notitem${item.id}`}
           renderItem={({item}) => (
-            <AnimatorsItem inter_Animators={item} onclick={_show_content} />
+            <CollecteursItem inter_Collecteurs={item} onclick={_show_content} />
           )}
           onEndReachedThreshold={0.5}
           onEndReached={() => {}}
         />
       )}
       <Modal
-        style={{position: 'absolute', bottom: 0}}
+        style={{position: 'absolute', bottom: 0, paddingVertical: 40}}
         animationType="slide"
         transparent={false}
         visible={modalVisible}
         onRequestClose={() => {
           setmodalVisible(!modalVisible);
         }}>
-        <ScrollView style={{paddingTop: 40, paddingHorizontal: 20}}>
+        <ScrollView
+          style={{
+            paddingHorizontal: 20,
+          }}>
           <Icon
-            style={{marginBottom: 30}}
+            style={{marginBottom: 6, paddingTop: 40}}
             name="arrow-back"
             size={30}
             color="black"
@@ -121,16 +123,22 @@ function Animators(route) {
             }}
           />
           <View style={styles.notif_meta_container}>
-            <Text style={styles.Animators_title}>De: </Text>
-            <Text style={styles.notif_infotag}>{notides?.expediteur}</Text>
+            <Image
+              source={{
+                uri: notides?.urlPhoto,
+              }}
+              style={{
+                ...styles.def_avatar,
+                height: 200,
+                width: 200,
+                borderRadius: 10,
+              }}
+              PlaceholderContent={<ActivityIndicator />}
+              resizeMode="contain"
+            />
+            <Text style={styles.notif_infotag}>{notides?.name}</Text>
           </View>
-          <View style={{...styles.notif_meta_container, marginBottom: 50}}>
-            <Text style={styles.Animators_title}>Date: </Text>
-            <Text style={styles.notif_infotag}>
-              {date_to_local_string(notides?.date_envoi)}{' '}
-            </Text>
-          </View>
-          <Text style={styles.Animators_description}>
+          <Text style={styles.Collecteurs_description}>
             {notides?.description}
           </Text>
         </ScrollView>
@@ -144,4 +152,4 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch =>
   bindActionCreators({AddProfilItem}, dispatch);
-export default connect(mapStateToProps, mapDispatchToProps)(Animators);
+export default connect(mapStateToProps, mapDispatchToProps)(Collectors);

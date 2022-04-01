@@ -40,15 +40,15 @@ export default function ForgetPass({navigation}) {
       )
         .then(res => {
           setspinner(false);
-          if (res.message) {
-            set_wrong_text(res.message);
-            setspinner(false);
-          } else {
+          if (!res.error) {
             Globals.PROFIL_INFO = res;
             Toast.show({
               type: 'success',
               text1: res.success_message || Globals.STRINGS.Ocurred_error,
             });
+          } else {
+            set_wrong_text(res.error);
+            setspinner(false);
           }
         })
         .catch(err => {

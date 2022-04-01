@@ -28,26 +28,20 @@ function Personal(route) {
     {
       icon: 'person-circle',
       title: Globals.STRINGS.firstname,
-      value: profil.last_name,
-      key: 'last_name',
+      value: profil.nom,
+      key: 'nom',
     },
     {
       icon: 'person-circle-outline',
       title: Globals.STRINGS.lastname,
-      value: profil.first_name,
-      key: 'first_name',
+      value: profil.prenom,
+      key: 'prenom',
     },
     {
-      icon: 'at-circle',
-      title: Globals.STRINGS.mail,
-      value: profil.mail,
-      key: 'mail',
-    },
-    {
-      icon: 'location',
+      icon: 'phone',
       title: 'adresse',
-      value: profil.address,
-      key: 'address',
+      value: profil.contact,
+      key: 'phone',
     },
     {
       icon: 'md-alert-circle',
@@ -63,14 +57,15 @@ function Personal(route) {
       setspinner(true);
       Fetcher.UpdateData(UriEncoder(modifying))
         .then(res => {
-          if (res.message) {
-            toast_message(res.message);
-          } else {
+          if (!res.error) {
             toast_message(Globals.STRINGS.sucess_Update);
             route.setProfil(modifying);
             //todo web developp un endpoint pour obtenir toutes les information (current modified)
             //Storer.StoreProfil();
             setspinner(false);
+            toast_message(res.success);
+          } else {
+            toast_message(res.error);
           }
         })
         .catch(err => {

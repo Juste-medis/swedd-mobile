@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
 import PropTypes from 'prop-types';
-import DatePicker from 'react-native-datepicker';
+import RnDatePicker from 'react-native-date-picker';
 
 import LabelError from '../LabelError';
 
@@ -50,18 +50,20 @@ export default class CustomDate extends Component {
     } = this.props;
     const moreOptions = {};
     if (minDate) {
-      moreOptions.minDate = minDate;
+      moreOptions.minimumDate = new Date(minDate);
     }
     if (maxDate) {
-      moreOptions.maxDate = maxDate;
+      moreOptions.maximumDate = new Date(maxDate);
     }
+
     return (
       <View>
         <LabelError label={label} error={error} />
-        <DatePicker
+        <RnDatePicker
           {...moreOptions}
+          locale="fr-FR"
           style={styles.dateContainer}
-          date={value}
+          date={new Date(value)}
           mode="date"
           placeholder={placeholder}
           format={dateFormat}

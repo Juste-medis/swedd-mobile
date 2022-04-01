@@ -4,6 +4,7 @@ import {styleAccount as styles} from '../../../Ressources/Styles';
 import {styleControlBoard as stylesc} from '../../../Ressources/Styles';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Fiches from '../../../Ressources/Data/Fiches';
+import TextW from '../../../components/Gadgets/TextW';
 
 function FichesTemplates(route) {
   const [spinner, setspinner] = React.useState(false);
@@ -53,7 +54,11 @@ function FichesTemplates(route) {
                     }}>
                     {item.title}
                   </Text>
-                  <Text style={stylesc.description}>{item.description}</Text>
+                  <TextW
+                    style={stylesc.description}
+                    text={item.description}
+                    size={100}
+                  />
                 </View>
               </TouchableOpacity>
             </View>

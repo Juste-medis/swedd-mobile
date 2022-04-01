@@ -7,7 +7,7 @@ import Globals from '../../../Ressources/Globals';
 import Swiper from 'react-native-swiper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Toast from 'react-native-toast-message';
-import LoadingDot from '../../../components/Tools/Loading';
+import LoadingDot from '../../../components/Gadgets/Loading';
 
 let mainForm = [];
 function FicheForm(route) {

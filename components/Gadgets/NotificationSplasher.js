@@ -1,35 +1,26 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {connect} from 'react-redux';
 import Globals from '../../Ressources/Globals';
 
-function pannier(route) {
+function NotificationSplasher(route) {
   if (Globals.USER_TYPE) {
-    let pub = route.my_profil.account.cart.length;
+    let pub = route.my_profil.account.notifications.length;
     return (
       <TouchableOpacity
+        activeOpacity={0.9}
         style={styles.main_container}
-        style={route.style}
         onPress={() => {
-          route.navigation.navigate('MyPannier');
+          route.navigation.navigate('Notification');
         }}>
         <Icon
           style={styles.icon}
-          name={'basket'}
-          size={27}
+          name="ios-notifications-sharp"
+          size={40}
           color={Globals.COLORS.primary}
         />
-        <Text
-          style={[
-            styles.price,
-            {
-              color: route.color ? route.color : 'black',
-              right: pub < 10 ? '35%' : '24%',
-            },
-          ]}>
-          {pub < 10 ? pub : '9+'}
-        </Text>
+        <Text style={styles.price}>{pub < 10 ? pub : '9+'}</Text>
       </TouchableOpacity>
     );
   } else {
@@ -41,18 +32,24 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    marginRight: 15,
+    position: 'relative',
   },
   icon: {
     alignSelf: 'center',
   },
   price: {
     fontFamily: 'Lato-Bold',
-    color: 'black',
+    color: Globals.COLORS.white,
     position: 'absolute',
-    fontFamily: 'Lato-Regular',
     fontSize: 10,
     alignSelf: 'center',
-    top: '25%',
+    top: '10%',
+    right: -4,
+    backgroundColor: Globals.COLORS.red,
+    borderRadius: 20,
+    padding: 5,
+    elevation: 10,
   },
 });
 
@@ -61,4 +58,4 @@ const mapStateToProps = state => {
   return {my_profil};
 };
 
-export default connect(mapStateToProps)(pannier);
+export default connect(mapStateToProps)(NotificationSplasher);

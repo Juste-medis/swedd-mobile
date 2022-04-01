@@ -1,58 +1,17 @@
 import {generateRandom, randomDate} from '../Helpers/Utils';
 import Fiches from '../Ressources/Data/Fiches';
-import {animators, descriptions, kits} from '../Ressources/Data/properties';
+import {collecteurs, descriptions, kits} from '../Ressources/Data/properties';
 import Neter from '../Ressources/Neter';
 const baseUrl = Neter.uri1;
 
+async function resolveresponse(obj) {
+  return await new Promise(resolve => {
+    setTimeout(() => {
+      resolve(obj);
+    }, 3000);
+  });
+}
 let Fetcher = {
-  GetSection: async function (setdada) {
-    const result = await new Promise(resolve => {
-      setTimeout(() => {
-        resolve({
-          trancriptarr: [
-            'Il s’est agrippé à moi.',
-            "Je m'assied sur un dabouret",
-            'regarde cet homme devant toi',
-            'Tourne à gauche',
-            'respecte tes aînés',
-            "L'homme travail dur pour gagner son pain",
-            'Tourne à droite',
-          ],
-          language: 'Fongbe',
-        });
-      }, 3000);
-    });
-    return await result;
-  },
-  GetMessages: async function (setdada) {
-    const result = await new Promise(resolve => {
-      setTimeout(() => {
-        resolve({
-          trancriptarr: [
-            'Il s’est agrippé à moi.',
-            "Je m'assied sur un dabouret",
-            'regarde cet homme devant toi',
-            'Tourne à gauche',
-            'respecte tes aînés',
-            "L'homme travail dur pour gagner son pain",
-            'Tourne à droite',
-          ],
-          language: 'Fongbe',
-        });
-      }, 3000);
-    });
-    return await result;
-  },
-  GetUnityMessage: async function (setdada) {
-    const result = await new Promise(resolve => {
-      setTimeout(() => {
-        resolve({
-          description: 'Il s’est agrippé à moi.',
-        });
-      }, 3000);
-    });
-    return await result;
-  },
   RessetPassword: async function (setdada) {
     const result = await new Promise(resolve => {
       setTimeout(() => {
@@ -64,16 +23,87 @@ let Fetcher = {
     });
     return await result;
   },
+  ChangePassPassu: async function (setdada) {
+    //{new_pass,password_conf,password}
+    //=>{error,success}
+    const result = await new Promise(resolve => {
+      setTimeout(() => {
+        resolve({
+          success:
+            'Si vous avez saisit la bonne adresse mail, des instructions vous sont envoyées dans votre boîte Mail.',
+        });
+      }, 3000);
+    });
+    return await result;
+  },
+  GetMessages: async function (setdada) {
+    //{type (notification ou message) } / {error}
+    //=> {error,messages}
+    const result = await new Promise(resolve => {
+      setTimeout(() => {
+        resolve({
+          success:
+            'Si vous avez saisit la bonne adresse mail, des instructions vous sont envoyées dans votre boîte Mail.',
+        });
+      }, 3000);
+    });
+    return await result;
+  },
+
+  /**
+ GetCollecteurs: async function (data, cache) {
+    //=> {error,collecteurs}
+    let result = {};
+    if (cache) {
+      let cachedData = await Storer.getData('@Collecteurs');
+      if (cachedData) {
+        result = cachedData;
+      }
+    } else {
+      result = await resolveresponse({
+        collecteurs: Array.apply(null, Array(30)).map(function (x, i) {
+          return {
+            id: i + 1,
+            new: 1,
+            name: collecteurs[generateRandom(collecteurs.length)],
+            description: descriptions[generateRandom(descriptions.length)],
+            urlPhoto: 'https://picsum.photos/200',
+          };
+        }),
+      });
+    }
+    return result;
+  },
+   */
+  GetCollecteurs: async function (data, cache) {
+    //=> {error,collecteurs}
+    return await resolveresponse({
+      collecteurs: Array.apply(null, Array(30)).map(function (x, i) {
+        return {
+          id: i + 1,
+          new: 1,
+          name: collecteurs[generateRandom(collecteurs.length)],
+          description: descriptions[generateRandom(descriptions.length)],
+          urlPhoto: 'https://picsum.photos/200',
+        };
+      }),
+    });
+  },
   AuthSignin: async function (setdada) {
     const result = await new Promise(resolve => {
       setdada = JSON.parse(setdada);
       setTimeout(() => {
         resolve({
+          username: setdada.username,
           user_type: setdada.user_type,
           mail: setdada.mail,
-          first_name: 'Mathildda',
-          last_name: 'Martica',
-          address: 'Abomey Calavi',
+          roles: [],
+          id: 2,
+          prenom: 'Mathildda',
+          nom: 'Martica',
+          contact: '94632954',
+          urlPhoto: 'https://picsum.photos/200',
+          adminId: 50,
           filled_fiche: Array.apply(null, Array(50)).map(function (x, i) {
             const radi = generateRandom(Fiches.length);
             return {
@@ -106,20 +136,20 @@ let Fetcher = {
               title: Fiches[radi].title,
             };
           }),
-          animators: Array.apply(null, Array(50)).map(function (x, i) {
+          collecteurs: Array.apply(null, Array(50)).map(function (x, i) {
             return {
               id: i + 1,
-              name: animators[generateRandom(animators.length)],
+              name: collecteurs[generateRandom(collecteurs.length)],
               description: descriptions[generateRandom(descriptions.length)],
-              photo: 'https://picsum.photos/200',
+              urlPhoto: 'https://picsum.photos/200',
             };
           }),
           beneficiaires: Array.apply(null, Array(66)).map(function (x, i) {
             return {
               id: i + 1,
-              name: animators[generateRandom(animators.length)],
+              name: collecteurs[generateRandom(collecteurs.length)],
               description: descriptions[generateRandom(descriptions.length)],
-              photo: 'https://picsum.photos/200',
+              urlPhoto: 'https://picsum.photos/200',
             };
           }),
           formations: Array.apply(null, Array(25)).map(function (x, i) {
@@ -143,7 +173,7 @@ let Fetcher = {
               description: descriptions[generateRandom(descriptions.length)],
               date_envoi: randomDate(new Date(2021, 0, 1), new Date()),
               date_lecture: randomDate(new Date(2021, 0, 1), new Date()),
-              expediteur: animators[generateRandom(animators.length)],
+              expediteur: collecteurs[generateRandom(collecteurs.length)],
             };
           }),
         });
@@ -156,9 +186,12 @@ let Fetcher = {
       setTimeout(() => {
         resolve({
           sucess_Update: 'Modification reuissi !',
-          first_name: 'Mathildda',
-          last_name: 'Martica',
+          prenom: 'Mathildda',
+          nom: 'Martica',
           address: 'Abomey Calavi',
+          contact: '94632954',
+          adminId: 50,
+
           filled_fiche: 68,
           rejected_fiche: 80,
           accepted_fiche: 8,
@@ -206,18 +239,6 @@ let Fetcher = {
       }, 3000);
     });
     return await result;
-  },
-  PutSection: async function (setdada) {
-    let url = baseUrl + '/auth/users/authenticate';
-    let res = await fetch(url, {
-      method: 'POST',
-      body: setdada,
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    return await res.json();
   },
 };
 export default Fetcher;

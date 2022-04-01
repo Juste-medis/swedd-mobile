@@ -151,14 +151,13 @@ function Account(route) {
       </View>
     );
   };
-
   return (
     <ScrollView>
       <View style={styles.main_container}>
         <View style={{width: '100%', alignItems: 'center'}}>
-          {profil.photourl !== '' ? (
+          {profil.urlPhoto !== '' ? (
             <Image
-              source={{uri: profil.photourl}}
+              source={{uri: profil.urlPhoto}}
               containerStyle={styles.item}
               style={styles.image_avatar}
               PlaceholderContent={<ActivityIndicator />}
@@ -171,16 +170,13 @@ function Account(route) {
                   fontSize: 50,
                   fontFamily: 'Lato-Bold',
                 }}>
-                {profil.first_name.substr(0, 2)}
+                {profil.prenom.substr(0, 2)}
               </Text>
             </View>
           )}
 
           <Text style={styles.name_title}>
-            {profil.last_name +
-              ' ' +
-              profil.first_name.toUpperCase().charAt(0) +
-              '.'}
+            {profil.nom + ' ' + profil.prenom.toUpperCase().charAt(0) + '.'}
           </Text>
 
           <Text

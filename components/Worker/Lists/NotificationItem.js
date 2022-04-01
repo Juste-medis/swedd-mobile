@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import Globals from '../../../Ressources/Globals';
 import {styleNotificationItem as styles} from '../../../Ressources/Styles';
-import TextW from '../../Tools/TextW';
+import TextW from '../../Gadgets/TextW';
 import {date_to_local_string} from '../../../Helpers/Utils';
 import SimpleRipple from '../../Touchable/SimpleRipple';
 
@@ -27,17 +27,15 @@ function NotificationItem(route) {
       onPress={() => {
         onclick({description, expediteur, date_envoi});
       }}>
-      <View style={styles.title_container}>
-        <View style={styles.def_avatar}>
-          <Text
-            style={{
-              color: 'white',
-              fontSize: 20,
-              fontFamily: 'Lato-Bold',
-            }}>
-            {expediteur.substr(0, 2)}
-          </Text>
-        </View>
+      <View style={styles.def_avatar}>
+        <Text
+          style={{
+            color: 'white',
+            fontSize: 20,
+            fontFamily: 'Lato-Bold',
+          }}>
+          {expediteur.substr(0, 2)}
+        </Text>
       </View>
       <View style={styles.main_container}>
         <View style={styles.desciption_container}>

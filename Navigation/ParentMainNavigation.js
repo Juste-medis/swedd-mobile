@@ -19,19 +19,24 @@ import {alert_message, toast_message} from '../Helpers/Utils';
 import fetcher from '../API/fakeApi';
 import Storer from '../API/storer';
 import RNReastart from 'react-native-restart';
+import NotificationSplasher from '../components/Gadgets/NotificationSplasher';
+
 const Drawer = createDrawerNavigator();
 function ParentMainNavigation() {
   return (
     <SafeAreaProvider>
       <Drawer.Navigator
         initialRouteName="Profil"
-        screenOptions={{
-          drawerActiveTintColor: '#30B9AB',
-          drawerActiveBackgroundColor: 'rgba(0,0,0,.04)',
-          drawerLabelStyle: {
-            fontFamily: 'Lato-Bold',
-            fontSize: 18,
-          },
+        screenOptions={({navigation}) => {
+          return {
+            headerRight: () => <NotificationSplasher navigation={navigation} />,
+            drawerActiveTintColor: '#30B9AB',
+            drawerActiveBackgroundColor: 'rgba(0,0,0,.04)',
+            drawerLabelStyle: {
+              fontFamily: 'Lato-Bold',
+              fontSize: 18,
+            },
+          };
         }}
         drawerContent={props => <CustomSidebarMenu {...props} />}>
         <Drawer.Screen
@@ -149,8 +154,8 @@ const CustomSidebarMenu = props => {
     <SafeAreaView style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
         <View style={styles.drawer_header_cont}>
-          {/**Globals.PROFIL_INFO.photourl && Globals.PROFIL_INFO.photourl !== ''  */}
-          {1 ? (
+          {Globals.PROFIL_INFO.urlPhoto &&
+          Globals.PROFIL_INFO.urlPhoto !== '' ? (
             <Image
               source={{
                 uri: 'https://picsum.photos/200',
@@ -165,9 +170,9 @@ const CustomSidebarMenu = props => {
           )}
 
           <Text style={styles.name_title}>
-            {Globals.PROFIL_INFO.last_name +
+            {Globals.PROFIL_INFO.nom +
               ' ' +
-              Globals.PROFIL_INFO.first_name.toUpperCase().charAt(0) +
+              Globals.PROFIL_INFO.prenom.toUpperCase().charAt(0) +
               '.'}
           </Text>
           <Text style={styles.mail_title}>{Globals.PROFIL_INFO.mail}</Text>
@@ -295,6 +300,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   name_title: {
+    marginTop: 5,
     fontFamily: 'Lato-Bold',
     fontSize: 16,
     color: 'black',

@@ -17,8 +17,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {AddProfilItem} from '../../../Store/Actions';
 import {date_to_local_string, toast_message} from '../../../Helpers/Utils';
-import EmptyThing from '../../../components/Tools/EmptyThing';
-import LoadingDot from '../../../components/Tools/Loading';
+import EmptyThing from '../../../components/Gadgets/EmptyThing';
+import LoadingDot from '../../../components/Gadgets/Loading';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 let notides = {uri: '', text: 'toto'};
@@ -78,14 +78,14 @@ function Notification(route) {
   return (
     <SafeAreaView
       style={{
-        backgroundColor: Globals.COLORS.white,
+        backgroundColor: Globals.COLORS.light_grey,
         flex: 1,
       }}>
       {spinner ? (
         <LoadingDot />
       ) : (
         <FlatList
-          style={{flex: 1, backgroundColor: Globals.COLORS.white}}
+          style={{flex: 1, backgroundColor: Globals.COLORS.light_grey}}
           data={notifications}
           ListEmptyComponent={
             <EmptyThing

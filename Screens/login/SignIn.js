@@ -16,7 +16,7 @@ import {CheckBox} from 'react-native-elements';
 
 export default function SignIn({navigation}) {
   const [vip, setvip] = useState(false);
-  const [mail, setmail] = useState('');
+  const [username, setusername] = useState('');
   const [password, setpassword] = useState('');
 
   const [wrong_logins_text, set_wrong_text] = useState('');
@@ -35,11 +35,11 @@ export default function SignIn({navigation}) {
   }
   async function onSignInPressed() {
     try {
-      await Schemasignin.validate({mail, password});
+      await Schemasignin.validate({username, password});
       setspinner(true);
       Fetcher.AuthSignin(
         JSON.stringify({
-          mail,
+          username,
           password,
           //to remove
           user_type: vip ? 'facilitateur_2' : 'facilitateur_1',
@@ -56,10 +56,10 @@ export default function SignIn({navigation}) {
             Toast.show({
               type: 'success',
               text1: 'Bienvenu',
-              text2: res?.first_name,
+              text2: res?.prenom,
             });
 
-            Storer.storeData('@ProfilInfo', {...res, mail, password}).then(
+            Storer.storeData('@ProfilInfo', {...res, username, password}).then(
               () => {
                 Storer.storeData('@USER_TYPE', 1).then(() => {
                   RNReastart.Restart();
@@ -103,12 +103,12 @@ export default function SignIn({navigation}) {
           )}
 
           <Input
-            placeholder={Globals.STRINGS.mail}
-            rightIcon={<Icon name="mail" size={24} color="black" />}
+            placeholder={Globals.STRINGS.username}
+            rightIcon={<Icon name="user" size={24} color="black" />}
             rightIconContainerStyle={{position: 'absolute', right: 15}}
-            onChangeText={name => setmail(name)}
+            onChangeText={name => setusername(name)}
             style={styles.input}
-            value={mail}
+            value={username}
             underlineColorAndroi
             inputContainerStyle={{
               borderBottomWidth: 0,

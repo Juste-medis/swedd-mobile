@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useCallback} from 'react';
+import React from 'react';
 import {ScrollView, Text, View, Linking} from 'react-native';
 import Globals from '../../../Ressources/Globals';
 import {styleAccount as styles} from '../../../Ressources/Styles';
@@ -11,29 +11,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {onShare} from '../../../Helpers/Utils';
 import SimpleRipple from '../../../components/Touchable/SimpleRipple';
 import Fiches from '../../../Ressources/Data/Fiches';
-import {useNavigation, useFocusEffect} from '@react-navigation/native';
 
-/*
-    // TabNav navigation item
-    const navigation = useNavigation();
-
-    // Effect will be triggered everytime the Tab changes 
-    //      Mounting is not enough -> Tabs will not be unmount by change
-    useFocusEffect(
-        useCallback(() => {
-
-            // Get StackNav navigation item
-            const stackNavigator = navigation.dangerouslyGetParent();
-            if(stackNavigator){
-
-                // Actually set Title
-                stackNavigator.setOptions({
-                    title: "Home"
-                });
-            }
-        }, [navigation])
-    );
-*/
 function ControlBoard(route) {
   let profil = route.my_profil.account;
   React.useEffect(() => {
@@ -54,7 +32,7 @@ function ControlBoard(route) {
       profil.user_type === 'facilitateur_1'
         ? {
             icon: 'md-eye-outline',
-            title: 'Supervision en cour',
+            title: 'En cour de validation',
             value: profil.review_fiche.length,
             variant: 'rgb(255,193,7)',
             onclick: () => {
@@ -92,13 +70,22 @@ function ControlBoard(route) {
         : {},
     ],
     {
+      icon: 'document',
+      title: 'Fiches Entrées',
+      value: profil.collecteurs.length,
+      variant: Globals.COLORS.light_blue,
+      onclick: () => {
+        route.navigation.navigate('Collecteurs');
+      },
+    },
+    {
       icon: 'md-person-sharp',
       title: 'Animateurs',
-      value: profil.animators.length,
+      value: profil.collecteurs.length,
       variant: Globals.COLORS.arsenic,
       backgroundColor: 'white',
       onclick: () => {
-        route.navigation.navigate('Animators');
+        route.navigation.navigate('Collecteurs');
       },
     },
     {
@@ -141,7 +128,7 @@ function ControlBoard(route) {
             <View
               style={{
                 marginTop: 10,
-                borderRadius: 20,
+                borderRadius: 10,
               }}
               key={item.title}>
               <SimpleRipple
@@ -165,6 +152,7 @@ function ControlBoard(route) {
                     style={{
                       display: 'flex',
                       justifyContent: 'flex-start',
+                      marginTop: 5,
                     }}>
                     <Text
                       style={{

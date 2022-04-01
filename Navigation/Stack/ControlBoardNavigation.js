@@ -4,7 +4,7 @@ import ControlBoard from '../../Screens/Drawer/ControlBoard/ControlBoard';
 import FichesTemplates from '../../Screens/Drawer/ControlBoard/FichesTemplates';
 import FicheForm from '../../Screens/Drawer/ControlBoard/FicheForm';
 import FichesList from '../../Screens/Drawer/ControlBoard/FichesList';
-import Animators from '../../Screens/Drawer/ControlBoard/Animators';
+import Collecteurs from '../../Screens/Drawer/ControlBoard/Collecteurs';
 
 const Stack = createStackNavigator();
 
@@ -34,8 +34,8 @@ function Navigation({navigation}) {
         }}
       />
       <Stack.Screen
-        name="Animators"
-        component={Animators}
+        name="Collecteurs"
+        component={Collecteurs}
         options={{
           headerShown: false,
         }}

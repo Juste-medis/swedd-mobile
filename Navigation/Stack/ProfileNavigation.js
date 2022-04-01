@@ -39,7 +39,7 @@ function Navigation({navigation}) {
       />
       <Stack.Screen
         name="Notification"
-        component={Security}
+        component={Notification}
         options={{
           ...navOptions,
           title: 'Notification',

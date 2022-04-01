@@ -15,7 +15,7 @@ let tyleFicheForm,
   tyleControlBoard,
   tyleAccount,
   tyleNotificationItem,
-  tyleAnimatorsItem,
+  tyleCollecteursItem,
   tyleAccordian,
   tyletoollength,
   tyleNoInternet;
@@ -43,7 +43,7 @@ if (mobile_360_750) {
       borderRadius: 70,
       justifyContent: 'center',
       alignItems: 'center',
-      height: 30,
+      height: 40,
     },
     boldText_touchable: {
       fontFamily: 'Lato-Bold',
@@ -66,7 +66,7 @@ if (mobile_360_750) {
       backgroundColor: 'transparent',
       flexDirection: 'row',
       position: 'absolute',
-      top: 290,
+      top: 280,
       left: 0,
       flex: 1,
       justifyContent: 'space-between',
@@ -101,7 +101,6 @@ if (mobile_360_750) {
     sectionTitleStyle: {
       fontFamily: 'Lato-Bold',
       color: Globals.COLORS.primary,
-      marginTop: 30,
     },
     centeredView: {
       flex: 1,
@@ -693,11 +692,12 @@ if (mobile_360_750) {
     main_ripple: {
       flexDirection: 'row',
       elevation: 2,
-      width: '90%',
+      width: '100%',
       padding: 10,
-      marginBottom: 10,
+      marginBottom: 4,
+      borderStartColor: Globals.COLORS.primary,
+      borderStartWidth: 4,
     },
-
     main_container: {
       display: 'flex',
       flexDirection: 'column',
@@ -724,10 +724,12 @@ if (mobile_360_750) {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      borderRadius: 50,
       height: 50,
       width: 50,
-      marginRight: 15,
+      marginRight: 10,
+      backgroundColor: Globals.COLORS.primary,
+      borderRadius: 50,
+      marginTop: 10,
     },
     notification_description: {
       fontSize: 17,
@@ -746,17 +748,16 @@ if (mobile_360_750) {
       alignItems: 'center',
     },
   });
-  tyleAnimatorsItem = StyleSheet.create({
+  tyleCollecteursItem = StyleSheet.create({
     main_ripple: {
       flexDirection: 'row',
-      elevation: 2,
       width: '100%',
       padding: 10,
-      marginVertical: 1,
-      borderStartColor: Globals.COLORS.primary,
-      borderStartWidth: 4,
+      marginBottom: 2,
+      backgroundColor: 'white',
+      borderBottomWidth: 1,
+      borderColor: Globals.COLORS.co_gris,
     },
-
     main_container: {
       display: 'flex',
       flexDirection: 'column',
@@ -783,14 +784,13 @@ if (mobile_360_750) {
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 40,
-      height: 40,
-      width: 40,
-      backgroundColor: Globals.COLORS.primary,
-      marginRight: 20,
+      height: 50,
+      width: 50,
+      marginRight: 8,
     },
     notification_description: {
       fontSize: 17,
-      fontFamily: 'Lato-Bold',
+      fontFamily: 'Lato-Medium',
       color: Globals.COLORS.arsenic,
       fontWeight: '600',
       lineHeight: 25,
@@ -800,9 +800,15 @@ if (mobile_360_750) {
     },
     notif_meta_container: {
       display: 'flex',
-      flexDirection: 'row',
-      marginVertical: 10,
+      flexDirection: 'column',
       alignItems: 'center',
+      justifyContent: 'center',
+    },
+    Collecteurs_description: {
+      marginTop: 20,
+      fontSize: 16,
+      fontFamily: 'Lato-Regular',
+      color: 'black',
     },
   });
   tyletoollength = StyleSheet.create({
@@ -819,7 +825,7 @@ if (mobile_360_750) {
     },
     icon_containter: {
       backgroundColor: 'white',
-      padding: 25,
+      padding: 20,
       elevation: 2,
       borderRadius: 10,
     },
@@ -905,8 +911,8 @@ if (mobile_360_750) {
       alignItems: 'flex-start',
       justifyContent: 'space-between',
       paddingHorizontal: 15,
-      paddingVertical: 12,
-      borderRadius: 20,
+      paddingVertical: 5,
+      borderRadius: 10,
     },
     item_title: {
       fontFamily: 'Lato-Regular',
@@ -1091,7 +1097,7 @@ export const styleFicheForm = tyleFicheForm,
   styleCourseOverView = tyleCourseOverView,
   styleAccount = tyleAccount,
   styleNotificationItem = tyleNotificationItem,
-  styleAnimatorsItem = tyleAnimatorsItem,
+  styleCollecteursItem = tyleCollecteursItem,
   styleAccordian = tyleAccordian,
   styletoollength = tyletoollength,
   styleControlBoard = tyleControlBoard;

@@ -10,6 +10,9 @@ export const variants = [
     'En termes de fréquentation scolaire, 45 % des filles du premier cycle du secondaire ne sont pas scolarisées (contre 28 % des garçons).',
     'Si cette dynamique démographique se poursuit, la population béninoise pourrait doubler au cours des 30 prochaines années',
     'ce qui entraînerait une pression accrue sur les dépenses sociales et économiques et risquerait de retarder davantage la transition',
+    `La perte de connexion est un problème majeur auquel sont confrontés les utilisateurs du web depuis des années. La meilleure application web au monde produirait un bien mauvais effet si vous ne pouviez pas la télécharger. Il y a eu de nombreuses tentatives pour mettre en place des technologies susceptibles de résoudre ce problème, comme le montre notre page Offline, et certains problèmes ont été résolus. Mais le problème principal reste l'absence d'un mécanisme de contrôle global pour la mise en cache des ressources et la personnalisation des requêtes réseau.
+
+        La première tentative— AppCache — semblait être une bonne idée parce qu'elle permettait de spécifier les ressources à mettre en cache de manière très simple. Cependant, elle faisait beaucoup de suppositions sur la manière de le mettre en place et échouait implacablement si votre application ne se pliait pas exactement à ces suppositions. Lisez Application Cache is a Douchebag de Jake Archibald pour plus de détails.`,
   ],
   kits = [
     'Tlephones',
@@ -20,7 +23,7 @@ export const variants = [
     'Plastiques',
     'Savon',
   ],
-  animators = [
+  collecteurs = [
     'ASSIAMAIN Nikola',
     'Minsmin Nikole',
     'Blaise YIDENON',

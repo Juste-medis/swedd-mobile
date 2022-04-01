@@ -14,11 +14,10 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {setProfil} from '../../../Store/Actions';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Fetcher from '../../../API/fetcher';
+import Fetcher from '../../../API/fakeApi';
 import {toast_message, UriEncoder} from '../../../Helpers/Utils';
 
 function Security(route) {
-  let profil = route.my_profil.account;
   let modifying = {};
   const [modibool, setmodibool] = React.useState(false);
   const [spinner, setspinner] = React.useState(false);
@@ -27,35 +26,32 @@ function Security(route) {
     {
       icon: 'lock-closed',
       title: Globals.STRINGS.password,
-      value: profil.password,
-      key: 'user_pass',
+      key: 'password',
     },
     {
       icon: 'lock-closed-outline',
       title: Globals.STRINGS.old_password,
-      value: '',
-      key: 'user_pass',
+      key: 'password',
     },
     {
       icon: 'lock-closed-outline',
       title: Globals.STRINGS.new_pass,
-      value: '',
       key: 'new_pass',
     },
     {
       icon: 'lock-closed-outline',
       title: Globals.STRINGS.confirm_password,
-      value: '',
       key: 'password_conf',
     },
   ];
   function submit_modi() {
+    console.log(modifying);
     setmodibool(!modibool);
     if (modibool) {
       if (
         !modifying.new_pass ||
         !modifying.password_conf ||
-        !modifying.user_pass ||
+        !modifying.password ||
         modifying.new_pass !== modifying.password_conf
       ) {
         toast_message(
@@ -65,10 +61,10 @@ function Security(route) {
         setspinner(true);
         Fetcher.ChangePassPassu(UriEncoder(modifying))
           .then(res => {
-            if (res.message) {
-              toast_message(res.message);
+            if (!res.error) {
+              toast_message(res.success);
             } else {
-              toast_message(res.ok);
+              toast_message(res.error);
             }
             setspinner(false);
           })
@@ -88,7 +84,7 @@ function Security(route) {
   const menu_main = data => {
     data = modibool ? [data[0], data[2], data[3]] : [data[0]];
     return (
-      <View style={{backgroundColor: 'white', width: '100%'}}>
+      <View style={{width: '100%'}}>
         {data.map((item, index) => {
           return (
             <View
@@ -130,9 +126,9 @@ function Security(route) {
                 style={{
                   width: '90%',
                   color: Globals.COLORS.blue_grey,
-                  fontWeight: modibool ? 'normal' : 'bold',
+                  fontSize: 20,
                 }}
-                defaultValue={item.value}
+                autoCapitalize="none"
                 onChangeText={name => (modifying[item.key] = name)}
                 multiline={item.title === Globals.STRINGS.About ? true : false}
                 secureTextEntry={item.title.includes('pass')}
@@ -146,7 +142,7 @@ function Security(route) {
   };
 
   return (
-    <ScrollView style={{backgroundColor: 'white'}}>
+    <ScrollView style={{backgroundColor: Globals.COLORS.surface}}>
       <View style={[styles.main_container]}>
         {menu_main(menuoth)}
         {spinner ? (

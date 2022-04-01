@@ -14,6 +14,17 @@ let Fetcher = {
       });
     });
   },
+  GetCollecteurs: async function (setdada, plateform) {
+    let url = baseUrl + '/api/royal/category/best';
+
+    let res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    return await res.json();
+  },
   AuthSignup: async function (setdada) {
     let url = baseUrl + '/api/users';
     let res = await fetch(url, {
