@@ -9,7 +9,7 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native';
-import CollecteursItem from '../../../components/Worker/Lists/CollecteursItem';
+import FormationsItem from '../../../components/Worker/Lists/formationsItem';
 import Globals from '../../../Ressources/Globals';
 import Fetcher from '../../../API/fakeApi';
 import {styleCollecteursItem as styles} from '../../../Ressources/Styles';
@@ -23,8 +23,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {Image} from 'react-native-elements';
 
 let notides = {uri: '', text: 'toto'};
-function Beneficiaires(route) {
-  const [Beneficiaries, setBeneficiaries] = React.useState([]);
+function Formations(route) {
+  const [formations, setformations] = React.useState([]);
   const [spinner, setspinner] = React.useState(true);
   const [modalVisible, setmodalVisible] = React.useState(false);
 
@@ -38,14 +38,14 @@ function Beneficiaires(route) {
 
   const _show_content = notif => {
     notides = notif;
-    setmodalVisible(true);
+    //setmodalVisible(true);
   };
   function _onSubmmitClick() {
-    Fetcher.GetBeneficiaires()
+    Fetcher.Getformations()
       .then(res => {
-        if (res.beneficiaires) {
-          setBeneficiaries(res.beneficiaires);
-          //Storer.storeData('@Beneficiaries', res.beneficiaires);
+        if (res.formations) {
+          setformations(res.formations);
+          //Storer.storeData('@formations', res.beneficiaires);
         }
         setspinner(false);
       })
@@ -71,16 +71,16 @@ function Beneficiaires(route) {
       ) : (
         <FlatList
           style={{flex: 1, backgroundColor: Globals.COLORS.white}}
-          data={Beneficiaries}
+          data={formations}
           ListEmptyComponent={
             <EmptyThing
               style={{marginTop: 50}}
-              message="Aucun Benneficiaire !"
+              message="Aucune formation dispensée !"
             />
           }
           keyExtractor={item => `notitem${item.id}`}
           renderItem={({item}) => (
-            <CollecteursItem inter_Collecteurs={item} onclick={_show_content} />
+            <FormationsItem inter_Collecteurs={item} onclick={_show_content} />
           )}
           onEndReachedThreshold={0.5}
           onEndReached={() => {}}
@@ -137,4 +137,4 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch =>
   bindActionCreators({AddProfilItem}, dispatch);
-export default connect(mapStateToProps, mapDispatchToProps)(Beneficiaires);
+export default connect(mapStateToProps, mapDispatchToProps)(Formations);

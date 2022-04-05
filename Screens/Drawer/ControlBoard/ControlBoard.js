@@ -33,7 +33,7 @@ function ControlBoard(route) {
         ? {
             icon: 'md-eye-outline',
             title: 'En cour de validation',
-            value: profil.review_fiche.length,
+            value: profil.review_fiche,
             variant: 'rgb(255,193,7)',
             onclick: () => {
               Linking.openURL('https://swedd.bj/contact/');
@@ -45,9 +45,9 @@ function ControlBoard(route) {
     ...[
       profil.user_type === 'facilitateur_1'
         ? {
-            icon: 'checkmark-sharp',
+            icon: 'md-checkmark-circle',
             title: 'Validées',
-            value: profil.accepted_fiche.length,
+            value: profil.accepted_fiche,
             variant: '#198754',
             onclick: () => {
               Linking.openURL('https://swedd.bj/presentation-du-projet/');
@@ -61,7 +61,7 @@ function ControlBoard(route) {
         ? {
             icon: 'md-close',
             title: 'Rejetées',
-            value: profil.rejected_fiche.length,
+            value: profil.rejected_fiche,
             variant: '#dc3545',
             onclick: () => {
               onShare('SweddMobile | tres cool');
@@ -72,16 +72,16 @@ function ControlBoard(route) {
     {
       icon: 'document',
       title: 'Fiches Entrées',
-      value: profil.collecteurs.length,
+      value: profil.filled_fiche,
       variant: Globals.COLORS.light_blue,
       onclick: () => {
-        route.navigation.navigate('Collecteurs');
+        //route.navigation.navigate('Collecteurs');
       },
     },
     {
       icon: 'md-person-sharp',
       title: 'Animateurs',
-      value: profil.collecteurs.length,
+      value: profil.collecteurs,
       variant: Globals.COLORS.arsenic,
       backgroundColor: 'white',
       onclick: () => {
@@ -91,31 +91,31 @@ function ControlBoard(route) {
     {
       icon: 'md-woman-outline',
       title: 'Bénéficiaires',
-      value: profil.beneficiaires.length,
+      value: profil.beneficiaires,
       variant: Globals.COLORS.arsenic,
       backgroundColor: 'white',
       onclick: () => {
-        onShare('SweddMobile | tres cool');
+        route.navigation.navigate('Beneficiaires');
       },
     },
     {
       icon: 'ios-book-outline', //md-school-outline
       title: 'Formations',
-      value: profil.formations.length,
+      value: profil.formations,
       variant: Globals.COLORS.arsenic,
       backgroundColor: 'white',
       onclick: () => {
-        onShare('SweddMobile | tres cool');
+        route.navigation.navigate('Formations');
       },
     },
     {
       icon: 'ios-layers',
       title: 'Kits',
-      value: profil.kits.length,
+      value: profil.kits,
       variant: Globals.COLORS.arsenic,
       backgroundColor: 'white',
       onclick: () => {
-        onShare('SweddMobile | tres cool');
+        route.navigation.navigate('Kits');
       },
     },
   ];
@@ -134,7 +134,7 @@ function ControlBoard(route) {
                 style={[
                   styles.menu_item,
                   {
-                    backgroundColor: item.backgroundColor || item.variant,
+                    backgroundColor: 'white',
                     borderWidth: item.backgroundColor ? 2 : 0,
                     borderColor: Globals.COLORS.aliceblue,
                   },
@@ -156,15 +156,15 @@ function ControlBoard(route) {
                     <Text
                       style={{
                         ...styles.prop_unity_value,
-                        color: item.backgroundColor ? item.variant : 'white',
+                        color: item.variant,
                       }}>
                       {item.value}
                     </Text>
                     <Text
                       style={{
-                        color: item.backgroundColor ? item.variant : 'white',
                         marginStart: 12,
                         fontFamily: 'Lato-Regular',
+                        color: item.variant,
                       }}>
                       {item.title}
                     </Text>

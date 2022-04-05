@@ -60,8 +60,32 @@ function FicheForm(route) {
   function getFormResponses(responses) {
     let allrep = {},
       go = true;
+    console.log(refs);
+
     for (let fi = 0; fi < refs.length; fi++) {
+      const actualForm = refs[fi],
+        firstElementkey = actualForm.props.form[0].key;
+
       const responsesi = refs[fi]._getFormResponses();
+      var result = {};
+
+      let value = [
+        {key: 'impl1', label: 1},
+        {key: 'imp2', label: 2},
+        {key: 'imp3', label: 3},
+        {key: 'imp4', label: 4},
+      ].reduce(function () {});
+
+      [0, 1, 2, 3, 4].reduce(function (
+        accumulateur,
+        valeurCourante,
+        index,
+        array,
+      ) {
+        return accumulateur + valeurCourante;
+      },
+      10);
+
       if (responsesi === false) {
         go = false;
         Toast.show({
@@ -72,7 +96,7 @@ function FicheForm(route) {
       }
       Object.assign(allrep, responsesi);
     }
-    if (go) {
+    if (0) {
       setsubmiting('submiting');
       Fetcher.PostFiche(JSON.stringify(allrep))
         .then(res => {
@@ -96,8 +120,7 @@ function FicheForm(route) {
                 RNReastart.Restart();
               });
             },
-          );
-*/
+          );*/
           }
         })
         .catch(err => {

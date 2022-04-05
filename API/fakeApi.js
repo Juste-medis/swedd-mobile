@@ -1,6 +1,13 @@
 import {generateRandom, randomDate} from '../Helpers/Utils';
 import Fiches from '../Ressources/Data/Fiches';
-import {collecteurs, descriptions, kits} from '../Ressources/Data/properties';
+import {
+  arrondissements,
+  collecteurs,
+  communes,
+  descriptions,
+  formations,
+  kits,
+} from '../Ressources/Data/properties';
 import Neter from '../Ressources/Neter';
 const baseUrl = Neter.uri1;
 
@@ -37,7 +44,7 @@ let Fetcher = {
     return await result;
   },
   PostFiche: async function (setdada) {
-    //{departement:{id,label},commune:{id,label},arrondissement:{??..},nom_fille:{..},sexe,:{..}.....}
+    //{beneficiaire:{nom,prenom,...},collecteur:{nom,prenom,...},...}
     //=>{error,success}
     const result = await new Promise(resolve => {
       setTimeout(() => {
@@ -104,13 +111,59 @@ let Fetcher = {
   GetBeneficiaires: async function (data, cache) {
     //=> {error,beneficiaires}
     return await resolveresponse({
-      collecteurs: Array.apply(null, Array(30)).map(function (x, i) {
+      beneficiaires: Array.apply(null, Array(30)).map(function (x, i) {
         return {
           id: i + 1,
           new: 1,
           name: collecteurs[generateRandom(collecteurs.length)],
           description: descriptions[generateRandom(descriptions.length)],
           urlPhoto: 'https://picsum.photos/200',
+        };
+      }),
+    });
+  },
+  Getformations: async function (data, cache) {
+    //=> {error,formations}
+    return await resolveresponse({
+      formations: Array.apply(null, Array(30)).map(function (x, i) {
+        return {
+          id: i + 1,
+          libelle: formations[generateRandom(formations.length)],
+          dateDebut: randomDate(new Date(2022, 0, 1), new Date()),
+          dateFin: randomDate(new Date(2022, 0, 1), new Date()),
+          formationCentres: [
+            `${arrondissements[generateRandom(arrondissements.length)].label},${
+              communes[generateRandom(communes.length)].label
+            }`,
+          ],
+        };
+      }),
+    });
+  },
+  Getkits: async function (data, cache) {
+    //=> {error,kits}
+    return await resolveresponse({
+      kits: Array.apply(null, Array(30)).map(function (x, i) {
+        return {
+          id: i + 1,
+          libelle: kits[generateRandom(kits.length)],
+        };
+      }),
+    });
+  },
+  GetFiches: async function (data) {
+    //=> {error,beneficiaires}
+    return await resolveresponse({
+      collecteurs: Array.apply(null, Array(30)).map(function (x, i) {
+        return {
+          fiches: Array.apply(null, Array(80)).map(function (x, i) {
+            const radi = generateRandom(Fiches.length);
+            return {
+              id: i + 1,
+              id_fiche: Fiches[radi].id,
+              title: Fiches[radi].title,
+            };
+          }),
         };
       }),
     });
@@ -130,38 +183,10 @@ let Fetcher = {
           contact: '94632954',
           urlPhoto: 'https://picsum.photos/200',
           adminId: 50,
-          filled_fiche: Array.apply(null, Array(50)).map(function (x, i) {
-            const radi = generateRandom(Fiches.length);
-            return {
-              id: i + 1,
-              id_fiche: Fiches[radi].id,
-              title: Fiches[radi].title,
-            };
-          }),
-          rejected_fiche: Array.apply(null, Array(30)).map(function (x, i) {
-            const radi = generateRandom(Fiches.length);
-            return {
-              id: i + 1,
-              id_fiche: Fiches[radi].id,
-              title: Fiches[radi].title,
-            };
-          }),
-          accepted_fiche: Array.apply(null, Array(80)).map(function (x, i) {
-            const radi = generateRandom(Fiches.length);
-            return {
-              id: i + 1,
-              id_fiche: Fiches[radi].id,
-              title: Fiches[radi].title,
-            };
-          }),
-          review_fiche: Array.apply(null, Array(31)).map(function (x, i) {
-            const radi = generateRandom(Fiches.length);
-            return {
-              id: i + 1,
-              id_fiche: Fiches[radi].id,
-              title: Fiches[radi].title,
-            };
-          }),
+          filled_fiche: 50,
+          rejected_fiche: 30,
+          accepted_fiche: 80,
+          review_fiche: 31,
           collecteurs: 50,
           beneficiaires: 66,
           formations: 25,

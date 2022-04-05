@@ -16,6 +16,8 @@ let tyleFicheForm,
   tyleAccount,
   tyleNotificationItem,
   tyleCollecteursItem,
+  tyleformationsItem,
+  tyleKitsItem,
   tyleAccordian,
   tyletoollength,
   tyleNoInternet;
@@ -811,6 +813,141 @@ if (mobile_360_750) {
       color: 'black',
     },
   });
+  tyleformationsItem = StyleSheet.create({
+    main_ripple: {
+      flexDirection: 'row',
+      width: '100%',
+      padding: 10,
+      marginBottom: 2,
+      backgroundColor: 'white',
+      borderBottomWidth: 1,
+      borderColor: Globals.COLORS.co_gris,
+    },
+    main_container: {
+      display: 'flex',
+      flexDirection: 'column',
+      paddingEnd: 70,
+    },
+    props_title: {
+      color: Globals.COLORS.arsenic,
+      fontFamily: 'Lato-Black',
+      marginBottom: 5,
+    },
+    props_value: {
+      color: Globals.COLORS.arsenic,
+      fontFamily: 'Lato-Medium',
+    },
+    title_container: {
+      display: 'flex',
+      alignItems: 'flex-start',
+      flexDirection: 'column',
+    },
+    notification_title: {
+      fontFamily: 'Lato-Bold',
+      fontSize: 20,
+      color: Globals.COLORS.arsenic2,
+    },
+    notif_infotag: {
+      fontFamily: 'Lato-Bold',
+      marginTop: 2,
+      color: Globals.COLORS.arsenic2,
+      fontWeight: '700',
+    },
+    def_avatar: {
+      display: 'flex',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      borderRadius: 40,
+      height: 70,
+      width: 70,
+      marginRight: 8,
+    },
+    notification_description: {
+      fontSize: 17,
+      fontFamily: 'Lato-Medium',
+      color: Globals.COLORS.arsenic,
+      fontWeight: '600',
+      lineHeight: 25,
+    },
+    desciption_container: {
+      justifyContent: 'flex-start',
+    },
+    notif_meta_container: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    Collecteurs_description: {
+      marginTop: 20,
+      fontSize: 16,
+      fontFamily: 'Lato-Regular',
+      color: 'black',
+    },
+  });
+  tyleKitsItem = StyleSheet.create({
+    main_ripple: {
+      flexDirection: 'row',
+      width: '100%',
+      padding: 10,
+      marginBottom: 2,
+      backgroundColor: 'white',
+      borderBottomWidth: 1,
+      borderColor: Globals.COLORS.co_gris,
+    },
+    main_container: {
+      display: 'flex',
+      flexDirection: 'column',
+      paddingEnd: 70,
+    },
+    title_container: {
+      display: 'flex',
+      alignItems: 'flex-start',
+      flexDirection: 'column',
+    },
+    notification_title: {
+      fontFamily: 'Lato-Bold',
+      fontSize: 20,
+      color: Globals.COLORS.arsenic2,
+    },
+    notif_infotag: {
+      fontFamily: 'Lato-Bold',
+      marginTop: 2,
+      color: Globals.COLORS.arsenic2,
+      fontWeight: '700',
+    },
+    def_avatar: {
+      display: 'flex',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      borderRadius: 40,
+      height: 100,
+      width: 100,
+      marginRight: 8,
+    },
+    notification_description: {
+      fontSize: 17,
+      fontFamily: 'Lato-Medium',
+      color: Globals.COLORS.arsenic,
+      fontWeight: '600',
+      lineHeight: 25,
+    },
+    desciption_container: {
+      justifyContent: 'flex-start',
+    },
+    notif_meta_container: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    Collecteurs_description: {
+      marginTop: 20,
+      fontSize: 16,
+      fontFamily: 'Lato-Regular',
+      color: 'black',
+    },
+  });
   tyletoollength = StyleSheet.create({
     learnig_display_text: {
       fontFamily: 'Lato-Regular',
@@ -832,7 +969,7 @@ if (mobile_360_750) {
     main_menu_indider: {
       marginBottom: 20,
       width: '100%',
-      borderRadius: 70,
+      borderRadius: 8,
       backgroundColor: 'white',
       elevation: 20,
     },
@@ -911,7 +1048,7 @@ if (mobile_360_750) {
       alignItems: 'flex-start',
       justifyContent: 'space-between',
       paddingHorizontal: 15,
-      paddingVertical: 5,
+      paddingVertical: 10,
       borderRadius: 10,
     },
     item_title: {
@@ -1100,4 +1237,6 @@ export const styleFicheForm = tyleFicheForm,
   styleCollecteursItem = tyleCollecteursItem,
   styleAccordian = tyleAccordian,
   styletoollength = tyletoollength,
+  styleformationsItem = tyleformationsItem,
+  styleKitsItem = tyleKitsItem,
   styleControlBoard = tyleControlBoard;

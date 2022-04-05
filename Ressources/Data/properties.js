@@ -32,6 +32,12 @@ export const variants = [
     'Reginald KOMLAN',
     'TIPENTI gaspard',
   ],
+  formations = [
+    'necessité de protection',
+    'prevention vih',
+    'propreté en milueu scolaire',
+    'la puberté chez elles',
+  ],
   departements = [
     {
       label: 'ALIBORI',

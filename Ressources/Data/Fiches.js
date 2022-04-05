@@ -65,68 +65,62 @@ export default Fiches = [
             required: true,
             label: 'Village',
             placeholder: 'Veuillez écrire le village de provenance de la fille',
-
             maxlength: 30,
           },
         ],
         [
           {
-            key: 'collecteursectiontitle',
+            key: 'collecteur',
             type: 'header',
             subtype: 'h3',
             label: "Informations relatives à l'agent enregistreur",
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'animator_lastname',
+            key: 'nom',
             type: 'text',
             required: true,
             label: "Nom de l'agent enrégistreur",
             placeholder: 'veillez entrer votre nom',
-
             maxlength: 30,
           },
           {
-            key: 'animator_firstname',
+            key: 'prenom',
             label: "Prénoms de l'agent enrégistreur",
             placeholder: 'Veillez entrer vos Prénoms',
             type: 'text',
             required: true,
-
             maxlength: 30,
           },
           {
-            key: 'animator_Contact',
+            key: 'contacts_collecteur',
             label: 'Contact',
             placeholder: 'Veuillez écrire votre numéro',
-
             type: 'text',
             required: true,
             subtype: 'tel',
             maxlength: 30,
           },
           {
-            key: 'animator_Nom_du_superviseur',
+            key: 'nom_superviseur',
             label: 'Nom du superviseur',
             placeholder: 'Veuillez écrire le nom de votre superviseur',
             type: 'textarea',
             required: true,
-
             maxlength: 30,
           },
           {
-            key: 'animator_Pr_noms_du_superviseur',
+            key: 'prenom_superviseur',
             label: 'Prénoms du superviseur',
             placeholder: 'Veuillez écrire le/les prénoms de votre superviseur',
             type: 'text',
             required: true,
-
             maxlength: 30,
           },
         ],
         [
           {
-            key: 'beneficiairesectiontitle',
+            key: 'beneficiaire',
             type: 'header',
             subtype: 'h3',
             label:
@@ -134,7 +128,7 @@ export default Fiches = [
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'beneficiaire_Num_ro_d_ordre',
+            key: 'numOrdre',
             label: "Numéro d'ordre",
             placeholder:
               "Veuillez écrire le numéro d'ordre de l'enfant enregistré",
@@ -143,7 +137,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_Nom_de_l_enfant_enregistr',
+            key: 'nom',
             label: "Nom de l'enfant enregistré",
             placeholder: "Veuillez écrire le nom de l'enfant enregistré",
             type: 'text',
@@ -151,7 +145,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_Pr_noms_de_l_enfant_enregistr',
+            key: 'prenom',
             label: "Prénoms de l'enfant enregistré",
             placeholder:
               "Veuillez écrire le/les prénoms de l'enfant enregistré",
@@ -160,7 +154,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_Sexe',
+            key: 'sexe',
             label: 'Sexe',
             placeholder: "Veuillez cochez le sexe de l'enfant enregistré",
             type: 'radio-group',
@@ -179,7 +173,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'beneficiaire_Age_de_l_enfant_enr_gistr',
+            key: 'age',
             label: "Age de l'enfant enrégistré",
             placeholder: "Veuillez entrer l'âge exacte de l'enfant enregistré",
             type: 'text',
@@ -188,7 +182,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_Statut_de_l_enfant',
+            key: 'statutEnfant',
             label: "Statut de l'enfant",
             placeholder: "Veuillez cocher le statut de l'enfant à enregistré",
             type: 'radio-group',
@@ -210,33 +204,31 @@ export default Fiches = [
             ],
           },
           {
-            key: 'beneficiaire_crochage_classe',
+            key: 'niveauDecrochageEnfant',
             label: "Préciser le niveau d'étude avant décrochage (classe)",
             placeholder:
               "Veuillez écrire le niveau d'étude/classe atteint par l'enfant avant décrochage",
             type: 'text',
             required: true,
-
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_residence',
+            key: 'residence',
             label: 'Quartier de ville/ Village de résidence',
             placeholder:
               "Veuillez entrer le village/village de résidence de l'enfant à enregistré",
             type: 'text',
             required: true,
-
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_vulnerabilite',
+            key: 'critereVulnerabilite',
             required: true,
             label: 'Critères de vulnérabilité',
             placeholder:
               'Veuillez choisir le critère de vulnérabilité de la fille',
             type: 'checkbox-group',
-            other: true, // optional
+            other: true,
             values: [
               {
                 label: 'OEV',
@@ -261,7 +253,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'beneficiaire_Logement',
+            key: 'logement',
             label: 'Logement',
             type: 'radio-group',
             other: false,
@@ -280,7 +272,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'beneficiaire_Non_mari',
+            key: 'nonMarie',
             label: 'Non marié',
             type: 'radio-group',
             other: false,
@@ -299,7 +291,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'beneficiaire_Mari',
+            key: 'marie',
             type: 'radio-group',
             other: false,
             required: true,
@@ -332,14 +324,14 @@ export default Fiches = [
       return [
         [
           {
-            key: 'collecteursectiontitle',
+            key: 'collecteur',
             type: 'header',
             subtype: 'h3',
             label: "Informations sur l'animateur",
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'animator_lastname',
+            key: 'nom',
             type: 'text',
             required: true,
             label: "Nom de l'agent enrégistreur",
@@ -347,7 +339,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'animator_firstname',
+            key: 'prenom',
             label: "Prénoms de l'agent enrégistreur",
             placeholder: 'Veillez entrer vos Prénoms',
             type: 'text',
@@ -355,7 +347,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'fiche_Date',
+            key: 'dateCollecte',
             type: 'date',
             label: 'Date',
             placeholder: 'Veuillez entrer la date de la collecte',
@@ -366,34 +358,31 @@ export default Fiches = [
         ],
         [
           {
-            key: 'beneficiairesectiontitle',
+            key: 'beneficiaire',
             type: 'header',
             subtype: 'h3',
             label: 'Informations relatives à la fille',
             style: styles.sectionTitleStyle,
           },
-
           {
-            key: 'beneficiaire_Nom_de_l_enfant_enregistr',
+            key: 'nom',
             label: 'Nom de la fille',
             placeholder: 'Veuillez entrer le nom de la fille',
             type: 'text',
             required: true,
-
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_Pr_noms_de_l_enfant_enregistr',
+            key: 'prenom',
             label: 'Prénoms de la fille',
             placeholder: 'Veuillez entrer le/les prénoms de la fille',
             type: 'text',
             required: true,
-
             maxlength: 30,
           },
 
           {
-            key: 'beneficiaire_N_Mll_EDUCMASTER',
+            key: 'numM2EducMaster',
             label: 'N° Mll /EDUCMASTER',
             placeholder: 'Veuillez entrer le numéro EDUCMASTER de la fille',
             type: 'text',
@@ -436,11 +425,10 @@ export default Fiches = [
             label: 'Village/Quartier/Maison',
             placeholder:
               'Veuillez entrer le village/quartier/maison de provenance de la fille',
-
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_Etablissement_Universit',
+            key: 'etablissementUniversite',
             label: 'Etablissement/Université',
             placeholder:
               "Veuillez entrer l'établissement/université de la fille",
@@ -449,7 +437,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'beneficiaire_Niveau_d_tude_Classe',
+            key: 'niveauEtudeClasse',
             label: "Niveau d'étude/Classe",
             placeholder:
               "Veuillez entrer le niveau d'étude ou la classe de la fille",
@@ -458,7 +446,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'beneficiaire_Type_d_appui',
+            key: 'typeAppui',
             label: "Type d'appui",
             placeholder:
               "Veuillez choisir le type d'appui dont bénéficie la fille",
@@ -481,13 +469,13 @@ export default Fiches = [
             ],
           },
           {
-            key: 'beneficiaire_vulnerabilite',
+            key: 'critereVulnerabilite',
             required: true,
             label: 'Critères de vulnérabilité',
             placeholder:
               'Veuillez choisir le critère de vulnérabilité de la fille',
             type: 'checkbox-group',
-            other: true, // optional
+            other: true,
             values: [
               {
                 label: 'OEV',
@@ -512,7 +500,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'beneficiaire_Cat_gorie',
+            key: 'categorieFille',
             label: 'Catégorie',
             placeholder:
               'Veuillez cochez la catégorie dans laquelle se trouve la fille',
@@ -537,46 +525,42 @@ export default Fiches = [
         ],
         [
           {
-            key: 'affiliesectiontitle',
+            key: 'beneficiairePersonneAffiliers',
             type: 'header',
             subtype: 'h3',
             label: "Informations relatives à la personne affilier à l'enfant",
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'affilie_personne_contacter',
+            key: 'nom',
             label: 'Nom de la personne à contacter',
             placeholder: 'Veuillez entrer le nom de la personne à contacter',
-
             maxlength: 30,
             type: 'text',
             required: true,
           },
           {
-            key: 'affilie_Prenoms_de_la_personne_contacter',
+            key: 'prenom',
             label: 'Prénoms de la personne à contacter',
             placeholder: 'Veuillez entrer le nom de la personne à contacter',
-
             maxlength: 30,
             type: 'text',
             required: true,
           },
           {
-            key: 'affilie_Affinit',
+            key: 'affinite',
             label: 'Affinité',
             placeholder:
               'Veuillez entrer le lien existant entre la fille et la personne a contacté',
-
             maxlength: 30,
             type: 'text',
             required: true,
           },
           {
-            key: 'affilie_Contacts',
+            key: 'contact',
             label: 'Contacts',
             placeholder:
               'Veuillez entrer le/les contacts de la personne à contacter',
-
             maxlength: 30,
             type: 'text',
             required: true,
@@ -596,14 +580,14 @@ export default Fiches = [
       return [
         [
           {
-            key: 'collecteursectiontitle',
+            key: 'collecteur',
             type: 'header',
             subtype: 'h3',
             label: "Informations relatives à l'animateur",
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'animator_lastname',
+            key: 'nom',
             type: 'text',
             required: true,
             label: "Nom de l'animateur",
@@ -611,7 +595,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'animator_firstname',
+            key: 'prenom',
             label: "Prénoms de l'animateur",
             placeholder: 'Veuillez entrer votre/vos prénoms ',
             type: 'text',
@@ -619,7 +603,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'fiche_Date',
+            key: 'dateCollecte',
             type: 'date',
             label: 'Date',
             placeholder: 'Veuillez entrer la date de la collecte',
@@ -631,21 +615,21 @@ export default Fiches = [
         ],
         [
           {
-            key: 'beneficiairesectiontitle',
+            key: 'beneficiaire',
             type: 'header',
             subtype: 'h3',
             label: 'Informations relatives à la fille',
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'beneficiaire_N_Mll_EDUCMASTER',
+            key: 'numM2EducMaster',
             label: 'N° Mll /EDUCMASTER',
             placeholder: 'Veuillez entrer le numéro EDUCMASTER de la fille',
             type: 'text',
             required: true,
           },
           {
-            key: 'beneficiaire_Nom_de_l_enfant_enregistr',
+            key: 'nom',
             label: 'Nom de la fille',
             placeholder: 'Veuillez entrer le nom de la fille',
             type: 'text',
@@ -653,7 +637,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_Pr_noms_de_l_enfant_enregistr',
+            key: 'prenom',
             label: 'Prénoms de la fille',
             placeholder: 'Veuillez entrer le/les prénoms de la fille',
             type: 'text',
@@ -661,7 +645,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'Date_de_naissance_de_la_fillle',
+            key: 'dateNaissance',
             type: 'date',
             label: 'Date de naissance de la fillle',
             placeholder: 'Veuillez entrer la date de naissance de la fille',
@@ -671,7 +655,7 @@ export default Fiches = [
             disabled: false,
           },
           {
-            key: 'beneficiaire_Lieu_de_naissance',
+            key: 'lieuNaissance',
             label: 'Lieu de naissance',
             placeholder: 'Veuillez entrer le lieu de naissance de la fille',
             type: 'text',
@@ -707,7 +691,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_Niveau_d_tude_Classe',
+            key: 'niveauEtudeClasse',
             label: "Niveau d'étude/Classe",
             placeholder:
               "Veuillez entrer le niveau d'étude ou la classe de la fille",
@@ -716,7 +700,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'beneficiaire_Type_d_appui',
+            key: 'typeAppui',
             label: "Type d'appui",
             placeholder:
               "Veuillez choisir le type d'appui dont bénéficie la fille",
@@ -741,14 +725,14 @@ export default Fiches = [
         ],
         [
           {
-            key: 'suiviscolairesectiontitle',
+            key: 'beneficiaire',
             type: 'header',
             subtype: 'h3',
             label: 'Informations relatives au suivi scolaire',
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'beneficiaire_regularit',
+            key: 'frequenceCours',
             label: 'Régularité',
             placeholder: 'Veuillez préciser la régularité de la fille au cours',
             maxlength: 30,
@@ -756,7 +740,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'beneficiaire_Raison_d_absence',
+            key: 'raisonAbsenceCoursFille',
             label: "Raison d'absence",
             placeholder:
               "Veuillez cocher la raison de l'absence au cours de la fille",
@@ -791,7 +775,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'beneficiaire_periode',
+            key: 'periodeCompoFille',
             label: 'Période',
             placeholder:
               'Veuillez cochez la période relative aux évaluations/compositions de la fille',
@@ -826,7 +810,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'beneficiaire_Moyenne_obtenue',
+            key: 'observationMoyenneFille',
             label: 'Moyenne obtenue',
             placeholder:
               "Veuillez notifier la moyenne obtenue pour la composition/l'évaluation choisie plus haut",
@@ -836,7 +820,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'beneficiaire_Decision_finale',
+            key: 'decisionFinaleEtablissementFille',
             label: 'Décision finale',
             placeholder:
               "Veuillez cochez la décision finale de l'établissement de la fille à l'issue de l'évaluation/composition",
@@ -867,7 +851,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'beneficiaire_Observation_carts',
+            key: 'observationecart', //to check
             label: 'Observation (raison des écarts)',
             placeholder:
               "Veuillez faire des observation s'il y en a sur la raison es écarts entre les moyennes de la fille",
@@ -879,14 +863,14 @@ export default Fiches = [
         ],
         [
           {
-            key: 'affiliesectiontitle',
+            key: 'beneficiairePersonneAffiliers',
             type: 'header',
             subtype: 'h3',
             label: "Informations relatives à la personne affilier à l'enfant",
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'affilie_personne_contacter',
+            key: 'nom',
             label: 'Nom de la personne à contacter',
             placeholder: 'Veuillez entrer le nom de la personne à contacter',
             maxlength: 30,
@@ -894,7 +878,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'affilie_Prenoms_de_la_personne_contacter',
+            key: 'prenom',
             label: 'Prénoms de la personne à contacter',
             placeholder: 'Veuillez entrer le nom de la personne à contacter',
             maxlength: 30,
@@ -902,7 +886,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'affilie_Contacts',
+            key: 'contact',
             label: 'Contacts',
             placeholder:
               'Veuillez entrer le/les contacts de la personne à contacter',
@@ -925,21 +909,21 @@ export default Fiches = [
       return [
         [
           {
-            key: 'collecteursectiontitle',
+            key: 'formation',
             type: 'header',
             subtype: 'h3',
             label: this.title,
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'Titre_formation',
+            key: 'libelle',
             label: 'Titre de la formation',
             placeholder:
               'Veuillez écrire le titre de la formation/thématique enseignée',
             required: true,
           },
           {
-            key: 'Date_formation',
+            key: 'dateDebut',
             label: 'Date de la la formation',
             placeholder: 'Veuillez écrire la date de la formation',
             required: true,
@@ -979,14 +963,14 @@ export default Fiches = [
         ],
         [
           {
-            key: 'collecteursectiontitle',
+            key: 'collecteur',
             type: 'header',
             subtype: 'h3',
             label: "Informations relatives à l'agent enregistreur",
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'animator_lastname',
+            key: 'nom',
             type: 'text',
             required: true,
             label: "Nom de l'animateur",
@@ -994,7 +978,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'animator_firstname',
+            key: 'prenom',
             label: "Prénoms de l'animateur",
             placeholder: 'Veuillez entrer votre/vos prénoms',
             type: 'text',
@@ -1003,7 +987,7 @@ export default Fiches = [
           },
           {
             key: 'Num_enregistrement',
-            label: 'Contact',
+            label: "Numéro d'enregistrement",
             placeholder: "Numéro d'enregistrement",
             type: 'text',
             required: true,
@@ -1013,7 +997,7 @@ export default Fiches = [
         ],
         [
           {
-            key: 'beneficiairesectiontitle',
+            key: 'beneficiaire',
             type: 'header',
             subtype: 'h3',
             label: 'Informations relatives à la fille',
@@ -1039,7 +1023,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_Sexe',
+            key: 'sexe',
             label: 'Sexe',
             placeholder: "Veuillez cochez le sexe de l'enfant enregistré",
             type: 'radio-group',
@@ -1058,7 +1042,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'beneficiaire_Age_de_l_enfant_enr_gistr',
+            key: 'age',
             label: "Age de l'enfant enrégistré",
             placeholder: "Veuillez entrer l'âge exacte de l'enfant enregistré",
             type: 'text',
@@ -1067,7 +1051,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_Niveau_d_tude_Classe',
+            key: 'niveauEtudeClasse',
             label: "Niveau d'étude/Classe",
             placeholder:
               "Veuillez entrer le niveau d'étude ou la classe de la fille",
@@ -1076,7 +1060,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'beneficiaire_Cible_directe',
+            key: 'cibleDirecte',
             label: 'Cible directe',
             placeholder:
               'Veuillez cochez si la cible est une cible directe ou pas',
@@ -1095,7 +1079,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'beneficiaire_Handicap',
+            key: 'handicape',
             label: 'Handicapé',
             placeholder:
               'Veuillez cocher si le bénéficiaire est handicapé ou non',
@@ -1114,7 +1098,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'Type_de_handicap',
+            key: 'typehandicap', // to check
             label: 'Type de handicap',
             placeholder:
               "Veuillez choisir le handicap de l'adolescent/bénéficiaire",
@@ -1153,7 +1137,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'beneficiaire_Contact',
+            key: 'contact',
             label: 'Contact',
             placeholder: 'Veuillez entrer le/les contacts du bénéficiaire',
             maxlength: 30,
@@ -1162,7 +1146,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'presence_mensuellement',
+            key: 'presencemensuelle', // to check
             label: 'Nombre de jours de présence/XXXX mensuellement',
             placeholder:
               'Précisez le nombre de jours de présence de aux formations du bénéficiaire',
@@ -1185,14 +1169,14 @@ export default Fiches = [
       return [
         [
           {
-            key: 'collecteursectiontitle',
+            key: 'collecteur',
             type: 'header',
             subtype: 'h3',
             label: "nformations relatives à l'agent collecteur/animateur",
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'animator_lastname',
+            key: 'nom',
             type: 'text',
             required: true,
             label: "Nom de l'agent collecteur",
@@ -1200,7 +1184,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'animator_firstname',
+            key: 'prenom',
             label: "Prénoms de l'agent collecteur",
             placeholder: 'Veuillez entrer vos Prénoms',
             type: 'text',
@@ -1208,7 +1192,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'fiche_Date',
+            key: 'dateCollecte',
             type: 'date',
             label: 'Date de la collecte',
             placeholder: 'Veuillez entrer la date',
@@ -1220,7 +1204,7 @@ export default Fiches = [
         ],
         [
           {
-            key: 'beneficiairesectiontitle',
+            key: 'beneficiaire',
             type: 'header',
             subtype: 'h3',
             label: 'Informations relatives à la fille',
@@ -1228,7 +1212,7 @@ export default Fiches = [
           },
 
           {
-            key: 'beneficiaire_Nom_de_l_enfant_enregistr',
+            key: 'nom',
             label: 'Nom de la fille',
             placeholder: 'Veuillez entrer le nom de la fille',
             type: 'text',
@@ -1236,7 +1220,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_Pr_noms_de_l_enfant_enregistr',
+            key: 'prenom',
             label: 'Prénoms de la fille',
             placeholder: 'Veuillez entrer le/les prénoms de la fille',
             type: 'text',
@@ -1244,14 +1228,14 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_N_Mll_EDUCMASTER',
+            key: 'numM2EducMaster',
             label: 'N° Mll /EDUCMASTER',
             placeholder: 'Veuillez entrer le numéro EDUCMASTER de la fille',
             type: 'text',
             required: true,
           },
           {
-            key: 'Date_de_naissance_de_la_fillle',
+            key: 'dateNaissance',
             type: 'date',
             label: 'Date de naissance de la fillle',
             placeholder: 'Veuillez entrer la date de naissance de la fille',
@@ -1261,7 +1245,7 @@ export default Fiches = [
             disabled: false,
           },
           {
-            key: 'beneficiaire_Lieu_de_naissance',
+            key: 'lieuNaissance',
             label: 'Lieu de naissance',
             placeholder: 'Veuillez entrer le lieu de naissance de la fille',
             type: 'text',
@@ -1297,7 +1281,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_Etablissement_Universit',
+            key: 'etablissementUniversite',
             label: 'Etablissement/Université',
             placeholder:
               "Veuillez entrer l'établissement/université de la fille",
@@ -1306,7 +1290,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'beneficiaire_Niveau_d_tude_Classe',
+            key: 'niveauEtudeClasse',
             label: "Niveau d'étude/Classe",
             placeholder:
               "Veuillez entrer le niveau d'étude ou la classe de la fille",
@@ -1315,7 +1299,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'beneficiaire_Type_d_appui',
+            key: 'typeAppui',
             label: "Type d'appui",
             placeholder:
               "Veuillez choisir le type d'appui dont bénéficie la fille",
@@ -1340,14 +1324,14 @@ export default Fiches = [
         ],
         [
           {
-            key: 'suiviitiontitle',
+            key: 'beneficiaire',
             type: 'header',
             subtype: 'h3',
             label: 'Informations relatives aux critères de suivi',
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'suivi_Connaissance_appui',
+            key: 'connaissanceAppui',
             label: "Connaissance de l'appui",
             placeholder:
               "Veuillez indiquer la connaissance qu'a l'enfant des appuis du projet",
@@ -1366,7 +1350,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'suivi_Fratrie',
+            key: 'fratrieEnfant',
             label: 'Fratrie',
             placeholder: "Veuillez indiquer si l'enfant à des frères ou sœurs",
             type: 'radio-group',
@@ -1384,7 +1368,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'suivi_flatrie_nombre',
+            key: 'nombreFratrie', // to check
             label: 'Si Oui, précisez le nombre.',
             placeholder:
               "Si l'enfant a des frères et sœurs, veuillez préciser le nombre",
@@ -1393,7 +1377,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'suivi_Type_de_famille',
+            key: 'typeFamille',
             label: 'Type de famille',
             placeholder:
               'Veuillez indiquer le type de famille est issue la fille',
@@ -1412,7 +1396,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'suivi_completude_appui_kits',
+            key: 'aRecuKit',
             label: "Complétude de l'appui (kits)",
             placeholder:
               "Veuillez indiquer la complétude (caractère complet du kit) de l'appui reçu par la fille",
@@ -1428,7 +1412,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'suivi_Encadrement',
+            key: 'encadrementMaison',
             label: 'Encadrement',
             placeholder:
               'Veuillez cocher si oui ou non la fille est encadré à la maison',
@@ -1448,7 +1432,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'suivi_Implication_parental_alogue_parent_enfant',
+            key: 'implicationParentale',
             label:
               "Implication parentale (appréciation du temps d'étude par rapport aux travaux domestiques, suivi des résultats par les parents, mise en œuvre dialogue parent-enfant)",
             placeholder:
@@ -1472,7 +1456,7 @@ export default Fiches = [
             ],
           },
           {
-            key: 'suivi_Appr_ciation_de_l_environnement_scolaire',
+            key: 'appreciationEnvironnementScolaire',
             label: "Appréciation de l'environnement scolaire",
             placeholder:
               "Veuillez indiquer l'appréciation qu'a la fille de son environnement scolaire",
@@ -1493,14 +1477,14 @@ export default Fiches = [
         ],
         [
           {
-            key: 'affiliesectiontitle',
+            key: 'beneficiairePersonneAffiliers',
             type: 'header',
             subtype: 'h3',
             label: 'Informations relatives à la personne à contacter',
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'affilie_personne_contacter',
+            key: 'nom',
             label: 'Nom de la personne à contacter',
             placeholder: 'Veuillez entrer le nom de la personne à contacter',
             maxlength: 30,
@@ -1508,7 +1492,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'affilie_Prenoms_de_la_personne_contacter',
+            key: 'prenom',
             label: 'Prénoms de la personne à contacter',
             placeholder: 'Veuillez entrer le nom de la personne à contacter',
             maxlength: 30,
@@ -1516,7 +1500,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'affilie_Contacts',
+            key: 'contact',
             label: 'Contacts',
             placeholder:
               'Veuillez entrer le/les contacts de la personne à contacter',
@@ -1539,14 +1523,14 @@ export default Fiches = [
       return [
         [
           {
-            key: 'collecteursectiontitle',
+            key: 'collecteur',
             type: 'header',
             subtype: 'h3',
             label: "Informations sur l'animateur",
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'animator_lastname',
+            key: 'nom',
             type: 'text',
             required: true,
             label: "Nom de l'agent enrégistreur",
@@ -1554,7 +1538,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'animator_firstname',
+            key: 'prenom',
             label: "Prénoms de l'agent enrégistreur",
             placeholder: 'Veillez entrer vos Prénoms',
             type: 'text',
@@ -1562,7 +1546,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'fiche_Date',
+            key: 'dateCollecte',
             type: 'date',
             label: 'Date',
             placeholder: 'Veuillez entrer la date de la collecte',
@@ -1573,14 +1557,14 @@ export default Fiches = [
         ],
         [
           {
-            key: 'beneficiairesectiontitle',
+            key: 'beneficiaire',
             type: 'header',
             subtype: 'h3',
             label: 'Informations relatives à la fille',
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'beneficiaire_N_Mll_EDUCMASTER',
+            key: 'numM2EducMaster',
             label: 'N° Mll /EDUCMASTER',
             placeholder: 'Veuillez entrer le numéro EDUCMASTER de la fille',
             type: 'text',
@@ -1589,7 +1573,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_Nom_de_l_enfant_enregistr',
+            key: 'nom',
             label: 'Nom de la fille',
             placeholder: 'Veuillez entrer le nom de la fille',
             type: 'text',
@@ -1597,7 +1581,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_Pr_noms_de_l_enfant_enregistr',
+            key: 'prenom',
             label: 'Prénoms de la fille',
             placeholder: 'Veuillez entrer le/les prénoms de la fille',
             type: 'text',
@@ -1605,7 +1589,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'Date_de_naissance_de_la_fillle',
+            key: 'dateNaissance',
             type: 'date',
             label: 'Date de naissance de la fillle',
             placeholder: 'Veuillez entrer la date de naissance de la fille',
@@ -1615,7 +1599,7 @@ export default Fiches = [
             disabled: false,
           },
           {
-            key: 'beneficiaire_Lieu_de_naissance',
+            key: 'lieuNaissance',
             label: 'Lieu de naissance',
             placeholder: 'Veuillez entrer le lieu de naissance de la fille',
             type: 'text',
@@ -1651,7 +1635,7 @@ export default Fiches = [
             maxlength: 30,
           },
           {
-            key: 'beneficiaire_Etablissement_Universit',
+            key: 'etablissementUniversite',
             label: 'Etablissement/Université',
             placeholder:
               "Veuillez entrer l'établissement/université de la fille",
@@ -1660,7 +1644,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'beneficiaire_Niveau_d_tude_Classe',
+            key: 'niveauEtudeClasse',
             label: "Niveau d'étude/Classe",
             placeholder:
               "Veuillez entrer le niveau d'étude ou la classe de la fille",
@@ -1669,7 +1653,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'beneficiaire_Type_d_appui',
+            key: 'typeAppui',
             label: "Type d'appui",
             placeholder:
               "Veuillez choisir le type d'appui dont bénéficie la fille",
@@ -1692,13 +1676,13 @@ export default Fiches = [
             ],
           },
           {
-            key: 'beneficiaire_vulnerabilite',
+            key: 'critereVulnerabilite',
             required: true,
             label: 'Critères de vulnérabilité',
             placeholder:
               'Veuillez choisir le critère de vulnérabilité de la fille',
             type: 'checkbox-group',
-            other: true, // optional
+            other: true,
             values: [
               {
                 label: 'OEV',
@@ -1725,23 +1709,22 @@ export default Fiches = [
         ],
         [
           {
-            key: 'affiliesectiontitle',
+            key: 'beneficiairePersonneAffiliers',
             type: 'header',
             subtype: 'h3',
             label: 'Informations relatives à la personne à contacter',
             style: styles.sectionTitleStyle,
           },
           {
-            key: 'affilie_personne_contacter',
+            key: 'nom',
             label: 'Nom de la personne à contacter',
             placeholder: 'Veuillez entrer le nom de la personne à contacter',
-
             maxlength: 30,
             type: 'text',
             required: true,
           },
           {
-            key: 'affilie_Prenoms_de_la_personne_contacter',
+            key: 'prenom',
             label: 'Prénoms de la personne à contacter',
             placeholder:
               'Veuillez entrer le/les prénoms de la personne à contacter',
@@ -1750,7 +1733,7 @@ export default Fiches = [
             required: true,
           },
           {
-            key: 'affilie_Contacts',
+            key: 'contact',
             label: 'Contacts',
             placeholder:
               'Veuillez entrer le/les contacts de la personne à contacter',
@@ -1772,7 +1755,6 @@ export default Fiches = [
   {
     id: 'ao4yESbsUPZZQWNtbno6ZK',
     title: 'FICHE DE SUIVI DE LA PERFORMANCE SCOLAIRE DE LA FILLE',
-
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
