@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import CollecteursItem from '../../../components/Worker/Lists/CollecteursItem';
 import Globals from '../../../Ressources/Globals';
-import Fetcher from '../../../API/fakeApi';
+import Fetcher from '../../../API/fetcher';
 import {styleCollecteursItem as styles} from '../../../Ressources/Styles';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -27,6 +27,7 @@ function Beneficiaires(route) {
   const [Beneficiaries, setBeneficiaries] = React.useState([]);
   const [spinner, setspinner] = React.useState(true);
   const [modalVisible, setmodalVisible] = React.useState(false);
+  const [page, setpage] = React.useState(1);
 
   React.useEffect(() => {
     //console.log(route.navigation.getParent());
@@ -41,7 +42,8 @@ function Beneficiaires(route) {
     setmodalVisible(true);
   };
   function _onSubmmitClick() {
-    Fetcher.GetBeneficiaires()
+    setspinner(true);
+    Fetcher.GetBeneficiaires('', page)
       .then(res => {
         if (res.beneficiaires) {
           setBeneficiaries(res.beneficiaires);
@@ -53,12 +55,16 @@ function Beneficiaires(route) {
         setspinner(false);
         if (!Globals.INTERNET) {
           toast_message(Globals.STRINGS.no_internet);
-          route.navigation.goBack();
+          
         } else {
           toast_message(`${err}`);
         }
       });
   }
+
+  const renderFooter = () => {
+    return <View style={styles.footer}>{spinner ? <LoadingDot /> : null}</View>;
+  };
 
   return (
     <SafeAreaView
@@ -66,7 +72,7 @@ function Beneficiaires(route) {
         backgroundColor: Globals.COLORS.white,
         flex: 1,
       }}>
-      {spinner ? (
+      {spinner && Beneficiaries.length === 0 ? (
         <LoadingDot />
       ) : (
         <FlatList
@@ -83,7 +89,8 @@ function Beneficiaires(route) {
             <CollecteursItem inter_Collecteurs={item} onclick={_show_content} />
           )}
           onEndReachedThreshold={0.5}
-          onEndReached={() => {}}
+          onEndReached={_onSubmmitClick}
+          ListFooterComponent={renderFooter}
         />
       )}
       <Modal

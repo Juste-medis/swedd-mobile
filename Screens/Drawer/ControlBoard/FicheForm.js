@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-import DynamicForm from '../../../components/Formifyer/DynamicForm/DynamicForm';
+import DynamicForm from '../../../components/Formifyer/forms/DynamicForm/DynamicForm';
 import {flatArrayBykey, toast_message} from '../../../Helpers/Utils';
 import {styleFicheForm as styles} from '../../../Ressources/Styles';
 import Globals from '../../../Ressources/Globals';
@@ -8,7 +8,8 @@ import Swiper from 'react-native-swiper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Toast from 'react-native-toast-message';
 import LoadingDot from '../../../components/Gadgets/Loading';
-import Fetcher from '../../../API/fakeApi';
+import Fetcher from '../../../API/fetcher';
+import {fakepost} from '../../../Ressources/Data/properties';
 
 let mainForm = [];
 function FicheForm(route) {
@@ -57,35 +58,20 @@ function FicheForm(route) {
       setcomponentloading(!componentloading);
     }
   }
-  function getFormResponses(responses) {
-    let allrep = {},
-      go = true;
-    console.log(refs);
 
-    for (let fi = 0; fi < refs.length; fi++) {
-      const actualForm = refs[fi],
-        firstElementkey = actualForm.props.form[0].key;
-
-      const responsesi = refs[fi]._getFormResponses();
-      var result = {};
-
-      let value = [
-        {key: 'impl1', label: 1},
-        {key: 'imp2', label: 2},
-        {key: 'imp3', label: 3},
-        {key: 'imp4', label: 4},
-      ].reduce(function () {});
-
-      [0, 1, 2, 3, 4].reduce(function (
-        accumulateur,
-        valeurCourante,
-        index,
-        array,
-      ) {
-        return accumulateur + valeurCourante;
+  async function getFormResponses(responses) {
+    let allrep = {
+        ...fakepost,
+        //categorieFiche: `/api/categorie_fiches/${set.id}`,
+        categorieFiche: '/api/categorie_fiches/2',
+        facilitateur: '/api/facilitateurs/1',
+        formationAnimateur: '/api/formation_animateurs/3',
+        sousProjet: '/api/sous_projets/1',
+        projet: '/api/projets/1',
       },
-      10);
-
+      go = true;
+    for (let fi = 0; fi < refs.length; fi++) {
+      const responsesi = refs[fi]._getFormResponses();
       if (responsesi === false) {
         go = false;
         Toast.show({
@@ -94,33 +80,59 @@ function FicheForm(route) {
         });
         break;
       }
-      Object.assign(allrep, responsesi);
+      const actualForm = refs[fi],
+        firstElementkey = actualForm.props.form[0].key;
+      var property = {};
+      for (let pi = 0; pi < actualForm.props.form.length; pi++) {
+        const actpo = actualForm.props.form[pi];
+        if (firstElementkey !== actpo.key) {
+          if (actpo.type === 'select' && !actpo.multiple) {
+            property[actpo.key] = responsesi[actpo.key]?.userAnswer[0];
+          } else {
+            property[actpo.key] = responsesi[actpo.key]?.userAnswer;
+          }
+        }
+      }
+      Object.assign(allrep, {
+        [firstElementkey]: {...fakepost[firstElementkey], ...property},
+      });
     }
-    if (0) {
+
+    if (go) {
       setsubmiting('submiting');
-      Fetcher.PostFiche(JSON.stringify(allrep))
+
+      let {beneficiaire, collecteurtitle} = allrep;
+      let {quartier, arrondissement} = beneficiaire;
+
+      if (collecteurtitle) {
+        allrep.collecteur = collecteurtitle.collecteur;
+      }
+      if (quartier) {
+        allrep.quartier = allrep.beneficiaire.quartier = {
+          libelle: quartier,
+          arrondissement: `/api/arrondissements/${arrondissement}`,
+        };
+      }
+      allrep.beneficiaire.facilitateur = allrep.facilitateur;
+
+      console.log(allrep);
+      console.log('--------------------');
+      Fetcher.PostFiche(allrep)
         .then(res => {
-          if (res.error) {
+          console.log(res);
+          if (res['@type'] === 'hydra:Error') {
             Toast.show({
               type: 'error',
-              text1: res.error,
+              text1: res['hydra:description'],
             });
             setsubmiting('progress');
           } else {
             Toast.show({
               type: 'success',
-              text1: 'Bienvenu',
+              text1: 'La fiche a bien été soumise !',
               text2: res.success,
             });
             setsubmiting('submited');
-            /*todo
-          Storer.storeData('@ProfilInfo', {...res, username, password}).then(
-            () => {
-              Storer.storeData('@USER_TYPE', 1).then(() => {
-                RNReastart.Restart();
-              });
-            },
-          );*/
           }
         })
         .catch(err => {
@@ -188,7 +200,7 @@ function FicheForm(route) {
                       disabled: submiting === 'submiting',
                       buttonStyle: {
                         backgroundColor: Globals.COLORS.primary,
-                        height: 40,
+                        height: 50,
                         marginTop: 20,
                         borderRadius: 50,
                       },

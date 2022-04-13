@@ -3,13 +3,7 @@ import {Button} from 'react-native-elements';
 
 import styles from './styles';
 
-const ButtonValidate = ({
-  label,
-  onPress,
-  buttonStyle,
-  buttonTextStyle,
-  disabled,
-}) => (
+const ButtonValidate = ({onPress, buttonStyle, disabled}) => (
   <Button
     buttonStyle={[
       styles.buttonContainer,
@@ -18,6 +12,7 @@ const ButtonValidate = ({
         opacity: disabled ? 0.5 : 1,
       },
     ]}
+    loadingProps={{color: 'black', size: 'large'}}
     onPress={onPress}
     loading={disabled}
     disabled={disabled}

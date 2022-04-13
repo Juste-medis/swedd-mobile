@@ -1,70 +1,92 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {ScrollView, Text, View} from 'react-native';
-import {styleAccount as styles} from '../../../Ressources/Styles';
-import {styleControlBoard as stylesc} from '../../../Ressources/Styles';
-import Icon from 'react-native-vector-icons/AntDesign';
-import SimpleRipple from '../../../components/Touchable/SimpleRipple';
-import Fiches from '../../../Ressources/Data/Fiches';
+import {FlatList, SafeAreaView} from 'react-native';
+import MyfichesItem from '../../../components/Worker/Lists/myfichesItem';
+import Globals from '../../../Ressources/Globals';
+import Fetcher from '../../../API/fakeApi';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {AddProfilItem} from '../../../Store/Actions';
+import {toast_message} from '../../../Helpers/Utils';
+import EmptyThing from '../../../components/Gadgets/EmptyThing';
+import LoadingDot from '../../../components/Gadgets/Loading';
+function FichesList({route}) {
+  const fichestate = route.params.fichestate;
+  const [fiches, setfiches] = React.useState([]);
+  const [spinner, setspinner] = React.useState(true);
 
-function FichesList(route) {
   React.useEffect(() => {
-    //route.AddProfilItem({ key: "visitedcourses", data: "^^^^^^^^^^^^^^^^^" });
+    //console.log(route.navigation.getParent());
+    //route.navigation.getParent().setOptions({title: 'Animateur'});
+    //route.navigation.setParams({title: 'Animateur'});
+    _onSubmmitClick();
+    return () => {};
   }, []);
 
-  const menu_main = data => {
-    return (
-      <View style={{width: '100%'}}>
-        {data.map((item, index) => {
-          return (
-            <View key={item.id} style={stylesc.main_menu_indider}>
-              <SimpleRipple
-                style={[styles.menu_item, stylesc.menu_item]}
-                onPress={() => {
-                  route.navigation.navigate('FicheForm', {set: item});
-                }}
-                rippleColor={item.variant}>
-                <View style={stylesc.main_menu_top}>
-                  <View
-                    style={{
-                      ...stylesc.icon_containter_ficheli,
-                      backgroundColor: `rgba(${item.variant},.1)`,
-                    }}>
-                    <Icon
-                      name={item.icon}
-                      size={50}
-                      color={`rgb(${item.variant})`}
-                    />
-                  </View>
-                  <Text
-                    style={{
-                      ...stylesc.prop_unity_value,
-                    }}>
-                    {item.meta_thing}
-                  </Text>
-                </View>
-                <View style={stylesc.main_menu_bottom}>
-                  <Text
-                    style={{
-                      ...styles.prop_unity_value,
-                      ...stylesc.prop_unity_valuei,
-                    }}>
-                    {item.title}
-                  </Text>
-                  <Text style={stylesc.description}>{item.description}</Text>
-                </View>
-              </SimpleRipple>
-            </View>
-          );
-        })}
-      </View>
-    );
+  const _show_content = param => {
+    let selected = fiches.find(mes => mes.id === param.id);
+    route.navigation.navigate('FicheForm', {set: selected, selected});
+    //setmodalVisible(true);
   };
 
+  function _onSubmmitClick() {
+    Fetcher.GetFiches({fichestate})
+      .then(res => {
+        if (res.error) {
+          toast_message(res.error);
+        } else if (res.fiches) {
+          setfiches(res.fiches);
+          //Storer.storeData('@fiches', res.beneficiaires);
+        }
+        setspinner(false);
+      })
+      .catch(err => {
+        setspinner(false);
+        if (!Globals.INTERNET) {
+          toast_message(Globals.STRINGS.no_internet);
+        } else {
+          toast_message(`${err}`);
+        }
+      });
+  }
+
   return (
-    <ScrollView style={stylesc.main_container}>
-      <View style={[styles.main_container]}>{menu_main(Fiches)}</View>
-    </ScrollView>
+    <SafeAreaView
+      style={{
+        backgroundColor: Globals.COLORS.white,
+        flex: 1,
+      }}>
+      {spinner ? (
+        <LoadingDot />
+      ) : (
+        <FlatList
+          style={{flex: 1, backgroundColor: Globals.COLORS.white}}
+          data={fiches}
+          ListEmptyComponent={
+            <EmptyThing
+              style={{marginTop: 50}}
+              message="Aucune fiches enrégistrée !"
+            />
+          }
+          keyExtractor={item => `notitem${item.id}`}
+          renderItem={({item}) => (
+            <MyfichesItem
+              fichestate={fichestate}
+              inter_Collecteurs={item}
+              onclick={_show_content}
+            />
+          )}
+          onEndReachedThreshold={0.5}
+          onEndReached={() => {}}
+        />
+      )}
+    </SafeAreaView>
   );
 }
-
-export default FichesList;
+const mapStateToProps = state => {
+  const {my_profil} = state;
+  return {my_profil};
+};
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({AddProfilItem}, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(FichesList);

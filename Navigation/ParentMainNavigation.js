@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/drawer';
 import Profil from './Stack/ProfileNavigation';
 import About from './Stack/AboutNavigation';
+import Helps from './Stack/HelpsNavigation';
 import Notification from './Stack/NotificationNavigation';
 import Parameter from './Stack/ParameterNavigation';
 import ControlBoard from './Stack/ControlBoardNavigation';
@@ -105,7 +106,7 @@ function ParentMainNavigation() {
         ) : null}
         <Drawer.Screen
           name="MainFeedBack"
-          component={About}
+          component={Helps}
           options={{
             drawerItemStyle: {
               borderColor: Globals.COLORS.grey,
@@ -175,7 +176,7 @@ const CustomSidebarMenu = props => {
               Globals.PROFIL_INFO.prenom.toUpperCase().charAt(0) +
               '.'}
           </Text>
-          <Text style={styles.mail_title}>{Globals.PROFIL_INFO.mail}</Text>
+          <Text style={styles.mail_title}>{Globals.PROFIL_INFO.contact}</Text>
         </View>
         {state.routes.map((route, i) => {
           const {activeTintColor, drawerIcon, title, first, groupName} =
@@ -197,7 +198,7 @@ const CustomSidebarMenu = props => {
                       {groupName}
                     </Text>
                   )}
-                  {!first && <View style={styles.sectionLine} />}
+                  <View style={styles.sectionLine} />
                 </View>
               ) : null}
               <DrawerItem
@@ -260,7 +261,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
   buts_style: {
     width: 200,
@@ -285,15 +287,15 @@ const styles = StyleSheet.create({
   },
   image_avatar: {
     borderRadius: 70,
-    height: 130,
-    width: 130,
+    height: 100,
+    width: 100,
     shadowColor: 'black',
     shadowOffset: {height: 10, width: 10},
     shadowOpacity: 0.5,
     shadowRadius: 1,
   },
   sectionLine: {
-    backgroundColor: 'gray',
+    backgroundColor: '#dddddd',
     flex: 1,
     height: 1,
     marginLeft: 10,

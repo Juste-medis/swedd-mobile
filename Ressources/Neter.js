@@ -1,5 +1,5 @@
 const Globals = {
-  uri3: "http://217.160.170.119",
+  uri3: 'https://young-badlands-98424.herokuapp.com',
 };
 const expGloal = {
   uri1: Globals.uri3,

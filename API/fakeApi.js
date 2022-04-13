@@ -8,7 +8,9 @@ import {
   formations,
   kits,
 } from '../Ressources/Data/properties';
+import Globals from '../Ressources/Globals';
 import Neter from '../Ressources/Neter';
+import Storer from './storer';
 const baseUrl = Neter.uri1;
 
 async function resolveresponse(obj) {
@@ -44,19 +46,117 @@ let Fetcher = {
     return await result;
   },
   PostFiche: async function (setdada) {
-    //{beneficiaire:{nom,prenom,...},collecteur:{nom,prenom,...},...}
+    //{ficheid,beneficiaire:{nom,prenom,...},collecteur:{nom,prenom,...},...}
     //=>{error,success}
-    const result = await new Promise(resolve => {
-      setTimeout(() => {
-        resolve({
-          success: 'Fiche Envoyée.',
-        });
-      }, 3000);
-    });
-    return await result;
+    if (Globals.INTERNET) {
+    } else {
+      let Fiche = JSON.parse(setdada);
+      Fiche._date = Date.now();
+      Fiche._unsynced = true;
+
+      let fiches = await Storer.getData('@QuedFiche');
+      let afiches = await Storer.getData('@OfflineFiche');
+      //sauvegarder dans la liste des non envoyé
+      if (fiches) {
+        fiches.push(Fiche);
+      } else {
+        fiches = [Fiche];
+      }
+      //sauvegarder dans la liste des fiches offlines
+      if (afiches) {
+        afiches.push(Fiche);
+      } else {
+        afiches = [Fiche];
+      }
+      await Storer.storeData('@QuedFiche', fiches);
+      Storer.storeData('@OfflineFiche', afiches);
+
+      return {
+        success_offline: 'Fiche enrégistrée ! (connexion indisponible)',
+      };
+    }
   },
-  GetMessages: async function (setdada) {
-    //{type (notification ou message) } / {error}
+  PostBeneficiaire: async function (setdada) {
+    //{ficheid,beneficiaire:{nom,prenom,...},collecteur:{nom,prenom,...},...}
+    //=>{error,success}
+    //if (Globals.INTERNET) {
+    if (false) {
+      //a supprimmer
+    } else {
+      let Fiche = JSON.parse(setdada);
+      Fiche._date = Date.now();
+      Fiche._unsynced = true;
+
+      let fiches = await Storer.getData('@QuedFiche');
+      let afiches = await Storer.getData('@OfflineFiche');
+      //sauvegarder dans la liste des non envoyé
+      if (fiches) {
+        fiches.push(Fiche);
+      } else {
+        fiches = [Fiche];
+      }
+      //sauvegarder dans la liste des fiches offlines
+      if (afiches) {
+        afiches.push(Fiche);
+      } else {
+        afiches = [Fiche];
+      }
+      await Storer.storeData('@QuedFiche', fiches);
+      Storer.storeData('@OfflineFiche', afiches);
+
+      return {
+        success_offline: 'Fiche enrégistrée ! (connexion indisponible)',
+      };
+    }
+  },
+  GetFiches: async function (data) {
+    //{fichestate (all,review,rejected,accepted) }
+    //=> {error,fiches}
+    //if (Globals.INTERNET) {
+    if (false) {
+      //a supprimmer
+    } else {
+      let afiches = await Storer.getData('@OfflineFiche');
+      afiches = afiches || [];
+      switch (data.fichestate) {
+        case 'review':
+          //todo : get plutot a base de propriété mes et de fichestate
+          afiches = afiches.filter((mes, index) => index > 3 && index < 9);
+          break;
+        case 'rejected':
+          //todo : get plutot a base de propriété mes et de fichestate
+          afiches = afiches.filter((mes, index) => index > 0 && index < 4);
+          break;
+        case 'accepted':
+          //todo : get plutot a base de propriété mes et de fichestate
+          afiches = afiches.filter((mes, index) => index > 8 && index < 13);
+          break;
+        default:
+          afiches = afiches;
+          break;
+      }
+      return {
+        fiches: afiches,
+      };
+    }
+  },
+  /*
+   Storer.getData("@SAVED_NOTES").then((dati) => {
+              if (dati) {
+                let notes = dati.find((e) => e.id == id);
+                notes.content = notes.content.filter((e) => e.id != note.id);
+                dati = dati.filter((e) => e.id != id);
+                dati.push(notes);
+                Storer.storeData("@SAVED_NOTES", dati);
+              }
+              ToastAndroid.show(
+                Globals.STRINGS.suceffully_delete,
+                ToastAndroid.LONG
+              );
+              navigation.pop();
+            });
+*/ GetMessages: async function (setdada) {
+    //{type (notification ou message) }
     //=> {error,messages}
     const result = await new Promise(resolve => {
       setTimeout(() => {
@@ -68,7 +168,6 @@ let Fetcher = {
     });
     return await result;
   },
-
   /**
  GetCollecteurs: async function (data, cache) {
     //=> {error,collecteurs}
@@ -147,23 +246,6 @@ let Fetcher = {
         return {
           id: i + 1,
           libelle: kits[generateRandom(kits.length)],
-        };
-      }),
-    });
-  },
-  GetFiches: async function (data) {
-    //=> {error,beneficiaires}
-    return await resolveresponse({
-      collecteurs: Array.apply(null, Array(30)).map(function (x, i) {
-        return {
-          fiches: Array.apply(null, Array(80)).map(function (x, i) {
-            const radi = generateRandom(Fiches.length);
-            return {
-              id: i + 1,
-              id_fiche: Fiches[radi].id,
-              title: Fiches[radi].title,
-            };
-          }),
         };
       }),
     });

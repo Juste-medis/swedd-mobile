@@ -53,7 +53,7 @@ function Formations(route) {
         setspinner(false);
         if (!Globals.INTERNET) {
           toast_message(Globals.STRINGS.no_internet);
-          route.navigation.goBack();
+          
         } else {
           toast_message(`${err}`);
         }

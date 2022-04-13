@@ -97,15 +97,6 @@ export default class DynamicForm extends Component {
     // loop through form to populate default values
     _.each(form, element => {
       switch (element.type) {
-        case 'radio-group':
-          const selectedValue = _.find(element.values, value => value.selected);
-          if (selectedValue) {
-            _.set(responses, element.key, {
-              ...element,
-              userAnswer: selectedValue.value,
-            });
-          }
-          break;
         case 'starRating':
         case 'number':
         case 'date':
@@ -119,35 +110,44 @@ export default class DynamicForm extends Component {
           }
           break;
         case 'select':
-          const selectedValues = _.filter(
-            element.values,
-            value => value.selected,
-          );
-          if (!_.isEmpty(selectedValues)) {
+          if (element.value) {
             _.set(responses, element.key, {
               ...element,
               userAnswer: [],
             });
-            _.each(selectedValues, value => {
-              responses[element.key].userAnswer.push(value.value);
+            _.each(element.value, value => {
+              responses[element.key].userAnswer.push(value);
+            });
+          }
+          break;
+        case 'radio-group':
+          if (element.value) {
+            _.set(responses, element.key, {
+              ...element,
+              userAnswer: element.value,
             });
           }
           break;
         case 'checkbox-group':
-          const valuesSelected = _.filter(
-            element.values,
-            value => value.selected,
-          );
-          if (!_.isEmpty(selectedValues)) {
+          const valuesSelected = element.value;
+          if (!_.isEmpty(valuesSelected)) {
             _.set(responses, element.key, {
               ...element,
               userAnswer: {
                 regular: [],
+                other: [],
               },
             });
-            _.each(valuesSelected, value => {
-              responses[element.key].userAnswer.regular.push(value.value);
-            });
+            if (valuesSelected.regular) {
+              _.each(valuesSelected.regular, value => {
+                responses[element.key].userAnswer.regular.push(value);
+              });
+            }
+            if (valuesSelected.other) {
+              _.each(valuesSelected.other, value => {
+                responses[element.key].userAnswer.other.push(value);
+              });
+            }
           }
           break;
         default:
@@ -290,6 +290,7 @@ export default class DynamicForm extends Component {
                 required={required}
                 error={this.state.errors[key]}
                 {...checkOptions}
+                placeholder={element.placeholder}
                 label={label}
                 options={element.values}
                 onCheckboxValueChanged={value => {

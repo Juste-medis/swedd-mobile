@@ -11,9 +11,8 @@ import {
 } from 'react-native';
 import CollecteursItem from '../../../components/Worker/Lists/CollecteursItem';
 import Globals from '../../../Ressources/Globals';
-import Fetcher from '../../../API/fakeApi';
+import Fetcher from '../../../API/fetcher';
 import {styleCollecteursItem as styles} from '../../../Ressources/Styles';
-import Storer from '../../../API/storer';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {AddProfilItem} from '../../../Store/Actions';
@@ -22,12 +21,14 @@ import EmptyThing from '../../../components/Gadgets/EmptyThing';
 import LoadingDot from '../../../components/Gadgets/Loading';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Image} from 'react-native-elements';
+import Storer from '../../../API/storer';
 
 let notides = {uri: '', text: 'toto'};
 function Collectors(route) {
   const [Collecteurs, setCollecteurs] = React.useState([]);
   const [spinner, setspinner] = React.useState(true);
   const [modalVisible, setmodalVisible] = React.useState(false);
+  const [page, setpage] = React.useState(1);
 
   React.useEffect(() => {
     //console.log(route.navigation.getParent());
@@ -42,41 +43,40 @@ function Collectors(route) {
     setmodalVisible(true);
   };
   function _onSubmmitClick() {
-    Storer.getData('@Collecteurs')
-      .then(data => {
-        if (data) {
-          setCollecteurs(data);
-          setspinner(false);
-        } else {
-          Fetcher.GetCollecteurs()
-            .then(res => {
-              if (res.collecteurs) {
-                setCollecteurs(res.collecteurs);
-                //Storer.storeData('@Collecteurs', res.collectors);
-              }
-              setspinner(false);
-            })
-            .catch(err => {
-              setspinner(false);
-              if (!Globals.INTERNET) {
-                toast_message(Globals.STRINGS.no_internet);
-                route.navigation.goBack();
-              } else {
-                toast_message(`${err}`);
-              }
-            });
+    setspinner(true);
+    Fetcher.GetCollecteurs('', page)
+      .then(res => {
+        if (res.collecteurs) {
+          setpage(page + 1);
+          const fetched = [...Collecteurs, ...res.collecteurs];
+          setCollecteurs(fetched);
+          Storer.storeData('@Collecteurs', fetched);
         }
+        setspinner(false);
       })
       .catch(err => {
         setspinner(false);
         if (!Globals.INTERNET) {
           toast_message(Globals.STRINGS.no_internet);
-          route.navigation.goBack();
+          
         } else {
           toast_message(`${err}`);
         }
       });
   }
+
+  const renderFooter = () => {
+    return (
+      <View style={styles.footer}>
+        {spinner ? (
+          <ActivityIndicator
+            color={Globals.COLORS.primary}
+            style={{marginLeft: 8}}
+          />
+        ) : null}
+      </View>
+    );
+  };
 
   return (
     <SafeAreaView
@@ -84,7 +84,7 @@ function Collectors(route) {
         backgroundColor: Globals.COLORS.white,
         flex: 1,
       }}>
-      {spinner ? (
+      {spinner && Collecteurs.length === 0 ? (
         <LoadingDot />
       ) : (
         <FlatList
@@ -98,7 +98,8 @@ function Collectors(route) {
             <CollecteursItem inter_Collecteurs={item} onclick={_show_content} />
           )}
           onEndReachedThreshold={0.5}
-          onEndReached={() => {}}
+          onEndReached={_onSubmmitClick}
+          ListFooterComponent={renderFooter}
         />
       )}
       <Modal

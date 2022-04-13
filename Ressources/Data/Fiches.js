@@ -9,12 +9,29 @@ import {
 } from './properties';
 import {styleFicheForm as styles} from '../../Ressources/Styles';
 
+const collectteurfield = {
+  key: 'collecteur',
+  type: 'select',
+  label: 'Agent enrégistreur',
+  multiple: false,
+  searchInputPlaceholder: 'Veillez sélectionner le collecteur',
+  value: ['/api/collecteurs/1'],
+  values: [
+    {
+      label: 'SISI',
+      value: '/api/collecteurs/1',
+    },
+    {
+      label: 'Cokou',
+      value: '/api/collecteurs/2',
+    },
+  ],
+};
 /* eslint-disable no-unused-vars */
 let Fiches;
-
 export default Fiches = [
   {
-    id: 'afhRrQdK2NjsBUeou5d8mr',
+    id: 1,
     title:
       "FICHE D'ENREGISTREMENT DES ADOLESCENTES ET ADOLESCENTS DE 10 - 24 ANS",
     meta_thing: 'Natacha C. G. BAMEYNOU',
@@ -25,7 +42,7 @@ export default Fiches = [
       return [
         [
           {
-            key: 'title',
+            key: 'beneficiaire',
             type: 'header',
             subtype: 'h3',
             label: this.title,
@@ -60,7 +77,7 @@ export default Fiches = [
             values: arrondissements,
           },
           {
-            key: 'village',
+            key: 'quartier',
             type: 'text',
             required: true,
             label: 'Village',
@@ -70,53 +87,13 @@ export default Fiches = [
         ],
         [
           {
-            key: 'collecteur',
+            key: 'collecteurtitle',
             type: 'header',
             subtype: 'h3',
             label: "Informations relatives à l'agent enregistreur",
             style: styles.sectionTitleStyle,
           },
-          {
-            key: 'nom',
-            type: 'text',
-            required: true,
-            label: "Nom de l'agent enrégistreur",
-            placeholder: 'veillez entrer votre nom',
-            maxlength: 30,
-          },
-          {
-            key: 'prenom',
-            label: "Prénoms de l'agent enrégistreur",
-            placeholder: 'Veillez entrer vos Prénoms',
-            type: 'text',
-            required: true,
-            maxlength: 30,
-          },
-          {
-            key: 'contacts_collecteur',
-            label: 'Contact',
-            placeholder: 'Veuillez écrire votre numéro',
-            type: 'text',
-            required: true,
-            subtype: 'tel',
-            maxlength: 30,
-          },
-          {
-            key: 'nom_superviseur',
-            label: 'Nom du superviseur',
-            placeholder: 'Veuillez écrire le nom de votre superviseur',
-            type: 'textarea',
-            required: true,
-            maxlength: 30,
-          },
-          {
-            key: 'prenom_superviseur',
-            label: 'Prénoms du superviseur',
-            placeholder: 'Veuillez écrire le/les prénoms de votre superviseur',
-            type: 'text',
-            required: true,
-            maxlength: 30,
-          },
+          collectteurfield,
         ],
         [
           {
@@ -163,12 +140,12 @@ export default Fiches = [
             values: [
               {
                 label: 'Féminin',
-                value: 'f_minin',
+                value: 'F',
                 selected: true,
               },
               {
                 label: 'Masculin',
-                value: 'masculin',
+                value: 'M',
               },
             ],
           },
@@ -178,7 +155,7 @@ export default Fiches = [
             placeholder: "Veuillez entrer l'âge exacte de l'enfant enregistré",
             type: 'text',
             required: true,
-            subtype: 'tel',
+            subtype: 'number',
             maxlength: 30,
           },
           {
@@ -314,7 +291,7 @@ export default Fiches = [
     },
   },
   {
-    id: 'akFuu3Yjwnp2LQCyX2pndK',
+    id: 2,
     title: "FICHE D'ENREGISTREMENT DES FILLES",
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
@@ -324,37 +301,13 @@ export default Fiches = [
       return [
         [
           {
-            key: 'collecteur',
+            key: 'collecteurtitle',
             type: 'header',
             subtype: 'h3',
-            label: "Informations sur l'animateur",
+            label: "Informations relatives à l'agent enregistreur",
             style: styles.sectionTitleStyle,
           },
-          {
-            key: 'nom',
-            type: 'text',
-            required: true,
-            label: "Nom de l'agent enrégistreur",
-            placeholder: 'veillez entrer votre nom',
-            maxlength: 30,
-          },
-          {
-            key: 'prenom',
-            label: "Prénoms de l'agent enrégistreur",
-            placeholder: 'Veillez entrer vos Prénoms',
-            type: 'text',
-            required: true,
-            maxlength: 30,
-          },
-          {
-            key: 'dateCollecte',
-            type: 'date',
-            label: 'Date',
-            placeholder: 'Veuillez entrer la date de la collecte',
-            value: '',
-            dateFormat: 'DD-MM-YYYY',
-            disabled: false,
-          },
+          collectteurfield,
         ],
         [
           {
@@ -419,7 +372,7 @@ export default Fiches = [
             values: arrondissements,
           },
           {
-            key: 'village',
+            key: 'quartier',
             type: 'text',
             required: true,
             label: 'Village/Quartier/Maison',
@@ -570,7 +523,7 @@ export default Fiches = [
     },
   },
   {
-    id: 'aM3G3UPxF73u25wtrjPcmh',
+    id: 3,
     title: 'FICHE DE SUIVI SCOLAIRE',
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
@@ -580,38 +533,13 @@ export default Fiches = [
       return [
         [
           {
-            key: 'collecteur',
+            key: 'collecteurtitle',
             type: 'header',
             subtype: 'h3',
-            label: "Informations relatives à l'animateur",
+            label: "Informations relatives à l'agent enregistreur",
             style: styles.sectionTitleStyle,
           },
-          {
-            key: 'nom',
-            type: 'text',
-            required: true,
-            label: "Nom de l'animateur",
-            placeholder: 'Veuillez entrer votre nom',
-            maxlength: 30,
-          },
-          {
-            key: 'prenom',
-            label: "Prénoms de l'animateur",
-            placeholder: 'Veuillez entrer votre/vos prénoms ',
-            type: 'text',
-            required: true,
-            maxlength: 30,
-          },
-          {
-            key: 'dateCollecte',
-            type: 'date',
-            label: 'Date',
-            placeholder: 'Veuillez entrer la date de la collecte',
-            value: new Date().toISOString(),
-            dateFormat: 'DD-MM-YYYY',
-            required: true,
-            disabled: false,
-          },
+          collectteurfield,
         ],
         [
           {
@@ -682,7 +610,16 @@ export default Fiches = [
             values: communes,
           },
           {
-            key: 'village',
+            key: 'arrondissement',
+            type: 'select',
+            label: 'ARRONDISSEMENTS',
+            dependencie: ['commune', 'COMMUNES'],
+            multiple: false,
+            searchInputPlaceholder: "Veuillez sélectionner l'arrondissement",
+            values: arrondissements,
+          },
+          {
+            key: 'quartier',
             type: 'text',
             required: true,
             label: 'Village/Quartier/Maison',
@@ -899,7 +836,7 @@ export default Fiches = [
     },
   },
   {
-    id: 'a7tNTKTTwC88ztZg47jxR8',
+    id: 4,
     title: 'LISTE DE PRESENCE DES PARTICIPANTS AUX FORMATIONS',
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
@@ -963,37 +900,13 @@ export default Fiches = [
         ],
         [
           {
-            key: 'collecteur',
+            key: 'collecteurtitle',
             type: 'header',
             subtype: 'h3',
             label: "Informations relatives à l'agent enregistreur",
             style: styles.sectionTitleStyle,
           },
-          {
-            key: 'nom',
-            type: 'text',
-            required: true,
-            label: "Nom de l'animateur",
-            placeholder: 'veillez entrer votre nom',
-            maxlength: 30,
-          },
-          {
-            key: 'prenom',
-            label: "Prénoms de l'animateur",
-            placeholder: 'Veuillez entrer votre/vos prénoms',
-            type: 'text',
-            required: true,
-            maxlength: 30,
-          },
-          {
-            key: 'Num_enregistrement',
-            label: "Numéro d'enregistrement",
-            placeholder: "Numéro d'enregistrement",
-            type: 'text',
-            required: true,
-            subtype: 'tel',
-            maxlength: 30,
-          },
+          collectteurfield,
         ],
         [
           {
@@ -1003,7 +916,15 @@ export default Fiches = [
             label: 'Informations relatives à la fille',
             style: styles.sectionTitleStyle,
           },
-
+          {
+            key: 'departement',
+            type: 'select',
+            label: 'DEPARTEMENTS',
+            multiple: false,
+            searchInputPlaceholder: 'Veuillez sélectionner le département',
+            values: departements,
+            dependent: 'commune',
+          },
           {
             key: 'commune',
             type: 'select',
@@ -1015,7 +936,16 @@ export default Fiches = [
             values: communes,
           },
           {
-            key: 'village',
+            key: 'arrondissement',
+            type: 'select',
+            label: 'ARRONDISSEMENTS',
+            dependencie: ['commune', 'COMMUNES'],
+            multiple: false,
+            searchInputPlaceholder: "Veuillez sélectionner l'arrondissement",
+            values: arrondissements,
+          },
+          {
+            key: 'quartier',
             type: 'text',
             required: true,
             label: 'Village',
@@ -1032,12 +962,12 @@ export default Fiches = [
             values: [
               {
                 label: 'Féminin',
-                value: 'f_minin',
+                value: 'F',
                 selected: true,
               },
               {
                 label: 'Masculin',
-                value: 'masculin',
+                value: 'M',
               },
             ],
           },
@@ -1047,7 +977,7 @@ export default Fiches = [
             placeholder: "Veuillez entrer l'âge exacte de l'enfant enregistré",
             type: 'text',
             required: true,
-            subtype: 'tel',
+            subtype: 'number',
             maxlength: 30,
           },
           {
@@ -1070,11 +1000,11 @@ export default Fiches = [
             values: [
               {
                 label: 'Oui',
-                value: 'oui',
+                value: true,
               },
               {
                 label: 'Non',
-                value: 'non',
+                value: false,
               },
             ],
           },
@@ -1089,11 +1019,11 @@ export default Fiches = [
             values: [
               {
                 label: 'Oui',
-                value: 'oui',
+                value: true,
               },
               {
                 label: 'Non',
-                value: 'non',
+                value: false,
               },
             ],
           },
@@ -1159,7 +1089,7 @@ export default Fiches = [
     },
   },
   {
-    id: 'a8McuuWNb9RNitPXVFEo38',
+    id: 5,
     title: 'FICHE DE SUIVI A DOMICILE',
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
@@ -1169,38 +1099,13 @@ export default Fiches = [
       return [
         [
           {
-            key: 'collecteur',
+            key: 'collecteurtitle',
             type: 'header',
             subtype: 'h3',
-            label: "nformations relatives à l'agent collecteur/animateur",
+            label: "Informations relatives à l'agent enregistreur",
             style: styles.sectionTitleStyle,
           },
-          {
-            key: 'nom',
-            type: 'text',
-            required: true,
-            label: "Nom de l'agent collecteur",
-            placeholder: 'veuillez entrer votre nom',
-            maxlength: 30,
-          },
-          {
-            key: 'prenom',
-            label: "Prénoms de l'agent collecteur",
-            placeholder: 'Veuillez entrer vos Prénoms',
-            type: 'text',
-            required: true,
-            maxlength: 30,
-          },
-          {
-            key: 'dateCollecte',
-            type: 'date',
-            label: 'Date de la collecte',
-            placeholder: 'Veuillez entrer la date',
-            value: new Date().toISOString(),
-            dateFormat: 'DD-MM-YYYY',
-            required: true,
-            disabled: false,
-          },
+          collectteurfield,
         ],
         [
           {
@@ -1210,7 +1115,6 @@ export default Fiches = [
             label: 'Informations relatives à la fille',
             style: styles.sectionTitleStyle,
           },
-
           {
             key: 'nom',
             label: 'Nom de la fille',
@@ -1272,7 +1176,16 @@ export default Fiches = [
             values: communes,
           },
           {
-            key: 'village',
+            key: 'arrondissement',
+            type: 'select',
+            label: 'ARRONDISSEMENTS',
+            dependencie: ['commune', 'COMMUNES'],
+            multiple: false,
+            searchInputPlaceholder: "Veuillez sélectionner l'arrondissement",
+            values: arrondissements,
+          },
+          {
+            key: 'quartier',
             type: 'text',
             required: true,
             label: 'Village/Quartier/Maison',
@@ -1341,11 +1254,11 @@ export default Fiches = [
             values: [
               {
                 label: 'Oui',
-                value: 'oui',
+                value: true,
               },
               {
                 label: 'Non',
-                value: 'non',
+                value: false,
               },
             ],
           },
@@ -1359,11 +1272,11 @@ export default Fiches = [
             values: [
               {
                 label: 'Oui',
-                value: 'oui',
+                value: true,
               },
               {
                 label: 'Non',
-                value: 'non',
+                value: false,
               },
             ],
           },
@@ -1403,11 +1316,11 @@ export default Fiches = [
             values: [
               {
                 label: 'Oui',
-                value: 'oui',
+                value: true,
               },
               {
                 label: 'Non',
-                value: 'non',
+                value: false,
               },
             ],
           },
@@ -1423,11 +1336,11 @@ export default Fiches = [
             values: [
               {
                 label: 'Oui',
-                value: 'oui',
+                value: true,
               },
               {
                 label: 'Non',
-                value: 'non',
+                value: false,
               },
             ],
           },
@@ -1513,7 +1426,7 @@ export default Fiches = [
     },
   },
   {
-    id: 'apnWvBPiRGXDyUFmLk96HE',
+    id: 6,
     title: "FICHE D'IDENTIFICATION DES FILLES (Maintien des filles à l'école)",
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
@@ -1523,37 +1436,13 @@ export default Fiches = [
       return [
         [
           {
-            key: 'collecteur',
+            key: 'collecteurtitle',
             type: 'header',
             subtype: 'h3',
-            label: "Informations sur l'animateur",
+            label: "Informations relatives à l'agent enregistreur",
             style: styles.sectionTitleStyle,
           },
-          {
-            key: 'nom',
-            type: 'text',
-            required: true,
-            label: "Nom de l'agent enrégistreur",
-            placeholder: 'veillez entrer votre nom',
-            maxlength: 30,
-          },
-          {
-            key: 'prenom',
-            label: "Prénoms de l'agent enrégistreur",
-            placeholder: 'Veillez entrer vos Prénoms',
-            type: 'text',
-            required: true,
-            maxlength: 30,
-          },
-          {
-            key: 'dateCollecte',
-            type: 'date',
-            label: 'Date',
-            placeholder: 'Veuillez entrer la date de la collecte',
-            value: new Date().toISOString(),
-            dateFormat: 'DD-MM-YYYY',
-            disabled: false,
-          },
+          collectteurfield,
         ],
         [
           {
@@ -1571,6 +1460,7 @@ export default Fiches = [
             required: true,
             subtype: 'tel',
             maxlength: 30,
+            value: 'edumas',
           },
           {
             key: 'nom',
@@ -1579,6 +1469,7 @@ export default Fiches = [
             type: 'text',
             required: true,
             maxlength: 30,
+            value: 'nomfi',
           },
           {
             key: 'prenom',
@@ -1587,6 +1478,7 @@ export default Fiches = [
             type: 'text',
             required: true,
             maxlength: 30,
+            value: 'prenomfi',
           },
           {
             key: 'dateNaissance',
@@ -1605,6 +1497,7 @@ export default Fiches = [
             type: 'text',
             required: true,
             maxlength: 30,
+            value: 'lieufi',
           },
           {
             key: 'departement',
@@ -1614,6 +1507,7 @@ export default Fiches = [
             searchInputPlaceholder: 'Veuillez sélectionner le département',
             values: departements,
             dependent: 'commune',
+            value: ['2'],
           },
           {
             key: 'commune',
@@ -1624,15 +1518,27 @@ export default Fiches = [
             dependencie: ['departement', 'DEPARTEMENTS'],
             dependent: 'arrondissement',
             values: communes,
+            value: ['2'],
           },
           {
-            key: 'village',
+            key: 'arrondissement',
+            type: 'select',
+            label: 'ARRONDISSEMENTS',
+            dependencie: ['commune', 'COMMUNES'],
+            multiple: false,
+            searchInputPlaceholder: "Veuillez sélectionner l'arrondissement",
+            values: arrondissements,
+            value: ['1'],
+          },
+          {
+            key: 'quartier',
             type: 'text',
             required: true,
             label: 'Village/Quartier/Maison',
             placeholder:
               'Veuillez entrer le village/quartier/maison de provenance de la fille',
             maxlength: 30,
+            value: 'qutieri',
           },
           {
             key: 'etablissementUniversite',
@@ -1642,6 +1548,7 @@ export default Fiches = [
             maxlength: 30,
             type: 'text',
             required: true,
+            value: 'etablifill',
           },
           {
             key: 'niveauEtudeClasse',
@@ -1651,6 +1558,7 @@ export default Fiches = [
             maxlength: 30,
             type: 'text',
             required: true,
+            value: 'niclasse',
           },
           {
             key: 'typeAppui',
@@ -1660,6 +1568,7 @@ export default Fiches = [
             type: 'radio-group',
             other: false,
             required: true,
+            value: 'kits',
             values: [
               {
                 label: 'KITS',
@@ -1683,6 +1592,7 @@ export default Fiches = [
               'Veuillez choisir le critère de vulnérabilité de la fille',
             type: 'checkbox-group',
             other: true,
+            value: {regular: ['oev']},
             values: [
               {
                 label: 'OEV',
@@ -1722,6 +1632,7 @@ export default Fiches = [
             maxlength: 30,
             type: 'text',
             required: true,
+            value: 'nompecon',
           },
           {
             key: 'prenom',
@@ -1731,6 +1642,7 @@ export default Fiches = [
             maxlength: 30,
             type: 'text',
             required: true,
+            value: 'prenompecon',
           },
           {
             key: 'contact',
@@ -1739,13 +1651,14 @@ export default Fiches = [
               'Veuillez entrer le/les contacts de la personne à contacter',
             type: 'text',
             required: true,
+            value: 'concon',
           },
         ],
       ];
     },
   },
   {
-    id: 'amPgTAnJstQ2a3Bu5LoSGx',
+    id: 7,
     title: 'FICHE DES FILLES SCOLARISEES',
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
@@ -1753,7 +1666,7 @@ export default Fiches = [
     description: descriptions[generateRandom(descriptions.length)],
   },
   {
-    id: 'ao4yESbsUPZZQWNtbno6ZK',
+    id: 8,
     title: 'FICHE DE SUIVI DE LA PERFORMANCE SCOLAIRE DE LA FILLE',
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
@@ -1761,25 +1674,23 @@ export default Fiches = [
     description: descriptions[generateRandom(descriptions.length)],
   },
   {
-    id: 'abDk3yjb6BvAvaUmrxzrFP',
+    id: 9,
     title: 'FICHE DE SUIVI DES KITS',
-
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
     description: descriptions[generateRandom(descriptions.length)],
   },
   {
-    id: 'aC3pUtw3qL8sshtpAUt9mz',
+    id: 10,
     title: 'LISTE DE PRESENCE DES PARTICIPANTS',
-
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
     description: descriptions[generateRandom(descriptions.length)],
   },
   {
-    id: 'a3uEKqnTyCFcUBmRW9YvxH',
+    id: 11,
     title:
       'FICHE DE COLLECTE DE DONNEES SUR LES FORMATIONS DANS LES ESPACES SÛRS',
 
@@ -1789,25 +1700,23 @@ export default Fiches = [
     description: descriptions[generateRandom(descriptions.length)],
   },
   {
-    id: 'aA4AzLmkMNyvJyh9XDysQR',
+    id: 12,
     title: 'FICHE DE SUIVI DES ACTIVITES DES MARRAINES OU « DEUXIEMES MAMANS »',
-
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
     description: descriptions[generateRandom(descriptions.length)],
   },
   {
-    id: 'aiYHyF3t9wQagLxhViEAKH',
+    id: 13,
     title: 'FICHE SYNTHESE DES FORMATIONS',
-
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
     description: descriptions[generateRandom(descriptions.length)],
   },
   {
-    id: 'anVfwjmFiC8JGpfNQ9AfG3',
+    id: 14,
     title: 'Fiche de suivi des activités communautaires des Leaders Religieux',
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],

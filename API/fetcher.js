@@ -14,16 +14,78 @@ let Fetcher = {
       });
     });
   },
-  GetCollecteurs: async function (setdada, plateform) {
-    let url = baseUrl + '/api/royal/category/best';
-
+  GetCollecteurs: async function (data, page) {
+    let url = `${baseUrl}/api/collecteurs?facilitateur=${data}&page=${page}`;
     let res = await fetch(url, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
       },
     });
+    const response = await res.json();
+    return response;
+  },
+  GetBeneficiaires: async function (data, page) {
+    let url = `${baseUrl}/api/facilitateur?facilitateur=${data}&page=${page}`;
+    let res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+    const response = await res.json();
+    return response;
+  },
+  PostBeneficiaire: async function (setdada) {
+    let url = baseUrl + '/api/fiches';
+    let res = await fetch(url, {
+      method: 'post',
+      body: setdada,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     return await res.json();
+  },
+  PostFiche: async function (allrep) {
+    //{ficheid,beneficiaire:{nom,prenom,...},collecteur:{nom,prenom,...},...}
+    //=>{error,success}
+    if (Globals.INTERNET) {
+      let url = baseUrl + '/api/fiches';
+      let res = await fetch(url, {
+        method: 'post',
+        body: JSON.stringify(allrep),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      return await res.json();
+    } else {
+      let Fiche = allrep;
+      Fiche._date = Date.now();
+      Fiche._unsynced = true;
+
+      let fiches = await Storer.getData('@QuedFiche'),
+        afiches = await Storer.getData('@OfflineFiche');
+      //sauvegarder dans la liste des non envoyé
+      if (fiches) {
+        fiches.push(Fiche);
+      } else {
+        fiches = [Fiche];
+      }
+      //sauvegarder dans la liste des fiches offlines
+      if (afiches) {
+        afiches.push(Fiche);
+      } else {
+        afiches = [Fiche];
+      }
+      await Storer.storeData('@QuedFiche', fiches);
+      Storer.storeData('@OfflineFiche', afiches);
+
+      return {
+        success_offline: 'Fiche enrégistrée ! (connexion indisponible)',
+      };
+    }
   },
   AuthSignup: async function (setdada) {
     let url = baseUrl + '/api/users';

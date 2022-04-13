@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import Globals from '../../../Ressources/Globals';
 import {styleformationsItem as styles} from '../../../Ressources/Styles';
 import {date_to_local_string} from '../../../Helpers/Utils';

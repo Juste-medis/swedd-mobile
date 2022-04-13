@@ -1,602 +1,215 @@
 {
-    "Date_de_naissance_de_la_fillle": {
-        "dateFormat": "DD-MM-YYYY",
-        "disabled": false,
-        "key": "Date_de_naissance_de_la_fillle",
-        "label": "Date de naissance de la fillle",
-        "onchange": [Function anonymous
-        ],
-        "placeholder": "Veuillez entrer la date de naissance de la fille",
-        "required": true,
-        "type": "date",
-        "userAnswer": 2022-04-02T15: 19: 00.000Z,
-        "value": "2022-04-01T15:19:46.708Z"
-    },
-    "affilie_Contacts": {
-        "key": "affilie_Contacts",
-        "label": "Contacts",
-        "onchange": [Function anonymous
-        ],
-        "placeholder": "Veuillez entrer le/les contacts de la personne à contacter",
-        "required": true,
-        "type": "text",
-        "userAnswer": "Ddgfdgg"
-    },
-    "affilie_Prenoms_de_la_personne_contacter": {
-        "key": "affilie_Prenoms_de_la_personne_contacter",
-        "label": "Prénoms de la personne à contacter",
-        "maxlength": 30,
-        "onchange": [Function anonymous
-        ],
-        "placeholder": "Veuillez entrer le/les prénoms de la personne à contacter",
-        "required": true,
-        "type": "text",
-        "userAnswer": "Efgdgf"
-    },
-    "affilie_personne_contacter": {
-        "key": "affilie_personne_contacter",
-        "label": "Nom de la personne à contacter",
-        "maxlength": 30,
-        "onchange": [Function anonymous
-        ],
-        "placeholder": "Veuillez entrer le nom de la personne à contacter",
-        "required": true,
-        "type": "text",
-        "userAnswer": "Eredgf"
-    },
-    "animator_firstname": {
-        "key": "animator_firstname",
-        "label": "Prénoms de l'agent enrégistreur",
-        "maxlength": 30,
-        "onchange": [Function anonymous
-        ],
-        "placeholder": "Veillez entrer vos Prénoms",
-        "required": true,
-        "type": "text",
-        "userAnswer": "adido"
-    },
-    "animator_lastname": {
-        "key": "animator_lastname",
-        "label": "Nom de l'agent enrégistreur",
-        "maxlength": 30,
-        "onchange": [Function anonymous
-        ],
-        "placeholder": "veillez entrer votre nom",
-        "required": true,
-        "type": "text",
-        "userAnswer": "Poloiv"
-    },
-    "beneficiaire_Etablissement_Universit": {
-        "key": "beneficiaire_Etablissement_Universit",
-        "label": "Etablissement/Université",
-        "maxlength": 30,
-        "onchange": [Function anonymous
-        ],
-        "placeholder": "Veuillez entrer l'établissement/université de la fille",
-        "required": true,
-        "type": "text",
-        "userAnswer": "3rrthfgh"
-    },
-    "beneficiaire_Lieu_de_naissance": {
-        "key": "beneficiaire_Lieu_de_naissance",
-        "label": "Lieu de naissance",
-        "maxlength": 30,
-        "onchange": [Function anonymous
-        ],
-        "placeholder": "Veuillez entrer le lieu de naissance de la fille",
-        "required": true,
-        "type": "text",
-        "userAnswer": "Fjfhggfry"
-    },
-    "beneficiaire_N_Mll_EDUCMASTER": {
-        "key": "beneficiaire_N_Mll_EDUCMASTER",
-        "label": "N° Mll /EDUCMASTER",
-        "maxlength": 30,
-        "onchange": [Function anonymous
-        ],
-        "placeholder": "Veuillez entrer le numéro EDUCMASTER de la fille",
-        "required": true,
-        "subtype": "tel",
-        "type": "text",
-        "userAnswer": "52"
-    },
-    "beneficiaire_Niveau_d_tude_Classe": {
-        "key": "beneficiaire_Niveau_d_tude_Classe",
-        "label": "Niveau d'étude/Classe",
-        "maxlength": 30,
-        "onchange": [Function anonymous
-        ],
-        "placeholder": "Veuillez entrer le niveau d'étude ou la classe de la fille",
-        "required": true,
-        "type": "text",
-        "userAnswer": "Dffgghdh"
-    },
-    "beneficiaire_Nom_de_l_enfant_enregistr": {
-        "key": "beneficiaire_Nom_de_l_enfant_enregistr",
-        "label": "Nom de la fille",
-        "maxlength": 30,
-        "onchange": [Function anonymous
-        ],
-        "placeholder": "Veuillez entrer le nom de la fille",
-        "required": true,
-        "type": "text",
-        "userAnswer": "Hfrtyy"
-    },
-    "beneficiaire_Pr_noms_de_l_enfant_enregistr": {
-        "key": "beneficiaire_Pr_noms_de_l_enfant_enregistr",
-        "label": "Prénoms de la fille",
-        "maxlength": 30,
-        "onchange": [Function anonymous
-        ],
-        "placeholder": "Veuillez entrer le/les prénoms de la fille",
-        "required": true,
-        "type": "text",
-        "userAnswer": "Fgsdf"
-    },
-    "beneficiaire_Type_d_appui": {
-        "key": "beneficiaire_Type_d_appui",
-        "label": "Type d'appui",
-        "onchange": [Function anonymous
-        ],
-        "other": false,
-        "placeholder": "Veuillez choisir le type d'appui dont bénéficie la fille",
-        "required": true,
-        "type": "radio-group",
-        "userAnswer": "bourse",
-        "values": [
-            [Object
+    "@context": "/api/contexts/Fiche",
+    "@id": "/api/fiches/33",
+    "@type": "Fiche",
+    "beneficiaire": {
+        "@id": "/api/beneficiaires/53",
+        "@type": "Beneficiaire",
+        "aRecuKit": false,
+        "age": 0,
+        "appreciationEnvironnementScolaire": "",
+        "categorieFille": "",
+        "cibleDirecte": false,
+        "completudeAppui": false,
+        "connaissanceAppui": false,
+        "contact": "",
+        "critereVulnerabilite": {
+            "other": [Array
             ],
-            [Object
-            ],
-            [Object
-            ]
-        ]
-    },
-    "beneficiaire_vulnerabilite": {
-        "key": "beneficiaire_vulnerabilite",
-        "label": "Critères de vulnérabilité",
-        "onchange": [Function anonymous
-        ],
-        "other": true,
-        "placeholder": "Veuillez choisir le critère de vulnérabilité de la fille",
-        "required": true,
-        "type": "checkbox-group",
-        "userAnswer": {
             "regular": [Array
             ]
         },
-        "values": [
-            [Object
+        "decisionFinaleEtablissementFille": "",
+        "encadrementMaison": false,
+        "etablissementUniversite": "etablifill",
+        "facilitateur": {
+            "@id": "/api/facilitateurs/1",
+            "@type": "Facilitateur",
+            "contact": null,
+            "id": 1,
+            "nom": "Kocou",
+            "ong": [Array
             ],
-            [Object
+            "prenom": "Alin",
+            "rseNiveau2": [Array
             ],
-            [Object
+            "sexe": "M",
+            "urlPhoto": null,
+            "username": "kocou1900"
+        },
+        "fratrieEnfant": false,
+        "frequenceCours": "",
+        "groupeFille": "",
+        "handicape": false,
+        "id": 53,
+        "implicationParentale": "",
+        "lieuNaissance": "lieufi",
+        "logement": "",
+        "marie": "",
+        "nbreKitRecu": 0,
+        "niveauDecrochageEnfant": "",
+        "niveauEtudeClasse": "niclasse",
+        "nom": "nomfi",
+        "nomMentor": "",
+        "nonMarie": "",
+        "numM2EducMaster": "edumas",
+        "numOrdre": "",
+        "observationMoyenneFille": "",
+        "periodeCompoFille": "",
+        "prenom": "prenomfi",
+        "prenomMentor": "",
+        "quartier": {
+            "@id": "/api/quartiers/77",
+            "@type": "Quartier",
+            "arrondissement": [Object
             ],
-            [Object
-            ],
-            [Object
-            ]
-        ]
+            "id": 77,
+            "libelle": "qutieri"
+        },
+        "raisonAbsenceCoursFille": "",
+        "regulariteFilleCours": "",
+        "sexe": "F",
+        "statutEnfant": "",
+        "typeAppui": "kits",
+        "typeFamille": "",
+        "urlPhotoFille": "",
+        "utilisationAppui": ""
     },
-    "commune": {
-        "dependencie": [
-            "departement",
-            "DEPARTEMENTS"
-        ],
-        "dependent": "arrondissement",
-        "key": "commune",
-        "label": "COMMUNES",
-        "multiple": false,
-        "onchange": [Function anonymous
-        ],
-        "searchInputPlaceholder": "Veuillez sélectionner la commune",
-        "type": "select",
-        "userAnswer": [
-            "28"
-        ],
-        "values": [
-            [Object
-            ],
-            [Object
-            ],
-            [Object
-            ],
-            [Object
-            ],
-            [Object
-            ],
-            [Object
-            ],
-            [Object
-            ],
-            [Object
-            ]
-        ]
+    "categorieFiche": {
+        "@id": "/api/categorie_fiches/2",
+        "@type": "CategorieFiche",
+        "description": null,
+        "id": 2,
+        "libelle": "Fiche de suivi des filles scolarisées"
     },
-    "departement": {
-        "dependent": "commune",
-        "key": "departement",
-        "label": "DEPARTEMENTS",
-        "multiple": false,
-        "onchange": [Function anonymous
-        ],
-        "searchInputPlaceholder": "Veuillez sélectionner le département",
-        "type": "select",
-        "userAnswer": [
-            "4"
-        ],
-        "values": [
-            [Object
+    "collecteur": {
+        "@id": "/api/collecteurs/1",
+        "@type": "Collecteur",
+        "contacts": "123456",
+        "facilitateur": {
+            "@id": "/api/facilitateurs/2",
+            "@type": "Facilitateur",
+            "contact": null,
+            "id": 2,
+            "nom": "Ali",
+            "ong": [Array
             ],
-            [Object
+            "prenom": "jean",
+            "rseNiveau2": [Array
             ],
-            [Object
-            ],
-            [Object
-            ],
-            [Object
-            ],
-            [Object
-            ],
-            [Object
-            ],
-            [Object
-            ],
-            [Object
-            ],
-            [Object
-            ],
-            [Object
-            ],
-            [Object
-            ]
-        ]
+            "sexe": "M",
+            "urlPhoto": null,
+            "username": "alijean"
+        },
+        "id": 1,
+        "nom": "toto",
+        "prenom": "tata",
+        "sexe": "F"
     },
-    "fiche_Date": {
-        "dateFormat": "DD-MM-YYYY",
-        "disabled": false,
-        "key": "fiche_Date",
-        "label": "Date",
-        "onchange": [Function anonymous
-        ],
-        "placeholder": "Veuillez entrer la date de la collecte",
-        "type": "date",
-        "userAnswer": 2022-04-05T15: 19: 00.000Z,
-        "value": "2022-04-01T15:19:46.707Z"
+    "dateAjout": "2022-04-13T15:13:03+00:00",
+    "dateCollecte": "2022-04-13T15:13:03+00:00",
+    "dateModif": "2022-04-13T15:13:03+00:00",
+    "facilitateur": {
+        "@id": "/api/facilitateurs/1",
+        "@type": "Facilitateur",
+        "contact": null,
+        "id": 1,
+        "nom": "Kocou",
+        "ong": [],
+        "prenom": "Alin",
+        "rseNiveau2": [],
+        "sexe": "M",
+        "urlPhoto": null,
+        "username": "kocou1900"
     },
-    "village": {
-        "key": "village",
-        "label": "Village/Quartier/Maison",
-        "maxlength": 30,
-        "onchange": [Function anonymous
-        ],
-        "placeholder": "Veuillez entrer le village/quartier/maison de provenance de la fille",
-        "required": true,
-        "type": "text",
-        "userAnswer": "Dgyghh"
-    },
-    "tom": [
-        {
-            "__reactInternalMemoizedMergedChildContext": {
-                "theme": [Object
-                ]
-            },
-            "_getFormResponses": [Function anonymous
+    "formationAnimateur": {
+        "@id": "/api/formation_animateurs/3",
+        "@type": "FormationAnimateur",
+        "animateur": {
+            "@id": "/api/animateurs/8",
+            "@type": "Animateur",
+            "confessionReligieuse": null,
+            "facilitateur": [Object
             ],
-            "_reactInternalInstance": {},
-            "_reactInternals": {
-                "_debugHookTypes": null,
-                "_debugNeedsRemount": false,
-                "_debugOwner": [FiberNode
-                ],
-                "_debugSource": [Object
-                ],
-                "actualDuration": 0.03707718849182129,
-                "actualStartTime": 1232539997.596643,
-                "alternate": [FiberNode
-                ],
-                "child": [FiberNode
-                ],
-                "childLanes": 0,
-                "deletions": null,
-                "dependencies": null,
-                "elementType": [Function DynamicForm
-                ],
-                "flags": 0,
-                "index": 0,
-                "key": "0",
-                "lanes": 0,
-                "memoizedProps": [Object
-                ],
-                "memoizedState": [Object
-                ],
-                "mode": 2,
-                "pendingProps": [Object
-                ],
-                "ref": [Function ref
-                ],
-                "return": [FiberNode
-                ],
-                "selfBaseDuration": 27.660154104232788,
-                "sibling": null,
-                "stateNode": [Circular
-                ],
-                "subtreeFlags": 1048576,
-                "tag": 1,
-                "treeBaseDuration": 172.35285210609436,
-                "type": [Function DynamicForm
-                ],
-                "updateQueue": [Object
-                ]
-            },
-            "context": {},
-            "errors": {
-                "arrondissement": false,
-                "commune": false,
-                "departement": false,
-                "title": false,
-                "village": false
-            },
-            "getFormElementLabel": [Function anonymous
+            "id": 8,
+            "nom": "Patrik",
+            "numEnregistrement": "965855",
+            "prenom": "Coffi",
+            "quartier": [Object
             ],
-            "getFormElementValue": [Function anonymous
-            ],
-            "poupulateDefaultFormFields": [Function anonymous
-            ],
-            "props": {
-                "form": [Array
-                ],
-                "onFormDataChange": [Function onFormDataChange
-                ],
-                "style": [Object
-                ],
-                "submitButton": null,
-                "theme": [Object
-                ]
-            },
-            "refs": {},
-            "renderForm": [Function anonymous
-            ],
-            "state": {
-                "errors": [Object
-                ],
-                "responses": [Object
-                ]
-            },
-            "submitButtonPress": [Function anonymous
-            ],
-            "updateFormElement": [Function anonymous
-            ],
-            "updater": {
-                "enqueueForceUpdate": [Function enqueueForceUpdate
-                ],
-                "enqueueReplaceState": [Function enqueueReplaceState
-                ],
-                "enqueueSetState": [Function enqueueSetState
-                ],
-                "isMounted": [Function isMounted
-                ]
-            },
-            "validateInput": [Function anonymous
+            "titreOrganisation": null,
+            "typeAnimateur": [Object
             ]
         },
-        {
-            "__reactInternalMemoizedMergedChildContext": {
-                "theme": [Object
-                ]
-            },
-            "_getFormResponses": [Function anonymous
+        "formation": {
+            "@id": "/api/formations/3",
+            "@type": "Formation",
+            "dateDebut": "2022-04-02T00:00:00+00:00",
+            "dateFin": "2022-04-02T00:00:00+00:00",
+            "dureeActivite": 2,
+            "heureDeroulement": "1970-01-01T10:14:00+00:00",
+            "id": 3,
+            "libelle": "Formation 1",
+            "nature": "1",
+            "observation": "good class",
+            "techniqueFormation": null,
+            "thematique": [Object
             ],
-            "_reactInternalInstance": {},
-            "_reactInternals": {
-                "_debugHookTypes": null,
-                "_debugNeedsRemount": false,
-                "_debugOwner": [FiberNode
-                ],
-                "_debugSource": [Object
-                ],
-                "actualDuration": 0.012923002243041992,
-                "actualStartTime": 1232540077.001182,
-                "alternate": [FiberNode
-                ],
-                "child": [FiberNode
-                ],
-                "childLanes": 0,
-                "deletions": null,
-                "dependencies": null,
-                "elementType": [Function DynamicForm
-                ],
-                "flags": 0,
-                "index": 0,
-                "key": "1",
-                "lanes": 0,
-                "memoizedProps": [Object
-                ],
-                "memoizedState": [Object
-                ],
-                "mode": 2,
-                "pendingProps": [Object
-                ],
-                "ref": [Function ref
-                ],
-                "return": [FiberNode
-                ],
-                "selfBaseDuration": 6.671383857727051,
-                "sibling": null,
-                "stateNode": [Circular
-                ],
-                "subtreeFlags": 1048576,
-                "tag": 1,
-                "treeBaseDuration": 79.3322274684906,
-                "type": [Function DynamicForm
-                ],
-                "updateQueue": [Object
-                ]
-            },
-            "context": {},
-            "errors": {
-                "collecteur": false,
-                "contacts_collecteur": false,
-                "nom": false,
-                "nom_superviseur": false,
-                "prenom": false,
-                "prenom_superviseur": false
-            },
-            "getFormElementLabel": [Function anonymous
-            ],
-            "getFormElementValue": [Function anonymous
-            ],
-            "poupulateDefaultFormFields": [Function anonymous
-            ],
-            "props": {
-                "form": [Array
-                ],
-                "onFormDataChange": [Function onFormDataChange
-                ],
-                "style": [Object
-                ],
-                "submitButton": null,
-                "theme": [Object
-                ]
-            },
-            "refs": {},
-            "renderForm": [Function anonymous
-            ],
-            "state": {
-                "errors": [Object
-                ],
-                "responses": [Object
-                ]
-            },
-            "submitButtonPress": [Function anonymous
-            ],
-            "updateFormElement": [Function anonymous
-            ],
-            "updater": {
-                "enqueueForceUpdate": [Function enqueueForceUpdate
-                ],
-                "enqueueReplaceState": [Function enqueueReplaceState
-                ],
-                "enqueueSetState": [Function enqueueSetState
-                ],
-                "isMounted": [Function isMounted
-                ]
-            },
-            "validateInput": [Function anonymous
-            ]
+            "trancheAgeConcerne": "Option1"
         },
-        {
-            "__reactInternalMemoizedMergedChildContext": {
-                "theme": [Object
-                ]
-            },
-            "_getFormResponses": [Function anonymous
+        "id": 3
+    },
+    "genreClub": "",
+    "id": 33,
+    "nbreFemmeFilleFormer": 0,
+    "nbreFilleFreqClub": 0,
+    "nbreGarconFreqClub": 0,
+    "nbreHommeGarconFormer": 5,
+    "nbreJourPresence": 0,
+    "nomMentor": "",
+    "observationAdmin": [
+        ""
+    ],
+    "observationRseN1": [
+        ""
+    ],
+    "observationRseN2": [
+        ""
+    ],
+    "projet": {
+        "@id": "/api/projets/1",
+        "@type": "Projet",
+        "id": 1,
+        "libelle": "gff"
+    },
+    "quartier": {
+        "@id": "/api/quartiers/76",
+        "@type": "Quartier",
+        "arrondissement": {
+            "@id": "/api/arrondissements/1",
+            "@type": "Arrondissement",
+            "commune": [Object
             ],
-            "_reactInternalInstance": {},
-            "_reactInternals": {
-                "_debugHookTypes": null,
-                "_debugNeedsRemount": false,
-                "_debugOwner": [FiberNode
-                ],
-                "_debugSource": [Object
-                ],
-                "actualDuration": 0.021923065185546875,
-                "actualStartTime": 1232539998.501182,
-                "alternate": [FiberNode
-                ],
-                "child": [FiberNode
-                ],
-                "childLanes": 0,
-                "deletions": null,
-                "dependencies": null,
-                "elementType": [Function DynamicForm
-                ],
-                "flags": 0,
-                "index": 0,
-                "key": "2",
-                "lanes": 0,
-                "memoizedProps": [Object
-                ],
-                "memoizedState": [Object
-                ],
-                "mode": 2,
-                "pendingProps": [Object
-                ],
-                "ref": [Function ref
-                ],
-                "return": [FiberNode
-                ],
-                "selfBaseDuration": 17.187768936157227,
-                "sibling": null,
-                "stateNode": [Circular
-                ],
-                "subtreeFlags": 1048576,
-                "tag": 1,
-                "treeBaseDuration": 604.0589897632599,
-                "type": [Function DynamicForm
-                ],
-                "updateQueue": [Object
-                ]
-            },
-            "context": {},
-            "errors": {
-                "age": false,
-                "beneficiaire": false,
-                "critereVulnerabilite": false,
-                "logement": false,
-                "marie": false,
-                "niveauDecrochageEnfant": false,
-                "nom": false,
-                "nonMarie": false,
-                "numOrdre": false,
-                "prenom": false,
-                "residence": false,
-                "sexe": false,
-                "statutEnfant": false
-            },
-            "getFormElementLabel": [Function anonymous
-            ],
-            "getFormElementValue": [Function anonymous
-            ],
-            "poupulateDefaultFormFields": [Function anonymous
-            ],
-            "props": {
-                "form": [Array
-                ],
-                "onFormDataChange": [Function onFormDataChange
-                ],
-                "style": [Object
-                ],
-                "submitButton": [Object
-                ],
-                "theme": [Object
-                ]
-            },
-            "refs": {},
-            "renderForm": [Function anonymous
-            ],
-            "state": {
-                "errors": [Object
-                ],
-                "responses": [Object
-                ]
-            },
-            "submitButtonPress": [Function anonymous
-            ],
-            "updateFormElement": [Function anonymous
-            ],
-            "updater": {
-                "enqueueForceUpdate": [Function enqueueForceUpdate
-                ],
-                "enqueueReplaceState": [Function enqueueReplaceState
-                ],
-                "enqueueSetState": [Function enqueueSetState
-                ],
-                "isMounted": [Function isMounted
-                ]
-            },
-            "validateInput": [Function anonymous
-            ]
+            "id": 1,
+            "libelle": "BANIKOARA"
+        },
+        "id": 76,
+        "libelle": "qutieri"
+    },
+    "sousProjet": {
+        "@id": "/api/sous_projets/1",
+        "@type": "SousProjet",
+        "id": 1,
+        "libelle": "dedd",
+        "projet": {
+            "@id": "/api/projets/1",
+            "@type": "Projet",
+            "id": 1,
+            "libelle": "gff"
         }
-    ]
+    },
+    "validerAdmin": false,
+    "validerFacilitateur": false,
+    "validerRseN1": false,
+    "validerRseN2": false
 }

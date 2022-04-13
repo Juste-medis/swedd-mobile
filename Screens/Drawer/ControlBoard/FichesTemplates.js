@@ -7,8 +7,6 @@ import Fiches from '../../../Ressources/Data/Fiches';
 import TextW from '../../../components/Gadgets/TextW';
 
 function FichesTemplates(route) {
-  const [spinner, setspinner] = React.useState(false);
-
   React.useEffect(() => {
     //route.AddProfilItem({ key: "visitedcourses", data: "^^^^^^^^^^^^^^^^^" });
   }, []);
@@ -23,7 +21,6 @@ function FichesTemplates(route) {
                 activeOpacity={0.8}
                 style={[styles.menu_item, stylesc.menu_item]}
                 onPress={() => {
-                  setspinner(true);
                   route.navigation.navigate('FicheForm', {set: item});
                 }}
                 rippleColor={item.variant}>
@@ -70,7 +67,9 @@ function FichesTemplates(route) {
 
   return (
     <ScrollView style={stylesc.main_container}>
-      <View style={[styles.main_container]}>{menu_main(Fiches)}</View>
+      <View style={[styles.main_container, {backgroundColor: 'white'}]}>
+        {menu_main(Fiches)}
+      </View>
     </ScrollView>
   );
 }

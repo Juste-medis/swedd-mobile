@@ -36,8 +36,7 @@ function ControlBoard(route) {
             value: profil.review_fiche,
             variant: 'rgb(255,193,7)',
             onclick: () => {
-              Linking.openURL('https://swedd.bj/contact/');
-              //route.navigation.navigate("About");
+              route.navigation.navigate('FichesList', {fichestate: 'review'});
             },
           }
         : {},
@@ -50,8 +49,7 @@ function ControlBoard(route) {
             value: profil.accepted_fiche,
             variant: '#198754',
             onclick: () => {
-              Linking.openURL('https://swedd.bj/presentation-du-projet/');
-              //route.navigation.navigate("About");
+              route.navigation.navigate('FichesList', {fichestate: 'accepted'});
             },
           }
         : {},
@@ -64,7 +62,7 @@ function ControlBoard(route) {
             value: profil.rejected_fiche,
             variant: '#dc3545',
             onclick: () => {
-              onShare('SweddMobile | tres cool');
+              route.navigation.navigate('FichesList', {fichestate: 'rejected'});
             },
           }
         : {},
@@ -75,7 +73,7 @@ function ControlBoard(route) {
       value: profil.filled_fiche,
       variant: Globals.COLORS.light_blue,
       onclick: () => {
-        //route.navigation.navigate('Collecteurs');
+        route.navigation.navigate('FichesList', {fichestate: 'all'});
       },
     },
     {
@@ -135,7 +133,7 @@ function ControlBoard(route) {
                   styles.menu_item,
                   {
                     backgroundColor: 'white',
-                    borderWidth: item.backgroundColor ? 2 : 0,
+                    borderWidth: 2,
                     borderColor: Globals.COLORS.aliceblue,
                   },
                 ]}
@@ -157,6 +155,7 @@ function ControlBoard(route) {
                       style={{
                         ...styles.prop_unity_value,
                         color: item.variant,
+                        marginTop: -5,
                       }}>
                       {item.value}
                     </Text>

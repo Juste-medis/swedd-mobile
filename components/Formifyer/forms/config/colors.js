@@ -1,4 +1,4 @@
-import Globals from '../../../Ressources/Globals';
+import Globals from '../../../../Ressources/Globals';
 
 export const primary = Globals.COLORS.primary;
 export const primaryDark = '#0077cb';

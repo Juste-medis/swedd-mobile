@@ -9,7 +9,7 @@ import CustomInput from '../CustomInput';
 import styles from './styles';
 
 import {CheckBox, Icon, Text} from 'react-native-elements';
-import Globals from '../../../../Ressources/Globals';
+import Globals from '../../../../../Ressources/Globals';
 
 export default class RadioGroup extends Component {
   static propTypes = {

@@ -20,6 +20,8 @@ let tyleFicheForm,
   tyleKitsItem,
   tyleAccordian,
   tyletoollength,
+  tyleFicheList,
+  tyleHelps,
   tyleNoInternet;
 
 if (mobile_360_750) {
@@ -812,6 +814,29 @@ if (mobile_360_750) {
       fontFamily: 'Lato-Regular',
       color: 'black',
     },
+    container: {
+      justifyContent: 'center',
+      flex: 1,
+    },
+    footer: {
+      padding: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
+    },
+    loadMoreBtn: {
+      padding: 10,
+      backgroundColor: '#800000',
+      borderRadius: 4,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    btnText: {
+      color: 'white',
+      fontSize: 15,
+      textAlign: 'center',
+    },
   });
   tyleformationsItem = StyleSheet.create({
     main_ripple: {
@@ -998,6 +1023,114 @@ if (mobile_360_750) {
       marginTop: 10,
       color: Globals.COLORS.blue_dark,
       paddingStart: 0,
+    },
+    description: {
+      paddingVertical: 10,
+      color: '#707375',
+      fontFamily: 'Lato-Regular',
+      lineHeight: 21,
+    },
+  });
+  tyleControlBoard = StyleSheet.create({
+    main_container: {height: '100%', backgroundColor: Globals.COLORS.white},
+    icon_containter_ficheli: {
+      padding: 10,
+      borderRadius: 10,
+    },
+    icon_containter: {
+      backgroundColor: 'white',
+      padding: 20,
+      elevation: 2,
+      borderRadius: 10,
+    },
+    main_menu_indider: {
+      marginBottom: 20,
+      width: '100%',
+      borderRadius: 8,
+      backgroundColor: 'white',
+      elevation: 20,
+    },
+    menu_item: {
+      width: '100%',
+      flexDirection: 'column',
+      borderRadius: 8,
+      paddingHorizontal: 20,
+    },
+    main_menu_top: {
+      display: 'flex',
+      flexDirection: 'row',
+    },
+    prop_unity_value: {
+      fontFamily: 'Lato-Regular',
+      fontSize: 14,
+      marginTop: 10,
+      paddingStart: 10,
+    },
+    main_menu_bottom: {
+      display: 'flex',
+      justifyContent: 'flex-start',
+    },
+    prop_unity_valuei: {
+      fontSize: 15,
+      marginTop: 10,
+      color: Globals.COLORS.blue_dark,
+      paddingStart: 0,
+    },
+    description: {
+      paddingVertical: 10,
+      color: '#707375',
+      fontFamily: 'Lato-Regular',
+      lineHeight: 21,
+    },
+  });
+  tyleHelps = StyleSheet.create({
+    main_container: {height: '100%', backgroundColor: Globals.COLORS.red},
+    icon_containter_ficheli: {
+      borderRadius: 10,
+    },
+    icon_containter: {
+      backgroundColor: 'white',
+      padding: 20,
+      elevation: 2,
+      borderRadius: 10,
+    },
+    main_menu_indider: {
+      marginTop: 20,
+      width: '100%',
+      borderRadius: 8,
+      backgroundColor: 'white',
+      elevation: 20,
+    },
+    menu_item: {
+      width: '100%',
+      flexDirection: 'column',
+      borderRadius: 8,
+      paddingHorizontal: 20,
+    },
+    main_menu_top: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '100%',
+    },
+    prop_unity_value: {
+      fontFamily: 'Lato-Regular',
+      fontSize: 14,
+      marginTop: 10,
+      paddingStart: 10,
+    },
+    main_menu_bottom: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+    },
+    prop_unity_valuei: {
+      fontSize: 15,
+      marginTop: 10,
+      color: Globals.COLORS.blue_dark,
+      paddingStart: 0,
+      textAlign: 'center',
     },
     description: {
       paddingVertical: 10,
@@ -1239,4 +1372,6 @@ export const styleFicheForm = tyleFicheForm,
   styletoollength = tyletoollength,
   styleformationsItem = tyleformationsItem,
   styleKitsItem = tyleKitsItem,
-  styleControlBoard = tyleControlBoard;
+  styleHelps = tyleHelps,
+  styleControlBoard = tyleControlBoard,
+  styleFicheList = tyleFicheList;
