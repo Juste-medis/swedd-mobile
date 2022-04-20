@@ -151,9 +151,9 @@ export default class CheckboxGroup extends PureComponent {
               <View key={`${_.get(value, 'value')}`}>
                 <CheckBox
                   containerStyle={{
-                    backgroundColor: 'rgba(9,105,195,0.05)',
-                    borderRadius: 50,
-                    borderWidth: 0,
+                    backgroundColor: 'rgba(0,0,0,0.05)',
+                    borderRadius: 10,
+                    padding: 8,
                   }}
                   textStyle={{
                     padding: 0,

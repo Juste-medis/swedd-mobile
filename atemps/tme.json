@@ -1,215 +1,32 @@
 {
-    "@context": "/api/contexts/Fiche",
-    "@id": "/api/fiches/33",
-    "@type": "Fiche",
-    "beneficiaire": {
-        "@id": "/api/beneficiaires/53",
-        "@type": "Beneficiaire",
-        "aRecuKit": false,
-        "age": 0,
-        "appreciationEnvironnementScolaire": "",
-        "categorieFille": "",
-        "cibleDirecte": false,
-        "completudeAppui": false,
-        "connaissanceAppui": false,
-        "contact": "",
-        "critereVulnerabilite": {
-            "other": [Array
-            ],
-            "regular": [Array
-            ]
+    "formations": [
+        {
+            "IRI": "/api/formation_animateurs/2",
+            "libelle": "Formation 1"
         },
-        "decisionFinaleEtablissementFille": "",
-        "encadrementMaison": false,
-        "etablissementUniversite": "etablifill",
-        "facilitateur": {
-            "@id": "/api/facilitateurs/1",
-            "@type": "Facilitateur",
-            "contact": null,
-            "id": 1,
-            "nom": "Kocou",
-            "ong": [Array
-            ],
-            "prenom": "Alin",
-            "rseNiveau2": [Array
-            ],
-            "sexe": "M",
-            "urlPhoto": null,
-            "username": "kocou1900"
-        },
-        "fratrieEnfant": false,
-        "frequenceCours": "",
-        "groupeFille": "",
-        "handicape": false,
-        "id": 53,
-        "implicationParentale": "",
-        "lieuNaissance": "lieufi",
-        "logement": "",
-        "marie": "",
-        "nbreKitRecu": 0,
-        "niveauDecrochageEnfant": "",
-        "niveauEtudeClasse": "niclasse",
-        "nom": "nomfi",
-        "nomMentor": "",
-        "nonMarie": "",
-        "numM2EducMaster": "edumas",
-        "numOrdre": "",
-        "observationMoyenneFille": "",
-        "periodeCompoFille": "",
-        "prenom": "prenomfi",
-        "prenomMentor": "",
-        "quartier": {
-            "@id": "/api/quartiers/77",
-            "@type": "Quartier",
-            "arrondissement": [Object
-            ],
-            "id": 77,
-            "libelle": "qutieri"
-        },
-        "raisonAbsenceCoursFille": "",
-        "regulariteFilleCours": "",
-        "sexe": "F",
-        "statutEnfant": "",
-        "typeAppui": "kits",
-        "typeFamille": "",
-        "urlPhotoFille": "",
-        "utilisationAppui": ""
-    },
-    "categorieFiche": {
-        "@id": "/api/categorie_fiches/2",
-        "@type": "CategorieFiche",
-        "description": null,
-        "id": 2,
-        "libelle": "Fiche de suivi des filles scolarisées"
-    },
-    "collecteur": {
-        "@id": "/api/collecteurs/1",
-        "@type": "Collecteur",
-        "contacts": "123456",
-        "facilitateur": {
-            "@id": "/api/facilitateurs/2",
-            "@type": "Facilitateur",
-            "contact": null,
-            "id": 2,
-            "nom": "Ali",
-            "ong": [Array
-            ],
-            "prenom": "jean",
-            "rseNiveau2": [Array
-            ],
-            "sexe": "M",
-            "urlPhoto": null,
-            "username": "alijean"
-        },
-        "id": 1,
-        "nom": "toto",
-        "prenom": "tata",
-        "sexe": "F"
-    },
-    "dateAjout": "2022-04-13T15:13:03+00:00",
-    "dateCollecte": "2022-04-13T15:13:03+00:00",
-    "dateModif": "2022-04-13T15:13:03+00:00",
-    "facilitateur": {
-        "@id": "/api/facilitateurs/1",
-        "@type": "Facilitateur",
-        "contact": null,
-        "id": 1,
-        "nom": "Kocou",
-        "ong": [],
-        "prenom": "Alin",
-        "rseNiveau2": [],
-        "sexe": "M",
-        "urlPhoto": null,
-        "username": "kocou1900"
-    },
-    "formationAnimateur": {
-        "@id": "/api/formation_animateurs/3",
-        "@type": "FormationAnimateur",
-        "animateur": {
-            "@id": "/api/animateurs/8",
-            "@type": "Animateur",
-            "confessionReligieuse": null,
-            "facilitateur": [Object
-            ],
-            "id": 8,
-            "nom": "Patrik",
-            "numEnregistrement": "965855",
-            "prenom": "Coffi",
-            "quartier": [Object
-            ],
-            "titreOrganisation": null,
-            "typeAnimateur": [Object
-            ]
-        },
-        "formation": {
-            "@id": "/api/formations/3",
-            "@type": "Formation",
-            "dateDebut": "2022-04-02T00:00:00+00:00",
-            "dateFin": "2022-04-02T00:00:00+00:00",
-            "dureeActivite": 2,
-            "heureDeroulement": "1970-01-01T10:14:00+00:00",
-            "id": 3,
-            "libelle": "Formation 1",
-            "nature": "1",
-            "observation": "good class",
-            "techniqueFormation": null,
-            "thematique": [Object
-            ],
-            "trancheAgeConcerne": "Option1"
-        },
-        "id": 3
-    },
-    "genreClub": "",
-    "id": 33,
-    "nbreFemmeFilleFormer": 0,
-    "nbreFilleFreqClub": 0,
-    "nbreGarconFreqClub": 0,
-    "nbreHommeGarconFormer": 5,
-    "nbreJourPresence": 0,
-    "nomMentor": "",
-    "observationAdmin": [
-        ""
-    ],
-    "observationRseN1": [
-        ""
-    ],
-    "observationRseN2": [
-        ""
-    ],
-    "projet": {
-        "@id": "/api/projets/1",
-        "@type": "Projet",
-        "id": 1,
-        "libelle": "gff"
-    },
-    "quartier": {
-        "@id": "/api/quartiers/76",
-        "@type": "Quartier",
-        "arrondissement": {
-            "@id": "/api/arrondissements/1",
-            "@type": "Arrondissement",
-            "commune": [Object
-            ],
-            "id": 1,
-            "libelle": "BANIKOARA"
-        },
-        "id": 76,
-        "libelle": "qutieri"
-    },
-    "sousProjet": {
-        "@id": "/api/sous_projets/1",
-        "@type": "SousProjet",
-        "id": 1,
-        "libelle": "dedd",
-        "projet": {
-            "@id": "/api/projets/1",
-            "@type": "Projet",
-            "id": 1,
-            "libelle": "gff"
+        {
+            "IRI": "/api/formation_animateurs/3",
+            "libelle": "Formation 2"
         }
-    },
-    "validerAdmin": false,
-    "validerFacilitateur": false,
-    "validerRseN1": false,
-    "validerRseN2": false
+    ],
+    "projet": [
+        {
+            "IRI": "/api/projets/2",
+            "libelle": "Projet 1"
+        },
+        {
+            "IRI": "/api/projets/3",
+            "libelle": "Projet 2"
+        }
+    ],
+    "sousProjet": [
+        {
+            "IRI": "/api/sous_projets/2",
+            "libelle": "Sous projet 1"
+        },
+        {
+            "IRI": "/api/sous_projets/3",
+            "libelle": "Sous projet 2"
+        }
+    ]
 }

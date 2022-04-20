@@ -1,5 +1,4 @@
 import {generateRandom, randomDate} from '../Helpers/Utils';
-import Fiches from '../Ressources/Data/Fiches';
 import {
   arrondissements,
   collecteurs,
@@ -11,7 +10,6 @@ import {
 import Globals from '../Ressources/Globals';
 import Neter from '../Ressources/Neter';
 import Storer from './storer';
-const baseUrl = Neter.uri1;
 
 async function resolveresponse(obj) {
   return await new Promise(resolve => {
@@ -265,12 +263,12 @@ let Fetcher = {
           contact: '94632954',
           urlPhoto: 'https://picsum.photos/200',
           adminId: 50,
-          filled_fiche: 50,
-          rejected_fiche: 30,
-          accepted_fiche: 80,
-          review_fiche: 31,
+          ficheRemplies: 50,
+          ficheRejetes: 30,
+          ficheValide: 80,
+          ficheAttente: 31,
           collecteurs: 50,
-          beneficiaires: 66,
+          nbrBeneficiaire: 66,
           formations: 25,
           kits: 19,
           notifications: Array.apply(null, Array(15)).map(function (x, i) {
@@ -298,10 +296,10 @@ let Fetcher = {
           contact: '94632954',
           adminId: 50,
 
-          filled_fiche: 68,
-          rejected_fiche: 80,
-          accepted_fiche: 8,
-          review_fiche: 15,
+          ficheRemplies: 68,
+          ficheRejetes: 80,
+          nbrBeneficiaire: 8,
+          ficheAttente: 15,
           new_messages: 20,
           new_notifications: 15,
         });

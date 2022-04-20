@@ -232,8 +232,28 @@ export const randomDate = (start, end) => {
   );
 };
 
+export const dynamicCompute = (operation, oldval = 0, value = '') => {
+  let result = 0;
+  switch (operation) {
+    case 'add':
+      result = oldval ? oldval + value : value;
+      break;
+    case 'mine':
+      result = oldval ? oldval - value : value;
+      break;
+    default:
+      break;
+  }
+  return result;
+};
+
 export const flatArrayBykey = (array = [], key = '', value = '') => {
-  const result = array.filter(mes => mes[key] === value);
+  const result = array.filter(mes => {
+    if (Array.isArray(mes[key])) {
+      return mes[key].findIndex(fi => fi === value) !== -1;
+    }
+    return mes[key] === value;
+  });
   if (result.length === 0 || !array[0][key]) {
     return array;
   }

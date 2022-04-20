@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import {styleAccount as styles} from '../../../Ressources/Styles';
 import {styleHelps as stylesc} from '../../../Ressources/Styles';
-import Icon from 'react-native-vector-icons/AntDesign';
 import TextW from '../../../components/Gadgets/TextW';
 import {Image} from 'react-native-elements';
 import Globals from '../../../Ressources/Globals';

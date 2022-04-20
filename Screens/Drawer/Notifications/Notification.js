@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import NotificationItem from '../../../components/Worker/Lists/NotificationItem';
 import Globals from '../../../Ressources/Globals';
-import Fetcher from '../../../API/fakeApi';
+import Fetcher from '../../../API/fetcher';
 import {styleNotificationItem as styles} from '../../../Ressources/Styles';
 import Storer from '../../../API/storer';
 import {connect} from 'react-redux';
@@ -23,9 +23,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 let notides = {uri: '', text: 'toto'};
 function Notification(route) {
-  const [notifications, setnotifications] = React.useState(
-    Globals.PROFIL_INFO.notifications,
-  );
+  const [notifications, setnotifications] = React.useState([]);
   const [spinner, setspinner] = React.useState(true);
   const [modalVisible, setmodalVisible] = React.useState(false);
   React.useEffect(() => {
@@ -38,37 +36,26 @@ function Notification(route) {
     setmodalVisible(true);
   };
   function _onSubmmitClick() {
-    Storer.getData('@NOTIFICATIONS')
-      .then(data => {
-        if (data) {
-          setnotifications(data);
-          setspinner(false);
+    Fetcher.GetMessages('notifications')
+      .then(res => {
+        if (res['@type'] === 'hydra:Error') {
+          toast_message(res['hydra:description']);
         } else {
-          Fetcher.GetMessages('notifications')
-            .then(res => {
-              if (res.messages) {
-                setnotifications(res.messages);
-                Storer.storeData('@NOTIFICATIONS', res.messages);
-                route.AddProfilItem({key: 'notifications', data: 0});
-              }
-              setspinner(false);
-            })
-            .catch(err => {
-              setspinner(false);
-              if (!Globals.INTERNET) {
-                toast_message(Globals.STRINGS.no_internet);
-                route.navigation.goBack();
-              } else {
-                toast_message(`${err}`);
-              }
-            });
+          setnotifications(res.messages);
+          Storer.storeData('@NOTIFICATIONS', res.messages);
+          route.AddProfilItem({key: 'notifications', data: 0});
         }
+        setspinner(false);
       })
-      .catch(err => {
+      .catch(async err => {
         setspinner(false);
         if (!Globals.INTERNET) {
-          toast_message(Globals.STRINGS.no_internet);
-          route.navigation.goBack();
+          const cached = await Storer.getData('@NOTIFICATIONS');
+          if (!cached) {
+            toast_message(Globals.STRINGS.no_internet);
+          } else {
+            setnotifications(cached);
+          }
         } else {
           toast_message(`${err}`);
         }

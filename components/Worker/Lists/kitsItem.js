@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import Globals from '../../../Ressources/Globals';
 import {styleKitsItem as styles} from '../../../Ressources/Styles';
 import Icono from 'react-native-vector-icons/Ionicons';
+import TextW from '../../Gadgets/TextW';
 
 function kitsItem(route) {
   const {id, libelle} = route.inter_Collecteurs;
@@ -23,7 +24,7 @@ function kitsItem(route) {
       <View style={styles.def_avatar}>
         <Icono
           name="md-cube-outline"
-          size={90}
+          size={50}
           color={Globals.COLORS.primary}
         />
       </View>
@@ -36,6 +37,11 @@ function kitsItem(route) {
             }}>
             {libelle}
           </Text>
+          <TextW
+            style={styles.notification_description}
+            text={`identifiant: ${id}`.replace(/(<([^>]+)>)/gi, '')}
+            size={100}
+          />
         </View>
       </View>
     </TouchableOpacity>

@@ -21,6 +21,8 @@ import EmptyThing from '../../../components/Gadgets/EmptyThing';
 import LoadingDot from '../../../components/Gadgets/Loading';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Image} from 'react-native-elements';
+import Storer from '../../../API/storer';
+import ToolItemLength from '../../../components/Gadgets/ToolItemLength';
 
 let notides = {uri: '', text: 'toto'};
 function Beneficiaires(route) {
@@ -41,30 +43,37 @@ function Beneficiaires(route) {
     notides = notif;
     setmodalVisible(true);
   };
-  function _onSubmmitClick() {
+  async function _onSubmmitClick() {
     setspinner(true);
-    Fetcher.GetBeneficiaires('', page)
+
+    Fetcher.GetBeneficiaires(Globals.PROFIL_INFO.id, page)
       .then(res => {
-        if (res.beneficiaires) {
-          setBeneficiaries(res.beneficiaires);
-          //Storer.storeData('@Beneficiaries', res.beneficiaires);
+        if (res['@type'] === 'hydra:Error') {
+          toast_message(res['hydra:description']);
+        } else {
+          setpage(page + 1);
+          const fetched = [...Beneficiaries, ...res];
+          setBeneficiaries(fetched);
+          if (page === 1) {
+            Storer.storeData('@Beneficiaries', fetched);
+          }
         }
         setspinner(false);
       })
-      .catch(err => {
+      .catch(async err => {
         setspinner(false);
         if (!Globals.INTERNET) {
-          toast_message(Globals.STRINGS.no_internet);
-          
+          const cached = await Storer.getData('@Beneficiaries');
+          if (!cached) {
+            toast_message(Globals.STRINGS.no_internet);
+          } else {
+            setBeneficiaries(cached);
+          }
         } else {
           toast_message(`${err}`);
         }
       });
   }
-
-  const renderFooter = () => {
-    return <View style={styles.footer}>{spinner ? <LoadingDot /> : null}</View>;
-  };
 
   return (
     <SafeAreaView
@@ -78,10 +87,18 @@ function Beneficiaires(route) {
         <FlatList
           style={{flex: 1, backgroundColor: Globals.COLORS.white}}
           data={Beneficiaries}
+          ListHeaderComponent={
+            <View style={{paddingHorizontal: 8}}>
+              <ToolItemLength
+                value={Beneficiaries.length}
+                label={'Vos bénéficiaires'}
+              />
+            </View>
+          }
           ListEmptyComponent={
             <EmptyThing
               style={{marginTop: 50}}
-              message="Aucun Benneficiaire !"
+              message="Aucun Bénéficiaire !"
             />
           }
           keyExtractor={item => `notitem${item.id}`}
@@ -89,8 +106,6 @@ function Beneficiaires(route) {
             <CollecteursItem inter_Collecteurs={item} onclick={_show_content} />
           )}
           onEndReachedThreshold={0.5}
-          onEndReached={_onSubmmitClick}
-          ListFooterComponent={renderFooter}
         />
       )}
       <Modal

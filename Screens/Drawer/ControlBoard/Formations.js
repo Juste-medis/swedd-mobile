@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import FormationsItem from '../../../components/Worker/Lists/formationsItem';
 import Globals from '../../../Ressources/Globals';
-import Fetcher from '../../../API/fakeApi';
+import Fetcher from '../../../API/fetcher';
 import {styleCollecteursItem as styles} from '../../../Ressources/Styles';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -21,12 +21,15 @@ import EmptyThing from '../../../components/Gadgets/EmptyThing';
 import LoadingDot from '../../../components/Gadgets/Loading';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Image} from 'react-native-elements';
+import Storer from '../../../API/storer';
+import ToolItemLength from '../../../components/Gadgets/ToolItemLength';
 
 let notides = {uri: '', text: 'toto'};
 function Formations(route) {
   const [formations, setformations] = React.useState([]);
   const [spinner, setspinner] = React.useState(true);
   const [modalVisible, setmodalVisible] = React.useState(false);
+  const [page, setpage] = React.useState(1);
 
   React.useEffect(() => {
     //console.log(route.navigation.getParent());
@@ -41,19 +44,31 @@ function Formations(route) {
     //setmodalVisible(true);
   };
   function _onSubmmitClick() {
-    Fetcher.Getformations()
+    setspinner(true);
+
+    Fetcher.Getformations(Globals.PROFIL_INFO.id, page)
       .then(res => {
-        if (res.formations) {
-          setformations(res.formations);
-          //Storer.storeData('@formations', res.beneficiaires);
+        if (res['@type'] === 'hydra:Error') {
+          toast_message(res['hydra:description']);
+        } else {
+          setpage(page + 1);
+          const fetched = [...formations, ...res];
+          setformations(fetched);
+          if (page === 1) {
+            Storer.storeData('@formations', fetched);
+          }
         }
         setspinner(false);
       })
-      .catch(err => {
+      .catch(async err => {
         setspinner(false);
         if (!Globals.INTERNET) {
-          toast_message(Globals.STRINGS.no_internet);
-          
+          const cached = await Storer.getData('@formations');
+          if (!cached) {
+            toast_message(Globals.STRINGS.no_internet);
+          } else {
+            setformations(cached);
+          }
         } else {
           toast_message(`${err}`);
         }
@@ -72,6 +87,11 @@ function Formations(route) {
         <FlatList
           style={{flex: 1, backgroundColor: Globals.COLORS.white}}
           data={formations}
+          ListHeaderComponent={
+            <View style={{paddingHorizontal: 8}}>
+              <ToolItemLength value={formations.length} label={'Formations'} />
+            </View>
+          }
           ListEmptyComponent={
             <EmptyThing
               style={{marginTop: 50}}

@@ -89,18 +89,8 @@ export default class RadioGroup extends Component {
         <View style={styles.radioContainer}>
           {_.map(options, value => (
             <CheckBox
-              containerStyle={{
-                backgroundColor: 'rgba(9,105,195,0.05)',
-                borderRadius: 50,
-                borderWidth: 0,
-              }}
-              textStyle={{
-                padding: 0,
-              }}
-              style={{
-                margin: 0,
-                padding: 0,
-              }}
+              containerStyle={styles.containerStyle}
+              textStyle={styles.textStyle}
               Component={Text}
               checkedIcon={
                 <Icon

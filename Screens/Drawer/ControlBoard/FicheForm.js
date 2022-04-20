@@ -1,7 +1,11 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import DynamicForm from '../../../components/Formifyer/forms/DynamicForm/DynamicForm';
-import {flatArrayBykey, toast_message} from '../../../Helpers/Utils';
+import {
+  dynamicCompute,
+  flatArrayBykey,
+  toast_message,
+} from '../../../Helpers/Utils';
 import {styleFicheForm as styles} from '../../../Ressources/Styles';
 import Globals from '../../../Ressources/Globals';
 import Swiper from 'react-native-swiper';
@@ -32,22 +36,71 @@ function FicheForm(route) {
     let form = set.content;
     if (form) {
       for (let fi = 0; fi < form.length; fi++) {
+        let defaultvls = {};
         for (let j = 0; j < form[fi].length; j++) {
           let element = form[fi][j];
-          let deps = element.dependencie;
+          if (values) {
+            let tmpdef = values[form[fi][j].key];
+            if (j === 0 && tmpdef) {
+              defaultvls = tmpdef;
+              if (form[fi][j].key === 'beneficiaire') {
+                Object.assign(defaultvls, {
+                  arrondissement: `${defaultvls?.quartier?.arrondissement?.id}`,
+                  commune: `${defaultvls?.quartier?.arrondissement?.commune?.id}`,
+                  departement: `${defaultvls?.quartier?.arrondissement?.commune?.departement?.id}`,
+                  quartier: `${defaultvls?.quartier?.libelle}`,
+                  nbreFilleFreqClub: `${defaultvls?.nbreFilleFreqClub}`,
+                });
+              }
+            }
+          }
+          let {dependencie} = element;
           form[fi][j] = {
             ...element,
-            onchange: element.dependent
-              ? value => {
-                  setdependencies({...dependencies, [element.key]: value[0]});
+            ...(defaultvls[element.key] !== undefined
+              ? {
+                  value: defaultvls[element.key],
                 }
-              : () => {},
-            ...(deps
+              : {}),
+            ...(element.computation
+              ? {
+                  onchange: value => {
+                    const oldval = dependencies[element.computation[0]];
+                    setdependencies({
+                      ...dependencies,
+                      [element.computation[0]]: dynamicCompute(
+                        element.computation[1],
+                        oldval,
+                        value,
+                      ),
+                    });
+                  },
+                }
+              : {}),
+            ...(element.computated
+              ? {
+                  value: dependencies[element.computated[0]] || 0,
+                }
+              : {}),
+            ...(element.dependent
+              ? {
+                  onchange: value => {
+                    const compval =
+                      element.type === 'select' ? value[0] : value;
+                    setdependencies({
+                      ...dependencies,
+                      [element.key]: compval,
+                    });
+                  },
+                }
+              : {}),
+
+            ...(dependencie
               ? {
                   values: flatArrayBykey(
                     element.values,
-                    deps[1],
-                    dependencies[deps[0]],
+                    dependencie[1],
+                    dependencies[dependencie[0]],
                   ),
                 }
               : {}),
@@ -58,16 +111,16 @@ function FicheForm(route) {
       setcomponentloading(!componentloading);
     }
   }
-
   async function getFormResponses(responses) {
     let allrep = {
         ...fakepost,
         //categorieFiche: `/api/categorie_fiches/${set.id}`,
+        facilitateur: `/api/facilitateurs/${Globals.PROFIL_INFO.id}`,
         categorieFiche: '/api/categorie_fiches/2',
-        facilitateur: '/api/facilitateurs/1',
         formationAnimateur: '/api/formation_animateurs/3',
         sousProjet: '/api/sous_projets/1',
         projet: '/api/projets/1',
+        fichestate: 'review',
       },
       go = true;
     for (let fi = 0; fi < refs.length; fi++) {
@@ -114,12 +167,12 @@ function FicheForm(route) {
         };
       }
       allrep.beneficiaire.facilitateur = allrep.facilitateur;
+      if (allrep.beneficiaire.nbreFilleFreqClub) {
+        allrep.nbreFilleFreqClub = allrep.beneficiaire.nbreFilleFreqClub;
+      }
 
-      console.log(allrep);
-      console.log('--------------------');
-      Fetcher.PostFiche(allrep)
+      Fetcher.PostFiche(allrep, {libelle: set.title, id: set.id})
         .then(res => {
-          console.log(res);
           if (res['@type'] === 'hydra:Error') {
             Toast.show({
               type: 'error',
@@ -129,7 +182,7 @@ function FicheForm(route) {
           } else {
             Toast.show({
               type: 'success',
-              text1: 'La fiche a bien été soumise !',
+              text1: res.success_offline || 'La fiche a bien été soumise !',
               text2: res.success,
             });
             setsubmiting('submited');

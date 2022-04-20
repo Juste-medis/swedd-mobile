@@ -135,5 +135,17 @@ export default {
     check_con_retry:
       'Erreur de telechargement . verifiez votre connexion et reésayez',
     sucess_Update: 'Mise à jour reuissi',
+    fichelistLAbel: {
+      all: 'Liste de toutes les fiches',
+      review: 'Liste de toutes les fiches en cour de validation',
+      rejected: 'Liste de toutes les fiches rejetées',
+      accepted: 'Liste de toutes les fiches validées',
+    },
+    ficheStateLAbel: {
+      review: 'En cour',
+      rejected: 'rejetée',
+      accepted: 'validée',
+      all: '?',
+    },
   },
 };

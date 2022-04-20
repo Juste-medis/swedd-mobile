@@ -1,13 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {ScrollView, Text, View, Linking, ActivityIndicator} from 'react-native';
+import {ScrollView, Text, View, Linking} from 'react-native';
 import Globals from '../../../Ressources/Globals';
 import {styleAccount as styles} from '../../../Ressources/Styles';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {AddProfilItem} from '../../../Store/Actions';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {toast_message} from '../../../Helpers/Utils';
 import {Image} from 'react-native-elements';
 import SimpleRipple from '../../../components/Touchable/SimpleRipple';
 
@@ -16,7 +15,6 @@ function Account(route) {
   React.useEffect(() => {
     //route.AddProfilItem({ key: "visitedcourses", data: "^^^^^^^^^^^^^^^^^" });
   }, []);
-
   let menugen = [
     {
       icon: 'ios-person-circle-sharp',
@@ -29,9 +27,11 @@ function Account(route) {
       icon: 'reader',
       title: 'Fiches',
       onclick: () => {
-        Globals.INTERNET
-          ? route.navigation.navigate('Command')
-          : toast_message(Globals.STRINGS.no_internet);
+        //route.navigation.navigate('MainControlBoard', {fichestate: 'all'});
+        route.navigation.navigate('MainControlBoard', {
+          screen: 'FichesList',
+          params: {fichestate: 'all'},
+        });
       },
     },
     ...[
@@ -59,7 +59,7 @@ function Account(route) {
             icon: 'people-outline',
             title: 'Responsable superviseur Niveau 2',
             onclick: () => {
-              route.navigation.navigate('Notes');
+              //route.navigation.navigate('Notes');
             },
           }
         : {},
@@ -155,28 +155,31 @@ function Account(route) {
       </View>
     );
   };
+  const AvatarPlace = () => (
+    <View style={styles.def_avatar}>
+      <Text
+        style={{
+          color: 'white',
+          fontSize: 50,
+          fontFamily: 'Lato-Bold',
+        }}>
+        {profil.prenom.substr(0, 2)}
+      </Text>
+    </View>
+  );
   return (
     <ScrollView>
       <View style={styles.main_container}>
         <View style={{width: '100%', alignItems: 'center'}}>
-          {profil.urlPhoto !== '' ? (
+          {![null, ''].includes(profil.urlPhoto) ? (
             <Image
               source={{uri: profil.urlPhoto}}
               containerStyle={styles.item}
               style={styles.image_avatar}
-              PlaceholderContent={<ActivityIndicator />}
+              PlaceholderContent={<AvatarPlace />}
             />
           ) : (
-            <View style={styles.def_avatar}>
-              <Text
-                style={{
-                  color: 'white',
-                  fontSize: 50,
-                  fontFamily: 'Lato-Bold',
-                }}>
-                {profil.prenom.substr(0, 2)}
-              </Text>
-            </View>
+            <AvatarPlace />
           )}
 
           <Text style={styles.name_title}>

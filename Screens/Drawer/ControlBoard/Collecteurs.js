@@ -22,6 +22,7 @@ import LoadingDot from '../../../components/Gadgets/Loading';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Image} from 'react-native-elements';
 import Storer from '../../../API/storer';
+import ToolItemLength from '../../../components/Gadgets/ToolItemLength';
 
 let notides = {uri: '', text: 'toto'};
 function Collectors(route) {
@@ -44,39 +45,34 @@ function Collectors(route) {
   };
   function _onSubmmitClick() {
     setspinner(true);
-    Fetcher.GetCollecteurs('', page)
+    Fetcher.GetCollecteurs(Globals.PROFIL_INFO.id, page)
       .then(res => {
-        if (res.collecteurs) {
+        if (res['@type'] === 'hydra:Error') {
+          toast_message(res['hydra:description']);
+        } else {
           setpage(page + 1);
-          const fetched = [...Collecteurs, ...res.collecteurs];
+          const fetched = [...Collecteurs, ...res];
           setCollecteurs(fetched);
-          Storer.storeData('@Collecteurs', fetched);
+          if (page === 1) {
+            Storer.storeData('@Collecteurs', fetched);
+          }
         }
         setspinner(false);
       })
-      .catch(err => {
+      .catch(async err => {
         setspinner(false);
         if (!Globals.INTERNET) {
-          toast_message(Globals.STRINGS.no_internet);
-          
+          const cached = await Storer.getData('@Collecteurs');
+          if (!cached) {
+            toast_message(Globals.STRINGS.no_internet);
+          } else {
+            setCollecteurs(cached);
+          }
         } else {
           toast_message(`${err}`);
         }
       });
   }
-
-  const renderFooter = () => {
-    return (
-      <View style={styles.footer}>
-        {spinner ? (
-          <ActivityIndicator
-            color={Globals.COLORS.primary}
-            style={{marginLeft: 8}}
-          />
-        ) : null}
-      </View>
-    );
-  };
 
   return (
     <SafeAreaView
@@ -93,13 +89,23 @@ function Collectors(route) {
           ListEmptyComponent={
             <EmptyThing style={{marginTop: 50}} message="Aucun Animateur !" />
           }
+          ListHeaderComponent={
+            <View style={{paddingHorizontal: 8}}>
+              <ToolItemLength
+                value={Collecteurs.length}
+                label={'Vos collecteurs'}
+              />
+            </View>
+          }
           keyExtractor={item => `notitem${item.id}`}
           renderItem={({item}) => (
-            <CollecteursItem inter_Collecteurs={item} onclick={_show_content} />
+            <CollecteursItem
+              role="colecttor"
+              inter_Collecteurs={item}
+              onclick={_show_content}
+            />
           )}
           onEndReachedThreshold={0.5}
-          onEndReached={_onSubmmitClick}
-          ListFooterComponent={renderFooter}
         />
       )}
       <Modal

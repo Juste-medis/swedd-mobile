@@ -1,32 +1,141 @@
 import {generateRandom} from '../../Helpers/Utils';
 import {
   arrondissements,
+  classes,
   communes,
+  confessionReligieux,
+  critereVulnerabilites,
+  cycles,
+  decisionFinaleEtablissement,
   departements,
-  descriptions,
+  frequenceCours,
   icons,
+  niveauEtude,
+  periodescolaire,
+  series,
   variants,
 } from './properties';
 import {styleFicheForm as styles} from '../../Ressources/Styles';
 
 const collectteurfield = {
-  key: 'collecteur',
-  type: 'select',
-  label: 'Agent enrégistreur',
-  multiple: false,
-  searchInputPlaceholder: 'Veillez sélectionner le collecteur',
-  value: ['/api/collecteurs/1'],
-  values: [
+    key: 'collecteur',
+    type: 'select',
+    label: 'Agent enrégistreur',
+    multiple: false,
+    searchInputPlaceholder: 'Veillez sélectionner le collecteur',
+    value: ['/api/collecteurs/1'],
+    values: [
+      {
+        label: 'SISI',
+        value: '/api/collecteurs/1',
+      },
+      {
+        label: 'Cokou',
+        value: '/api/collecteurs/2',
+      },
+    ],
+  },
+  depconarron = [
     {
-      label: 'SISI',
-      value: '/api/collecteurs/1',
+      key: 'departement',
+      type: 'select',
+      label: 'DEPARTEMENTS',
+      multiple: false,
+      searchInputPlaceholder: 'Veuillez sélectionner le département',
+      values: departements,
+      dependent: 'commune',
     },
     {
-      label: 'Cokou',
-      value: '/api/collecteurs/2',
+      key: 'commune',
+      type: 'select',
+      label: 'COMMUNES',
+      multiple: false,
+      searchInputPlaceholder: 'Veuillez sélectionner la commune',
+      dependencie: ['departement', 'DEPARTEMENTS'],
+      dependent: 'arrondissement',
+      values: communes,
+    },
+    {
+      key: 'arrondissement',
+      type: 'select',
+      label: 'ARRONDISSEMENTS',
+      dependencie: ['commune', 'COMMUNES'],
+      multiple: false,
+      searchInputPlaceholder: "Veuillez sélectionner l'arrondissement",
+      values: arrondissements,
     },
   ],
-};
+  formationfield = {
+    key: 'collecteur',
+    type: 'select',
+    label: 'Agent enrégistreur',
+    multiple: false,
+    searchInputPlaceholder: 'Veillez sélectionner le collecteur',
+    value: ['/api/collecteurs/1'],
+    values: [
+      {
+        label: 'SISI',
+        value: '/api/formation_animateurs/3',
+      },
+      {
+        label: 'Cokou',
+        value: '/api/collecteurs/2',
+      },
+    ],
+  },
+  projetsfield = {
+    key: 'projet',
+    type: 'select',
+    label: 'Agent enrégistreur',
+    multiple: false,
+    searchInputPlaceholder: 'Veillez sélectionner le collecteur',
+    value: ['/api/collecteurs/1'],
+    values: [
+      {
+        label: '/api/projets/1',
+        value: '/api/projets/1',
+      },
+      {
+        label: '/api/projets/2',
+        value: '/api/projets/2',
+      },
+    ],
+  },
+  sous_projetsfield = {
+    key: 'sous_projets',
+    type: 'select',
+    label: 'Agent enrégistreur',
+    multiple: false,
+    searchInputPlaceholder: 'Veillez sélectionner le collecteur',
+    value: ['/api/collecteurs/1'],
+    values: [
+      {
+        label: '/api/sous_projets/1',
+        value: '/api/sous_projets/1',
+      },
+      {
+        label: '/api/sous_projets/2',
+        value: '/api/sous_projets/2',
+      },
+    ],
+  },
+  fichdescription = [
+    '',
+    'En termes de fréquentation scolaire, 45 % des filles du premier cycle du secondaire ne sont pas scolarisées (contre 28 % des garçons).',
+    'Si cette dynamique démographique se poursuit, la population béninoise pourrait doubler au cours des 30 prochaines années',
+    'ce qui entraînerait une pression accrue sur les dépenses sociales et économiques et risquerait de retarder davantage la transition',
+    'Il faut cependant attendre les élections législatives françaises de 1951 pour que la rupture soit effective. L’obtention d’un second siège au Palais Bourbon pour la circonscription du Dahomey est alors considérée, par Hubert Maga et ses partisans, comme l’occasion donnée à l’UPD de démontrer son attachement aux intérêts du',
+    'En termes de fréquentation scolaire, 45 % des filles du premier cycle du secondaire ne sont pas scolarisées (contre 28 % des garçons).',
+    'Si cette dynamique démographique se poursuit, la population béninoise pourrait doubler au cours des 30 prochaines années',
+    'ce qui entraînerait une pression accrue sur les dépenses sociales et économiques et risquerait de retarder davantage la transition',
+    'Il faut cependant attendre les élections législatives françaises de 1951 pour que la rupture soit effective. L’obtention d’un second siège au Palais Bourbon pour la circonscription du Dahomey est alors considérée, par Hubert Maga et ses partisans, comme l’occasion donnée à l’UPD de démontrer son attachement aux intérêts du',
+    'En termes de fréquentation scolaire, 45 % des filles du premier cycle du secondaire ne sont pas scolarisées (contre 28 % des garçons).',
+    'Si cette dynamique démographique se poursuit, la population béninoise pourrait doubler au cours des 30 prochaines années',
+    'ce qui entraînerait une pression accrue sur les dépenses sociales et économiques et risquerait de retarder davantage la transition',
+    'Si cette dynamique démographique se poursuit, la population béninoise pourrait doubler au cours des 30 prochaines années',
+    'ce qui entraînerait une pression accrue sur les dépenses sociales et économiques et risquerait de retarder davantage la transition',
+    'Si cette dynamique démographique se poursuit, la population béninoise pourrait doubler au cours des 30 prochaines années',
+  ];
 /* eslint-disable no-unused-vars */
 let Fiches;
 export default Fiches = [
@@ -37,7 +146,9 @@ export default Fiches = [
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
-    description: descriptions[generateRandom(descriptions.length)],
+    get description() {
+      return fichdescription[this.id];
+    },
     get content() {
       return [
         [
@@ -48,41 +159,14 @@ export default Fiches = [
             label: this.title,
             style: styles.sectionTitleStyle,
           },
-          {
-            key: 'departement',
-            type: 'select',
-            label: 'DEPARTEMENTS',
-            multiple: false,
-            searchInputPlaceholder: 'Veuillez sélectionner le département',
-            values: departements,
-            dependent: 'commune',
-          },
-          {
-            key: 'commune',
-            type: 'select',
-            label: 'COMMUNES',
-            multiple: false,
-            searchInputPlaceholder: 'Veuillez sélectionner la commune',
-            dependencie: ['departement', 'DEPARTEMENTS'],
-            dependent: 'arrondissement',
-            values: communes,
-          },
-          {
-            key: 'arrondissement',
-            type: 'select',
-            label: 'ARRONDISSEMENTS',
-            dependencie: ['commune', 'COMMUNES'],
-            multiple: false,
-            searchInputPlaceholder: "Veuillez sélectionner l'arrondissement",
-            values: arrondissements,
-          },
+          ...depconarron,
           {
             key: 'quartier',
             type: 'text',
             required: true,
             label: 'Village',
             placeholder: 'Veuillez écrire le village de provenance de la fille',
-            maxlength: 30,
+            maxlength: 100,
           },
         ],
         [
@@ -111,7 +195,7 @@ export default Fiches = [
               "Veuillez écrire le numéro d'ordre de l'enfant enregistré",
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'nom',
@@ -119,7 +203,7 @@ export default Fiches = [
             placeholder: "Veuillez écrire le nom de l'enfant enregistré",
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'prenom',
@@ -128,7 +212,7 @@ export default Fiches = [
               "Veuillez écrire le/les prénoms de l'enfant enregistré",
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'sexe',
@@ -156,7 +240,7 @@ export default Fiches = [
             type: 'text',
             required: true,
             subtype: 'number',
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'statutEnfant',
@@ -187,7 +271,7 @@ export default Fiches = [
               "Veuillez écrire le niveau d'étude/classe atteint par l'enfant avant décrochage",
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'residence',
@@ -196,7 +280,7 @@ export default Fiches = [
               "Veuillez entrer le village/village de résidence de l'enfant à enregistré",
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'critereVulnerabilite',
@@ -206,28 +290,7 @@ export default Fiches = [
               'Veuillez choisir le critère de vulnérabilité de la fille',
             type: 'checkbox-group',
             other: true,
-            values: [
-              {
-                label: 'OEV',
-                value: 'oev',
-              },
-              {
-                label: 'PLACEE',
-                value: 'placee',
-              },
-              {
-                label: 'SURVIVANTE VBG',
-                value: 'survivante_vbg',
-              },
-              {
-                label: 'FILLE - MERE',
-                value: 'fille___mere',
-              },
-              {
-                label: 'HANDICAPEE',
-                value: 'handicapee',
-              },
-            ],
+            values: critereVulnerabilites,
           },
           {
             key: 'logement',
@@ -296,7 +359,9 @@ export default Fiches = [
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
-    description: descriptions[generateRandom(descriptions.length)],
+    get description() {
+      return fichdescription[this.id];
+    },
     get content() {
       return [
         [
@@ -304,7 +369,8 @@ export default Fiches = [
             key: 'collecteurtitle',
             type: 'header',
             subtype: 'h3',
-            label: "Informations relatives à l'agent enregistreur",
+            label:
+              this.title + "\n-\nInformations relatives à l'agent enregistreur",
             style: styles.sectionTitleStyle,
           },
           collectteurfield,
@@ -323,7 +389,7 @@ export default Fiches = [
             placeholder: 'Veuillez entrer le nom de la fille',
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'prenom',
@@ -331,9 +397,8 @@ export default Fiches = [
             placeholder: 'Veuillez entrer le/les prénoms de la fille',
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
           },
-
           {
             key: 'numM2EducMaster',
             label: 'N° Mll /EDUCMASTER',
@@ -341,27 +406,10 @@ export default Fiches = [
             type: 'text',
             required: true,
             subtype: 'tel',
-            maxlength: 30,
+            maxlength: 100,
           },
-          {
-            key: 'departement',
-            type: 'select',
-            label: 'DEPARTEMENTS',
-            multiple: false,
-            searchInputPlaceholder: 'Veuillez sélectionner le département',
-            values: departements,
-            dependent: 'commune',
-          },
-          {
-            key: 'commune',
-            type: 'select',
-            label: 'COMMUNES',
-            multiple: false,
-            searchInputPlaceholder: 'Veuillez sélectionner la commune',
-            dependencie: ['departement', 'DEPARTEMENTS'],
-            dependent: 'arrondissement',
-            values: communes,
-          },
+          ...depconarron,
+
           {
             key: 'arrondissement',
             type: 'select',
@@ -378,14 +426,14 @@ export default Fiches = [
             label: 'Village/Quartier/Maison',
             placeholder:
               'Veuillez entrer le village/quartier/maison de provenance de la fille',
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'etablissementUniversite',
             label: 'Etablissement/Université',
             placeholder:
               "Veuillez entrer l'établissement/université de la fille",
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -394,7 +442,7 @@ export default Fiches = [
             label: "Niveau d'étude/Classe",
             placeholder:
               "Veuillez entrer le niveau d'étude ou la classe de la fille",
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -429,28 +477,7 @@ export default Fiches = [
               'Veuillez choisir le critère de vulnérabilité de la fille',
             type: 'checkbox-group',
             other: true,
-            values: [
-              {
-                label: 'OEV',
-                value: 'oev',
-              },
-              {
-                label: 'PLACEE',
-                value: 'placee',
-              },
-              {
-                label: 'SURVIVANTE VBG',
-                value: 'survivante_vbg',
-              },
-              {
-                label: 'FILLE - MERE',
-                value: 'fille___mere',
-              },
-              {
-                label: 'HANDICAPEE',
-                value: 'handicapee',
-              },
-            ],
+            values: critereVulnerabilites,
           },
           {
             key: 'categorieFille',
@@ -488,7 +515,7 @@ export default Fiches = [
             key: 'nom',
             label: 'Nom de la personne à contacter',
             placeholder: 'Veuillez entrer le nom de la personne à contacter',
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -496,7 +523,7 @@ export default Fiches = [
             key: 'prenom',
             label: 'Prénoms de la personne à contacter',
             placeholder: 'Veuillez entrer le nom de la personne à contacter',
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -505,7 +532,7 @@ export default Fiches = [
             label: 'Affinité',
             placeholder:
               'Veuillez entrer le lien existant entre la fille et la personne a contacté',
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -514,7 +541,7 @@ export default Fiches = [
             label: 'Contacts',
             placeholder:
               'Veuillez entrer le/les contacts de la personne à contacter',
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -528,7 +555,9 @@ export default Fiches = [
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
-    description: descriptions[generateRandom(descriptions.length)],
+    get description() {
+      return fichdescription[this.id];
+    },
     get content() {
       return [
         [
@@ -536,7 +565,8 @@ export default Fiches = [
             key: 'collecteurtitle',
             type: 'header',
             subtype: 'h3',
-            label: "Informations relatives à l'agent enregistreur",
+            label:
+              this.title + "\n-\nInformations relatives à l'agent enregistreur",
             style: styles.sectionTitleStyle,
           },
           collectteurfield,
@@ -562,7 +592,7 @@ export default Fiches = [
             placeholder: 'Veuillez entrer le nom de la fille',
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'prenom',
@@ -570,12 +600,12 @@ export default Fiches = [
             placeholder: 'Veuillez entrer le/les prénoms de la fille',
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'dateNaissance',
             type: 'date',
-            label: 'Date de naissance de la fillle',
+            label: 'Date de naissance de la fille',
             placeholder: 'Veuillez entrer la date de naissance de la fille',
             value: new Date().toISOString(),
             dateFormat: 'DD-MM-YYYY',
@@ -588,36 +618,10 @@ export default Fiches = [
             placeholder: 'Veuillez entrer le lieu de naissance de la fille',
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
           },
-          {
-            key: 'departement',
-            type: 'select',
-            label: 'DEPARTEMENTS',
-            multiple: false,
-            searchInputPlaceholder: 'Veuillez sélectionner le département',
-            values: departements,
-            dependent: 'commune',
-          },
-          {
-            key: 'commune',
-            type: 'select',
-            label: 'COMMUNES',
-            multiple: false,
-            searchInputPlaceholder: 'Veuillez sélectionner la commune',
-            dependencie: ['departement', 'DEPARTEMENTS'],
-            dependent: 'arrondissement',
-            values: communes,
-          },
-          {
-            key: 'arrondissement',
-            type: 'select',
-            label: 'ARRONDISSEMENTS',
-            dependencie: ['commune', 'COMMUNES'],
-            multiple: false,
-            searchInputPlaceholder: "Veuillez sélectionner l'arrondissement",
-            values: arrondissements,
-          },
+          ...depconarron,
+
           {
             key: 'quartier',
             type: 'text',
@@ -625,14 +629,14 @@ export default Fiches = [
             label: 'Village/Quartier/Maison',
             placeholder:
               'Veuillez entrer le village/quartier/maison de provenance de la fille',
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'niveauEtudeClasse',
             label: "Niveau d'étude/Classe",
             placeholder:
               "Veuillez entrer le niveau d'étude ou la classe de la fille",
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -672,7 +676,7 @@ export default Fiches = [
             key: 'frequenceCours',
             label: 'Régularité',
             placeholder: 'Veuillez préciser la régularité de la fille au cours',
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -751,7 +755,7 @@ export default Fiches = [
             label: 'Moyenne obtenue',
             placeholder:
               "Veuillez notifier la moyenne obtenue pour la composition/l'évaluation choisie plus haut",
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             subtype: 'number',
             required: true,
@@ -781,10 +785,6 @@ export default Fiches = [
                 label: 'Abandon',
                 value: 'abandon_1',
               },
-              {
-                label: 'Autres',
-                value: 'autres',
-              },
             ],
           },
           {
@@ -792,7 +792,6 @@ export default Fiches = [
             label: 'Observation (raison des écarts)',
             placeholder:
               "Veuillez faire des observation s'il y en a sur la raison es écarts entre les moyennes de la fille",
-            maxlength: 30,
             type: 'text',
             subtype: 'textarea',
             required: true,
@@ -810,7 +809,7 @@ export default Fiches = [
             key: 'nom',
             label: 'Nom de la personne à contacter',
             placeholder: 'Veuillez entrer le nom de la personne à contacter',
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -818,7 +817,7 @@ export default Fiches = [
             key: 'prenom',
             label: 'Prénoms de la personne à contacter',
             placeholder: 'Veuillez entrer le nom de la personne à contacter',
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -827,7 +826,7 @@ export default Fiches = [
             label: 'Contacts',
             placeholder:
               'Veuillez entrer le/les contacts de la personne à contacter',
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -841,7 +840,9 @@ export default Fiches = [
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
-    description: descriptions[generateRandom(descriptions.length)],
+    get description() {
+      return fichdescription[this.id];
+    },
     get content() {
       return [
         [
@@ -849,54 +850,10 @@ export default Fiches = [
             key: 'formation',
             type: 'header',
             subtype: 'h3',
-            label: this.title,
+            label: 'Information sur formation',
             style: styles.sectionTitleStyle,
           },
-          {
-            key: 'libelle',
-            label: 'Titre de la formation',
-            placeholder:
-              'Veuillez écrire le titre de la formation/thématique enseignée',
-            required: true,
-          },
-          {
-            key: 'dateDebut',
-            label: 'Date de la la formation',
-            placeholder: 'Veuillez écrire la date de la formation',
-            required: true,
-            type: 'date',
-            value: new Date().toISOString(),
-            dateFormat: 'DD-MM-YYYY',
-            disabled: false,
-          },
-          {
-            key: 'departement',
-            type: 'select',
-            label: 'DEPARTEMENTS',
-            multiple: false,
-            searchInputPlaceholder: 'Veuillez sélectionner le département',
-            values: departements,
-            dependent: 'commune',
-          },
-          {
-            key: 'commune',
-            type: 'select',
-            label: 'COMMUNES',
-            multiple: false,
-            searchInputPlaceholder: 'Veuillez sélectionner la commune',
-            dependencie: ['departement', 'DEPARTEMENTS'],
-            dependent: 'arrondissement',
-            values: communes,
-          },
-          {
-            key: 'arrondissement',
-            type: 'select',
-            label: 'ARRONDISSEMENTS',
-            dependencie: ['commune', 'COMMUNES'],
-            multiple: false,
-            searchInputPlaceholder: "Veuillez sélectionner l'arrondissement",
-            values: arrondissements,
-          },
+          formationfield,
         ],
         [
           {
@@ -916,41 +873,14 @@ export default Fiches = [
             label: 'Informations relatives à la fille',
             style: styles.sectionTitleStyle,
           },
-          {
-            key: 'departement',
-            type: 'select',
-            label: 'DEPARTEMENTS',
-            multiple: false,
-            searchInputPlaceholder: 'Veuillez sélectionner le département',
-            values: departements,
-            dependent: 'commune',
-          },
-          {
-            key: 'commune',
-            type: 'select',
-            label: 'COMMUNES',
-            multiple: false,
-            searchInputPlaceholder: 'Veuillez sélectionner la commune',
-            dependencie: ['departement', 'DEPARTEMENTS'],
-            dependent: 'arrondissement',
-            values: communes,
-          },
-          {
-            key: 'arrondissement',
-            type: 'select',
-            label: 'ARRONDISSEMENTS',
-            dependencie: ['commune', 'COMMUNES'],
-            multiple: false,
-            searchInputPlaceholder: "Veuillez sélectionner l'arrondissement",
-            values: arrondissements,
-          },
+          ...depconarron,
           {
             key: 'quartier',
             type: 'text',
             required: true,
             label: 'Village',
             placeholder: 'Veuillez écrire le village de provenance de la fille',
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'sexe',
@@ -978,14 +908,14 @@ export default Fiches = [
             type: 'text',
             required: true,
             subtype: 'number',
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'niveauEtudeClasse',
             label: "Niveau d'étude/Classe",
             placeholder:
               "Veuillez entrer le niveau d'étude ou la classe de la fille",
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -1058,11 +988,7 @@ export default Fiches = [
               },
               {
                 label: 'Mal voyant',
-                value: 'autres__si_ou__pr_cisiez',
-              },
-              {
-                label: 'AUTRES (Si ou, Précisiez)',
-                value: 'autres__si_ou__pr_cisiez_1',
+                value: 'mal_voyant',
               },
             ],
           },
@@ -1070,7 +996,7 @@ export default Fiches = [
             key: 'contact',
             label: 'Contact',
             placeholder: 'Veuillez entrer le/les contacts du bénéficiaire',
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             subtype: 'tel',
             required: true,
@@ -1094,7 +1020,9 @@ export default Fiches = [
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
-    description: descriptions[generateRandom(descriptions.length)],
+    get description() {
+      return fichdescription[this.id];
+    },
     get content() {
       return [
         [
@@ -1102,7 +1030,8 @@ export default Fiches = [
             key: 'collecteurtitle',
             type: 'header',
             subtype: 'h3',
-            label: "Informations relatives à l'agent enregistreur",
+            label:
+              this.title + "\n-\nInformations relatives à l'agent enregistreur",
             style: styles.sectionTitleStyle,
           },
           collectteurfield,
@@ -1121,7 +1050,7 @@ export default Fiches = [
             placeholder: 'Veuillez entrer le nom de la fille',
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'prenom',
@@ -1129,7 +1058,7 @@ export default Fiches = [
             placeholder: 'Veuillez entrer le/les prénoms de la fille',
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'numM2EducMaster',
@@ -1141,7 +1070,7 @@ export default Fiches = [
           {
             key: 'dateNaissance',
             type: 'date',
-            label: 'Date de naissance de la fillle',
+            label: 'Date de naissance de la fille',
             placeholder: 'Veuillez entrer la date de naissance de la fille',
             value: new Date().toISOString(),
             dateFormat: 'DD-MM-YYYY',
@@ -1154,36 +1083,10 @@ export default Fiches = [
             placeholder: 'Veuillez entrer le lieu de naissance de la fille',
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
           },
-          {
-            key: 'departement',
-            type: 'select',
-            label: 'DEPARTEMENTS',
-            multiple: false,
-            searchInputPlaceholder: 'Veuillez sélectionner le département',
-            values: departements,
-            dependent: 'commune',
-          },
-          {
-            key: 'commune',
-            type: 'select',
-            label: 'COMMUNES',
-            multiple: false,
-            searchInputPlaceholder: 'Veuillez sélectionner la commune',
-            dependencie: ['departement', 'DEPARTEMENTS'],
-            dependent: 'arrondissement',
-            values: communes,
-          },
-          {
-            key: 'arrondissement',
-            type: 'select',
-            label: 'ARRONDISSEMENTS',
-            dependencie: ['commune', 'COMMUNES'],
-            multiple: false,
-            searchInputPlaceholder: "Veuillez sélectionner l'arrondissement",
-            values: arrondissements,
-          },
+          ...depconarron,
+
           {
             key: 'quartier',
             type: 'text',
@@ -1191,14 +1094,14 @@ export default Fiches = [
             label: 'Village/Quartier/Maison',
             placeholder:
               'Veuillez entrer le village/quartier/maison de provenance de la fille',
-            maxlength: 30,
+            maxlength: 100,
           },
           {
             key: 'etablissementUniversite',
             label: 'Etablissement/Université',
             placeholder:
               "Veuillez entrer l'établissement/université de la fille",
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -1207,7 +1110,7 @@ export default Fiches = [
             label: "Niveau d'étude/Classe",
             placeholder:
               "Veuillez entrer le niveau d'étude ou la classe de la fille",
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -1331,7 +1234,6 @@ export default Fiches = [
               'Veuillez cocher si oui ou non la fille est encadré à la maison',
             type: 'radio-group',
             other: false,
-            subtype: 'number',
             required: true,
             values: [
               {
@@ -1400,7 +1302,7 @@ export default Fiches = [
             key: 'nom',
             label: 'Nom de la personne à contacter',
             placeholder: 'Veuillez entrer le nom de la personne à contacter',
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -1408,7 +1310,7 @@ export default Fiches = [
             key: 'prenom',
             label: 'Prénoms de la personne à contacter',
             placeholder: 'Veuillez entrer le nom de la personne à contacter',
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -1417,7 +1319,7 @@ export default Fiches = [
             label: 'Contacts',
             placeholder:
               'Veuillez entrer le/les contacts de la personne à contacter',
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
           },
@@ -1431,7 +1333,9 @@ export default Fiches = [
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
-    description: descriptions[generateRandom(descriptions.length)],
+    get description() {
+      return fichdescription[this.id];
+    },
     get content() {
       return [
         [
@@ -1439,7 +1343,8 @@ export default Fiches = [
             key: 'collecteurtitle',
             type: 'header',
             subtype: 'h3',
-            label: "Informations relatives à l'agent enregistreur",
+            label:
+              this.title + "\n-\nInformations relatives à l'agent enregistreur",
             style: styles.sectionTitleStyle,
           },
           collectteurfield,
@@ -1459,7 +1364,7 @@ export default Fiches = [
             type: 'text',
             required: true,
             subtype: 'tel',
-            maxlength: 30,
+            maxlength: 100,
             value: 'edumas',
           },
           {
@@ -1468,7 +1373,7 @@ export default Fiches = [
             placeholder: 'Veuillez entrer le nom de la fille',
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
             value: 'nomfi',
           },
           {
@@ -1477,13 +1382,13 @@ export default Fiches = [
             placeholder: 'Veuillez entrer le/les prénoms de la fille',
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
             value: 'prenomfi',
           },
           {
             key: 'dateNaissance',
             type: 'date',
-            label: 'Date de naissance de la fillle',
+            label: 'Date de naissance de la fille',
             placeholder: 'Veuillez entrer la date de naissance de la fille',
             value: new Date().toISOString(),
             dateFormat: 'DD-MM-YYYY',
@@ -1496,40 +1401,10 @@ export default Fiches = [
             placeholder: 'Veuillez entrer le lieu de naissance de la fille',
             type: 'text',
             required: true,
-            maxlength: 30,
+            maxlength: 100,
             value: 'lieufi',
           },
-          {
-            key: 'departement',
-            type: 'select',
-            label: 'DEPARTEMENTS',
-            multiple: false,
-            searchInputPlaceholder: 'Veuillez sélectionner le département',
-            values: departements,
-            dependent: 'commune',
-            value: ['2'],
-          },
-          {
-            key: 'commune',
-            type: 'select',
-            label: 'COMMUNES',
-            multiple: false,
-            searchInputPlaceholder: 'Veuillez sélectionner la commune',
-            dependencie: ['departement', 'DEPARTEMENTS'],
-            dependent: 'arrondissement',
-            values: communes,
-            value: ['2'],
-          },
-          {
-            key: 'arrondissement',
-            type: 'select',
-            label: 'ARRONDISSEMENTS',
-            dependencie: ['commune', 'COMMUNES'],
-            multiple: false,
-            searchInputPlaceholder: "Veuillez sélectionner l'arrondissement",
-            values: arrondissements,
-            value: ['1'],
-          },
+          ...depconarron,
           {
             key: 'quartier',
             type: 'text',
@@ -1537,7 +1412,7 @@ export default Fiches = [
             label: 'Village/Quartier/Maison',
             placeholder:
               'Veuillez entrer le village/quartier/maison de provenance de la fille',
-            maxlength: 30,
+            maxlength: 100,
             value: 'qutieri',
           },
           {
@@ -1545,7 +1420,7 @@ export default Fiches = [
             label: 'Etablissement/Université',
             placeholder:
               "Veuillez entrer l'établissement/université de la fille",
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
             value: 'etablifill',
@@ -1555,7 +1430,7 @@ export default Fiches = [
             label: "Niveau d'étude/Classe",
             placeholder:
               "Veuillez entrer le niveau d'étude ou la classe de la fille",
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
             value: 'niclasse',
@@ -1593,28 +1468,7 @@ export default Fiches = [
             type: 'checkbox-group',
             other: true,
             value: {regular: ['oev']},
-            values: [
-              {
-                label: 'OEV',
-                value: 'oev',
-              },
-              {
-                label: 'PLACEE',
-                value: 'placee',
-              },
-              {
-                label: 'SURVIVANTE VBG',
-                value: 'survivante_vbg',
-              },
-              {
-                label: 'FILLE - MERE',
-                value: 'fille___mere',
-              },
-              {
-                label: 'HANDICAPEE',
-                value: 'handicapee',
-              },
-            ],
+            values: critereVulnerabilites,
           },
         ],
         [
@@ -1629,7 +1483,7 @@ export default Fiches = [
             key: 'nom',
             label: 'Nom de la personne à contacter',
             placeholder: 'Veuillez entrer le nom de la personne à contacter',
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
             value: 'nompecon',
@@ -1639,7 +1493,7 @@ export default Fiches = [
             label: 'Prénoms de la personne à contacter',
             placeholder:
               'Veuillez entrer le/les prénoms de la personne à contacter',
-            maxlength: 30,
+            maxlength: 100,
             type: 'text',
             required: true,
             value: 'prenompecon',
@@ -1663,7 +1517,134 @@ export default Fiches = [
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
-    description: descriptions[generateRandom(descriptions.length)],
+    get description() {
+      return fichdescription[this.id];
+    },
+    get content() {
+      return [
+        [
+          {
+            key: 'collecteurtitle',
+            type: 'header',
+            subtype: 'h3',
+            label: this.title + "\n-\nInformations sur l'agent collecteur",
+            style: styles.sectionTitleStyle,
+          },
+          collectteurfield,
+        ],
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Informations générales sur la fille',
+            style: styles.sectionTitleStyle,
+          },
+          ...depconarron,
+
+          {
+            key: 'residence',
+            label: 'Ville/Village de résidence',
+            placeholder:
+              'Veillez renseigner le Village ou la ville de la fille',
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'etablissementUniversite',
+            label: 'Etablissement fréquenté par la fille',
+            placeholder:
+              "Veillez inscrire le nom de l'établissement que fréquente la fille",
+            maxlength: 100,
+            type: 'text',
+            required: true,
+          },
+          {
+            key: 'nom',
+            label: "Nom de l'enfant enregistré",
+            placeholder: "Veuillez écrire le nom de l'enfant enregistré",
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'prenom',
+            label: "Prénoms de l'enfant enregistré",
+            placeholder:
+              "Veuillez écrire le/les prénoms de l'enfant enregistré",
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'age',
+            label: 'Âge de la fille',
+            placeholder: "Veillez entrer l'âge exacte de la fille",
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            maxlength: 100,
+          },
+          {
+            key: 'groupeFille',
+            label: 'Groupe',
+            placeholder: 'Veillez indiquer le groupe de la fille',
+            maxlength: 100,
+            type: 'text',
+          },
+          {
+            key: 'niveauEtude',
+            label: "Niveau d'étude de la fille",
+            placeholder: "Veillez choisir le niveau d'étude de la fille",
+            type: 'radio-group',
+            other: false,
+            dependent: 'cyclefille',
+            required: true,
+            values: niveauEtude,
+          },
+          {
+            key: 'cyclefille',
+            label: 'Cycle',
+            placeholder: 'Veillez choisir le cycle',
+            type: 'radio-group',
+            value: '',
+            dependencie: ['niveauEtude', 'niveau'],
+            dependent: 'classefille',
+            required: true,
+            values: cycles,
+          },
+          {
+            key: 'classefille',
+            label: 'Classe de la fille',
+            placeholder: 'Veillez choisir la classe de la fille',
+            type: 'radio-group',
+            other: false,
+            required: true,
+            dependencie: ['cyclefille', 'cycle'],
+            dependent: 'seriefille',
+            values: classes,
+          },
+          {
+            key: 'seriefille',
+            label: 'Série de la fille',
+            placeholder: 'Veillez choisir la série',
+            type: 'radio-group',
+            other: false,
+            dependencie: ['cyclefille', 'cycle'],
+            value: '',
+            values: series,
+          },
+          {
+            key: 'urlPhotoFille',
+            label: 'Photo de la fille',
+            placeholder:
+              "Demandez l'autorisation de la fille avant de la photographier",
+            type: 'image',
+          },
+        ],
+      ];
+    },
   },
   {
     id: 8,
@@ -1671,7 +1652,275 @@ export default Fiches = [
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
-    description: descriptions[generateRandom(descriptions.length)],
+    get description() {
+      return fichdescription[this.id];
+    },
+    get content() {
+      return [
+        [
+          {
+            key: 'collecteurtitle',
+            type: 'header',
+            subtype: 'h3',
+            label: this.title + "\n-\nInformations sur l'agent collecteur ",
+            style: styles.sectionTitleStyle,
+          },
+          collectteurfield,
+        ],
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Informations générales sur la fille',
+            style: styles.sectionTitleStyle,
+          },
+          ...depconarron,
+
+          {
+            key: 'etablissementUniversite',
+            label: 'Etablissement fréquenté par la fille',
+            placeholder:
+              "Veillez inscrire le nom de l'établissement que fréquente la fille",
+            maxlength: 100,
+            type: 'text',
+            required: true,
+          },
+
+          {
+            key: 'nom',
+            label: "Nom de l'enfant enregistré",
+            placeholder: "Veuillez écrire le nom de l'enfant enregistré",
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'prenom',
+            label: "Prénoms de l'enfant enregistré",
+            placeholder:
+              "Veuillez écrire le/les prénoms de l'enfant enregistré",
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'age',
+            label: 'Âge de la fille',
+            placeholder: "Veillez entrer l'âge exacte de la fille",
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            maxlength: 100,
+          },
+          {
+            key: 'niveauEtude',
+            label: "Niveau d'étude de la fille",
+            placeholder: "Veillez choisir le niveau d'étude de la fille",
+            type: 'radio-group',
+            other: false,
+            dependent: 'cyclefille',
+            required: true,
+            values: niveauEtude,
+          },
+          {
+            key: 'cyclefille',
+            label: 'Cycle',
+            placeholder: 'Veillez choisir le cycle',
+            type: 'radio-group',
+            value: '',
+            dependencie: ['niveauEtude', 'niveau'],
+            dependent: 'classefille',
+            required: true,
+            values: cycles,
+          },
+          {
+            key: 'classefille',
+            label: 'Classe de la fille',
+            placeholder: 'Veillez choisir la classe de la fille',
+            type: 'radio-group',
+            other: false,
+            required: true,
+            dependencie: ['cyclefille', 'cycle'],
+            dependent: 'seriefille',
+            values: classes,
+          },
+          {
+            key: 'seriefille',
+            label: 'Série de la fille',
+            placeholder: 'Veillez choisir la série',
+            type: 'radio-group',
+            other: false,
+            dependencie: ['cyclefille', 'cycle'],
+            value: '',
+            values: series,
+          },
+        ],
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Performances scolaires de la fille',
+            style: styles.sectionTitleStyle,
+          },
+          {
+            key: 'periodeCompoFille',
+            label: 'Période',
+            placeholder: "Période de l'année scolaire",
+            type: 'radio-group',
+            other: false,
+            values: periodescolaire,
+          },
+          {
+            key: 'observationMoyenneFille',
+            label: 'Inscrire la moyenne obtenue par la fille',
+            placeholder: 'En fonction de la période',
+            type: 'text',
+            subtype: 'number',
+            maxlength: 100,
+          },
+          {
+            key: 'decisionFinaleEtablissementFille',
+            label: 'Décision finale',
+            placeholder:
+              "Veuillez cochez la décision finale de l'établissement de la fille à l'issue de l'évaluation/composition",
+            type: 'radio-group',
+            other: true,
+            required: true,
+            values: decisionFinaleEtablissement,
+          },
+          {
+            key: 'precision',
+            label: 'Précision',
+            placeholder:
+              "Veuillez faire des observation s'il y en a sur la raison es écarts entre les moyennes de la fille",
+            type: 'text',
+            subtype: 'textarea',
+          },
+        ],
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Performances scolaires de la fille',
+            style: styles.sectionTitleStyle,
+          },
+          {
+            key: 'periodeCompoFille',
+            label: 'Période',
+            placeholder: 'En fonction du la période',
+            type: 'radio-group',
+            other: false,
+            values: [
+              {
+                label: 'Première composition',
+                value: 'premi_re_composition',
+              },
+              {
+                label: 'Deuxième composition',
+                value: 'deuxi_me_composition',
+              },
+              {
+                label: 'Troisième composition',
+                value: 'troisi_me_composition',
+              },
+              {
+                label: 'Composition de passage',
+                value: 'composition_de_passage',
+              },
+            ],
+          },
+          {
+            key: 'observationMoyenneFille',
+            label: 'Inscrire la note obtenue par la fille',
+            placeholder: 'En fonction de la composition',
+            type: 'text',
+            subtype: 'number',
+            maxlength: 100,
+          },
+          {
+            key: 'decisionFinaleEtablissementFille',
+            label: 'Décision finale',
+            placeholder:
+              "Veuillez cochez la décision finale de l'établissement de la fille à l'issue de l'évaluation/composition",
+            type: 'radio-group',
+            other: true,
+            required: true,
+            values: decisionFinaleEtablissement,
+          },
+          {
+            key: 'precision',
+            label: 'Précision',
+            placeholder:
+              "Veuillez faire des observation s'il y en a sur la raison es écarts entre les moyennes de la fille",
+            type: 'text',
+            subtype: 'textarea',
+          },
+        ],
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Probables facteurs liés à la performance de la fille ',
+            style: styles.sectionTitleStyle,
+          },
+          {
+            key: 'encadrementMaison',
+            label: 'Encadrement',
+            placeholder: 'La fille est-elle encadrée à la maison ?',
+            type: 'radio-group',
+            other: false,
+            subtype: 'number',
+            required: true,
+            values: [
+              {
+                label: 'Oui',
+                value: true,
+              },
+              {
+                label: 'Non',
+                value: false,
+              },
+            ],
+          },
+          {
+            key: 'encadreurNom',
+            label: "Si Oui, Renseignez le Nom et les Prénoms de l'encadreur",
+            placeholder: '',
+            type: 'text',
+            subtype: 'number',
+            maxlength: 100,
+          },
+          {
+            key: 'frequenceCours',
+            label: 'Fréquence au cours de la fille',
+            placeholder: '',
+            type: 'radio-group',
+            other: false,
+            required: true,
+            values: frequenceCours,
+          },
+          {
+            key: 'raisonAbsenceCoursFille',
+            label: "Raison d'abscence",
+            placeholder: '',
+            type: 'text',
+            subtype: 'textarea',
+            required: true,
+          },
+          {
+            key: 'raisonAbandonCoursFille',
+            label: "Raison d'abandon",
+            placeholder: '',
+            type: 'text',
+            subtype: 'textarea',
+          },
+        ],
+      ];
+    },
   },
   {
     id: 9,
@@ -1679,7 +1928,246 @@ export default Fiches = [
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
-    description: descriptions[generateRandom(descriptions.length)],
+    get description() {
+      return fichdescription[this.id];
+    },
+    get content() {
+      return [
+        [
+          {
+            key: 'collecteurtitle',
+            type: 'header',
+            subtype: 'h3',
+            label: this.title + "\n-\nInformations sur l'agent collecteur",
+            style: styles.sectionTitleStyle,
+          },
+          collectteurfield,
+        ],
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Informations générales sur la fille',
+            style: styles.sectionTitleStyle,
+          },
+          ...depconarron,
+
+          {
+            key: 'etablissementUniversite',
+            label: 'Etablissement fréquenté par la fille',
+            placeholder:
+              "Veillez inscrire le nom de l'établissement que fréquente la fille",
+            maxlength: 100,
+            type: 'text',
+            required: true,
+          },
+          {
+            key: 'nom',
+            label: 'Nom de la fille',
+            placeholder: "Veuillez écrire le nom de l'enfant enregistré",
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'prenom',
+            label: 'Prénoms de la fille',
+            placeholder:
+              "Veuillez écrire le/les prénoms de l'enfant enregistré",
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'age',
+            label: 'Âge de la fille',
+            placeholder: "Veillez entrer l'âge exacte de la fille",
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            maxlength: 100,
+          },
+          {
+            key: 'niveauEtude',
+            label: "Niveau d'étude de la fille",
+            placeholder: "Veillez choisir le niveau d'étude de la fille",
+            type: 'radio-group',
+            other: false,
+            dependent: 'cyclefille',
+            required: true,
+            values: niveauEtude,
+          },
+          {
+            key: 'cyclefille',
+            label: 'Cycle',
+            placeholder: 'Veillez choisir le cycle',
+            type: 'radio-group',
+            value: '',
+            dependencie: ['niveauEtude', 'niveau'],
+            dependent: 'classefille',
+            required: true,
+            values: cycles,
+          },
+          {
+            key: 'classefille',
+            label: 'Classe de la fille',
+            placeholder: 'Veillez choisir la classe de la fille',
+            type: 'radio-group',
+            other: false,
+            required: true,
+            dependencie: ['cyclefille', 'cycle'],
+            dependent: 'seriefille',
+            values: classes,
+          },
+          {
+            key: 'seriefille',
+            label: 'Série de la fille',
+            placeholder: 'Veillez choisir la série',
+            type: 'radio-group',
+            other: false,
+            dependencie: ['cyclefille', 'cycle'],
+            value: '',
+            values: series,
+          },
+        ],
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Performances scolaires de la fille',
+            style: styles.sectionTitleStyle,
+          },
+          {
+            key: 'periodeCompoFille',
+            label: 'Période',
+            placeholder: "Période de l'année scolaire",
+            type: 'radio-group',
+            other: false,
+            values: periodescolaire,
+          },
+          {
+            key: 'observationMoyenneFille',
+            label: 'Inscrire la moyenne obtenue par la fille',
+            placeholder: 'En fonction de la période',
+            type: 'text',
+            subtype: 'number',
+            maxlength: 100,
+          },
+          {
+            key: 'decisionFinaleEtablissementFille',
+            label: 'Décision finale',
+            placeholder:
+              "Veuillez cochez la décision finale de l'établissement de la fille à l'issue de l'évaluation/composition",
+            type: 'radio-group',
+            other: true,
+            required: true,
+            values: decisionFinaleEtablissement,
+          },
+          {
+            key: 'precision',
+            label: 'Précision',
+            placeholder:
+              "Veuillez faire des observation s'il y en a sur la raison es écarts entre les moyennes de la fille",
+            type: 'text',
+            subtype: 'textarea',
+          },
+        ],
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Performances scolaires de la fille',
+            style: styles.sectionTitleStyle,
+          },
+          {
+            key: 'periodeCompoFille',
+            label: 'Période',
+            placeholder: 'En fonction du la période',
+            type: 'radio-group',
+            other: false,
+            values: [
+              {
+                label: 'Première composition',
+                value: 'premi_re_composition',
+              },
+              {
+                label: 'Deuxième composition',
+                value: 'deuxi_me_composition',
+              },
+              {
+                label: 'Troisième composition',
+                value: 'troisi_me_composition',
+              },
+              {
+                label: 'Composition de passage',
+                value: 'composition_de_passage',
+              },
+            ],
+          },
+          {
+            key: 'observationMoyenneFille',
+            label: 'Inscrire la note obtenue par la fille',
+            placeholder: 'En fonction de la composition',
+            type: 'text',
+            subtype: 'number',
+            maxlength: 100,
+          },
+          {
+            key: 'decisionFinaleEtablissementFille',
+            label: 'Décision finale',
+            placeholder:
+              "Veuillez cochez la décision finale de l'établissement de la fille à l'issue de l'évaluation/composition",
+            type: 'radio-group',
+            other: true,
+            required: true,
+            values: decisionFinaleEtablissement,
+          },
+          {
+            key: 'precision',
+            label: 'Précision',
+            placeholder:
+              "Veuillez faire des observation s'il y en a sur la raison es écarts entre les moyennes de la fille",
+            type: 'text',
+            subtype: 'textarea',
+          },
+        ],
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Probables facteurs liés à la performance de la fille ',
+            style: styles.sectionTitleStyle,
+          },
+          {
+            key: 'aRecuKit',
+            label: 'La fille a t-elle reçue de kit? ',
+            placeholder: '',
+            type: 'radio-group',
+            other: false,
+            values: [
+              {
+                label: 'Oui',
+                value: true,
+              },
+              {
+                label: 'Non',
+                value: false,
+              },
+            ],
+          },
+          {
+            key: 'nbreKitRecu',
+            label: 'combien de kits la fille a t-elle reçu',
+            placeholder: '',
+            subtype: 'number',
+          },
+        ],
+      ];
+    },
   },
   {
     id: 10,
@@ -1687,17 +2175,186 @@ export default Fiches = [
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
-    description: descriptions[generateRandom(descriptions.length)],
+    get description() {
+      return fichdescription[this.id];
+    },
+    get content() {
+      return [
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: this.title,
+            style: styles.sectionTitleStyle,
+          },
+          ...depconarron,
+
+          {
+            key: 'quartier',
+            type: 'text',
+            required: true,
+            label: 'Village de provenance',
+            placeholder:
+              'Veuillez entrer le village de provenance du participant',
+            maxlength: 100,
+          },
+          {
+            key: 'nom',
+            label: 'Nom de la fille',
+            placeholder: "Veuillez écrire le nom de l'enfant enregistré",
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'prenom',
+            label: 'Prénoms de la fille',
+            placeholder:
+              "Veuillez écrire le/les prénoms de l'enfant enregistré",
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'niveauEtude',
+            label: "Niveau d'étude de la fille",
+            placeholder: "Veillez choisir le niveau d'étude de la fille",
+            type: 'radio-group',
+            other: false,
+            dependent: 'cyclefille',
+            required: true,
+            values: niveauEtude,
+          },
+          {
+            key: 'age',
+            label: 'Âge de la fille',
+            placeholder: "Veillez entrer l'âge exacte de la fille",
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            maxlength: 100,
+          },
+        ],
+        [
+          {
+            key: 'collecteurtitle',
+            type: 'header',
+            subtype: 'h3',
+            label: "Informations sur l'agent collecteur",
+            style: styles.sectionTitleStyle,
+          },
+          collectteurfield,
+        ],
+        [
+          {
+            key: 'formation',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Information sur formation',
+            style: styles.sectionTitleStyle,
+          },
+          formationfield,
+        ],
+      ];
+    },
   },
   {
     id: 11,
     title:
       'FICHE DE COLLECTE DE DONNEES SUR LES FORMATIONS DANS LES ESPACES SÛRS',
-
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
-    description: descriptions[generateRandom(descriptions.length)],
+    get description() {
+      return fichdescription[this.id];
+    },
+    get content() {
+      return [
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: this.title,
+            style: styles.sectionTitleStyle,
+          },
+          ...depconarron,
+
+          {
+            key: 'quartier',
+            type: 'text',
+            required: true,
+            label: 'Village',
+            placeholder: 'Veuillez indiquer le village ',
+            maxlength: 100,
+          },
+          {
+            key: 'nbreFilleFreqClub',
+            label: 'Nombre de filles fréquentant le club ',
+            placeholder:
+              'Veuillez entrer le nombre de fille fréquentant le club',
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            maxlength: 100,
+          },
+          {
+            key: 'nom',
+            label: 'Nom de la fille',
+            placeholder: "Veuillez écrire le nom de l'enfant enregistré",
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'prenom',
+            label: 'Prénoms de la fille',
+            placeholder:
+              "Veuillez écrire le/les prénoms de l'enfant enregistré",
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'nomMentor',
+            label: 'Nom du mentor',
+            placeholder: 'Veuillez entrer le nom  du mentor',
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'prenomMentor',
+            label: 'Prénoms du mentor',
+            placeholder: 'Veuillez entrer le/les prénoms du mentor',
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+        ],
+        [
+          {
+            key: 'collecteurtitle',
+            type: 'header',
+            subtype: 'h3',
+            label: "Informations sur l'agent collecteur",
+            style: styles.sectionTitleStyle,
+          },
+          collectteurfield,
+        ],
+        [
+          {
+            key: 'formation',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Information sur formation',
+            style: styles.sectionTitleStyle,
+          },
+          formationfield,
+        ],
+      ];
+    },
   },
   {
     id: 12,
@@ -1705,7 +2362,134 @@ export default Fiches = [
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
-    description: descriptions[generateRandom(descriptions.length)],
+    get description() {
+      return fichdescription[this.id];
+    },
+    get content() {
+      return [
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: this.title,
+            style: styles.sectionTitleStyle,
+          },
+          {
+            key: 'pays',
+            type: 'text',
+            required: true,
+            label: 'Pays',
+            placeholder:
+              'Veuillez écrire le pays dans lequel intervient le projet',
+            maxlength: 100,
+          },
+          ...depconarron,
+
+          {
+            key: 'nomMentor',
+            label: 'Nom du mentor',
+            placeholder: 'Veuillez entrer le nom  du mentor',
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'prenomMentor',
+            label: 'Prénoms du mentor',
+            placeholder: 'Veuillez entrer le/les prénoms du mentor',
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'dateActivite',
+            type: 'date',
+            label: 'Date de l’activité',
+            placeholder: "Veuillez entrer la date de déroulement de l'activité",
+            value: new Date().toISOString(),
+            dateFormat: 'DD-MM-YYYY',
+            required: true,
+            disabled: false,
+          },
+          {
+            key: 'dureeActivite',
+            label: 'Durée de l’activité',
+            placeholder: "Veuillez entrer la durée de l'activité",
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            maxlength: 100,
+          },
+          {
+            key: 'quartier',
+            type: 'text',
+            required: true,
+            label: 'Lieu (Village/Quartier)',
+            placeholder:
+              'Veuillez entrer le village/quartier de ville de provenance des bénéficiaires (Garçons et Filles)',
+            maxlength: 100,
+          },
+          {
+            key: 'nbreFemmeFilleFormer',
+            label: 'Nombre de Femmes/Filles formées',
+            placeholder:
+              'Veuillez entrez le nombre de femmes/filles ayant été formées',
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            maxlength: 100,
+          },
+          {
+            key: 'nbreHommeGarconFormer',
+            label: "Nombre d'hommes/garçons formés",
+            placeholder:
+              "Veuillez entrez le nombre d'hommes/garçons ayant été formés",
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            maxlength: 100,
+          },
+          {
+            key: 'nbreTotalFormer',
+            label: 'Nombre total de personnes formées',
+            placeholder:
+              "Veuillez entrez le nombre total d'hommes/garçons et Femmes/Filles formés",
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            maxlength: 100,
+          },
+          {
+            key: 'Observations',
+            label: 'Observations',
+            placeholder: "Veuillez écrire les observations s'il y en a",
+            type: 'textarea',
+            required: true,
+          },
+        ],
+        [
+          {
+            key: 'collecteurtitle',
+            type: 'header',
+            subtype: 'h3',
+            label: "Informations sur l'agent collecteur",
+            style: styles.sectionTitleStyle,
+          },
+          collectteurfield,
+        ],
+        [
+          {
+            key: 'formation',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Information sur formation',
+            style: styles.sectionTitleStyle,
+          },
+          formationfield,
+        ],
+      ];
+    },
   },
   {
     id: 13,
@@ -1713,7 +2497,84 @@ export default Fiches = [
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
-    description: descriptions[generateRandom(descriptions.length)],
+    get description() {
+      return fichdescription[this.id];
+    },
+    get content() {
+      return [
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: this.title,
+            style: styles.sectionTitleStyle,
+          },
+          ...depconarron,
+        ],
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Nombre de personnes de touchées',
+            style: styles.sectionTitleStyle,
+          },
+          {
+            key: 'nbreFemmeFilleFormer',
+            label: 'Nombre de femmes touchées',
+            placeholder:
+              'Veillez indiquer le nombre de personnes de sexe Féminin ayant participé à la formation',
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            value: 0,
+            computation: ['nbreTotalFormer', 'add'],
+          },
+          {
+            key: 'nbreHommeGarconFormer',
+            label: "Nombre d'hommes touchés",
+            placeholder:
+              'Veillez indiquer le nombre de personnes de sexe Masculin ayant participé à la formation',
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            value: 0,
+            computation: ['nbreTotalFormer', 'add'],
+          },
+          {
+            key: 'nbreTotalFormer',
+            label: 'Nombre total de personnes touchées est: ',
+            type: 'text',
+            required: true,
+            disabled: true,
+            subtype: 'number',
+            value: 0,
+            computated: ['nbreTotalFormer'],
+          },
+        ],
+        [
+          {
+            key: 'collecteurtitle',
+            type: 'header',
+            subtype: 'h3',
+            label: "Informations sur l'agent collecteur",
+            style: styles.sectionTitleStyle,
+          },
+          collectteurfield,
+        ],
+        [
+          {
+            key: 'formation',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Information sur formation',
+            style: styles.sectionTitleStyle,
+          },
+          formationfield,
+        ],
+      ];
+    },
   },
   {
     id: 14,
@@ -1721,6 +2582,174 @@ export default Fiches = [
     meta_thing: 'Natacha C. G. BAMEYNOU',
     icon: icons[generateRandom(icons.length)],
     variant: variants[generateRandom(variants.length)],
-    description: descriptions[generateRandom(descriptions.length)],
+    get description() {
+      return fichdescription[this.id];
+    },
+    get content() {
+      return [
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: this.title,
+            style: styles.sectionTitleStyle,
+          },
+          ...depconarron,
+          {
+            key: 'nomLeaderReligieux',
+            label: 'Nom du Leader Religieux',
+            placeholder: '',
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'prenomLeaderReligieux',
+            label: 'Prénom du Leader Religieux',
+            placeholder: '',
+            type: 'text',
+            required: true,
+            maxlength: 100,
+          },
+          {
+            key: 'confessionLeaderReligieux',
+            label: 'Confession Religieuse',
+            placeholder: '',
+            type: 'radio-group',
+            other: false,
+            required: true,
+            values: confessionReligieux,
+          },
+          {
+            key: 'titreLeaderReligieux',
+            label: "Titre dans l'organisation",
+            placeholder: '',
+            maxlength: 100,
+            type: 'text',
+            required: true,
+          },
+          {
+            key: 'quartier',
+            type: 'text',
+            required: true,
+            label: 'Lieu (Village/Quartier)',
+            placeholder:
+              'Veuillez entrer le village/quartier de ville de provenance des bénéficiaires (Garçons et Filles)',
+            maxlength: 100,
+          },
+          {
+            key: 'dureeActivite',
+            label: "Durée de l'activité (en heures)",
+            placeholder: "Veuillez entrer la durée de l'activité",
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            maxlength: 100,
+          },
+          {
+            key: 'lieuActivite',
+            type: 'text',
+            required: true,
+            label: "Lieu de l'activité",
+            placeholder:
+              "Préciser le nom du village ou quartier de ville où s'est déroulée l'activité",
+            maxlength: 100,
+          },
+          {
+            key: 'nbreFemmeFilleFormer',
+            label: 'Nombre de femmes touchées',
+            placeholder:
+              'Veuillez préciser le nombre de femmes qui ont participé à la sensibilisation sur la thématique',
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            value: 0,
+            computation: ['nbreTotalFormer', 'add'],
+          },
+          {
+            key: 'nbreHommeGarconFormer',
+            label: "Nombre d'hommes touchés",
+            placeholder:
+              "Veuillez préciser le nombre d'hommes qui ont participé à la sensibilisation sur la thématique",
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            value: 0,
+            computation: ['nbreTotalFormer', 'add'],
+          },
+          {
+            key: 'lieuRealisationActivite',
+            type: 'text',
+            required: true,
+            label: "Lieu de réalisation de l'activité",
+            placeholder:
+              "Préciser le nom du village ou quartier de ville où s'est déroulée l'activité",
+            maxlength: 100,
+          },
+        ],
+        [
+          {
+            key: 'beneficiaire',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Nombre de personnes de touchées',
+            style: styles.sectionTitleStyle,
+          },
+          {
+            key: 'nbreFemmeFilleFormer',
+            label: 'Nombre de femmes touchées',
+            placeholder:
+              'Veillez indiquer le nombre de personnes de sexe Féminin ayant participé à la formation',
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            value: 0,
+            computation: ['nbreTotalFormer', 'add'],
+          },
+          {
+            key: 'nbreHommeGarconFormer',
+            label: "Nombre d'hommes touchés",
+            placeholder:
+              'Veillez indiquer le nombre de personnes de sexe Masculin ayant participé à la formation',
+            type: 'text',
+            required: true,
+            subtype: 'number',
+            value: 0,
+            computation: ['nbreTotalFormer', 'add'],
+          },
+          {
+            key: 'nbreTotalFormer',
+            label: 'Nombre total de personnes touchées est: ',
+            type: 'text',
+            required: true,
+            disabled: true,
+            subtype: 'number',
+            value: 0,
+            computated: ['nbreTotalFormer'],
+          },
+        ],
+        [
+          {
+            key: 'collecteurtitle',
+            type: 'header',
+            subtype: 'h3',
+            label: "Informations sur l'agent collecteur",
+            style: styles.sectionTitleStyle,
+          },
+          collectteurfield,
+        ],
+        [
+          {
+            key: 'formation',
+            type: 'header',
+            subtype: 'h3',
+            label: 'Information sur formation',
+            style: styles.sectionTitleStyle,
+          },
+          formationfield,
+        ],
+      ];
+    },
   },
 ];

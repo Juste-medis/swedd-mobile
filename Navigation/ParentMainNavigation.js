@@ -13,11 +13,11 @@ import ControlBoard from './Stack/ControlBoardNavigation';
 import Globals from '../Ressources/Globals';
 import Icono from 'react-native-vector-icons/Ionicons';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {ActivityIndicator, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
 import {Image} from 'react-native-elements';
 import {alert_message, toast_message} from '../Helpers/Utils';
-import fetcher from '../API/fakeApi';
+import fetcher from '../API/fetcher';
 import Storer from '../API/storer';
 import RNReastart from 'react-native-restart';
 import NotificationSplasher from '../components/Gadgets/NotificationSplasher';
@@ -162,7 +162,13 @@ const CustomSidebarMenu = props => {
                 uri: 'https://picsum.photos/200',
               }}
               style={styles.image_avatar}
-              PlaceholderContent={<ActivityIndicator />}
+              PlaceholderContent={
+                <Icono
+                  name="person-circle"
+                  size={50}
+                  color={Globals.COLORS.blue_dark}
+                />
+              }
             />
           ) : (
             <View style={styles.def_avatar}>
@@ -177,6 +183,9 @@ const CustomSidebarMenu = props => {
               '.'}
           </Text>
           <Text style={styles.mail_title}>{Globals.PROFIL_INFO.contact}</Text>
+          <Text style={styles.mail_title}>
+            ONG: {Globals.PROFIL_INFO?.Ong?.libelle}
+          </Text>
         </View>
         {state.routes.map((route, i) => {
           const {activeTintColor, drawerIcon, title, first, groupName} =

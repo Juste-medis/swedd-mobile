@@ -272,6 +272,7 @@ export default class DynamicForm extends Component {
                 value={this.getFormElementValue(key, element)}
                 onRadioValueChanged={value => {
                   this.updateFormElement(value, element);
+                  element.onchange ? element.onchange(value) : () => {};
                 }}
               />
             </View>
@@ -295,6 +296,7 @@ export default class DynamicForm extends Component {
                 options={element.values}
                 onCheckboxValueChanged={value => {
                   this.updateFormElement(value, element);
+                  element.onchange ? element.onchange(value) : () => {};
                 }}
                 value={this.getFormElementValue(key, element)}
               />

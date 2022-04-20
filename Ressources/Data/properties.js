@@ -23,6 +23,28 @@ export const variants = [
     'Plastiques',
     'Savon',
   ],
+  confessionReligieux = [
+    {
+      label: 'Catholique',
+      value: 'catholique',
+    },
+    {
+      label: 'Musulman',
+      value: 'musulman',
+    },
+    {
+      label: 'Protestant',
+      value: 'protestant',
+    },
+    {
+      label: 'Christianiste céleste',
+      value: 'christianiste_celeste',
+    },
+    {
+      label: 'Dignitaire Vodoun',
+      value: 'dignitaire_vodoun',
+    },
+  ],
   collecteurs = [
     'ASSIAMAIN Nikola',
     'Minsmin Nikole',
@@ -38,36 +60,173 @@ export const variants = [
     'propreté en milueu scolaire',
     'la puberté chez elles',
   ],
-  fiches = [
+  fichestates = ['review', 'accepted', 'rejected'],
+  niveauEtude = [
     {
-      id: 1,
-      ficheid: 'fvdvkl5fv5vfvk',
-      beneficiaire: {
-        commune: ['35'],
-        critereVulnerabilite: {
-          regular: [],
-        },
-        dateNaissance: '2023-06-07T09: 41: 00.000Z',
-        departement: ['5'],
-        etablissementUniversite: 'Ffehhrr',
-        lieuNaissance: 'Rtetjedhh',
-        niveauEtudeClasse: 'Frzeghgf',
-        nom: 'Cfrhtee',
-        numM2EducMaster: '5555',
-        prenom: 'Gfdzhy',
-        typeAppui: 'kits',
-        village: 'Cfertt',
-      },
-      beneficiairePersonneAffiliers: {
-        contact: 'Gddgyrrg',
-        nom: 'Tergge',
-        prenom: 'Ggtjrrtj',
-      },
-      collecteur: {
-        dateCollecte: '2022-05-07T09: 41: 00.000Z',
-        nom: 'Gfghh',
-        prenom: 'Gffhhh',
-      },
+      label: 'Primaire',
+      value: 'primaire',
+    },
+    {
+      label: 'Secondaire',
+      value: 'secondaire',
+    },
+  ],
+  cycles = [
+    {
+      label: 'Primaire',
+      value: 'primaire',
+      niveau: 'primaire',
+    },
+    {
+      label: 'Premier cycle',
+      value: 'premier_cycle',
+      niveau: 'secondaire',
+    },
+    {
+      label: 'Second  cycle',
+      value: 'second_cycle',
+      niveau: 'secondaire',
+    },
+  ],
+  classes = [
+    {
+      label: 'CM1',
+      value: 'cm1',
+      cycle: 'primaire',
+    },
+    {
+      label: 'CM2',
+      value: 'cm2',
+      cycle: 'primaire',
+    },
+    {
+      label: '6ème',
+      value: '6_me',
+      cycle: 'premier_cycle',
+    },
+    {
+      label: '5ème',
+      value: '5_me',
+      cycle: 'premier_cycle',
+    },
+    {
+      label: '4ème',
+      value: '4_me',
+      cycle: 'premier_cycle',
+    },
+    {
+      label: '3ème',
+      value: '3_me',
+      cycle: 'premier_cycle',
+    },
+    {
+      label: '2nd',
+      value: '2nd',
+      cycle: 'second_cycle',
+    },
+    {
+      label: '1ère',
+      value: '1_re',
+      cycle: 'second_cycle',
+    },
+    {
+      label: 'Tle',
+      value: 'tle',
+      cycle: 'second_cycle',
+    },
+  ],
+  series = [
+    {
+      label: 'A',
+      value: 'a',
+      cycle: 'second_cycle',
+    },
+    {
+      label: 'B',
+      value: 'b',
+      cycle: 'second_cycle',
+    },
+    {
+      label: 'C',
+      value: 'c',
+      cycle: 'second_cycle',
+    },
+    {
+      label: 'D',
+      value: 'd',
+      cycle: 'second_cycle',
+    },
+  ],
+  critereVulnerabilites = [
+    {
+      label: 'OEV',
+      value: 'oev',
+    },
+    {
+      label: 'PLACEE',
+      value: 'placee',
+    },
+    {
+      label: 'SURVIVANTE VBG',
+      value: 'survivante_vbg',
+    },
+    {
+      label: 'FILLE - MERE',
+      value: 'fille___mere',
+    },
+    {
+      label: 'HANDICAPEE',
+      value: 'handicapee',
+    },
+  ],
+  periodescolaire = [
+    {
+      label: 'Premier semestre',
+      value: 'premier_semestre',
+    },
+    {
+      label: 'Second semestre',
+      value: 'second_semestre',
+    },
+    {
+      label: 'Annuelle ',
+      value: 'annuelle',
+    },
+  ],
+  decisionFinaleEtablissement = [
+    {
+      label: "La fille a validé l'année",
+      value: 'la_fille_a_valid__l_ann_e',
+    },
+    {
+      label: 'La fille reprend la classe',
+      value: 'la_fille_reprend_la_classe',
+    },
+  ],
+  frequenceCours = [
+    {
+      label: 'Très fréquente',
+      value: 'tr_s_fr_quente',
+    },
+    {
+      label: 'Fréquente',
+      value: 'fr_quente',
+    },
+    {
+      label: 'Moyennement fréquente',
+      value: 'moyennement_fr_quente',
+    },
+    {
+      label: 'Peu fréquente',
+      value: 'peu_fr_quente',
+    },
+    {
+      label: 'Pas du tout fréquente',
+      value: 'pas_du_tout_fr_quente',
+    },
+    {
+      label: 'Abandon',
+      value: 'abandon',
     },
   ],
   departements = [

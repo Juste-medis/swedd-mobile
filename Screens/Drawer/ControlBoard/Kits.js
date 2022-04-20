@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import FormationsItem from '../../../components/Worker/Lists/kitsItem';
 import Globals from '../../../Ressources/Globals';
-import Fetcher from '../../../API/fakeApi';
+import Fetcher from '../../../API/fetcher';
 import {styleCollecteursItem as styles} from '../../../Ressources/Styles';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -21,12 +21,15 @@ import EmptyThing from '../../../components/Gadgets/EmptyThing';
 import LoadingDot from '../../../components/Gadgets/Loading';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Image} from 'react-native-elements';
+import ToolItemLength from '../../../components/Gadgets/ToolItemLength';
+import Storer from '../../../API/storer';
 
 let notides = {uri: '', text: 'toto'};
 function Kits(route) {
   const [kits, setkits] = React.useState([]);
   const [spinner, setspinner] = React.useState(true);
   const [modalVisible, setmodalVisible] = React.useState(false);
+  const [page, setpage] = React.useState(1);
 
   React.useEffect(() => {
     //console.log(route.navigation.getParent());
@@ -41,19 +44,30 @@ function Kits(route) {
     setmodalVisible(true);
   };
   function _onSubmmitClick() {
-    Fetcher.Getkits()
+    setspinner(true);
+    Fetcher.Getkits(Globals.PROFIL_INFO.id, page)
       .then(res => {
-        if (res.kits) {
-          setkits(res.kits);
-          //Storer.storeData('@kits', res.beneficiaires);
+        if (res['@type'] === 'hydra:Error') {
+          toast_message(res['hydra:description']);
+        } else {
+          setpage(page + 1);
+          const fetched = [...kits, ...res];
+          setkits(fetched);
+          if (page === 1) {
+            Storer.storeData('@kits', fetched);
+          }
         }
         setspinner(false);
       })
-      .catch(err => {
+      .catch(async err => {
         setspinner(false);
         if (!Globals.INTERNET) {
-          toast_message(Globals.STRINGS.no_internet);
-          
+          const cached = await Storer.getData('@kits');
+          if (!cached) {
+            toast_message(Globals.STRINGS.no_internet);
+          } else {
+            setkits(cached);
+          }
         } else {
           toast_message(`${err}`);
         }
@@ -72,6 +86,11 @@ function Kits(route) {
         <FlatList
           style={{flex: 1, backgroundColor: Globals.COLORS.white}}
           data={kits}
+          ListHeaderComponent={
+            <View style={{paddingHorizontal: 8}}>
+              <ToolItemLength value={kits.length} label="Kits" />
+            </View>
+          }
           ListEmptyComponent={
             <EmptyThing
               style={{marginTop: 50}}

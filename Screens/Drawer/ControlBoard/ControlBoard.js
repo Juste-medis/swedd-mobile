@@ -33,7 +33,7 @@ function ControlBoard(route) {
         ? {
             icon: 'md-eye-outline',
             title: 'En cour de validation',
-            value: profil.review_fiche,
+            value: profil.ficheAttente,
             variant: 'rgb(255,193,7)',
             onclick: () => {
               route.navigation.navigate('FichesList', {fichestate: 'review'});
@@ -46,7 +46,7 @@ function ControlBoard(route) {
         ? {
             icon: 'md-checkmark-circle',
             title: 'Validées',
-            value: profil.accepted_fiche,
+            value: profil.ficheValide,
             variant: '#198754',
             onclick: () => {
               route.navigation.navigate('FichesList', {fichestate: 'accepted'});
@@ -59,7 +59,7 @@ function ControlBoard(route) {
         ? {
             icon: 'md-close',
             title: 'Rejetées',
-            value: profil.rejected_fiche,
+            value: profil.ficheRejetes,
             variant: '#dc3545',
             onclick: () => {
               route.navigation.navigate('FichesList', {fichestate: 'rejected'});
@@ -70,7 +70,7 @@ function ControlBoard(route) {
     {
       icon: 'document',
       title: 'Fiches Entrées',
-      value: profil.filled_fiche,
+      value: profil.ficheRemplies,
       variant: Globals.COLORS.light_blue,
       onclick: () => {
         route.navigation.navigate('FichesList', {fichestate: 'all'});
@@ -89,7 +89,7 @@ function ControlBoard(route) {
     {
       icon: 'md-woman-outline',
       title: 'Bénéficiaires',
-      value: profil.beneficiaires,
+      value: profil.nbrBeneficiaire,
       variant: Globals.COLORS.arsenic,
       backgroundColor: 'white',
       onclick: () => {

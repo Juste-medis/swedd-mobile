@@ -1,14 +1,23 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import Globals from '../../../Ressources/Globals';
-import {styleformationsItem as styles} from '../../../Ressources/Styles';
+import {stylemyFicheItem as styles} from '../../../Ressources/Styles';
 import {date_to_local_string} from '../../../Helpers/Utils';
-import Icono from 'react-native-vector-icons/Ionicons';
+import Icono from 'react-native-vector-icons/AntDesign';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {styleControlBoard as stylesc} from '../../../Ressources/Styles';
 import TextW from '../../Gadgets/TextW';
+import Globals from '../../../Ressources/Globals';
+
+function areEqual(prevProps, nextProps) {
+  return prevProps.fichestate === nextProps.fichestate;
+}
 
 function myfichesItem(route) {
-  const {fichestate, id, meta_thing, onclick, title} = route.inter_Collecteurs;
+  let {_unsynced, fichestate, dateAjout, categorieFiche, _categorieFiche, id} =
+      route.inter_Collecteurs,
+    {onclick} = route;
+  fichestate = fichestate || route.fichestate;
+
   let ficheprop = {
     icon: '',
     variant: '',
@@ -29,16 +38,39 @@ function myfichesItem(route) {
       ficheprop.icon = 'profile';
       ficheprop.variant = '25,135,84';
       break;
+    default:
+      ficheprop.icon = 'profile';
+      ficheprop.variant = '32,137,220';
+      break;
+  }
+  if (_unsynced) {
+    ficheprop.variant = '125,132,146';
   }
 
   return (
-    <View style={{width: '100%'}}>
-      <View key={id} style={stylesc.main_menu_indider}>
+    <View style={styles.main_container}>
+      <View key={id} style={styles.main_menu_indider}>
+        <Text
+          style={{
+            ...styles.statetext,
+            color: `rgba(${ficheprop.variant},1)`,
+            backgroundColor: `rgba(${ficheprop.variant},.1)`,
+          }}>
+          {_unsynced ? (
+            <Icon
+              name="signal-off"
+              size={20}
+              color={`rgb(${ficheprop.variant})`}
+            />
+          ) : (
+            Globals.STRINGS.ficheStateLAbel[fichestate]
+          )}
+        </Text>
         <TouchableOpacity
           activeOpacity={0.8}
           style={[styles.menu_item, stylesc.menu_item]}
           onPress={() => {
-            onclick({id});
+            onclick(route.inter_Collecteurs);
           }}
           rippleColor={ficheprop.variant}>
           <View style={stylesc.main_menu_top}>
@@ -46,29 +78,37 @@ function myfichesItem(route) {
               style={{
                 ...stylesc.icon_containter_ficheli,
                 backgroundColor: `rgba(${ficheprop.variant},.1)`,
+                height: 60,
               }}>
               <Icono
                 name={ficheprop.icon}
-                size={50}
+                size={40}
                 color={`rgb(${ficheprop.variant})`}
               />
             </View>
-            <Text
-              style={{
-                ...stylesc.prop_unity_value,
-              }}>
-              {meta_thing}
-            </Text>
+            <View style={stylesc.main_menu_bottom}>
+              <Text
+                style={{
+                  ...stylesc.prop_unity_value,
+                  fontFamily: 'Lato-Bold',
+                }}>
+                Fiche #000{id}
+              </Text>
+              <Text
+                style={{
+                  ...styles.title_text,
+                  ...stylesc.prop_unity_valuei,
+                }}>
+                {categorieFiche?.libelle || _categorieFiche?.libelle}
+              </Text>
+            </View>
           </View>
           <View style={stylesc.main_menu_bottom}>
-            <Text
-              style={{
-                ...styles.prop_unity_value,
-                ...stylesc.prop_unity_valuei,
-              }}>
-              {title}
-            </Text>
-            <TextW style={stylesc.description} text="toto" size={100} />
+            <TextW
+              style={stylesc.description}
+              text={date_to_local_string(dateAjout)}
+              size={100}
+            />
           </View>
         </TouchableOpacity>
       </View>
@@ -76,4 +116,4 @@ function myfichesItem(route) {
   );
 }
 
-export default myfichesItem;
+export default memo(myfichesItem, areEqual);

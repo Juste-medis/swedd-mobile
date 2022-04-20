@@ -18,6 +18,7 @@ let tyleFicheForm,
   tyleCollecteursItem,
   tyleformationsItem,
   tyleKitsItem,
+  tylemyFicheItem,
   tyleAccordian,
   tyletoollength,
   tyleFicheList,
@@ -910,11 +911,99 @@ if (mobile_360_750) {
       color: 'black',
     },
   });
+  tylemyFicheItem = StyleSheet.create({
+    main_ripple: {
+      flexDirection: 'row',
+      width: '100%',
+      padding: 10,
+      marginBottom: 2,
+      backgroundColor: 'white',
+      borderBottomWidth: 1,
+      borderColor: Globals.COLORS.co_gris,
+    },
+    main_container: {
+      width: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      marginTop: 10,
+    },
+    title_text: {
+      color: Globals.COLORS.arsenic,
+      fontFamily: 'Lato-Black',
+      marginBottom: 5,
+    },
+    statetext: {
+      position: 'absolute',
+      right: 6,
+      top: 6,
+      fontWeight: 'bold',
+      padding: 6,
+      borderRadius: 10,
+    },
+    main_menu_indider: {
+      width: '95%',
+      backgroundColor: 'white',
+      elevation: 20,
+      paddingVertical: 20,
+    },
+    props_value: {
+      color: Globals.COLORS.arsenic,
+      fontFamily: 'Lato-Medium',
+    },
+    title_container: {
+      display: 'flex',
+      alignItems: 'flex-start',
+      flexDirection: 'column',
+    },
+    notification_title: {
+      fontFamily: 'Lato-Bold',
+      fontSize: 20,
+      color: Globals.COLORS.arsenic2,
+    },
+    notif_infotag: {
+      fontFamily: 'Lato-Bold',
+      marginTop: 2,
+      color: Globals.COLORS.arsenic2,
+      fontWeight: '700',
+    },
+    def_avatar: {
+      display: 'flex',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      borderRadius: 40,
+      height: 70,
+      width: 70,
+      marginRight: 8,
+    },
+    notification_description: {
+      fontSize: 17,
+      fontFamily: 'Lato-Medium',
+      color: Globals.COLORS.arsenic,
+      fontWeight: '600',
+      lineHeight: 25,
+    },
+    desciption_container: {
+      justifyContent: 'flex-start',
+    },
+    notif_meta_container: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    Collecteurs_description: {
+      marginTop: 20,
+      fontSize: 16,
+      fontFamily: 'Lato-Regular',
+      color: 'black',
+    },
+  });
   tyleKitsItem = StyleSheet.create({
     main_ripple: {
       flexDirection: 'row',
       width: '100%',
       padding: 10,
+      paddingBottom: 0,
       marginBottom: 2,
       backgroundColor: 'white',
       borderBottomWidth: 1,
@@ -947,7 +1036,7 @@ if (mobile_360_750) {
       alignItems: 'center',
       borderRadius: 40,
       height: 100,
-      width: 100,
+      width: 50,
       marginRight: 8,
     },
     notification_description: {
@@ -976,13 +1065,13 @@ if (mobile_360_750) {
   tyletoollength = StyleSheet.create({
     learnig_display_text: {
       fontFamily: 'Lato-Regular',
-      fontSize: 20,
+      fontSize: 16,
     },
   });
   tyleControlBoard = StyleSheet.create({
     main_container: {height: '100%', backgroundColor: Globals.COLORS.surface},
     icon_containter_ficheli: {
-      padding: 10,
+      padding: 6,
       borderRadius: 10,
     },
     icon_containter: {
@@ -1034,7 +1123,7 @@ if (mobile_360_750) {
   tyleControlBoard = StyleSheet.create({
     main_container: {height: '100%', backgroundColor: Globals.COLORS.white},
     icon_containter_ficheli: {
-      padding: 10,
+      padding: 8,
       borderRadius: 10,
     },
     icon_containter: {
@@ -1044,7 +1133,7 @@ if (mobile_360_750) {
       borderRadius: 10,
     },
     main_menu_indider: {
-      marginBottom: 20,
+      marginTop: 20,
       width: '100%',
       borderRadius: 8,
       backgroundColor: 'white',
@@ -1054,7 +1143,7 @@ if (mobile_360_750) {
       width: '100%',
       flexDirection: 'column',
       borderRadius: 8,
-      paddingHorizontal: 20,
+      paddingHorizontal: 10,
     },
     main_menu_top: {
       display: 'flex',
@@ -1063,18 +1152,19 @@ if (mobile_360_750) {
     prop_unity_value: {
       fontFamily: 'Lato-Regular',
       fontSize: 14,
-      marginTop: 10,
       paddingStart: 10,
     },
     main_menu_bottom: {
       display: 'flex',
       justifyContent: 'flex-start',
+      flexDirection: 'column',
+      width: '90%',
     },
     prop_unity_valuei: {
       fontSize: 15,
       marginTop: 10,
       color: Globals.COLORS.blue_dark,
-      paddingStart: 0,
+      width: '95%',
     },
     description: {
       paddingVertical: 10,
@@ -1084,7 +1174,7 @@ if (mobile_360_750) {
     },
   });
   tyleHelps = StyleSheet.create({
-    main_container: {height: '100%', backgroundColor: Globals.COLORS.red},
+    main_container: {height: '100%'},
     icon_containter_ficheli: {
       borderRadius: 10,
     },
@@ -1372,6 +1462,7 @@ export const styleFicheForm = tyleFicheForm,
   styletoollength = tyletoollength,
   styleformationsItem = tyleformationsItem,
   styleKitsItem = tyleKitsItem,
+  stylemyFicheItem = tylemyFicheItem,
   styleHelps = tyleHelps,
   styleControlBoard = tyleControlBoard,
   styleFicheList = tyleFicheList;

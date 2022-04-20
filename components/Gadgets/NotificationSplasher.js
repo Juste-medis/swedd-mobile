@@ -20,7 +20,7 @@ function NotificationSplasher(route) {
           size={40}
           color={Globals.COLORS.primary}
         />
-        <Text style={styles.price}>{pub < 10 ? pub : '9+'}</Text>
+        {pub > 0 && <Text style={styles.price}>{pub < 10 ? pub : '9+'}</Text>}
       </TouchableOpacity>
     );
   } else {

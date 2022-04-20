@@ -1,19 +1,26 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {FlatList, SafeAreaView} from 'react-native';
+import {FlatList, SafeAreaView, View} from 'react-native';
 import MyfichesItem from '../../../components/Worker/Lists/myfichesItem';
 import Globals from '../../../Ressources/Globals';
-import Fetcher from '../../../API/fakeApi';
+import Fetcher from '../../../API/fetcher';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {AddProfilItem} from '../../../Store/Actions';
 import {toast_message} from '../../../Helpers/Utils';
 import EmptyThing from '../../../components/Gadgets/EmptyThing';
 import LoadingDot from '../../../components/Gadgets/Loading';
-function FichesList({route}) {
+import Storer from '../../../API/storer';
+import {styleCollecteursItem as styles} from '../../../Ressources/Styles';
+import ToolItemLength from '../../../components/Gadgets/ToolItemLength';
+import Fiches from '../../../Ressources/Data/Fiches';
+import RNReastart from 'react-native-restart';
+
+function FichesList({route, navigation}) {
   const fichestate = route.params.fichestate;
   const [fiches, setfiches] = React.useState([]);
   const [spinner, setspinner] = React.useState(true);
+  const [page, setpage] = React.useState(1);
 
   React.useEffect(() => {
     //console.log(route.navigation.getParent());
@@ -23,32 +30,57 @@ function FichesList({route}) {
     return () => {};
   }, []);
 
-  const _show_content = param => {
-    let selected = fiches.find(mes => mes.id === param.id);
-    route.navigation.navigate('FicheForm', {set: selected, selected});
-    //setmodalVisible(true);
+  const _show_content = values => {
+    let selected = Fiches.find(
+      mes =>
+        mes.id === values.categorieFiche?.id ||
+        mes.id === values._categorieFiche?.id,
+    );
+    navigation.navigate('FicheForm', {set: selected, values});
   };
 
   function _onSubmmitClick() {
-    Fetcher.GetFiches({fichestate})
-      .then(res => {
-        if (res.error) {
-          toast_message(res.error);
-        } else if (res.fiches) {
-          setfiches(res.fiches);
-          //Storer.storeData('@fiches', res.beneficiaires);
+    setspinner(true);
+    Fetcher.GetFiches(Globals.PROFIL_INFO.id, page, fichestate)
+      .then(async res => {
+        if (res['@type'] === 'hydra:Error') {
+          toast_message(res['hydra:description']);
+        } else {
+          let fetched = [...fiches, ...res];
+          if (page === 1) {
+            Storer.storeData('@OfflineFiche', res);
+            const cachedque = await Storer.getData('@QuedFiche');
+            if (cachedque) {
+              fetched = [...cachedque, ...fetched];
+            }
+          }
+          setpage(page + 1);
+          setfiches(fetched);
         }
         setspinner(false);
       })
-      .catch(err => {
+      .catch(async err => {
         setspinner(false);
         if (!Globals.INTERNET) {
-          toast_message(Globals.STRINGS.no_internet);
+          const cached = await Storer.getData('@OfflineFiche');
+          if (!cached) {
+            toast_message(Globals.STRINGS.no_internet);
+          } else {
+            setfiches(cached);
+          }
+        } else if (err?.message?.includes("Unrecognized token '<'")) {
+          Storer.removeData();
+          RNReastart.Restart();
+          return false;
         } else {
           toast_message(`${err}`);
         }
       });
   }
+
+  const renderFooter = () => {
+    return <View style={styles.footer}>{spinner ? <LoadingDot /> : null}</View>;
+  };
 
   return (
     <SafeAreaView
@@ -60,7 +92,19 @@ function FichesList({route}) {
         <LoadingDot />
       ) : (
         <FlatList
-          style={{flex: 1, backgroundColor: Globals.COLORS.white}}
+          style={{
+            flex: 1,
+            paddingTop: 10,
+            backgroundColor: Globals.COLORS.white,
+          }}
+          ListHeaderComponent={
+            <View style={{paddingHorizontal: 8}}>
+              <ToolItemLength
+                value={fiches.length}
+                label={Globals.STRINGS.fichelistLAbel[fichestate]}
+              />
+            </View>
+          }
           data={fiches}
           ListEmptyComponent={
             <EmptyThing
@@ -68,7 +112,6 @@ function FichesList({route}) {
               message="Aucune fiches enrégistrée !"
             />
           }
-          keyExtractor={item => `notitem${item.id}`}
           renderItem={({item}) => (
             <MyfichesItem
               fichestate={fichestate}
@@ -76,8 +119,11 @@ function FichesList({route}) {
               onclick={_show_content}
             />
           )}
+          ListFooterComponent={renderFooter}
+          keyExtractor={item => {
+            return `notitem${item.dateAjout}`;
+          }}
           onEndReachedThreshold={0.5}
-          onEndReached={() => {}}
         />
       )}
     </SafeAreaView>

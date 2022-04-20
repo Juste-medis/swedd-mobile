@@ -6,15 +6,8 @@ import {date_to_local_string} from '../../../Helpers/Utils';
 import Icono from 'react-native-vector-icons/Ionicons';
 
 function formationsItem(route) {
-  const {
-    libelle,
-    dateDebut,
-    dateFin,
-    formationCentres,
-    urlPhoto,
-    name,
-    description,
-  } = route.inter_Collecteurs;
+  const {libelle, dateDebut, dateFin, urlPhoto, name, description} =
+    route.inter_Collecteurs;
 
   let {onclick} = route;
   return (
@@ -49,9 +42,6 @@ function formationsItem(route) {
             <Text style={styles.props_value}>
               {date_to_local_string(dateFin)}
             </Text>
-          </Text>
-          <Text style={styles.props_title}>
-            Au: <Text style={styles.props_value}>{formationCentres}</Text>
           </Text>
         </View>
       </View>

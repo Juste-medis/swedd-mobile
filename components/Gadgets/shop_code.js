@@ -39,7 +39,6 @@ export default function ShopCodeIcon(props) {
       set_total_Price(mNb_heure * 1200);
     }
   }
-
   function onvalidate() {
     if (mNb_heure_valid) {
       //Data processing
@@ -116,6 +115,7 @@ export default function ShopCodeIcon(props) {
     </Dialog>
   );
 }
+
 const styles = StyleSheet.create({
   main_container: {
     flexDirection: 'column',

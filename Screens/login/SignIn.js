@@ -7,17 +7,14 @@ import {styleSignIn as styles} from '../../Ressources/Styles';
 import Storer from '../../API/storer';
 import RNReastart from 'react-native-restart';
 import Toast from 'react-native-toast-message';
-import Fetcher from '../../API/fakeApi';
+import Fetcher from '../../API/fetcher';
 import {Schemasignin} from '../../API/schemas';
 import {Input, Button, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Feather';
-//search "beautiful textinput on google"
-import {CheckBox} from 'react-native-elements';
 
 export default function SignIn({navigation}) {
-  const [vip, setvip] = useState(false);
-  const [username, setusername] = useState('');
-  const [password, setpassword] = useState('');
+  const [username, setusername] = useState('janedoe');
+  const [password, setpassword] = useState('secret123');
 
   const [wrong_logins_text, set_wrong_text] = useState('');
   const [spinner, setspinner] = useState(false);
@@ -41,31 +38,41 @@ export default function SignIn({navigation}) {
         JSON.stringify({
           username,
           password,
-          //to remove
-          user_type: vip ? 'facilitateur_2' : 'facilitateur_1',
-          //to remove
         }),
       )
-        .then(res => {
-          setspinner(false);
+        .then(async res => {
           if (res.error) {
             set_wrong_text(res.error);
             setspinner(false);
           } else {
-            Globals.PROFIL_INFO = res;
+            let infos = await Fetcher.GetUserData('');
+            let formations = await Fetcher.Getformations(infos.id, 1);
+
+            console.log(formations);
+            infos = {
+              ...infos,
+              user_type:
+                infos?.ong?.type === 'SWEDD'
+                  ? 'facilitateur_2'
+                  : 'facilitateur_1',
+              notifications: [],
+            };
+            Globals.PROFIL_INFO = infos;
             Toast.show({
               type: 'success',
               text1: 'Bienvenu',
-              text2: res?.prenom,
+              text2: infos?.prenom,
             });
 
-            Storer.storeData('@ProfilInfo', {...res, username, password}).then(
-              () => {
-                Storer.storeData('@USER_TYPE', 1).then(() => {
-                  RNReastart.Restart();
-                });
-              },
-            );
+            Storer.storeData('@ProfilInfo', {
+              ...infos,
+              username,
+              password,
+            }).then(() => {
+              Storer.storeData('@USER_TYPE', 1).then(() => {
+                RNReastart.Restart();
+              });
+            });
           }
         })
         .catch(err => {
@@ -140,27 +147,6 @@ export default function SignIn({navigation}) {
             containerStyle={{
               display: 'flex',
               alignItems: 'center',
-            }}
-          />
-          <CheckBox
-            containerStyle={{
-              backgroundColor: 'rgba(9,105,195,0.05)',
-              borderRadius: 50,
-              borderWidth: 0,
-            }}
-            textStyle={{
-              padding: 0,
-            }}
-            style={{
-              margin: 0,
-              padding: 0,
-            }}
-            Component={Text}
-            center
-            title="vip"
-            checked={vip}
-            onPress={checked => {
-              setvip(!vip);
             }}
           />
           <View style={styles.err_cont}>
