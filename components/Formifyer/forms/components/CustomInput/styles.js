@@ -10,8 +10,6 @@ export default (fontSize, error, icon, disabled, showBorder, multiline) =>
   StyleSheet.create({
     container: {
       borderBottomWidth: showBorder ? 1 : 0,
-      borderLeftWidth: 1,
-      borderWidth: 1,
       borderColor: textInputBorderColor,
       padding: 10,
       borderRadius: 20,

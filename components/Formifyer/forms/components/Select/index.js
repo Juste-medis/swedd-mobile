@@ -71,20 +71,37 @@ export default class Select extends PureComponent {
             selectedItemIconColor={selectedItemIconColor}
             itemTextColor={itemTextColor}
             displayKey="label"
+            styleDropdownMenuSubsection={{
+              borderWidth: 1,
+              height: 50,
+              borderColor: 'black',
+              borderRadius: 10,
+            }}
+            styleInputGroup={{
+              height: 50,
+              borderWidth: 1,
+              borderColor: 'black',
+              borderRadius: 10,
+            }}
+            styleItemsContainer={{
+              paddingHorizontal: 15,
+            }}
+            styleListContainer={{
+              elevation: 10,
+              backgroundColor: 'white',
+              paddingVertical: 15,
+            }}
+            styleRowList={{
+              paddingTop: 6,
+            }}
             styleTextDropdown={{
               paddingStart: 10,
-              color: 'grey',
             }}
             styleTextDropdownSelected={{
-              paddingStart: 10,
-              fontWeight: '500',
+              paddingStart: 15,
+              fontWeight: 'bold',
             }}
             noItemsText="Aucun élement trouvé ."
-            styleListContainer={{
-              elevation: 20,
-              backgroundColor: 'white',
-              marginHorizontal: 4,
-            }}
             submitButtonColor={submitButtonColor}
             submitButtonText="OK"
           />

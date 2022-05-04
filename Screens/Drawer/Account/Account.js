@@ -9,10 +9,14 @@ import {AddProfilItem} from '../../../Store/Actions';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Image} from 'react-native-elements';
 import SimpleRipple from '../../../components/Touchable/SimpleRipple';
+import Fetcher from '../../../API/fetcher';
 
 function Account(route) {
   let profil = route.my_profil.account;
   React.useEffect(() => {
+    if (Globals.INTERNET) {
+      Fetcher.SyncUserData();
+    }
     //route.AddProfilItem({ key: "visitedcourses", data: "^^^^^^^^^^^^^^^^^" });
   }, []);
   let menugen = [
@@ -168,7 +172,7 @@ function Account(route) {
     </View>
   );
   return (
-    <ScrollView>
+    <ScrollView keyboardShouldPersistTaps="always">
       <View style={styles.main_container}>
         <View style={{width: '100%', alignItems: 'center'}}>
           {![null, ''].includes(profil.urlPhoto) ? (

@@ -99,7 +99,9 @@ function Notification(route) {
         onRequestClose={() => {
           setmodalVisible(!modalVisible);
         }}>
-        <ScrollView style={{paddingTop: 40, paddingHorizontal: 20}}>
+        <ScrollView
+          keyboardShouldPersistTaps="always"
+          style={{paddingTop: 40, paddingHorizontal: 20}}>
           <Icon
             style={{marginBottom: 30}}
             name="arrow-back"

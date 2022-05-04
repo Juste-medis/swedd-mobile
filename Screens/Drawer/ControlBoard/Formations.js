@@ -115,6 +115,7 @@ function Formations(route) {
           setmodalVisible(!modalVisible);
         }}>
         <ScrollView
+          keyboardShouldPersistTaps="always"
           style={{
             paddingHorizontal: 20,
           }}>

@@ -257,7 +257,10 @@ const CustomSidebarMenu = props => {
               },
             );
           }}>
-          <Text style={styles.boldText_touchable}>se déconnecter</Text>
+          <Text style={styles.boldText_touchable}>
+            <Icono name="arrow-back-outline" size={20} color="red" />
+            Se déconnecter{' '}
+          </Text>
         </TouchableOpacity>
       </DrawerContentScrollView>
     </SafeAreaView>
@@ -275,19 +278,20 @@ const styles = StyleSheet.create({
   },
   buts_style: {
     width: 200,
-    backgroundColor: Globals.COLORS.pink,
+    borderWidth: 1,
+    borderColor: Globals.COLORS.pink,
     marginVertical: 15,
     borderRadius: 6,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 4,
     height: 50,
     alignSelf: 'center',
   },
   boldText_touchable: {
     fontFamily: 'Lato-Bold',
-    color: Globals.COLORS.white,
+    color: Globals.COLORS.pink,
     fontSize: 18,
+    textAlignVertical: 'center',
   },
   sectionContainer: {
     flex: 1,

@@ -3,7 +3,8 @@ export const getInputType = subtype => {
     case 'text':
       return 'default';
     case 'tel':
-      return 'phone-pad';
+    case 'numeric':
+      return 'numeric';
     case 'email':
       return 'email-address';
     default:

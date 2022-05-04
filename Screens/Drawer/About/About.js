@@ -81,7 +81,9 @@ function About(route) {
   };
 
   return (
-    <ScrollView style={stylesc.main_container}>
+    <ScrollView
+      keyboardShouldPersistTaps="always"
+      style={stylesc.main_container}>
       <View
         style={[styles.main_container, {backgroundColor: 'white', padding: 0}]}>
         <View style={{width: '100%'}}>

@@ -3,7 +3,7 @@ import {Button} from 'react-native-elements';
 
 import styles from './styles';
 
-const ButtonValidate = ({onPress, buttonStyle, disabled}) => (
+const ButtonValidate = ({onPress, buttonStyle, disabled, label}) => (
   <Button
     buttonStyle={[
       styles.buttonContainer,
@@ -16,7 +16,7 @@ const ButtonValidate = ({onPress, buttonStyle, disabled}) => (
     onPress={onPress}
     loading={disabled}
     disabled={disabled}
-    title="Soumettre"
+    title={label}
   />
 );
 

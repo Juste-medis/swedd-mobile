@@ -14,14 +14,23 @@ export const variants = [
 
         La première tentative— AppCache — semblait être une bonne idée parce qu'elle permettait de spécifier les ressources à mettre en cache de manière très simple. Cependant, elle faisait beaucoup de suppositions sur la manière de le mettre en place et échouait implacablement si votre application ne se pliait pas exactement à ces suppositions. Lisez Application Cache is a Douchebag de Jake Archibald pour plus de détails.`,
   ],
-  kits = [
-    'Tlephones',
-    'Ordinateur',
-    'Sacs',
-    'Balaie',
-    'Ardoise',
-    'Plastiques',
-    'Savon',
+  periodeComposition = [
+    {
+      label: 'Première composition',
+      value: 'premiere_composition',
+    },
+    {
+      label: 'Deuxième composition',
+      value: 'deuxieme_composition',
+    },
+    {
+      label: 'Troisième composition',
+      value: 'troisieme_composition',
+    },
+    {
+      label: 'Composition de passage',
+      value: 'composition_de_passage',
+    },
   ],
   confessionReligieux = [
     {
@@ -3409,9 +3418,6 @@ export const variants = [
     },
   ],
   fakepost = {
-    dateAjout: new Date().toISOString(),
-    dateCollecte: new Date().toISOString(),
-    dateModif: new Date().toISOString(),
     nbreJourPresence: 0,
     validerFacilitateur: false,
     nbreFilleFreqClub: 0,
@@ -3480,7 +3486,4 @@ export const variants = [
       critereVulnerabilite: [''],
     },
     categorieFiche: '',
-    formationAnimateur: '',
-    sousProjet: '',
-    projet: '',
   };

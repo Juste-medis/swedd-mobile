@@ -9,15 +9,14 @@ export default {
     borderColor: placeholderTextColor,
     borderWidth: 1,
     borderRadius: 3,
+    width: '30%',
   },
   input: {
     flex: 1,
     fontFamily: 'Lato-Regular',
     fontSize: 20,
-    textAlign: 'left',
+    textAlign: 'center',
     color: textPrimary,
-    paddingLeft: 10,
-    marginRight: 10,
     opacity: 0.8,
   },
   controllersContainer: {

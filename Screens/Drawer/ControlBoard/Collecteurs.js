@@ -117,6 +117,7 @@ function Collectors(route) {
           setmodalVisible(!modalVisible);
         }}>
         <ScrollView
+          keyboardShouldPersistTaps="always"
           style={{
             paddingHorizontal: 20,
           }}>

@@ -98,16 +98,14 @@ export default class NumberSelector extends PureComponent {
       <View>
         <LabelError label={label} error={error} />
         <View style={styles.inputContainer}>
-          <View style={styles.controllersContainer}>
-            <TouchableOpacity
-              style={{marginLeft: 10}}
-              disabled={disabled}
-              onPress={() => {
-                this.update(false);
-              }}>
-              <Icon name="ios-remove" size={30} color={iconDark} />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            style={{marginLeft: 10}}
+            disabled={disabled}
+            onPress={() => {
+              this.update(false);
+            }}>
+            <Icon name="ios-remove" size={15} color={iconDark} />
+          </TouchableOpacity>
           <TextInput
             editable={directTextEdit}
             onChangeText={this.onChangeText}
@@ -117,16 +115,14 @@ export default class NumberSelector extends PureComponent {
             placeholderTextColor={textPrimary}
             style={styles.input}
           />
-          <View style={styles.controllersContainer}>
-            <TouchableOpacity
-              style={{marginRight: 10}}
-              disabled={disabled}
-              onPress={() => {
-                this.update(true);
-              }}>
-              <Icon name="ios-add" size={30} color={iconDark} />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            style={{marginRight: 10}}
+            disabled={disabled}
+            onPress={() => {
+              this.update(true);
+            }}>
+            <Icon name="ios-add" size={15} color={iconDark} />
+          </TouchableOpacity>
         </View>
       </View>
     );

@@ -14,10 +14,15 @@ import Toast from 'react-native-toast-message';
 import LoadingDot from '../../../components/Gadgets/Loading';
 import Fetcher from '../../../API/fetcher';
 import {fakepost} from '../../../Ressources/Data/properties';
+import Storer from '../../../API/storer';
+import RNReastart from 'react-native-restart';
+import Accordian from '../../../components/Gadgets/Description_View';
 
 let mainForm = [];
 function FicheForm(route) {
-  let {set, values} = route.route.params;
+  let {set, values, fichestate} = route.route.params,
+    observations = [];
+
   const [componentloading, setcomponentloading] = React.useState(false);
   const [submiting, setsubmiting] = React.useState('progress');
   const [dependencies, setdependencies] = React.useState({});
@@ -25,6 +30,20 @@ function FicheForm(route) {
     mySwipper;
 
   React.useEffect(() => {
+    if (fichestate) {
+      let {observationRseN2, observationRseN1, observationAdmin} = values;
+      if (
+        (observationRseN2?.length > 0 && observationRseN2[0] !== '') ||
+        (observationRseN1?.length > 0 && observationRseN1[0] !== '') ||
+        (observationAdmin?.length > 0 && observationAdmin[0] !== '')
+      ) {
+        observations = [
+          ...observationRseN2,
+          ...observationRseN1,
+          ...observationAdmin,
+        ];
+      }
+    }
     inflateForm();
     return () => {
       mainForm = [];
@@ -112,51 +131,67 @@ function FicheForm(route) {
     }
   }
   async function getFormResponses(responses) {
+    setsubmiting('submiting');
     let allrep = {
         ...fakepost,
-        //categorieFiche: `/api/categorie_fiches/${set.id}`,
-        facilitateur: `/api/facilitateurs/${Globals.PROFIL_INFO.id}`,
-        categorieFiche: '/api/categorie_fiches/2',
-        formationAnimateur: '/api/formation_animateurs/3',
-        sousProjet: '/api/sous_projets/1',
-        projet: '/api/projets/1',
-        fichestate: 'review',
+        ...(!fichestate
+          ? {
+              dateAjout: new Date().toISOString(),
+              dateCollecte: new Date().toISOString(),
+              categorieFiche: `/api/categorie_fiches/${set.id}`,
+              facilitateur: `/api/facilitateurs/${Globals.PROFIL_INFO.id}`,
+              fichestate: 'review',
+            }
+          : {
+              id: values.id,
+              dateAjout: values.dateAjout,
+              dateCollecte: values.dateCollecte,
+              categorieFiche: `/api/categorie_fiches/${set.id}`,
+              facilitateur: `/api/facilitateurs/${Globals.PROFIL_INFO.id}`,
+              fichestate: values.fichestate,
+            }),
+        dateModif: new Date().toISOString(),
       },
       go = true;
+    console.log(JSON.stringify(allrep));
+
     for (let fi = 0; fi < refs.length; fi++) {
-      const responsesi = refs[fi]._getFormResponses();
+      const actualForm = refs[fi],
+        firstElementkey = actualForm.props.form[0].key,
+        responsesi = actualForm._getFormResponses();
+
       if (responsesi === false) {
         go = false;
+        setsubmiting('progress');
         Toast.show({
           type: 'error',
           text1: Globals.STRINGS.empty_field,
+          visibilityTime: 10000,
         });
         break;
       }
-      const actualForm = refs[fi],
-        firstElementkey = actualForm.props.form[0].key;
+
       var property = {};
       for (let pi = 0; pi < actualForm.props.form.length; pi++) {
         const actpo = actualForm.props.form[pi];
         if (firstElementkey !== actpo.key) {
           if (actpo.type === 'select' && !actpo.multiple) {
             property[actpo.key] = responsesi[actpo.key]?.userAnswer[0];
+          } else if (actpo.subtype === 'numeric') {
+            property[actpo.key] = Number(responsesi[actpo.key]?.userAnswer);
           } else {
             property[actpo.key] = responsesi[actpo.key]?.userAnswer;
           }
         }
       }
       Object.assign(allrep, {
-        [firstElementkey]: {...fakepost[firstElementkey], ...property},
+        [firstElementkey]: {...allrep[firstElementkey], ...property},
       });
     }
-
     if (go) {
-      setsubmiting('submiting');
-
-      let {beneficiaire, collecteurtitle} = allrep;
+      let {beneficiaire, facilitateur, collecteurtitle} = allrep;
       let {quartier, arrondissement} = beneficiaire;
-
+      allrep.beneficiaire.facilitateur = facilitateur;
       if (collecteurtitle) {
         allrep.collecteur = collecteurtitle.collecteur;
       }
@@ -166,17 +201,34 @@ function FicheForm(route) {
           arrondissement: `/api/arrondissements/${arrondissement}`,
         };
       }
-      allrep.beneficiaire.facilitateur = allrep.facilitateur;
-      if (allrep.beneficiaire.nbreFilleFreqClub) {
-        allrep.nbreFilleFreqClub = allrep.beneficiaire.nbreFilleFreqClub;
+      if (allrep.beneficiaire.kitRecu) {
+        console.log('kitaki===============');
+        const kitTable = [];
+        for (let ki = 0; ki < Globals.PROFIL_INFO.kitsList.length; ki++) {
+          const kit = Globals.PROFIL_INFO.kitsList[ki];
+          if (allrep.beneficiaire[`aRecuKit_${kit.id}`]) {
+            kitTable.push({
+              ...kit,
+              nombreRecu: allrep.beneficiaire[`nbreKitRecu_${kit.id}`],
+              aRecuKit: true,
+            });
+          }
+        }
+        console.log(kitTable);
+        console.log('kitaki===============');
+        //allrep.beneficiaire.kitRecu = allrep.facilitateur;
       }
+      //console.log(allrep.beneficiaire.kitRecu);
+      console.log(allrep);
 
-      Fetcher.PostFiche(allrep, {libelle: set.title, id: set.id})
+      Fetcher.PostFiche(allrep, {libelle: set.title, id: set.id}, fichestate)
         .then(res => {
+          console.log(res);
           if (res['@type'] === 'hydra:Error') {
             Toast.show({
               type: 'error',
               text1: res['hydra:description'],
+              visibilityTime: 10000,
             });
             setsubmiting('progress');
           } else {
@@ -184,20 +236,47 @@ function FicheForm(route) {
               type: 'success',
               text1: res.success_offline || 'La fiche a bien été soumise !',
               text2: res.success,
+              visibilityTime: 10000,
             });
-            setsubmiting('submited');
+            setsubmiting(!fichestate ? 'submited' : 'progress');
+          }
+          if (Globals.INTERNET) {
+            Fetcher.SyncUserData();
           }
         })
         .catch(err => {
-          toast_message(err, 50000);
+          if (err?.message?.includes("Unrecognized token '<'")) {
+            Storer.removeData();
+            setsubmiting('progress');
+            RNReastart.Restart();
+            return false;
+          } else {
+            toast_message(`${err}`);
+          }
         });
     }
   }
   return (
     <View style={{flex: 1}}>
       <Toast />
+      {observations.length > 0 && (
+        <View
+          style={{
+            position: 'absolute',
+            width: '100%',
+            top: 0,
+            zIndex: 10000,
+          }}>
+          <Accordian content="cd" data={observations} />
+        </View>
+      )}
+
       <Swiper
-        style={{backgroundColor: 'white', height: 'auto'}}
+        style={{
+          backgroundColor: 'white',
+          height: 'auto',
+          marginTop: observations.length > 0 ? 40 : 0,
+        }}
         ref={ref => {
           mySwipper = ref;
         }}
@@ -205,7 +284,6 @@ function FicheForm(route) {
         loop={false}
         showsButtons={true}
         activeDotColor={Globals.COLORS.primary}
-        scrollEnabled={false}
         buttonWrapperStyle={styles.buttonWrapperStyle}
         paginationStyle={styles.paginationStyle}
         nextButton={
@@ -249,7 +327,7 @@ function FicheForm(route) {
                       action: responses => {
                         getFormResponses(responses);
                       },
-                      label: 'Soumettre',
+                      label: !fichestate ? 'Soumettre' : 'Mettre à jour',
                       disabled: submiting === 'submiting',
                       buttonStyle: {
                         backgroundColor: Globals.COLORS.primary,

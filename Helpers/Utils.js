@@ -234,18 +234,29 @@ export const randomDate = (start, end) => {
 
 export const dynamicCompute = (operation, oldval = 0, value = '') => {
   let result = 0;
+  console.log(oldval, value);
+
   switch (operation) {
     case 'add':
-      result = oldval ? oldval + value : value;
+      result = oldval ? Number(oldval) + Number(value) : Number(value);
       break;
     case 'mine':
-      result = oldval ? oldval - value : value;
+      result = oldval ? Number(oldval) - Number(value) : Number(value);
       break;
     default:
       break;
   }
   return result;
 };
+
+export function Numberise(str) {
+  let regexRemover = /:("\d+")/gm;
+  let match = regexRemover.exec(str);
+  do {
+    str = str.replace(match[1], match[1].replace(/\D+/g, ''));
+  } while ((match = regexRemover.exec(str)) !== null);
+  return str;
+}
 
 export const flatArrayBykey = (array = [], key = '', value = '') => {
   const result = array.filter(mes => {

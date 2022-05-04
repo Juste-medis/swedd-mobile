@@ -36,7 +36,7 @@ export default class LabelError extends PureComponent {
         )}
         {error ? (
           <Text style={theme.error}>
-            Ce champ est requis ou doit être bien remplis.
+            Ce champ est requis ou doit être bien rempli.
           </Text>
         ) : null}
       </View>

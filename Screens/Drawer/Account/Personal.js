@@ -15,16 +15,24 @@ import {bindActionCreators} from 'redux';
 import {setProfil} from '../../../Store/Actions';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Storer from '../../../API/storer';
-import Fetcher from '../../../API/fakeApi';
-import {toast_message, UriEncoder} from '../../../Helpers/Utils';
+import Fetcher from '../../../API/fetcher';
+import {toast_message} from '../../../Helpers/Utils';
+import RNReastart from 'react-native-restart';
 
 function Personal(route) {
   let profil = route.my_profil.account;
+  console.log(profil);
   let modifying = {};
   const [modibool, setmodibool] = React.useState(false);
   const [spinner, setspinner] = React.useState(false);
   React.useEffect(() => {}, []);
   let menuoth = [
+    {
+      icon: 'person-circle',
+      title: Globals.STRINGS.username,
+      value: profil.username,
+      key: 'username',
+    },
     {
       icon: 'person-circle',
       title: Globals.STRINGS.firstname,
@@ -38,10 +46,16 @@ function Personal(route) {
       key: 'prenom',
     },
     {
+      icon: 'mail',
+      title: Globals.STRINGS.mail,
+      value: profil.email,
+      key: 'email',
+    },
+    {
       icon: 'phone-portrait',
       title: 'Téléphone',
       value: profil.contact,
-      key: 'phone',
+      key: 'contact',
     },
     {
       icon: 'md-alert-circle',
@@ -55,29 +69,44 @@ function Personal(route) {
     setmodibool(!modibool);
     if (modibool) {
       setspinner(true);
-      Fetcher.UpdateData(UriEncoder(modifying))
+      console.log(modifying);
+      Fetcher.UpdateUserData(JSON.stringify(modifying), Globals.PROFIL_INFO.id)
         .then(res => {
-          if (!res.error) {
+          if (res['@type'] === 'hydra:Error') {
+            toast_message(res['hydra:description']);
+          } else {
+            Fetcher.SyncUserData();
             toast_message(Globals.STRINGS.sucess_Update);
             route.setProfil(modifying);
-            //todo web developp un endpoint pour obtenir toutes les information (current modified)
-            //Storer.StoreProfil();
             setspinner(false);
-            toast_message(res.success);
-          } else {
-            toast_message(res.error);
           }
         })
         .catch(err => {
           setspinner(false);
-          toast_message(`${err}`);
+          console.log(err);
+          if (err?.message?.includes("Unrecognized token '<'")) {
+            Storer.removeData();
+            RNReastart.Restart();
+            return false;
+          } else {
+            toast_message(`${err}`);
+          }
         });
     }
   }
 
   const menu_main = data => {
     return (
-      <View style={{backgroundColor: 'white', width: '100%'}}>
+      <View
+        style={{
+          backgroundColor: 'white',
+          elevation: 10,
+          width: '100%',
+          paddingVertical: 30,
+          borderTopWidth: 5,
+          borderTopColor: Globals.COLORS.primary,
+          borderRadius: 20,
+        }}>
         {data.map((item, index) => {
           return (
             <View
@@ -126,8 +155,8 @@ function Personal(route) {
               <TextInput
                 style={{
                   width: '100%',
-                  color: Globals.COLORS.grey,
-                  fontWeight: '500',
+                  color: Globals.COLORS.blue_dark,
+                  fontWeight: modibool ? '300' : '500',
                   ...(modibool
                     ? {
                         borderWidth: 1,
@@ -147,24 +176,6 @@ function Personal(route) {
             </View>
           );
         })}
-      </View>
-    );
-  };
-
-  return (
-    <ScrollView>
-      <View style={[styles.main_container, {backgroundColor: 'white'}]}>
-        <Text
-          style={{
-            textAlign: 'left',
-            width: '100%',
-            marginBottom: 20,
-            padding: 10,
-            fontFamily: 'Lato-Bold',
-          }}>
-          Information relative à votre profil personel
-        </Text>
-        {menu_main(menuoth)}
         {spinner ? (
           <ActivityIndicator
             style={styles.indicator}
@@ -184,6 +195,26 @@ function Personal(route) {
             </Text>
           </TouchableOpacity>
         )}
+      </View>
+    );
+  };
+
+  return (
+    <ScrollView
+      keyboardShouldPersistTaps="always"
+      style={{backgroundColor: 'white'}}>
+      <View style={[styles.main_container, {backgroundColor: 'white'}]}>
+        <Text
+          style={{
+            textAlign: 'left',
+            width: '100%',
+            marginBottom: 20,
+            padding: 10,
+            fontFamily: 'Lato-Regular',
+          }}>
+          Information relative à votre profil personel
+        </Text>
+        {menu_main(menuoth)}
       </View>
     </ScrollView>
   );

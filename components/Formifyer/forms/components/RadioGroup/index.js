@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component} from 'react';
 import {View} from 'react-native';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
@@ -17,7 +17,7 @@ export default class RadioGroup extends Component {
     options: PropTypes.array.isRequired,
     onRadioValueChanged: PropTypes.func,
     other: PropTypes.bool,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     error: PropTypes.bool,
   };
 
@@ -90,8 +90,8 @@ export default class RadioGroup extends Component {
           {_.map(options, value => (
             <CheckBox
               containerStyle={styles.containerStyle}
-              textStyle={styles.textStyle}
               Component={Text}
+              textStyle={styles.textStyle}
               checkedIcon={
                 <Icon
                   name="radio-button-checked"
@@ -121,18 +121,8 @@ export default class RadioGroup extends Component {
         {other ? (
           <View style={styles.otherRow}>
             <CheckBox
-              containerStyle={{
-                backgroundColor: 'rgba(9,105,195,0.05)',
-                borderRadius: 50,
-                borderWidth: 0,
-              }}
-              textStyle={{
-                padding: 0,
-              }}
-              style={{
-                margin: 0,
-                padding: 0,
-              }}
+              containerStyle={styles.containerStyle}
+              textStyle={styles.textStyle}
               Component={Text}
               checkedIcon={
                 <Icon

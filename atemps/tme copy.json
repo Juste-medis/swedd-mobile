@@ -1,0 +1,210 @@
+{
+    "Ong": {
+        "adresse": "Cotonou",
+        "contact": "12345",
+        "email": "ong3@gmail.com",
+        "id": 6,
+        "libelle": "ONG3",
+        "type": "ONG"
+    },
+    "address": "",
+    "adminId": 0,
+    "categoriesFiche": [
+        {
+            "iri": "/api/categorie_fiches/1",
+            "libelle": "FICHE D'ENREGISTREMENT DES ADOLESCENTES ET ADOLESCENTS DE 10 - 24 ANS"
+        },
+        {
+            "iri": "/api/categorie_fiches/2",
+            "libelle": "FICHE D'ENREGISTREMENT DES FILLES"
+        },
+        {
+            "iri": "/api/categorie_fiches/3",
+            "libelle": "FICHE DE SUIVI SCOLAIRE"
+        },
+        {
+            "iri": "/api/categorie_fiches/4",
+            "libelle": "LISTE DE PRESENCE DES PARTICIPANTS AUX FORMATIONS"
+        },
+        {
+            "iri": "/api/categorie_fiches/5",
+            "libelle": "FICHE DE SUIVI A DOMICILE"
+        },
+        {
+            "iri": "/api/categorie_fiches/6",
+            "libelle": "FICHE D'IDENTIFICATION DES FILLES (Maintien des filles à l'école)"
+        },
+        {
+            "iri": "/api/categorie_fiches/7",
+            "libelle": "FICHE DES FILLES SCOLARISEES"
+        },
+        {
+            "iri": "/api/categorie_fiches/8",
+            "libelle": "FICHE DE SUIVI DE LA PERFORMANCE SCOLAIRE DE LA FILLE"
+        },
+        {
+            "iri": "/api/categorie_fiches/9",
+            "libelle": "FICHE DE SUIVI DES KITS"
+        },
+        {
+            "iri": "/api/categorie_fiches/10",
+            "libelle": "LISTE DE PRESENCE DES PARTICIPANTS"
+        },
+        {
+            "iri": "/api/categorie_fiches/11",
+            "libelle": "FICHE DE COLLECTE DE DONNEES SUR LES FORMATIONS DANS LES ESPACES SÛRS"
+        },
+        {
+            "iri": "/api/categorie_fiches/12",
+            "libelle": "FICHE DE SUIVI DES ACTIVITES DES MARRAINES OU « DEUXIEMES MAMANS »"
+        },
+        {
+            "iri": "/api/categorie_fiches/13",
+            "libelle": "FICHE SYNTHESE DES FORMATIONS"
+        },
+        {
+            "iri": "/api/categorie_fiches/14",
+            "libelle": "FICHE DE SUIVI DES ACTIVITES COMMUNAUTAIRES DES LEADERS RELIGIEUX"
+        }
+    ],
+    "collecteurs": 7,
+    "collecteursListe": [
+        {
+            "label": "ASSIAMAIN Nikola",
+            "value": "/api/collecteurs/1"
+        },
+        {
+            "label": "Minsmin Nikole",
+            "value": "/api/collecteurs/2"
+        },
+        {
+            "label": "YIDENON Blaise",
+            "value": "/api/collecteurs/3"
+        },
+        {
+            "label": "GLELE Antoine",
+            "value": "/api/collecteurs/4"
+        },
+        {
+            "label": "KOKOU Niquèze",
+            "value": "/api/collecteurs/5"
+        },
+        {
+            "label": "KOMLAN Reginald",
+            "value": "/api/collecteurs/6"
+        },
+        {
+            "label": "TIPENTI Gaspard",
+            "value": "/api/collecteurs/7"
+        }
+    ],
+    "contact": "",
+    "description": "",
+    "email": "",
+    "ficheAttente": 0,
+    "ficheRejetes": 0,
+    "ficheRemplies": 6,
+    "ficheValide": 0,
+    "formations": [
+        {
+            "label": "Nécessité de protection",
+            "value": "/api/formation/1"
+        },
+        {
+            "label": "Prévention VIH",
+            "value": "/api/formation/2"
+        },
+        {
+            "label": "Propreté en milieu scolaire",
+            "value": "/api/formation/3"
+        },
+        {
+            "label": "La puberté chez elles",
+            "value": "/api/formation/4"
+        }
+    ],
+    "id": 2,
+    "job": "",
+    "kits": 8,
+    "kitsList": [
+        {
+            "aRecuKit": false,
+            "id": 1,
+            "libelle": "Cahier de 100 pages",
+            "nombreRecu": 0
+        },
+        {
+            "aRecuKit": false,
+            "id": 2,
+            "libelle": "Téléphone",
+            "nombreRecu": 0
+        },
+        {
+            "aRecuKit": false,
+            "id": 3,
+            "libelle": "Ordinateur",
+            "nombreRecu": 0
+        },
+        {
+            "aRecuKit": false,
+            "id": 4,
+            "libelle": "Sacs",
+            "nombreRecu": 0
+        },
+        {
+            "aRecuKit": false,
+            "id": 5,
+            "libelle": "Balai",
+            "nombreRecu": 0
+        },
+        {
+            "aRecuKit": false,
+            "id": 6,
+            "libelle": "Ardoise",
+            "nombreRecu": 0
+        },
+        {
+            "aRecuKit": false,
+            "id": 7,
+            "libelle": "Plastiques",
+            "nombreRecu": 0
+        },
+        {
+            "aRecuKit": false,
+            "id": 8,
+            "libelle": "Savon",
+            "nombreRecu": 0
+        }
+    ],
+    "nbrBeneficiaire": 6,
+    "nbreFormations": 4,
+    "nom": "Facilitateuri",
+    "notifications": [],
+    "prenom": "Totoidf",
+    "projets": [
+        {
+            "iri": "/api/projets/1",
+            "libelle": "Projet 1"
+        },
+        {
+            "iri": "/api/projets/2",
+            "libelle": "Projet 2"
+        }
+    ],
+    "roles": [
+        "ROLE_FACILITATEUR"
+    ],
+    "sousProjets": [
+        {
+            "iri": "/api/sous_projets/1",
+            "libelle": "Sous-projet 1"
+        },
+        {
+            "iri": "/api/sous_projets/2",
+            "libelle": "Sous-projet 2"
+        }
+    ],
+    "urlPhoto": "",
+    "user_type": "facilitateur_1",
+    "username": "facilitateur"
+}

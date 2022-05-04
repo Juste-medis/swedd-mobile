@@ -13,8 +13,8 @@ import {Input, Button, Text} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Feather';
 
 export default function SignIn({navigation}) {
-  const [username, setusername] = useState('janedoe');
-  const [password, setpassword] = useState('secret123');
+  const [username, setusername] = useState('facilitateur');
+  const [password, setpassword] = useState('facilitateur');
 
   const [wrong_logins_text, set_wrong_text] = useState('');
   const [spinner, setspinner] = useState(false);
@@ -46,11 +46,29 @@ export default function SignIn({navigation}) {
             setspinner(false);
           } else {
             let infos = await Fetcher.GetUserData('');
-            let formations = await Fetcher.Getformations(infos.id, 1);
-
-            console.log(formations);
+            let kits = await Fetcher.Getkits('');
+            console.log(infos);
             infos = {
               ...infos,
+              formations: infos?.formations?.map(mes => {
+                return {
+                  label: mes.libelle,
+                  value: mes.iri,
+                };
+              }),
+              collecteursListe: infos?.collecteursListe?.map(mes => {
+                return {
+                  label: mes.username,
+                  value: mes.iri,
+                };
+              }),
+              kitsList: kits.map(mes => {
+                return {
+                  ...mes,
+                  nombreRecu: 0,
+                  aRecuKit: false,
+                };
+              }),
               user_type:
                 infos?.ong?.type === 'SWEDD'
                   ? 'facilitateur_2'
@@ -63,10 +81,9 @@ export default function SignIn({navigation}) {
               text1: 'Bienvenu',
               text2: infos?.prenom,
             });
-
+            setspinner(false);
             Storer.storeData('@ProfilInfo', {
               ...infos,
-              username,
               password,
             }).then(() => {
               Storer.storeData('@USER_TYPE', 1).then(() => {
@@ -87,7 +104,9 @@ export default function SignIn({navigation}) {
   return (
     <View style={styles.container} source={Globals.IMAGES.LO_SPLASH}>
       <Toast />
-      <ScrollView style={styles.center_scroll}>
+      <ScrollView
+        style={styles.center_scroll}
+        keyboardShouldPersistTaps="always">
         <Text style={styles.titleText}>{Globals.STRINGS.hello}</Text>
         <View style={styles.center_container}>
           <Image

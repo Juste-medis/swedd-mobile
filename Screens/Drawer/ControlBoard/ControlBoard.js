@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {ScrollView, Text, View, Linking} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import Globals from '../../../Ressources/Globals';
 import {styleAccount as styles} from '../../../Ressources/Styles';
 import {styleControlBoard as stylesc} from '../../../Ressources/Styles';
@@ -8,10 +8,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {AddProfilItem} from '../../../Store/Actions';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {onShare} from '../../../Helpers/Utils';
 import SimpleRipple from '../../../components/Touchable/SimpleRipple';
 import Fiches from '../../../Ressources/Data/Fiches';
-
 function ControlBoard(route) {
   let profil = route.my_profil.account;
   React.useEffect(() => {
@@ -23,7 +21,7 @@ function ControlBoard(route) {
       icon: 'documents-outline',
       title: 'Modèles de fiches',
       variant: Globals.COLORS.primary,
-      value: Fiches.length,
+      value: Fiches().length,
       onclick: () => {
         route.navigation.navigate('FichesTemplates');
       },
@@ -99,7 +97,7 @@ function ControlBoard(route) {
     {
       icon: 'ios-book-outline', //md-school-outline
       title: 'Formations',
-      value: profil.formations,
+      value: profil.nbreFormations,
       variant: Globals.COLORS.arsenic,
       backgroundColor: 'white',
       onclick: () => {
@@ -179,6 +177,7 @@ function ControlBoard(route) {
 
   return (
     <ScrollView
+      keyboardShouldPersistTaps="always"
       style={{height: '100%', backgroundColor: Globals.COLORS.surface}}>
       <View style={[styles.main_container, {backgroundColor: null}]}>
         {menu_main(menuoth)}

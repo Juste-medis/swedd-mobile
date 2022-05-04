@@ -72,7 +72,9 @@ export default function ForgetPass({navigation}) {
         style={{width: 150, height: 150, marginVertical: 20}}
       />
 
-      <ScrollView style={styles.center_scroll}>
+      <ScrollView
+        keyboardShouldPersistTaps="always"
+        style={styles.center_scroll}>
         <Text style={styles.titleText}>
           Recupération de votre mot de passe !
         </Text>

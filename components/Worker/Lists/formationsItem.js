@@ -8,7 +8,6 @@ import Icono from 'react-native-vector-icons/Ionicons';
 function formationsItem(route) {
   const {libelle, dateDebut, dateFin, urlPhoto, name, description} =
     route.inter_Collecteurs;
-
   let {onclick} = route;
   return (
     <TouchableOpacity

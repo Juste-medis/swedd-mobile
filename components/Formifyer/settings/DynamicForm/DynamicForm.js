@@ -421,7 +421,9 @@ export default class DynamicForm extends Component {
   render() {
     return (
       <View style={[styles.container, this.props.style]}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          keyboardShouldPersistTaps="always"
+          showsVerticalScrollIndicator={false}>
           {this.renderForm()}
         </ScrollView>
       </View>

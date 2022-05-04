@@ -48,6 +48,7 @@ function FichesTemplates(route) {
                     style={{
                       ...styles.prop_unity_value,
                       ...stylesc.prop_unity_valuei,
+                      paddingStart: 0,
                     }}>
                     {item.title}
                   </Text>
@@ -66,9 +67,11 @@ function FichesTemplates(route) {
   };
 
   return (
-    <ScrollView style={stylesc.main_container}>
+    <ScrollView
+      keyboardShouldPersistTaps="always"
+      style={stylesc.main_container}>
       <View style={[styles.main_container, {backgroundColor: 'white'}]}>
-        {menu_main(Fiches)}
+        {menu_main(Fiches())}
       </View>
     </ScrollView>
   );

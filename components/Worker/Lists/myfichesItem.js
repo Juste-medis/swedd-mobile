@@ -15,9 +15,8 @@ function areEqual(prevProps, nextProps) {
 function myfichesItem(route) {
   let {_unsynced, fichestate, dateAjout, categorieFiche, _categorieFiche, id} =
       route.inter_Collecteurs,
-    {onclick} = route;
+    {onclick, _trigger_actions} = route;
   fichestate = fichestate || route.fichestate;
-
   let ficheprop = {
     icon: '',
     variant: '',
@@ -72,6 +71,9 @@ function myfichesItem(route) {
           onPress={() => {
             onclick(route.inter_Collecteurs);
           }}
+          onLongPress={() => {
+            _trigger_actions(route.inter_Collecteurs);
+          }}
           rippleColor={ficheprop.variant}>
           <View style={stylesc.main_menu_top}>
             <View
@@ -98,6 +100,7 @@ function myfichesItem(route) {
                 style={{
                   ...styles.title_text,
                   ...stylesc.prop_unity_valuei,
+                  paddingStart: 8,
                 }}>
                 {categorieFiche?.libelle || _categorieFiche?.libelle}
               </Text>

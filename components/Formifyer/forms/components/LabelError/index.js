@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-boolean-cast */
 import React, {PureComponent} from 'react';
 import {View, Text} from 'react-native';
 import PropTypes from 'prop-types';
@@ -23,18 +24,18 @@ export default class LabelError extends PureComponent {
     const isRequired = `${label}`[`${label}`.length - 1] === '*';
     return (
       <View>
-        {label ? (
+        {!!label ? (
           <Text style={{...theme.label, fontFamily: 'Lato-Bold'}}>
             {isRequired ? `${label}`.replace(`*`, '') : label}
             {isRequired && <Text style={{color: 'red'}}>*</Text>}
           </Text>
         ) : null}
-        {placeholder && (
+        {!!placeholder && (
           <Text style={{paddingBottom: 15, color: 'grey'}}>{placeholder}</Text>
         )}
-        {error ? (
+        {!!error ? (
           <Text style={theme.error}>
-            Ce champ est requis ou doit être bien remplis.
+            Ce champ est requis ou doit être bien rempli.
           </Text>
         ) : null}
       </View>

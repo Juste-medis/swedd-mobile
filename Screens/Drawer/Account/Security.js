@@ -142,7 +142,9 @@ function Security(route) {
   };
 
   return (
-    <ScrollView style={{backgroundColor: Globals.COLORS.surface}}>
+    <ScrollView
+      keyboardShouldPersistTaps="always"
+      style={{backgroundColor: Globals.COLORS.surface}}>
       <View style={[styles.main_container]}>
         {menu_main(menuoth)}
         {spinner ? (

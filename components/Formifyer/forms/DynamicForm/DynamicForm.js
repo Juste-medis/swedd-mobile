@@ -159,12 +159,14 @@ export default class DynamicForm extends Component {
   validateInput = (value, element) => {
     let valid = true;
     if (element.type === 'header') {
-      return true;
+      return valid;
     }
-    if (element.type === 'checkbox-group' && element.required) {
-      valid = value?.regular?.length > 0 || !!value?.other?.value;
-    } else {
-      valid = !!value;
+    if (element.required) {
+      if (element.type === 'checkbox-group') {
+        valid = value?.regular?.length > 0 || !!value?.other?.value;
+      } else {
+        valid = !!value || typeof value === 'boolean';
+      }
     }
     return valid;
   };
@@ -182,7 +184,6 @@ export default class DynamicForm extends Component {
         [element.key]: validi,
       },
     });
-
     if (!_.isEmpty(formAnswer)) {
       formAnswer.userAnswer = value;
     } else {
@@ -387,6 +388,7 @@ export default class DynamicForm extends Component {
                 {...moreOptions}
                 onChangeText={value => {
                   this.updateFormElement(value, element);
+                  element.onchange ? element.onchange(value) : () => {};
                 }}
                 value={this.getFormElementValue(key, element)}
                 label={label}
@@ -423,7 +425,9 @@ export default class DynamicForm extends Component {
   render() {
     return (
       <View style={[styles.container, this.props.style]}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}>
           {this.renderForm()}
         </ScrollView>
       </View>

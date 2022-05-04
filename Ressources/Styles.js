@@ -71,7 +71,7 @@ if (mobile_360_750) {
       backgroundColor: 'transparent',
       flexDirection: 'row',
       position: 'absolute',
-      top: 280,
+      top: 285,
       left: 0,
       flex: 1,
       justifyContent: 'space-between',
@@ -925,7 +925,7 @@ if (mobile_360_750) {
       width: '100%',
       display: 'flex',
       alignItems: 'center',
-      marginTop: 10,
+      marginTop: 12,
     },
     title_text: {
       color: Globals.COLORS.arsenic,
@@ -943,7 +943,7 @@ if (mobile_360_750) {
     main_menu_indider: {
       width: '95%',
       backgroundColor: 'white',
-      elevation: 20,
+      elevation: 10,
       paddingVertical: 20,
     },
     props_value: {
@@ -1012,7 +1012,6 @@ if (mobile_360_750) {
     main_container: {
       display: 'flex',
       flexDirection: 'column',
-      paddingEnd: 70,
     },
     title_container: {
       display: 'flex',
@@ -1035,7 +1034,7 @@ if (mobile_360_750) {
       justifyContent: 'flex-start',
       alignItems: 'center',
       borderRadius: 40,
-      height: 100,
+      height: 70,
       width: 50,
       marginRight: 8,
     },
@@ -1044,7 +1043,6 @@ if (mobile_360_750) {
       fontFamily: 'Lato-Medium',
       color: Globals.COLORS.arsenic,
       fontWeight: '600',
-      lineHeight: 25,
     },
     desciption_container: {
       justifyContent: 'flex-start',
@@ -1161,10 +1159,10 @@ if (mobile_360_750) {
       width: '90%',
     },
     prop_unity_valuei: {
-      fontSize: 15,
+      fontSize: 13,
       marginTop: 10,
       color: Globals.COLORS.blue_dark,
-      width: '95%',
+      width: '90%',
     },
     description: {
       paddingVertical: 10,
@@ -1286,7 +1284,7 @@ if (mobile_360_750) {
     },
     buts_style: {
       width: 200,
-      backgroundColor: Globals.COLORS.pink,
+      backgroundColor: Globals.COLORS.primary,
       marginVertical: 15,
       borderRadius: 6,
       justifyContent: 'center',
@@ -1378,20 +1376,20 @@ if (mobile_360_750) {
     },
     row: {
       flexDirection: 'row',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
       alignItems: 'center',
-      borderTopWidth: 2,
-      borderTopColor: Globals.COLORS.white,
+      backgroundColor: Globals.COLORS.red,
     },
     main_container: {
       backgroundColor: Globals.COLORS.white,
+      fontFamily: 'Lato-Regular',
     },
     main_touchable: {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      backgroundColor: 'white',
+      backgroundColor: Globals.COLORS.surface,
       marginBottom: 4,
     },
 
@@ -1399,8 +1397,7 @@ if (mobile_360_750) {
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
-      width: '85%',
-      marginEnd: 10,
+      padding: 8,
     },
     index_text: {
       color: 'black',
@@ -1438,9 +1435,9 @@ if (mobile_360_750) {
     },
     lesson_heberger: {
       overflow: 'hidden',
-      backgroundColor: 'white',
-      borderBottomWidth: 1,
-      borderBottomColor: Globals.COLORS.light_grey,
+      backgroundColor: Globals.COLORS.surface,
+      borderBottomColor: Globals.COLORS.blue_dark,
+      elevation: 50,
     },
   });
 } else if (mobile_500_1000) {

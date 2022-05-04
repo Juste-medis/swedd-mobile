@@ -99,13 +99,13 @@ export default class CustomInput extends PureComponent {
     // extract colors from theme
     const {theme} = this.context;
     const {textPrimary, error, iconDark, placeholderTextColor} = theme.colors;
-
     return (
       <View style={styles.container}>
         <LabelError label={this.props.label} error={this.props.error} />
         <TextInput
           editable={!this.props.disabled}
           {...this.props}
+          keyboardType={this.props.keyboardType}
           onChangeText={input => {
             let value;
             if (this.props.onChangeTextWithNewValue) {
@@ -113,6 +113,7 @@ export default class CustomInput extends PureComponent {
             } else {
               value = input;
             }
+
             this.setState({value}, () => {
               if (this.state.error) {
                 this.setState({
